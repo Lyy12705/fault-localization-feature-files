@@ -1,0 +1,47 @@
+{
+  "experiment": "E1 file score aggregation",
+  "parameter_source": "engineering hypothesis fixed before Validation; tune only on Development",
+  "shared_settings": {
+    "embedding_backend": "tfidf-sbert-rerank",
+    "semantic_candidate_k": 50,
+    "candidate_file_k": 20,
+    "domain_path_routing": false,
+    "max_evidence_chunks": 5,
+    "evidence_score_ratio": 0.8,
+    "minimum_evidence_score": 0.05,
+    "support_bonus_per_additional_chunk": 0.0125,
+    "support_bonus_cap": 0.05,
+    "symbol_bonus_per_additional_symbol": 0.01,
+    "symbol_bonus_cap": 0.04,
+    "package_bonus_cap": 0.1
+  },
+  "methods": [
+    {
+      "id": "E1-A",
+      "runner_method": "tfidf-sbert",
+      "file_aggregation_mode": "basic",
+      "purpose": "unchanged comparison baseline"
+    },
+    {
+      "id": "E1-B",
+      "runner_method": "e1-b-supporting-chunks",
+      "file_aggregation_mode": "supporting-chunks",
+      "purpose": "measure bounded multi-chunk evidence"
+    },
+    {
+      "id": "E1-C",
+      "runner_method": "e1-c-supporting-symbols",
+      "file_aggregation_mode": "supporting-symbols",
+      "purpose": "add distinct symbol coverage"
+    },
+    {
+      "id": "E1-D",
+      "runner_method": "e1-d-supporting-symbols-package",
+      "file_aggregation_mode": "supporting-symbols-package",
+      "purpose": "add bounded same-package evidence"
+    }
+  ],
+  "primary_metric": "candidate_recall_at_20",
+  "auxiliary_metric": "base_commit_reachable_evaluation.candidate_recall_at_20",
+  "holdout_policy": "Do not use the original Frozen Holdout to select E1 parameters."
+}

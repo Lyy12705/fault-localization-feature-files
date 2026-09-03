@@ -1,0 +1,92 @@
+{
+  "protocol": "stage1-v11",
+  "status": "frozen_before_holdout",
+  "created_at_utc": "2026-08-15T14:54:03.155715+00:00",
+  "method_id": "tfidf-3e5e3b3cba1a",
+  "method": {
+    "method_version": "fault-localization-method-v11",
+    "embedding_backend": "tfidf",
+    "sbert_model": "",
+    "semantic_candidate_k": 0,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": true,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20
+  },
+  "development_acceptance": {
+    "minimum_candidate_recall_at_20": 0.9,
+    "candidate_hit_at_20": 0.9333333333333333,
+    "candidate_recall_at_20": 0.9333333333333333,
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.895238,
+        "upper": 0.961905
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.9,
+        "upper": 0.966667
+      }
+    },
+    "rows": 210,
+    "miss_rows": 14,
+    "average_candidate_count_at_20": 20.0
+  },
+  "development_artifacts": {
+    "run_manifest": {
+      "path": "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/reports/fault_localization/stage1_v11_frozen_development/test_run_manifest.json",
+      "bytes": 9839,
+      "sha256": "7c4ab8ea5196f74744162025f8113fa62e9062a2bf7bd4b4f47fd7d4d5391b13"
+    },
+    "metrics": {
+      "path": "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/reports/fault_localization/stage1_v11_frozen_development/test_metrics.json",
+      "bytes": 23593,
+      "sha256": "613da5689931cdfcee9adcc97cb9fe3ac1179d97621c29e022d2141836bc97ee"
+    },
+    "tickets": {
+      "path": "/Users/linyaying/Documents/bug_llm_project/bug_tracking_llm_system/data/fault_localization/swebench_lite/frozen_protocol_v1/development_tickets.jsonl",
+      "bytes": 2814616,
+      "sha256": "5bf8d8a6bf2ed365052d7c2cffa056842f06c093b2bfa64015fdb7f9004b9763"
+    },
+    "gold": {
+      "path": "/Users/linyaying/Documents/bug_llm_project/bug_tracking_llm_system/data/fault_localization/swebench_lite/frozen_protocol_v1/development_gold.jsonl",
+      "bytes": 84129,
+      "sha256": "1137ce0531ea2ab8b1683497c5b078d51d77d3d6986f325004dee81847df95e6"
+    }
+  },
+  "implementation": {
+    "src/utils/fault_localization.py": {
+      "path": "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/src/utils/fault_localization.py",
+      "bytes": 92042,
+      "sha256": "78062628235f6e8da5c34edaf025c97f98b7fe7af21fe3d8379bbeb8c71f09d0"
+    },
+    "src/modules/bug_localizer.py": {
+      "path": "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/src/modules/bug_localizer.py",
+      "bytes": 5659,
+      "sha256": "55dbe0b24a20194f7361245bcec3d51a2bd8aceeaefc2a55bb6395a2b40913e2"
+    },
+    "scripts/run_swebench_lite_fault_localization.py": {
+      "path": "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py",
+      "bytes": 30702,
+      "sha256": "5ed489ae84722651b98c59ef203d09ca437450e43bf16af75b48e1c350565037"
+    },
+    "scripts/evaluate_fault_localization.py": {
+      "path": "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/evaluate_fault_localization.py",
+      "bytes": 18188,
+      "sha256": "25c37066cf8d82e060ce9ad42ff503ee45ef3a89fe72deab8a6fb56ec0f9c779"
+    }
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "status": "ready",
+  "created_at_utc": "2026-09-02T12:03:13.732887+00:00",
+  "tickets": "data\\fault_localization\\swebench_full\\stage3_symbol_gold\\development_source_tickets.jsonl",
+  "repo_cache_dir": "data\\fault_localization\\swebench_full\\e7_development_repos",
+  "ticket_count": 61,
+  "repository_count": 12,
+  "base_commit_count": 61,
+  "reachable_count": 61,
+  "missing_count": 0,
+  "repositories": [
+    {
+      "repository": "astropy/astropy",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "django/django",
+      "ticket_count": 6,
+      "base_commit_count": 6,
+      "reachable_count": 6,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "matplotlib/matplotlib",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "mwaskom/seaborn",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pallets/flask",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "psf/requests",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pydata/xarray",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pylint-dev/pylint",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pytest-dev/pytest",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "scikit-learn/scikit-learn",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "sphinx-doc/sphinx",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "sympy/sympy",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    }
+  ],
+  "gold_accessed": false,
+  "evaluation_started": false
+}

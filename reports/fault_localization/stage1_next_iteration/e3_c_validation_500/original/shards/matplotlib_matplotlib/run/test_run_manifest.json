@@ -1,0 +1,221 @@
+{
+  "started_at_utc": "2026-08-22T14:36:42.093814+00:00",
+  "completed_at_utc": "2026-08-22T14:41:34.929859+00:00",
+  "method_id": "tfidf-sbert-rerank-0265bd395a1e",
+  "method": {
+    "method_version": "fault-localization-method-v16",
+    "embedding_backend": "tfidf-sbert-rerank",
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20,
+    "import_graph_mode": "off",
+    "import_graph_parameters": {
+      "reference_file_k": 5,
+      "outgoing_signal": 0.8,
+      "incoming_signal": 0.65,
+      "rank_decay": 0.08,
+      "maximum_signal": 0.8,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4
+    },
+    "symbol_expansion_mode": "symbol-definitions-api",
+    "symbol_expansion_parameters": {
+      "max_ticket_symbols": 20,
+      "max_files_per_symbol": 4,
+      "exact_match_bonus": 0.06,
+      "leaf_match_bonus": 0.04,
+      "maximum_bonus": 0.1,
+      "maximum_evidence_per_file": 4
+    },
+    "api_implementation_parameters": {
+      "max_links_per_symbol": 4,
+      "reexport_bonus": 0.04,
+      "wrapper_bonus": 0.05,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_wrapper_statements": 4
+    },
+    "file_aggregation_mode": "basic",
+    "file_aggregation_parameters": {
+      "max_evidence_chunks": 5,
+      "evidence_score_ratio": 0.8,
+      "minimum_evidence_score": 0.05,
+      "support_bonus_per_additional_chunk": 0.0125,
+      "support_bonus_cap": 0.05,
+      "symbol_bonus_per_additional_symbol": 0.01,
+      "symbol_bonus_cap": 0.04,
+      "package_bonus_cap": 0.1
+    }
+  },
+  "frozen_protocol": "",
+  "tickets_selected": 41,
+  "predictions": 41,
+  "failures": 0,
+  "processed_this_run": 41,
+  "skipped_existing": 0,
+  "index_cache_hits": 41,
+  "import_graph_cache_hits": 0,
+  "import_graph_builds": 0,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/stage1_next_iteration/e3_c_validation_500/original/shards/matplotlib_matplotlib/run/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/stage1_next_iteration/e3_c_validation_500/original/shards/matplotlib_matplotlib/run/test_metrics.json",
+  "failures_output": "reports/fault_localization/stage1_next_iteration/e3_c_validation_500/original/shards/matplotlib_matplotlib/run/test_failures.jsonl",
+  "metrics": {
+    "rows": 41,
+    "gold_rows": 41,
+    "prediction_rows": 41,
+    "matched_prediction_rows": 41,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 41,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 41,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.926829268292683,
+    "candidate_recall_at_20": 0.8116531165311655,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 28,
+      "partial_recall_rows": 10,
+      "miss_rows": 3
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "matplotlib__matplotlib-22767",
+        "matplotlib__matplotlib-24224",
+        "matplotlib__matplotlib-26532",
+        "matplotlib__matplotlib-25238",
+        "matplotlib__matplotlib-21481",
+        "matplotlib__matplotlib-24250",
+        "matplotlib__matplotlib-23740",
+        "matplotlib__matplotlib-26472",
+        "matplotlib__matplotlib-23174",
+        "matplotlib__matplotlib-20788",
+        "matplotlib__matplotlib-20816",
+        "matplotlib__matplotlib-25794",
+        "matplotlib__matplotlib-20374",
+        "matplotlib__matplotlib-20693",
+        "matplotlib__matplotlib-24627",
+        "matplotlib__matplotlib-13980",
+        "matplotlib__matplotlib-23049",
+        "matplotlib__matplotlib-25085",
+        "matplotlib__matplotlib-17810",
+        "matplotlib__matplotlib-25631",
+        "matplotlib__matplotlib-21318",
+        "matplotlib__matplotlib-24026",
+        "matplotlib__matplotlib-23203",
+        "matplotlib__matplotlib-13859",
+        "matplotlib__matplotlib-23088",
+        "matplotlib__matplotlib-22871",
+        "matplotlib__matplotlib-25785",
+        "matplotlib__matplotlib-25425"
+      ],
+      "partial_recall": [
+        "matplotlib__matplotlib-19743",
+        "matplotlib__matplotlib-24257",
+        "matplotlib__matplotlib-25515",
+        "matplotlib__matplotlib-24538",
+        "matplotlib__matplotlib-20470",
+        "matplotlib__matplotlib-24691",
+        "matplotlib__matplotlib-24619",
+        "matplotlib__matplotlib-26479",
+        "matplotlib__matplotlib-24013",
+        "matplotlib__matplotlib-23198"
+      ],
+      "miss": [
+        "matplotlib__matplotlib-25346",
+        "matplotlib__matplotlib-21550",
+        "matplotlib__matplotlib-26466"
+      ]
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.853659,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.715447,
+        "upper": 0.905149
+      }
+    },
+    "file_top_1_accuracy": 0.5609756097560976,
+    "file_top_3_accuracy": 0.7560975609756098,
+    "file_top_5_accuracy": 0.8292682926829268,
+    "file_mrr": 0.6634146341463414,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 41,
+    "top_1_accuracy": 0.5609756097560976,
+    "top_3_accuracy": 0.7560975609756098,
+    "top_5_accuracy": 0.8292682926829268,
+    "mrr": 0.6634146341463414,
+    "base_commit_reachable_evaluation": {
+      "rows_with_reachable_file_ground_truth": 41,
+      "candidate_hit_at_20": 0.926829268292683,
+      "candidate_recall_at_20": 0.8260162601626017,
+      "unreachable_gold_file_count": 10,
+      "unreachable_gold_files_by_ticket": {
+        "matplotlib__matplotlib-25515": [
+          "lib/matplotlib/sphinxext/figmpl_directive.py"
+        ],
+        "matplotlib__matplotlib-24691": [
+          "galleries/examples/color/set_alpha.py"
+        ],
+        "matplotlib__matplotlib-24013": [
+          "lib/matplotlib/tri/_triangulation.py",
+          "lib/matplotlib/tri/_tricontour.py",
+          "lib/matplotlib/tri/_trifinder.py",
+          "lib/matplotlib/tri/_triinterpolate.py",
+          "lib/matplotlib/tri/_tripcolor.py",
+          "lib/matplotlib/tri/_triplot.py",
+          "lib/matplotlib/tri/_trirefine.py",
+          "lib/matplotlib/tri/_tritools.py"
+        ]
+      },
+      "bootstrap_95_ci": {
+        "samples": 2000,
+        "seed": 44,
+        "candidate_hit_at_20": {
+          "lower": 0.829268,
+          "upper": 1.0
+        },
+        "candidate_recall_at_20": {
+          "lower": 0.725203,
+          "upper": 0.914634
+        }
+      },
+      "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+    },
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 41,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}

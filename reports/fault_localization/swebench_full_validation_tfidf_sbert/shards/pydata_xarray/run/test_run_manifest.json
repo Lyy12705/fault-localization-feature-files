@@ -1,0 +1,129 @@
+{
+  "started_at_utc": "2026-08-16T18:41:12.047086+00:00",
+  "completed_at_utc": "2026-08-16T18:42:09.116684+00:00",
+  "method_id": "tfidf-sbert-rerank-43260d1c9be2",
+  "method": {
+    "method_version": "fault-localization-method-v11",
+    "embedding_backend": "tfidf-sbert-rerank",
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20
+  },
+  "frozen_protocol": "",
+  "tickets_selected": 26,
+  "predictions": 26,
+  "failures": 0,
+  "processed_this_run": 26,
+  "skipped_existing": 0,
+  "index_cache_hits": 26,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/swebench_full_validation_tfidf_sbert/shards/pydata_xarray/run/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/swebench_full_validation_tfidf_sbert/shards/pydata_xarray/run/test_metrics.json",
+  "failures_output": "reports/fault_localization/swebench_full_validation_tfidf_sbert/shards/pydata_xarray/run/test_failures.jsonl",
+  "metrics": {
+    "rows": 26,
+    "gold_rows": 26,
+    "prediction_rows": 26,
+    "matched_prediction_rows": 26,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 26,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 26,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.9615384615384616,
+    "candidate_recall_at_20": 0.8435539098582576,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 16,
+      "partial_recall_rows": 9,
+      "miss_rows": 1
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "pydata__xarray-4758",
+        "pydata__xarray-3338",
+        "pydata__xarray-7391",
+        "pydata__xarray-5033",
+        "pydata__xarray-6823",
+        "pydata__xarray-4356",
+        "pydata__xarray-7203",
+        "pydata__xarray-3635",
+        "pydata__xarray-5362",
+        "pydata__xarray-4075",
+        "pydata__xarray-4419",
+        "pydata__xarray-4510",
+        "pydata__xarray-4827",
+        "pydata__xarray-6857",
+        "pydata__xarray-3677",
+        "pydata__xarray-6721"
+      ],
+      "partial_recall": [
+        "pydata__xarray-6804",
+        "pydata__xarray-7444",
+        "pydata__xarray-7019",
+        "pydata__xarray-5731",
+        "pydata__xarray-5455",
+        "pydata__xarray-7052",
+        "pydata__xarray-5187",
+        "pydata__xarray-5233",
+        "pydata__xarray-2922"
+      ],
+      "miss": [
+        "pydata__xarray-7347"
+      ]
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.846154,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.737108,
+        "upper": 0.931374
+      }
+    },
+    "file_top_1_accuracy": 0.5384615384615384,
+    "file_top_3_accuracy": 0.7692307692307693,
+    "file_top_5_accuracy": 0.8846153846153846,
+    "file_mrr": 0.6724358974358974,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 26,
+    "top_1_accuracy": 0.5384615384615384,
+    "top_3_accuracy": 0.7692307692307693,
+    "top_5_accuracy": 0.8846153846153846,
+    "mrr": 0.6724358974358974,
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 26,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}

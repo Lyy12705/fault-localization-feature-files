@@ -1,0 +1,3197 @@
+{
+  "ticket_id": "astropy__astropy-11693",
+  "bug_report": "bug_report: 'WCS.all_world2pix' failed to converge when plotting WCS with non linear distortions\n<!-- This comments are hidden when you submit the issue,\r\nso you do not need to remove them! -->\r\n\r\n<!-- Please be sure to check out our contributing guidelines,\r\nhttps://github.com/astropy/astropy/blob/master/CONTRIBUTING.md .\r\nPlease be sure to check out our code of conduct,\r\nhttps://github.com/astropy/astropy/blob/master/CODE_OF_CONDUCT.md . -->\r\n\r\n<!-- Please have a search on our GitHub repository to see if a similar\r\nissue has already been posted.\r\nIf a similar issue is closed, have a quick look to see if you are satisfied\r\nby the resolution.\r\nIf not please go ahead and open an issue! -->\r\n\r\n<!-- Please check that the development version still produces the same bug.\r\nYou can install development version with\r\npip install git+https://github.com/astropy/astropy\r\ncommand. -->\r\n\r\n### Description\r\nWhen trying to plot an image with a WCS as projection that contains non linear Distortions it fails with a `NoConvergence` error.\r\n\r\n### Expected behavior\r\nWhen I add `quiet=True` as parameter to the call \r\n```pixel = self.all_world2pix(*world_arrays, 0)``` \r\nat line 326 of `astropy/wcs/wcsapi/fitswcs.py` I get the good enough looking plot below:\r\n\r\n![bugreport](https://user-images.githubusercontent.com/64231/112940287-37c2c800-912d-11eb-8ce8-56fd284bb8e7.png)\r\n\r\nIt would be nice if there was a way of getting that plot without having to hack the library code like that.\r\n### Actual behavior\r\n<!-- What actually happened. -->\r\n<!-- Was the output confusing or poorly described? -->\r\nThe call to plotting the grid fails with the following error (last few lines, can provide more if necessary):\r\n\r\n```\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcsapi/fitswcs.py in world_to_pixel_values(self, *world_arrays)\r\n    324 \r\n    325     def world_to_pixel_values(self, *world_arrays):\r\n--> 326         pixel = self.all_world2pix(*world_arrays, 0)\r\n    327         return pixel[0] if self.pixel_n_dim == 1 else tuple(pixel)\r\n    328 \r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/utils/decorators.py in wrapper(*args, **kwargs)\r\n    534                     warnings.warn(message, warning_type, stacklevel=2)\r\n    535 \r\n--> 536             return function(*args, **kwargs)\r\n    537 \r\n    538         return wrapper\r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcs.py in all_world2pix(self, tolerance, maxiter, adaptive, detect_divergence, quiet, *args, **kwargs)\r\n   1886             raise ValueError(\"No basic WCS settings were created.\")\r\n   1887 \r\n-> 1888         return self._array_converter(\r\n   1889             lambda *args, **kwargs:\r\n   1890             self._all_world2pix(\r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcs.py in _array_converter(self, func, sky, ra_dec_order, *args)\r\n   1335                     \"a 1-D array for each axis, followed by an origin.\")\r\n   1336 \r\n-> 1337             return _return_list_of_arrays(axes, origin)\r\n   1338 \r\n   1339         raise TypeError(\r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcs.py in _return_list_of_arrays(axes, origin)\r\n   1289             if ra_dec_order and sky == 'input':\r\n   1290                 xy = self._denormalize_sky(xy)\r\n-> 1291             output = func(xy, origin)\r\n   1292             if ra_dec_order and sky == 'output':\r\n   1293                 output = self._normalize_sky(output)\r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcs.py in <lambda>(*args, **kwargs)\r\n   1888         return self._array_converter(\r\n   1889             lambda *args, **kwargs:\r\n-> 1890             self._all_world2pix(\r\n   1891                 *args, tolerance=tolerance, maxiter=maxiter,\r\n   1892                 adaptive=adaptive, detect_divergence=detect_divergence,\r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcs.py in _all_world2pix(self, world, origin, tolerance, maxiter, adaptive, detect_divergence, quiet)\r\n   1869                     slow_conv=ind, divergent=None)\r\n   1870             else:\r\n-> 1871                 raise NoConvergence(\r\n   1872                     \"'WCS.all_world2pix' failed to \"\r\n   1873                     \"converge to the requested accuracy.\\n\"\r\n\r\nNoConvergence: 'WCS.all_world2pix' failed to converge to the requested accuracy.\r\nAfter 20 iterations, the solution is diverging at least for one input point.\r\n```\r\n\r\n### Steps to Reproduce\r\n<!-- Ideally a code example could be provided so we can run it ourselves. -->\r\n<!-- If you are pasting code, use triple backticks (```) around\r\nyour code snippet. -->\r\n<!-- If necessary, sanitize your screen output to be pasted so you do not\r\nreveal secrets like tokens and passwords. -->\r\n\r\nHere is the code to reproduce the problem:\r\n```\r\nfrom astropy.wcs import WCS, Sip\r\nimport numpy as np\r\nimport matplotlib.pyplot as plt\r\n\r\nwcs = WCS(naxis=2)\r\na = [[ 0.00000000e+00,  0.00000000e+00,  6.77532513e-07,\r\n        -1.76632141e-10],\r\n       [ 0.00000000e+00,  9.49130161e-06, -1.50614321e-07,\r\n         0.00000000e+00],\r\n       [ 7.37260409e-06,  2.07020239e-09,  0.00000000e+00,\r\n         0.00000000e+00],\r\n       [-1.20116753e-07,  0.00000000e+00,  0.00000000e+00,\r\n         0.00000000e+00]]\r\nb = [[ 0.00000000e+00,  0.00000000e+00,  1.34606617e-05,\r\n        -1.41919055e-07],\r\n       [ 0.00000000e+00,  5.85158316e-06, -1.10382462e-09,\r\n         0.00000000e+00],\r\n       [ 1.06306407e-05, -1.36469008e-07,  0.00000000e+00,\r\n         0.00000000e+00],\r\n       [ 3.27391123e-09,  0.00000000e+00,  0.00000000e+00,\r\n         0.00000000e+00]]\r\ncrpix = [1221.87375165,  994.90917378]\r\nap = bp = np.zeros((4, 4))\r\n\r\nwcs.sip = Sip(a, b, ap, bp, crpix)\r\n\r\nplt.subplot(projection=wcs)\r\nplt.imshow(np.zeros((1944, 2592)))\r\nplt.grid(color='white', ls='solid')\r\n```\r\n\r\n### System Details\r\n<!-- Even if you do not think this is necessary, it is useful information for the maintainers.\r\nPlease run the following snippet and paste the output below:\r\nimport platform; print(platform.platform())\r\nimport sys; print(\"Python\", sys.version)\r\nimport numpy; print(\"Numpy\", numpy.__version__)\r\nimport astropy; print(\"astropy\", astropy.__version__)\r\nimport scipy; print(\"Scipy\", scipy.__version__)\r\nimport matplotlib; print(\"Matplotlib\", matplotlib.__version__)\r\n-->\r\n```\r\n>>> import platform; print(platform.platform())\r\nLinux-5.11.10-arch1-1-x86_64-with-glibc2.33\r\n>>> import sys; print(\"Python\", sys.version)\r\nPython 3.9.2 (default, Feb 20 2021, 18:40:11) \r\n[GCC 10.2.0]\r\n>>> import numpy; print(\"Numpy\", numpy.__version__)\r\nNumpy 1.20.2\r\n>>> import astropy; print(\"astropy\", astropy.__version__)\r\nastropy 4.3.dev690+g7811614f8\r\n>>> import scipy; print(\"Scipy\", scipy.__version__)\r\nScipy 1.6.1\r\n>>> import matplotlib; print(\"Matplotlib\", matplotlib.__version__)\r\nMatplotlib 3.3.4\r\n```\n'WCS.all_world2pix' failed to converge when plotting WCS with non linear distortions\n<!-- This comments are hidden when you submit the issue,\r\nso you do not need to remove them! -->\r\n\r\n<!-- Please be sure to check out our contributing guidelines,\r\nhttps://github.com/astropy/astropy/blob/master/CONTRIBUTING.md .\r\nPlease be sure to check out our code of conduct,\r\nhttps://github.com/astropy/astropy/blob/master/CODE_OF_CONDUCT.md . -->\r\n\r\n<!-- Please have a search on our GitHub repository to see if a similar\r\nissue has already been posted.\r\nIf a similar issue is closed, have a quick look to see if you are satisfied\r\nby the resolution.\r\nIf not please go ahead and open an issue! -->\r\n\r\n<!-- Please check that the development version still produces the same bug.\r\nYou can install development version with\r\npip install git+https://github.com/astropy/astropy\r\ncommand. -->\r\n\r\n### Description\r\nWhen trying to plot an image with a WCS as projection that contains non linear Distortions it fails with a `NoConvergence` error.\r\n\r\n### Expected behavior\r\nWhen I add `quiet=True` as parameter to the call \r\n```pixel = self.all_world2pix(*world_arrays, 0)``` \r\nat line 326 of `astropy/wcs/wcsapi/fitswcs.py` I get the good enough looking plot below:\r\n\r\n![bugreport](https://user-images.githubusercontent.com/64231/112940287-37c2c800-912d-11eb-8ce8-56fd284bb8e7.png)\r\n\r\nIt would be nice if there was a way of getting that plot without having to hack the library code like that.\r\n### Actual behavior\r\n<!-- What actually happened. -->\r\n<!-- Was the output confusing or poorly described? -->\r\nThe call to plotting the grid fails with the following error (last few lines, can provide more if necessary):\r\n\r\n```\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcsapi/fitswcs.py in world_to_pixel_values(self, *world_arrays)\r\n    324 \r\n    325     def world_to_pixel_values(self, *world_arrays):\r\n--> 326         pixel = self.all_world2pix(*world_arrays, 0)\r\n    327         return pixel[0] if self.pixel_n_dim == 1 else tuple(pixel)\r\n    328 \r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/utils/decorators.py in wrapper(*args, **kwargs)\r\n    534                     warnings.warn(message, warning_type, stacklevel=2)\r\n    535 \r\n--> 536             return function(*args, **kwargs)\r\n    537 \r\n    538         return wrapper\r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcs.py in all_world2pix(self, tolerance, maxiter, adaptive, detect_divergence, quiet, *args, **kwargs)\r\n   1886             raise ValueError(\"No basic WCS settings were created.\")\r\n   1887 \r\n-> 1888         return self._array_converter(\r\n   1889             lambda *args, **kwargs:\r\n   1890             self._all_world2pix(\r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcs.py in _array_converter(self, func, sky, ra_dec_order, *args)\r\n   1335                     \"a 1-D array for each axis, followed by an origin.\")\r\n   1336 \r\n-> 1337             return _return_list_of_arrays(axes, origin)\r\n   1338 \r\n   1339         raise TypeError(\r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcs.py in _return_list_of_arrays(axes, origin)\r\n   1289             if ra_dec_order and sky == 'input':\r\n   1290                 xy = self._denormalize_sky(xy)\r\n-> 1291             output = func(xy, origin)\r\n   1292             if ra_dec_order and sky == 'output':\r\n   1293                 output = self._normalize_sky(output)\r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcs.py in <lambda>(*args, **kwargs)\r\n   1888         return self._array_converter(\r\n   1889             lambda *args, **kwargs:\r\n-> 1890             self._all_world2pix(\r\n   1891                 *args, tolerance=tolerance, maxiter=maxiter,\r\n   1892                 adaptive=adaptive, detect_divergence=detect_divergence,\r\n\r\n~/work/develop/env/lib/python3.9/site-packages/astropy/wcs/wcs.py in _all_world2pix(self, world, origin, tolerance, maxiter, adaptive, detect_divergence, quiet)\r\n   1869                     slow_conv=ind, divergent=None)\r\n   1870             else:\r\n-> 1871                 raise NoConvergence(\r\n   1872                     \"'WCS.all_world2pix' failed to \"\r\n   1873                     \"converge to the requested accuracy.\\n\"\r\n\r\nNoConvergence: 'WCS.all_world2pix' failed to converge to the requested accuracy.\r\nAfter 20 iterations, the solution is diverging at least for one input point.\r\n```\r\n\r\n### Steps to Reproduce\r\n<!-- Ideally a code example could be provided so we can run it ourselves. -->\r\n<!-- If you are pasting code, use triple backticks (```) around\r\nyour code snippet. -->\r\n<!-- If necessary, sanitize your screen output to be pasted so you do not\r\nreveal secrets like tokens and passwords. -->\r\n\r\nHere is the code to reproduce the problem:\r\n```\r\nfrom astropy.wcs import WCS, Sip\r\nimport numpy as np\r\nimport matplotlib.pyplot as plt\r\n\r\nwcs = WCS(naxis=2)\r\na = [[ 0.00000000e+00,  0.00000000e+00,  6.77532513e-07,\r\n        -1.76632141e-10],\r\n       [ 0.00000000e+00,  9.49130161e-06, -1.50614321e-07,\r\n         0.00000000e+00],\r\n       [ 7.37260409e-06,  2.07020239e-09,  0.00000000e+00,\r\n         0.00000000e+00],\r\n       [-1.20116753e-07,  0.00000000e+00,  0.00000000e+00,\r\n         0.00000000e+00]]\r\nb = [[ 0.00000000e+00,  0.00000000e+00,  1.34606617e-05,\r\n        -1.41919055e-07],\r\n       [ 0.00000000e+00,  5.85158316e-06, -1.10382462e-09,\r\n         0.00000000e+00],\r\n       [ 1.06306407e-05, -1.36469008e-07,  0.00000000e+00,\r\n         0.00000000e+00],\r\n       [ 3.27391123e-09,  0.00000000e+00,  0.00000000e+00,\r\n         0.00000000e+00]]\r\ncrpix = [1221.87375165,  994.90917378]\r\nap = bp = np.zeros((4, 4))\r\n\r\nwcs.sip = Sip(a, b, ap, bp, crpix)\r\n\r\nplt.subplot(projection=wcs)\r\nplt.imshow(np.zeros((1944, 2592)))\r\nplt.grid(color='white', ls='solid')\r\n```\r\n\r\n### System Details\r\n<!-- Even if you do not think this is necessary, it is useful information for the maintainers.\r\nPlease run the following snippet and paste the output below:\r\nimport platform; print(platform.platform())\r\nimport sys; print(\"Python\", sys.version)\r\nimport numpy; print(\"Numpy\", numpy.__version__)\r\nimport astropy; print(\"astropy\", astropy.__version__)\r\nimport scipy; print(\"Scipy\", scipy.__version__)\r\nimport matplotlib; print(\"Matplotlib\", matplotlib.__version__)\r\n-->\r\n```\r\n>>> import platform; print(platform.platform())\r\nLinux-5.11.10-arch1-1-x86_64-with-glibc2.33\r\n>>> import sys; print(\"Python\", sys.version)\r\nPython 3.9.2 (default, Feb 20 2021, 18:40:11) \r\n[GCC 10.2.0]\r\n>>> import numpy; print(\"Numpy\", numpy.__version__)\r\nNumpy 1.20.2\r\n>>> import astropy; print(\"astropy\", astropy.__version__)\r\nastropy 4.3.dev690+g7811614f8\r\n>>> import scipy; print(\"Scipy\", scipy.__version__)\r\nScipy 1.6.1\r\n>>> import matplotlib; print(\"Matplotlib\", matplotlib.__version__)\r\nMatplotlib 3.3.4\r\n```\ntitle: 'WCS.all_world2pix' failed to converge when plotting WCS with non linear distortions\nproduct: astropy/astropy\ncomponent: astropy\nversion: 4.2",
+  "method": {
+    "name": "code_chunk_embedding_retrieval",
+    "stages": [
+      "stage1_chunk_retrieval",
+      "stage1_domain_path_routing",
+      "stage1_file_aggregation",
+      "stage2_optional_llm_rerank",
+      "stage3_ast_symbol_rerank",
+      "confidence_gate"
+    ],
+    "embedding_backend": "tfidf",
+    "semantic_candidate_k": 0,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": true,
+    "repository_proximity": false,
+    "import_graph_mode": "off",
+    "import_graph_parameters": {
+      "reference_file_k": 5,
+      "outgoing_signal": 0.8,
+      "incoming_signal": 0.65,
+      "rank_decay": 0.08,
+      "maximum_signal": 0.8,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4
+    },
+    "call_graph_mode": "off",
+    "call_graph_parameters": {
+      "reference_file_k": 5,
+      "outgoing_signal": 0.9,
+      "rank_decay": 0.08,
+      "maximum_signal": 0.9,
+      "maximum_bonus": 0.08,
+      "maximum_target_files_per_reference": 8,
+      "maximum_evidence_per_file": 4
+    },
+    "symbol_expansion_mode": "off",
+    "symbol_expansion_parameters": {
+      "max_ticket_symbols": 20,
+      "max_files_per_symbol": 4,
+      "exact_match_bonus": 0.06,
+      "leaf_match_bonus": 0.04,
+      "maximum_bonus": 0.1,
+      "maximum_evidence_per_file": 4
+    },
+    "api_implementation_parameters": {
+      "max_links_per_symbol": 4,
+      "reexport_bonus": 0.04,
+      "wrapper_bonus": 0.05,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_wrapper_statements": 4
+    },
+    "symbol_expansion_policy": {
+      "dotted_leaf_fallback": "disabled",
+      "api_implementation_expansion": "disabled",
+      "api_namespace_guard": "disabled"
+    },
+    "llm_rerank": true,
+    "llm_candidate_k": 20,
+    "llm_rerank_batch_size": 5,
+    "symbol_rerank": true,
+    "symbol_candidate_k": 30,
+    "symbol_top_k": 5,
+    "symbol_rerank_batch_size": 5,
+    "file_aggregation": true,
+    "advanced_file_aggregation": false,
+    "file_aggregation_mode": "basic",
+    "file_aggregation_parameters": {
+      "max_evidence_chunks": 5,
+      "evidence_score_ratio": 0.8,
+      "minimum_evidence_score": 0.05,
+      "support_bonus_per_additional_chunk": 0.0125,
+      "support_bonus_cap": 0.05,
+      "symbol_bonus_per_additional_symbol": 0.01,
+      "symbol_bonus_cap": 0.04,
+      "package_bonus_cap": 0.1
+    },
+    "ranking_level": "file_aggregated_chunks",
+    "top_k": 5,
+    "scoring_weights": {
+      "embedding_score": 0.5,
+      "stack_trace_score": 0.3,
+      "component_score": 0.05,
+      "keyword_score": 0.08,
+      "symbol_score": 0.07,
+      "domain_path_score": 0.18,
+      "identifier_score": 0.14,
+      "path_term_score": 0.12,
+      "repository_proximity_score": 0.1,
+      "package_proximity_score": 0.12
+    }
+  },
+  "stage1_candidate_files": [
+    {
+      "rank": 1,
+      "file_path": "astropy/wcs/wcs.py",
+      "retrieval_score": 0.3973,
+      "primary_symbol": "WCS.all_world2pix",
+      "symbol_kind": "method",
+      "start_line": 1892,
+      "end_line": 1905,
+      "reason": "WCS.all_world2pix: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.3515,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.5,
+        "symbol_score": 0.15,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.3178,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 3,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "wcs"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.3973,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 151,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2155-2234:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2155,
+          "end_line": 2234,
+          "score": 0.3943,
+          "retrieval_score": 0.3943
+        },
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2035-2114:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2035,
+          "end_line": 2114,
+          "score": 0.3732,
+          "retrieval_score": 0.3732
+        },
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2095-2174:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2095,
+          "end_line": 2174,
+          "score": 0.3724,
+          "retrieval_score": 0.3724
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file_path": "astropy/wcs/wcsapi/fitswcs.py",
+      "retrieval_score": 0.325,
+      "primary_symbol": "FITSWCSAPIMixin.world_to_pixel_values",
+      "symbol_kind": "method",
+      "start_line": 325,
+      "end_line": 327,
+      "reason": "FITSWCSAPIMixin.world_to_pixel_values: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: fitswcs. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.2175,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.5,
+        "symbol_score": 0.075,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.26,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 5,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "fitswcs"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.325,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 47,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:294-319:FITSWCSAPIMixin.axis_correlation_matrix",
+          "symbol_qualified_name": "FITSWCSAPIMixin.axis_correlation_matrix",
+          "start_line": 294,
+          "end_line": 319,
+          "score": 0.2857,
+          "retrieval_score": 0.2857
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:341-420:FITSWCSAPIMixin._get_components_and_classes",
+          "symbol_qualified_name": "FITSWCSAPIMixin._get_components_and_classes",
+          "start_line": 341,
+          "end_line": 420,
+          "score": 0.2796,
+          "retrieval_score": 0.2796
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:321-323:FITSWCSAPIMixin.pixel_to_world_values",
+          "symbol_qualified_name": "FITSWCSAPIMixin.pixel_to_world_values",
+          "start_line": 321,
+          "end_line": 323,
+          "score": 0.2755,
+          "retrieval_score": 0.2755
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file_path": "astropy/utils/decorators.py",
+      "retrieval_score": 0.2862,
+      "primary_symbol": "wrapper",
+      "symbol_kind": "function",
+      "start_line": 488,
+      "end_line": 546,
+      "reason": "wrapper: The ticket references this file. Shared report/code terms include: check, https, github, com, astropy. Ticket terms match the source path: decorators. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1602,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.4167,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.2289,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 4,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "decorators"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.2862,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 49,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/utils/decorators.py:85-164:deprecated",
+          "symbol_qualified_name": "deprecated",
+          "start_line": 85,
+          "end_line": 164,
+          "score": 0.2537,
+          "retrieval_score": 0.2537
+        },
+        {
+          "chunk_id": "astropy/utils/decorators.py:280-359:deprecated_renamed_argument",
+          "symbol_qualified_name": "deprecated_renamed_argument",
+          "start_line": 280,
+          "end_line": 359,
+          "score": 0.2462,
+          "retrieval_score": 0.2462
+        },
+        {
+          "chunk_id": "astropy/utils/decorators.py:869-948:format_doc",
+          "symbol_qualified_name": "format_doc",
+          "start_line": 869,
+          "end_line": 948,
+          "score": 0.2436,
+          "retrieval_score": 0.2436
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file_path": "astropy/nddata/decorators.py",
+      "retrieval_score": 0.2846,
+      "primary_symbol": "support_nddata",
+      "symbol_kind": "function",
+      "start_line": 82,
+      "end_line": 161,
+      "reason": "support_nddata: The ticket references this file. Shared report/code terms include: wcs, all, you, need, check. Ticket terms match the source path: decorators. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1304,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.5833,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.2277,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 1,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "decorators"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.2846,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 9,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/nddata/decorators.py:202-278:support_nddata",
+          "symbol_qualified_name": "support_nddata",
+          "start_line": 202,
+          "end_line": 278,
+          "score": 0.2679,
+          "retrieval_score": 0.2679
+        },
+        {
+          "chunk_id": "astropy/nddata/decorators.py:142-221:support_nddata",
+          "symbol_qualified_name": "support_nddata",
+          "start_line": 142,
+          "end_line": 221,
+          "score": 0.2661,
+          "retrieval_score": 0.2661
+        },
+        {
+          "chunk_id": "astropy/nddata/decorators.py:1-21:module",
+          "symbol_qualified_name": "",
+          "start_line": 1,
+          "end_line": 21,
+          "score": 0.2311,
+          "retrieval_score": 0.2311
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file_path": "astropy/units/decorators.py",
+      "retrieval_score": 0.2559,
+      "primary_symbol": "QuantityInput.wrapper",
+      "symbol_kind": "method",
+      "start_line": 226,
+      "end_line": 305,
+      "reason": "QuantityInput.wrapper: The ticket references this file. Shared report/code terms include: all, non, check, our, astropy. Ticket terms match the source path: decorators. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.0996,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.4167,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.2047,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 4,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "decorators"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.2559,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 14,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/units/decorators.py:134-213:QuantityInput",
+          "symbol_qualified_name": "QuantityInput",
+          "start_line": 134,
+          "end_line": 213,
+          "score": 0.2489,
+          "retrieval_score": 0.2489
+        },
+        {
+          "chunk_id": "astropy/units/decorators.py:1-22:module",
+          "symbol_qualified_name": "",
+          "start_line": 1,
+          "end_line": 22,
+          "score": 0.2264,
+          "retrieval_score": 0.2264
+        },
+        {
+          "chunk_id": "astropy/units/decorators.py:95-131:_parse_annotation",
+          "symbol_qualified_name": "_parse_annotation",
+          "start_line": 95,
+          "end_line": 131,
+          "score": 0.2256,
+          "retrieval_score": 0.2256
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file_path": "astropy/nddata/ccddata.py",
+      "retrieval_score": 0.2063,
+      "primary_symbol": "_generate_wcs_and_update_header",
+      "symbol_kind": "function",
+      "start_line": 455,
+      "end_line": 524,
+      "reason": "_generate_wcs_and_update_header: Shared report/code terms include: wcs, non, need, remove, them. Ticket terms match the source path: astropy, py. The bug report vector is similar to the code chunk text. 1 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1351,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 1.0,
+        "symbol_score": 0.05,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.46,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.165,
+        "support_evidence_count": 2,
+        "distinct_support_symbol_count": 2,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "astropy",
+          "py"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.2063,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 33,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/nddata/ccddata.py:134-213:CCDData",
+          "symbol_qualified_name": "CCDData",
+          "start_line": 134,
+          "end_line": 213,
+          "score": 0.1668,
+          "retrieval_score": 0.1668
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file_path": "astropy/io/fits/hdu/hdulist.py",
+      "retrieval_score": 0.2026,
+      "primary_symbol": "HDUList._flush_resize",
+      "symbol_kind": "method",
+      "start_line": 1373,
+      "end_line": 1426,
+      "reason": "HDUList._flush_resize: Shared report/code terms include: all, need, remove, sure, out. Ticket terms match the source path: astropy, py. The bug report vector is similar to the code chunk text. 2 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.158,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.8333,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.46,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1621,
+        "support_evidence_count": 3,
+        "distinct_support_symbol_count": 2,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "astropy",
+          "py"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.2026,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 65,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/io/fits/hdu/hdulist.py:1319-1398:HDUList",
+          "symbol_qualified_name": "HDUList",
+          "start_line": 1319,
+          "end_line": 1398,
+          "score": 0.1894,
+          "retrieval_score": 0.1894
+        },
+        {
+          "chunk_id": "astropy/io/fits/hdu/hdulist.py:1139-1218:HDUList",
+          "symbol_qualified_name": "HDUList",
+          "start_line": 1139,
+          "end_line": 1218,
+          "score": 0.1671,
+          "retrieval_score": 0.1671
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file_path": "astropy/wcs/utils.py",
+      "retrieval_score": 0.1986,
+      "primary_symbol": "skycoord_to_pixel",
+      "symbol_kind": "function",
+      "start_line": 504,
+      "end_line": 569,
+      "reason": "skycoord_to_pixel: Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: utils. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1249,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.8333,
+        "symbol_score": 0.05,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1589,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 5,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "utils"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1986,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 37,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/utils.py:294-335:proj_plane_pixel_scales",
+          "symbol_qualified_name": "proj_plane_pixel_scales",
+          "start_line": 294,
+          "end_line": 335,
+          "score": 0.191,
+          "retrieval_score": 0.191
+        },
+        {
+          "chunk_id": "astropy/wcs/utils.py:572-644:pixel_to_skycoord",
+          "symbol_qualified_name": "pixel_to_skycoord",
+          "start_line": 572,
+          "end_line": 644,
+          "score": 0.1876,
+          "retrieval_score": 0.1876
+        },
+        {
+          "chunk_id": "astropy/wcs/utils.py:955-1034:fit_wcs_from_points",
+          "symbol_qualified_name": "fit_wcs_from_points",
+          "start_line": 955,
+          "end_line": 1034,
+          "score": 0.1771,
+          "retrieval_score": 0.1771
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file_path": "astropy/wcs/wcsapi/high_level_api.py",
+      "retrieval_score": 0.1976,
+      "primary_symbol": "high_level_objects_to_values",
+      "symbol_kind": "function",
+      "start_line": 120,
+      "end_line": 199,
+      "reason": "high_level_objects_to_values: Shared report/code terms include: wcs, all, world, them, check. Ticket terms match the source path: astropy, py, wcs. The bug report vector is similar to the code chunk text. 2 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1194,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.75,
+        "symbol_score": 0.05,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.62,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1581,
+        "support_evidence_count": 3,
+        "distinct_support_symbol_count": 2,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "astropy",
+          "py",
+          "wcs",
+          "wcsapi"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1976,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 17,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/wcsapi/high_level_api.py:180-237:high_level_objects_to_values",
+          "symbol_qualified_name": "high_level_objects_to_values",
+          "start_line": 180,
+          "end_line": 237,
+          "score": 0.1777,
+          "retrieval_score": 0.1777
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/high_level_api.py:46-117:BaseHighLevelWCS",
+          "symbol_qualified_name": "BaseHighLevelWCS",
+          "start_line": 46,
+          "end_line": 117,
+          "score": 0.1614,
+          "retrieval_score": 0.1614
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file_path": "astropy/wcs/wcsapi/low_level_api.py",
+      "retrieval_score": 0.1975,
+      "primary_symbol": "BaseLowLevelWCS",
+      "symbol_kind": "class",
+      "start_line": 249,
+      "end_line": 328,
+      "reason": "BaseLowLevelWCS: Shared report/code terms include: wcs, all, world, distortions, you. Ticket terms match the source path: astropy, py, wcs. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1459,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.5833,
+        "symbol_score": 0.05,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.62,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.158,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 3,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "astropy",
+          "py",
+          "wcs",
+          "wcsapi"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1975,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 27,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/wcsapi/low_level_api.py:189-268:BaseLowLevelWCS",
+          "symbol_qualified_name": "BaseLowLevelWCS",
+          "start_line": 189,
+          "end_line": 268,
+          "score": 0.1878,
+          "retrieval_score": 0.1878
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/low_level_api.py:129-208:BaseLowLevelWCS",
+          "symbol_qualified_name": "BaseLowLevelWCS",
+          "start_line": 129,
+          "end_line": 208,
+          "score": 0.1787,
+          "retrieval_score": 0.1787
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/low_level_api.py:92-109:BaseLowLevelWCS.world_to_pixel_values",
+          "symbol_qualified_name": "BaseLowLevelWCS.world_to_pixel_values",
+          "start_line": 92,
+          "end_line": 109,
+          "score": 0.1728,
+          "retrieval_score": 0.1728
+        }
+      ]
+    },
+    {
+      "rank": 11,
+      "file_path": "astropy/units/quantity_helper/converters.py",
+      "retrieval_score": 0.197,
+      "primary_symbol": "converters_and_unit",
+      "symbol_kind": "function",
+      "start_line": 133,
+      "end_line": 212,
+      "reason": "converters_and_unit: Shared report/code terms include: all, non, need, check, out. Ticket terms match the source path: converter. The bug report vector is similar to the code chunk text. 2 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1384,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.75,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1576,
+        "support_evidence_count": 3,
+        "distinct_support_symbol_count": 2,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "converter"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.197,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 15,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/units/quantity_helper/converters.py:61-95:UfuncHelpers.__missing__",
+          "symbol_qualified_name": "UfuncHelpers.__missing__",
+          "start_line": 61,
+          "end_line": 95,
+          "score": 0.1841,
+          "retrieval_score": 0.1841
+        },
+        {
+          "chunk_id": "astropy/units/quantity_helper/converters.py:253-280:converters_and_unit",
+          "symbol_qualified_name": "converters_and_unit",
+          "start_line": 253,
+          "end_line": 280,
+          "score": 0.1759,
+          "retrieval_score": 0.1759
+        }
+      ]
+    },
+    {
+      "rank": 12,
+      "file_path": "astropy/coordinates/sky_coordinate.py",
+      "retrieval_score": 0.1948,
+      "primary_symbol": "SkyCoord",
+      "symbol_kind": "class",
+      "start_line": 701,
+      "end_line": 780,
+      "reason": "SkyCoord: Shared report/code terms include: all, you, need, them, please. Ticket terms match the source path: sky. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1208,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.8333,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1558,
+        "support_evidence_count": 4,
+        "distinct_support_symbol_count": 2,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "sky"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1948,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 90,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/coordinates/sky_coordinate.py:1683-1708:SkyCoord.to_pixel",
+          "symbol_qualified_name": "SkyCoord.to_pixel",
+          "start_line": 1683,
+          "end_line": 1708,
+          "score": 0.1655,
+          "retrieval_score": 0.1655
+        },
+        {
+          "chunk_id": "astropy/coordinates/sky_coordinate.py:1721-1800:SkyCoord",
+          "symbol_qualified_name": "SkyCoord",
+          "start_line": 1721,
+          "end_line": 1800,
+          "score": 0.1628,
+          "retrieval_score": 0.1628
+        },
+        {
+          "chunk_id": "astropy/coordinates/sky_coordinate.py:2021-2100:SkyCoord",
+          "symbol_qualified_name": "SkyCoord",
+          "start_line": 2021,
+          "end_line": 2100,
+          "score": 0.157,
+          "retrieval_score": 0.157
+        }
+      ]
+    },
+    {
+      "rank": 13,
+      "file_path": "examples/template/example-template.py",
+      "retrieval_score": 0.1931,
+      "primary_symbol": "",
+      "symbol_kind": "module",
+      "start_line": 1,
+      "end_line": 78,
+      "reason": "examples/template/example-template.py: Shared report/code terms include: all, comments, you, need, astropy. Ticket terms match the source path: example. The bug report vector is similar to the code chunk text.",
+      "scoring_signals": {
+        "embedding_score": 0.1742,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.5,
+        "symbol_score": 0.0,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1545,
+        "support_evidence_count": 1,
+        "distinct_support_symbol_count": 0,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "example"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1931,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 3,
+      "supporting_chunks": []
+    },
+    {
+      "rank": 14,
+      "file_path": "astropy/units/quantity.py",
+      "retrieval_score": 0.192,
+      "primary_symbol": "Quantity",
+      "symbol_kind": "class",
+      "start_line": 538,
+      "end_line": 617,
+      "reason": "Quantity: Shared report/code terms include: all, please, check, out, our. Ticket terms match the source path: astropy, py. The bug report vector is similar to the code chunk text. 2 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1502,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.75,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.46,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1536,
+        "support_evidence_count": 3,
+        "distinct_support_symbol_count": 1,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "astropy",
+          "py"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.192,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 151,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/units/quantity.py:1678-1757:Quantity",
+          "symbol_qualified_name": "Quantity",
+          "start_line": 1678,
+          "end_line": 1757,
+          "score": 0.1831,
+          "retrieval_score": 0.1831
+        },
+        {
+          "chunk_id": "astropy/units/quantity.py:1438-1517:Quantity",
+          "symbol_qualified_name": "Quantity",
+          "start_line": 1438,
+          "end_line": 1517,
+          "score": 0.1549,
+          "retrieval_score": 0.1549
+        }
+      ]
+    },
+    {
+      "rank": 15,
+      "file_path": "astropy/io/fits/fitsrec.py",
+      "retrieval_score": 0.1898,
+      "primary_symbol": "FITS_rec",
+      "symbol_kind": "class",
+      "start_line": 561,
+      "end_line": 640,
+      "reason": "FITS_rec: Shared report/code terms include: all, need, out, our, https. Ticket terms match the source path: astropy, py. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1456,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.75,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.46,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1518,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 3,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "astropy",
+          "py"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1898,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 76,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/io/fits/fitsrec.py:441-520:FITS_rec",
+          "symbol_qualified_name": "FITS_rec",
+          "start_line": 441,
+          "end_line": 520,
+          "score": 0.1828,
+          "retrieval_score": 0.1828
+        },
+        {
+          "chunk_id": "astropy/io/fits/fitsrec.py:801-880:FITS_rec",
+          "symbol_qualified_name": "FITS_rec",
+          "start_line": 801,
+          "end_line": 880,
+          "score": 0.1624,
+          "retrieval_score": 0.1624
+        },
+        {
+          "chunk_id": "astropy/io/fits/fitsrec.py:386-465:FITS_rec.from_columns",
+          "symbol_qualified_name": "FITS_rec.from_columns",
+          "start_line": 386,
+          "end_line": 465,
+          "score": 0.1556,
+          "retrieval_score": 0.1556
+        }
+      ]
+    },
+    {
+      "rank": 16,
+      "file_path": "astropy/visualization/wcsaxes/core.py",
+      "retrieval_score": 0.1896,
+      "primary_symbol": "WCSAxes",
+      "symbol_kind": "class",
+      "start_line": 170,
+      "end_line": 249,
+      "reason": "WCSAxes: Shared report/code terms include: wcs, all, non, need, remove. Ticket terms match the source path: astropy, py. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1685,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.5833,
+        "symbol_score": 0.05,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.46,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1517,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 2,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "astropy",
+          "py"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1896,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 39,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/visualization/wcsaxes/core.py:433-467:WCSAxes.draw",
+          "symbol_qualified_name": "WCSAxes.draw",
+          "start_line": 433,
+          "end_line": 467,
+          "score": 0.1868,
+          "retrieval_score": 0.1868
+        },
+        {
+          "chunk_id": "astropy/visualization/wcsaxes/core.py:290-369:WCSAxes",
+          "symbol_qualified_name": "WCSAxes",
+          "start_line": 290,
+          "end_line": 369,
+          "score": 0.181,
+          "retrieval_score": 0.181
+        },
+        {
+          "chunk_id": "astropy/visualization/wcsaxes/core.py:230-309:WCSAxes",
+          "symbol_qualified_name": "WCSAxes",
+          "start_line": 230,
+          "end_line": 309,
+          "score": 0.1731,
+          "retrieval_score": 0.1731
+        }
+      ]
+    },
+    {
+      "rank": 17,
+      "file_path": "cextern/wcslib/C/wcs.h",
+      "retrieval_score": 0.188,
+      "primary_symbol": "wcsnpv",
+      "symbol_kind": "function",
+      "start_line": 226,
+      "end_line": 305,
+      "reason": "wcsnpv: Shared report/code terms include: wcs, all, world, non, linear. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1205,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.75,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1504,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 5,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "wcs"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.188,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 1354,
+      "supporting_chunks": [
+        {
+          "chunk_id": "cextern/wcslib/C/wcs.h:9-88:or",
+          "symbol_qualified_name": "or",
+          "start_line": 9,
+          "end_line": 88,
+          "score": 0.1822,
+          "retrieval_score": 0.1822
+        },
+        {
+          "chunk_id": "cextern/wcslib/C/wcs.h:852-931:wcsprintf",
+          "symbol_qualified_name": "wcsprintf",
+          "start_line": 852,
+          "end_line": 931,
+          "score": 0.1756,
+          "retrieval_score": 0.1756
+        },
+        {
+          "chunk_id": "cextern/wcslib/C/wcs.h:272-351:System",
+          "symbol_qualified_name": "System",
+          "start_line": 272,
+          "end_line": 351,
+          "score": 0.1729,
+          "retrieval_score": 0.1729
+        }
+      ]
+    },
+    {
+      "rank": 18,
+      "file_path": "astropy/coordinates/earth.py",
+      "retrieval_score": 0.1844,
+      "primary_symbol": "EarthLocation",
+      "symbol_kind": "class",
+      "start_line": 284,
+      "end_line": 363,
+      "reason": "EarthLocation: Shared report/code terms include: all, you, check, https, github. Ticket terms match the source path: astropy, py. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1348,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.75,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.46,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1475,
+        "support_evidence_count": 4,
+        "distinct_support_symbol_count": 2,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "astropy",
+          "py"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1844,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 56,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/coordinates/earth.py:480-505:EarthLocation.get_site_names",
+          "symbol_qualified_name": "EarthLocation.get_site_names",
+          "start_line": 480,
+          "end_line": 505,
+          "score": 0.1803,
+          "retrieval_score": 0.1803
+        },
+        {
+          "chunk_id": "astropy/coordinates/earth.py:524-603:EarthLocation",
+          "symbol_qualified_name": "EarthLocation",
+          "start_line": 524,
+          "end_line": 603,
+          "score": 0.1617,
+          "retrieval_score": 0.1617
+        },
+        {
+          "chunk_id": "astropy/coordinates/earth.py:224-303:EarthLocation",
+          "symbol_qualified_name": "EarthLocation",
+          "start_line": 224,
+          "end_line": 303,
+          "score": 0.1492,
+          "retrieval_score": 0.1492
+        }
+      ]
+    },
+    {
+      "rank": 19,
+      "file_path": "astropy/coordinates/sites.py",
+      "retrieval_score": 0.1825,
+      "primary_symbol": "",
+      "symbol_kind": "module",
+      "start_line": 1,
+      "end_line": 23,
+      "reason": "astropy/coordinates/sites.py: Shared report/code terms include: https, github, com, astropy, git. Ticket terms match the source path: site. The bug report vector is similar to the code chunk text.",
+      "scoring_signals": {
+        "embedding_score": 0.1228,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.6667,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.146,
+        "support_evidence_count": 1,
+        "distinct_support_symbol_count": 0,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "site"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1825,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 13,
+      "supporting_chunks": []
+    },
+    {
+      "rank": 20,
+      "file_path": "astropy/utils/masked/core.py",
+      "retrieval_score": 0.1818,
+      "primary_symbol": "MaskedNDArray",
+      "symbol_kind": "class",
+      "start_line": 813,
+      "end_line": 892,
+      "reason": "MaskedNDArray: Shared report/code terms include: non, need, remove, check, out. Ticket terms match the source path: astropy, py, utils. The bug report vector is similar to the code chunk text. 2 additional independent chunk(s) in this file also matched.",
+      "scoring_signals": {
+        "embedding_score": 0.1239,
+        "stack_trace_score": 0.0,
+        "component_score": 0.0,
+        "keyword_score": 0.6667,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.54,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.1455,
+        "support_evidence_count": 3,
+        "distinct_support_symbol_count": 1,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "astropy",
+          "py",
+          "utils"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1818,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        }
+      },
+      "file_chunk_count": 94,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/utils/masked/core.py:873-952:MaskedNDArray",
+          "symbol_qualified_name": "MaskedNDArray",
+          "start_line": 873,
+          "end_line": 952,
+          "score": 0.1649,
+          "retrieval_score": 0.1649
+        },
+        {
+          "chunk_id": "astropy/utils/masked/core.py:753-832:MaskedNDArray",
+          "symbol_qualified_name": "MaskedNDArray",
+          "start_line": 753,
+          "end_line": 832,
+          "score": 0.1459,
+          "retrieval_score": 0.1459
+        }
+      ]
+    }
+  ],
+  "stage1_diagnostics": {
+    "stage_boundary": "before_llm_rerank",
+    "indexed_chunk_count": 35193,
+    "semantic_candidate_file_k": 0,
+    "semantic_representative": "",
+    "requested_candidate_file_k": 20,
+    "returned_candidate_file_count": 20,
+    "unique_candidate_file_count": 20,
+    "import_graph": {
+      "enabled": false
+    },
+    "call_graph": {
+      "enabled": false,
+      "mode": "off"
+    },
+    "symbol_expansion": {
+      "enabled": false,
+      "mode": "off",
+      "dotted_leaf_fallback_policy": "disabled",
+      "skipped_dotted_leaf_fallback_count": 0,
+      "skipped_dotted_leaf_fallback_names": [],
+      "ticket_program_names": [],
+      "indexed_symbol_keys": 0,
+      "returned_evidence_count": 0,
+      "matched_ticket_symbols": [],
+      "matched_definition_files": [],
+      "evidence": [],
+      "api_implementation_enabled": false,
+      "api_namespace_guard_enabled": false,
+      "rejected_api_namespace_count": 0,
+      "rejected_api_namespace_names": [],
+      "indexed_api_link_keys": 0,
+      "returned_api_evidence_count": 0,
+      "matched_implementation_files": [],
+      "api_evidence": []
+    }
+  },
+  "localized_candidates": [
+    {
+      "rank": 1,
+      "file_path": "astropy/wcs/wcs.py",
+      "function_name": "WCS.all_world2pix",
+      "class_name": "WCS",
+      "symbol_name": "WCS.all_world2pix",
+      "symbol_qualified_name": "WCS.all_world2pix",
+      "symbol_kind": "method",
+      "start_line": 1892,
+      "end_line": 1905,
+      "score": 0.2781,
+      "final_score": 0.2781,
+      "embedding_score": 0.3515,
+      "reason": "LLM rerank: short reason Retrieval: WCS.all_world2pix: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "code_text": "    @deprecated_renamed_argument('accuracy', 'tolerance', '4.3')\n    def all_world2pix(self, *args, tolerance=1e-4, maxiter=20, adaptive=False,\n                      detect_divergence=True, quiet=False, **kwargs):\n        if self.wcs is None:\n            raise ValueError(\"No basic WCS settings were created.\")\n\n        return self._array_converter(\n            lambda *args, **kwargs:\n            self._all_world2pix(\n                *args, tolerance=tolerance, maxiter=maxiter,\n                adaptive=adaptive, detect_divergence=detect_divergence,\n                quiet=quiet),\n            'input', *args, **kwargs\n        )",
+      "chunk_id": "astropy/wcs/wcs.py:1892-1905:WCS.all_world2pix",
+      "evaluation_key": "astropy/wcs/wcs.py::WCS.all_world2pix:1892-1905",
+      "scoring_signals": {
+        "embedding_score": 0.3515,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.5,
+        "symbol_score": 0.15,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.3178,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 3,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "wcs"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.2781,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        },
+        "llm_rerank_score": 0.0,
+        "retrieval_score_before_llm": 0.3973,
+        "llm_blended_score": 0.2781,
+        "llm_rerank_weights": {
+          "retrieval": 0.7,
+          "llm": 0.3
+        }
+      },
+      "signals": {
+        "embedding_score": 0.3515,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.5,
+        "symbol_score": 0.15,
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "final_score": 0.2781,
+        "component_path": 0.0,
+        "keyword_overlap": 0.5,
+        "matching_terms": [
+          "wcs",
+          "all_world2pix",
+          "all",
+          "world",
+          "pix",
+          "astropy"
+        ],
+        "matching_domain_intents": [],
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "wcs"
+        ],
+        "matching_repository_proximity": [],
+        "file_aggregation_mode": "basic",
+        "file_chunk_count": 151,
+        "supporting_chunks": [
+          {
+            "chunk_id": "astropy/wcs/wcs.py:2155-2234:WCS",
+            "symbol_qualified_name": "WCS",
+            "start_line": 2155,
+            "end_line": 2234,
+            "score": 0.3943,
+            "retrieval_score": 0.3943
+          },
+          {
+            "chunk_id": "astropy/wcs/wcs.py:2035-2114:WCS",
+            "symbol_qualified_name": "WCS",
+            "start_line": 2035,
+            "end_line": 2114,
+            "score": 0.3732,
+            "retrieval_score": 0.3732
+          },
+          {
+            "chunk_id": "astropy/wcs/wcs.py:2095-2174:WCS",
+            "symbol_qualified_name": "WCS",
+            "start_line": 2095,
+            "end_line": 2174,
+            "score": 0.3724,
+            "retrieval_score": 0.3724
+          }
+        ],
+        "chunk_score": 0.3973,
+        "support_evidence_threshold": 0.3178,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 3,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "file_aggregate_score": 0.3973,
+        "retrieval_score_before_llm": 0.3973,
+        "llm_rerank_score": 0.0,
+        "llm_blended_score": 0.2781,
+        "llm_rerank_batch": 1
+      },
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2155-2234:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2155,
+          "end_line": 2234,
+          "score": 0.3943,
+          "retrieval_score": 0.3943
+        },
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2035-2114:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2035,
+          "end_line": 2114,
+          "score": 0.3732,
+          "retrieval_score": 0.3732
+        },
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2095-2174:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2095,
+          "end_line": 2174,
+          "score": 0.3724,
+          "retrieval_score": 0.3724
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file_path": "astropy/wcs/wcsapi/fitswcs.py",
+      "function_name": "FITSWCSAPIMixin.world_to_pixel_values",
+      "class_name": "FITSWCSAPIMixin",
+      "symbol_name": "FITSWCSAPIMixin.world_to_pixel_values",
+      "symbol_qualified_name": "FITSWCSAPIMixin.world_to_pixel_values",
+      "symbol_kind": "method",
+      "start_line": 325,
+      "end_line": 327,
+      "score": 0.2275,
+      "final_score": 0.2275,
+      "embedding_score": 0.2175,
+      "reason": "LLM rerank: short reason Retrieval: FITSWCSAPIMixin.world_to_pixel_values: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: fitswcs. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "code_text": "    def world_to_pixel_values(self, *world_arrays):\n        pixel = self.all_world2pix(*world_arrays, 0)\n        return pixel[0] if self.pixel_n_dim == 1 else tuple(pixel)",
+      "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:325-327:FITSWCSAPIMixin.world_to_pixel_values",
+      "evaluation_key": "astropy/wcs/wcsapi/fitswcs.py::FITSWCSAPIMixin.world_to_pixel_values:325-327",
+      "scoring_signals": {
+        "embedding_score": 0.2175,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.5,
+        "symbol_score": 0.075,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.26,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 5,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "fitswcs"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.2275,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        },
+        "llm_rerank_score": 0.0,
+        "retrieval_score_before_llm": 0.325,
+        "llm_blended_score": 0.2275,
+        "llm_rerank_weights": {
+          "retrieval": 0.7,
+          "llm": 0.3
+        }
+      },
+      "signals": {
+        "embedding_score": 0.2175,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.5,
+        "symbol_score": 0.075,
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "final_score": 0.2275,
+        "component_path": 0.0,
+        "keyword_overlap": 0.5,
+        "matching_terms": [
+          "wcs",
+          "all_world2pix",
+          "all",
+          "world",
+          "pix",
+          "astropy"
+        ],
+        "matching_domain_intents": [],
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "fitswcs"
+        ],
+        "matching_repository_proximity": [],
+        "file_aggregation_mode": "basic",
+        "file_chunk_count": 47,
+        "supporting_chunks": [
+          {
+            "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:294-319:FITSWCSAPIMixin.axis_correlation_matrix",
+            "symbol_qualified_name": "FITSWCSAPIMixin.axis_correlation_matrix",
+            "start_line": 294,
+            "end_line": 319,
+            "score": 0.2857,
+            "retrieval_score": 0.2857
+          },
+          {
+            "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:341-420:FITSWCSAPIMixin._get_components_and_classes",
+            "symbol_qualified_name": "FITSWCSAPIMixin._get_components_and_classes",
+            "start_line": 341,
+            "end_line": 420,
+            "score": 0.2796,
+            "retrieval_score": 0.2796
+          },
+          {
+            "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:321-323:FITSWCSAPIMixin.pixel_to_world_values",
+            "symbol_qualified_name": "FITSWCSAPIMixin.pixel_to_world_values",
+            "start_line": 321,
+            "end_line": 323,
+            "score": 0.2755,
+            "retrieval_score": 0.2755
+          }
+        ],
+        "chunk_score": 0.325,
+        "support_evidence_threshold": 0.26,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 5,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "file_aggregate_score": 0.325,
+        "retrieval_score_before_llm": 0.325,
+        "llm_rerank_score": 0.0,
+        "llm_blended_score": 0.2275,
+        "llm_rerank_batch": 1
+      },
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:294-319:FITSWCSAPIMixin.axis_correlation_matrix",
+          "symbol_qualified_name": "FITSWCSAPIMixin.axis_correlation_matrix",
+          "start_line": 294,
+          "end_line": 319,
+          "score": 0.2857,
+          "retrieval_score": 0.2857
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:341-420:FITSWCSAPIMixin._get_components_and_classes",
+          "symbol_qualified_name": "FITSWCSAPIMixin._get_components_and_classes",
+          "start_line": 341,
+          "end_line": 420,
+          "score": 0.2796,
+          "retrieval_score": 0.2796
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:321-323:FITSWCSAPIMixin.pixel_to_world_values",
+          "symbol_qualified_name": "FITSWCSAPIMixin.pixel_to_world_values",
+          "start_line": 321,
+          "end_line": 323,
+          "score": 0.2755,
+          "retrieval_score": 0.2755
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file_path": "astropy/utils/decorators.py",
+      "function_name": "wrapper",
+      "class_name": "",
+      "symbol_name": "wrapper",
+      "symbol_qualified_name": "wrapper",
+      "symbol_kind": "function",
+      "start_line": 488,
+      "end_line": 546,
+      "score": 0.2003,
+      "final_score": 0.2003,
+      "embedding_score": 0.1602,
+      "reason": "LLM rerank: short reason Retrieval: wrapper: The ticket references this file. Shared report/code terms include: check, https, github, com, astropy. Ticket terms match the source path: decorators. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "code_text": "        @functools.wraps(function)\n        def wrapper(*args, **kwargs):\n            for i in range(n):\n                msg = message[i] or (f'\"{old_name[i]}\" was deprecated in '\n                                     f'version {since[i]} and will be removed '\n                                     'in a future version. ')\n                # The only way to have oldkeyword inside the function is\n                # that it is passed as kwarg because the oldkeyword\n                # parameter was renamed to newkeyword.\n                if old_name[i] in kwargs:\n                    value = kwargs.pop(old_name[i])\n                    # Display the deprecation warning only when it's not\n                    # pending.\n                    if not pending[i]:\n                        if not message[i]:\n                            if new_name[i] is not None:\n                                msg += f'Use argument \"{new_name[i]}\" instead.'\n                            elif alternative:\n                                msg += f'\\n        Use {alternative} instead.'\n                        warnings.warn(msg, warning_type, stacklevel=2)\n\n                    # Check if the newkeyword was given as well.\n                    newarg_in_args = (position[i] is not None and\n                                      len(args) > position[i])\n                    newarg_in_kwargs = new_name[i] in kwargs\n\n                    if newarg_in_args or newarg_in_kwargs:\n                        if not pending[i]:\n                            # If both are given print a Warning if relax is\n                            # True or raise an Exception is relax is False.\n                            if relax[i]:\n                                warnings.warn(\n                                    f'\"{old_name[i]}\" and \"{new_name[i]}\" '\n                                    'keywords were set. '\n                                    f'Using the value of \"{new_name[i]}\".',\n                                    AstropyUserWarning)\n                            else:\n                                raise TypeError(\n                                    f'cannot specify both \"{old_name[i]}\" and '\n                                    f'\"{new_name[i]}\".')\n                    else:\n                        # Pass the value of the old argument with the\n                        # name of the new argument to the function\n                        if new_name[i] is not None:\n                            kwargs[new_name[i]] = value\n                        # If old argument has no replacement, cast it back.\n                        # https://github.com/astropy/astropy/issues/9914\n                        else:\n                            kwargs[old_name[i]] = value\n\n                # Deprecated keyword without replacement is given as\n                # positional argument.\n                elif (not pending[i] and not new_name[i] and position[i] and\n                      len(args) > position[i]):\n                    if alternative and not message[i]:\n                        msg += f'\\n        Use {alternative} instead.'\n                    warnings.warn(msg, warning_type, stacklevel=2)\n\n            return function(*args, **kwargs)",
+      "chunk_id": "astropy/utils/decorators.py:488-546:wrapper",
+      "evaluation_key": "astropy/utils/decorators.py::wrapper:488-546",
+      "scoring_signals": {
+        "embedding_score": 0.1602,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.4167,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.2289,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 4,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "decorators"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.2003,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        },
+        "llm_rerank_score": 0.0,
+        "retrieval_score_before_llm": 0.2862,
+        "llm_blended_score": 0.2003,
+        "llm_rerank_weights": {
+          "retrieval": 0.7,
+          "llm": 0.3
+        }
+      },
+      "signals": {
+        "embedding_score": 0.1602,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.4167,
+        "symbol_score": 0.025,
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "final_score": 0.2003,
+        "component_path": 0.0,
+        "keyword_overlap": 0.4167,
+        "matching_terms": [
+          "check",
+          "https",
+          "github",
+          "com",
+          "astropy"
+        ],
+        "matching_domain_intents": [],
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "decorators"
+        ],
+        "matching_repository_proximity": [],
+        "file_aggregation_mode": "basic",
+        "file_chunk_count": 49,
+        "supporting_chunks": [
+          {
+            "chunk_id": "astropy/utils/decorators.py:85-164:deprecated",
+            "symbol_qualified_name": "deprecated",
+            "start_line": 85,
+            "end_line": 164,
+            "score": 0.2537,
+            "retrieval_score": 0.2537
+          },
+          {
+            "chunk_id": "astropy/utils/decorators.py:280-359:deprecated_renamed_argument",
+            "symbol_qualified_name": "deprecated_renamed_argument",
+            "start_line": 280,
+            "end_line": 359,
+            "score": 0.2462,
+            "retrieval_score": 0.2462
+          },
+          {
+            "chunk_id": "astropy/utils/decorators.py:869-948:format_doc",
+            "symbol_qualified_name": "format_doc",
+            "start_line": 869,
+            "end_line": 948,
+            "score": 0.2436,
+            "retrieval_score": 0.2436
+          }
+        ],
+        "chunk_score": 0.2862,
+        "support_evidence_threshold": 0.2289,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 4,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "file_aggregate_score": 0.2862,
+        "retrieval_score_before_llm": 0.2862,
+        "llm_rerank_score": 0.0,
+        "llm_blended_score": 0.2003,
+        "llm_rerank_batch": 1
+      },
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/utils/decorators.py:85-164:deprecated",
+          "symbol_qualified_name": "deprecated",
+          "start_line": 85,
+          "end_line": 164,
+          "score": 0.2537,
+          "retrieval_score": 0.2537
+        },
+        {
+          "chunk_id": "astropy/utils/decorators.py:280-359:deprecated_renamed_argument",
+          "symbol_qualified_name": "deprecated_renamed_argument",
+          "start_line": 280,
+          "end_line": 359,
+          "score": 0.2462,
+          "retrieval_score": 0.2462
+        },
+        {
+          "chunk_id": "astropy/utils/decorators.py:869-948:format_doc",
+          "symbol_qualified_name": "format_doc",
+          "start_line": 869,
+          "end_line": 948,
+          "score": 0.2436,
+          "retrieval_score": 0.2436
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file_path": "astropy/nddata/decorators.py",
+      "function_name": "support_nddata",
+      "class_name": "",
+      "symbol_name": "support_nddata",
+      "symbol_qualified_name": "support_nddata",
+      "symbol_kind": "function",
+      "start_line": 82,
+      "end_line": 161,
+      "score": 0.1992,
+      "final_score": 0.1992,
+      "embedding_score": 0.1304,
+      "reason": "LLM rerank: short reason Retrieval: support_nddata: The ticket references this file. Shared report/code terms include: wcs, all, you, need, check. Ticket terms match the source path: decorators. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "code_text": "\n    Notes\n    -----\n    If properties of ``NDData`` are set but have no corresponding function\n    argument a Warning is shown.\n\n    If a property is set of the ``NDData`` are set and an explicit argument is\n    given, the explicitly given argument is used and a Warning is shown.\n\n    The supported properties are:\n\n    - ``mask``\n    - ``unit``\n    - ``wcs``\n    - ``meta``\n    - ``uncertainty``\n    - ``flags``\n\n    Examples\n    --------\n\n    This function takes a Numpy array for the data, and some WCS information\n    with the ``wcs`` keyword argument::\n\n        def downsample(data, wcs=None):\n            # downsample data and optionally WCS here\n            pass\n\n    However, you might have an NDData instance that has the ``wcs`` property\n    set and you would like to be able to call the function with\n    ``downsample(my_nddata)`` and have the WCS information, if present,\n    automatically be passed to the ``wcs`` keyword argument.\n\n    This decorator can be used to make this possible::\n\n        @support_nddata\n        def downsample(data, wcs=None):\n            # downsample data and optionally WCS here\n            pass\n\n    This function can now either be called as before, specifying the data and\n    WCS separately, or an NDData instance can be passed to the ``data``\n    argument.\n    \"\"\"\n    if (returns is not None or keeps is not None) and not repack:\n        raise ValueError('returns or keeps should only be set if repack=True.')\n    elif returns is None and repack:\n        raise ValueError('returns should be set if repack=True.')\n    else:\n        # Use empty lists for returns and keeps so we don't need to check\n        # if any of those is None later on.\n        if returns is None:\n            returns = []\n        if keeps is None:\n            keeps = []\n\n    # Short version to avoid the long variable name later.\n    attr_arg_map = attribute_argument_mapping\n    if any(keep in returns for keep in keeps):\n        raise ValueError(\"cannot specify the same attribute in `returns` and \"\n                         \"`keeps`.\")\n    all_returns = returns + keeps\n\n    def support_nddata_decorator(func):\n        # Find out args and kwargs\n        func_args, func_kwargs = [], []\n        sig = signature(func).parameters\n        for param_name, param in sig.items():\n            if param.kind in (param.VAR_POSITIONAL, param.VAR_KEYWORD):\n                raise ValueError(\"func may not have *args or **kwargs.\")\n            try:\n                if param.default == param.empty:\n                    func_args.append(param_name)\n                else:\n                    func_kwargs.append(param_name)\n            # The comparison to param.empty may fail if the default is a\n            # numpy array or something similar. So if the comparison fails then\n            # it's quite obvious that there was a default and it should be\n            # appended to the \"func_kwargs\".\n            except ValueError as exc:",
+      "chunk_id": "astropy/nddata/decorators.py:82-161:support_nddata",
+      "evaluation_key": "astropy/nddata/decorators.py::support_nddata:82-161",
+      "scoring_signals": {
+        "embedding_score": 0.1304,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.5833,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.2277,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 1,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "decorators"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1992,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        },
+        "llm_rerank_score": 0.0,
+        "retrieval_score_before_llm": 0.2846,
+        "llm_blended_score": 0.1992,
+        "llm_rerank_weights": {
+          "retrieval": 0.7,
+          "llm": 0.3
+        }
+      },
+      "signals": {
+        "embedding_score": 0.1304,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.5833,
+        "symbol_score": 0.025,
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "final_score": 0.1992,
+        "component_path": 0.0,
+        "keyword_overlap": 0.5833,
+        "matching_terms": [
+          "wcs",
+          "all",
+          "you",
+          "need",
+          "check",
+          "out",
+          "astropy"
+        ],
+        "matching_domain_intents": [],
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "decorators"
+        ],
+        "matching_repository_proximity": [],
+        "file_aggregation_mode": "basic",
+        "file_chunk_count": 9,
+        "supporting_chunks": [
+          {
+            "chunk_id": "astropy/nddata/decorators.py:202-278:support_nddata",
+            "symbol_qualified_name": "support_nddata",
+            "start_line": 202,
+            "end_line": 278,
+            "score": 0.2679,
+            "retrieval_score": 0.2679
+          },
+          {
+            "chunk_id": "astropy/nddata/decorators.py:142-221:support_nddata",
+            "symbol_qualified_name": "support_nddata",
+            "start_line": 142,
+            "end_line": 221,
+            "score": 0.2661,
+            "retrieval_score": 0.2661
+          },
+          {
+            "chunk_id": "astropy/nddata/decorators.py:1-21:module",
+            "symbol_qualified_name": "",
+            "start_line": 1,
+            "end_line": 21,
+            "score": 0.2311,
+            "retrieval_score": 0.2311
+          }
+        ],
+        "chunk_score": 0.2846,
+        "support_evidence_threshold": 0.2277,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 1,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "file_aggregate_score": 0.2846,
+        "retrieval_score_before_llm": 0.2846,
+        "llm_rerank_score": 0.0,
+        "llm_blended_score": 0.1992,
+        "llm_rerank_batch": 1
+      },
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/nddata/decorators.py:202-278:support_nddata",
+          "symbol_qualified_name": "support_nddata",
+          "start_line": 202,
+          "end_line": 278,
+          "score": 0.2679,
+          "retrieval_score": 0.2679
+        },
+        {
+          "chunk_id": "astropy/nddata/decorators.py:142-221:support_nddata",
+          "symbol_qualified_name": "support_nddata",
+          "start_line": 142,
+          "end_line": 221,
+          "score": 0.2661,
+          "retrieval_score": 0.2661
+        },
+        {
+          "chunk_id": "astropy/nddata/decorators.py:1-21:module",
+          "symbol_qualified_name": "",
+          "start_line": 1,
+          "end_line": 21,
+          "score": 0.2311,
+          "retrieval_score": 0.2311
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file_path": "astropy/units/decorators.py",
+      "function_name": "QuantityInput.wrapper",
+      "class_name": "QuantityInput",
+      "symbol_name": "QuantityInput.wrapper",
+      "symbol_qualified_name": "QuantityInput.wrapper",
+      "symbol_kind": "method",
+      "start_line": 226,
+      "end_line": 305,
+      "score": 0.1791,
+      "final_score": 0.1791,
+      "embedding_score": 0.0996,
+      "reason": "LLM rerank: short reason Retrieval: QuantityInput.wrapper: The ticket references this file. Shared report/code terms include: all, non, check, our, astropy. Ticket terms match the source path: decorators. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+      "code_text": "        @wraps(wrapped_function)\n        def wrapper(*func_args, **func_kwargs):\n            # Bind the arguments to our new function to the signature of the original.\n            bound_args = wrapped_signature.bind(*func_args, **func_kwargs)\n\n            # Iterate through the parameters of the original signature\n            for param in wrapped_signature.parameters.values():\n                # We do not support variable arguments (*args, **kwargs)\n                if param.kind in (inspect.Parameter.VAR_KEYWORD,\n                                  inspect.Parameter.VAR_POSITIONAL):\n                    continue\n\n                # Catch the (never triggered) case where bind relied on a default value.\n                if (param.name not in bound_args.arguments\n                        and param.default is not param.empty):\n                    bound_args.arguments[param.name] = param.default\n\n                # Get the value of this parameter (argument to new function)\n                arg = bound_args.arguments[param.name]\n\n                # Get target unit or physical type, either from decorator kwargs\n                #   or annotations\n                if param.name in self.decorator_kwargs:\n                    targets = self.decorator_kwargs[param.name]\n                    is_annotation = False\n                else:\n                    targets = param.annotation\n                    is_annotation = True\n\n                    # parses to unit if it's an annotation (or list thereof)\n                    targets = _parse_annotation(targets)\n\n                # If the targets is empty, then no target units or physical\n                #   types were specified so we can continue to the next arg\n                if targets is inspect.Parameter.empty:\n                    continue\n\n                # If the argument value is None, and the default value is None,\n                #   pass through the None even if there is a target unit\n                if arg is None and param.default is None:\n                    continue\n\n                # Here, we check whether multiple target unit/physical type's\n                #   were specified in the decorator/annotation, or whether a\n                #   single string (unit or physical type) or a Unit object was\n                #   specified\n                if (isinstance(targets, str)\n                        or not isinstance(targets, Sequence)):\n                    valid_targets = [targets]\n\n                # Check for None in the supplied list of allowed units and, if\n                #   present and the passed value is also None, ignore.\n                elif None in targets or NoneType in targets:\n                    if arg is None:\n                        continue\n                    else:\n                        valid_targets = [t for t in targets if t is not None]\n\n                else:\n                    valid_targets = targets\n\n                # If we're dealing with an annotation, skip all the targets that\n                #    are not strings or subclasses of Unit. This is to allow\n                #    non unit related annotations to pass through\n                if is_annotation:\n                    valid_targets = [t for t in valid_targets\n                                     if isinstance(t, (str, UnitBase, PhysicalType))]\n\n                # Now we loop over the allowed units/physical types and validate\n                #   the value of the argument:\n                _validate_arg_value(param.name, wrapped_function.__name__,\n                                    arg, valid_targets, self.equivalencies,\n                                    self.strict_dimensionless)\n\n            # Call the original function with any equivalencies in force.\n            with add_enabled_equivalencies(self.equivalencies):\n                return_ = wrapped_function(*func_args, **func_kwargs)\n\n            # Return\n            ra = wrapped_signature.return_annotation",
+      "chunk_id": "astropy/units/decorators.py:226-305:QuantityInput.wrapper",
+      "evaluation_key": "astropy/units/decorators.py::QuantityInput.wrapper:226-305",
+      "scoring_signals": {
+        "embedding_score": 0.0996,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.4167,
+        "symbol_score": 0.025,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "package_proximity_score": 0.0,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "package_proximity_bonus": 0.0,
+        "file_aggregation_mode": "basic",
+        "support_evidence_threshold": 0.2047,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 4,
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "decorators"
+        ],
+        "matching_repository_proximity": [],
+        "matching_package_neighbor": "",
+        "final_score": 0.1791,
+        "weights": {
+          "embedding_score": 0.5,
+          "stack_trace_score": 0.3,
+          "component_score": 0.05,
+          "keyword_score": 0.08,
+          "symbol_score": 0.07,
+          "domain_path_score": 0.18,
+          "identifier_score": 0.14,
+          "path_term_score": 0.12,
+          "repository_proximity_score": 0.1,
+          "package_proximity_score": 0.12
+        },
+        "llm_rerank_score": 0.0,
+        "retrieval_score_before_llm": 0.2559,
+        "llm_blended_score": 0.1791,
+        "llm_rerank_weights": {
+          "retrieval": 0.7,
+          "llm": 0.3
+        }
+      },
+      "signals": {
+        "embedding_score": 0.0996,
+        "stack_trace_score": 0.35,
+        "component_score": 0.0,
+        "keyword_score": 0.4167,
+        "symbol_score": 0.025,
+        "domain_path_score": 0.0,
+        "identifier_score": 0.0,
+        "path_term_score": 0.55,
+        "repository_proximity_score": 0.0,
+        "symbol_definition_score": 0.0,
+        "symbol_definition_bonus": 0.0,
+        "symbol_definition_evidence": [],
+        "api_implementation_score": 0.0,
+        "api_implementation_bonus": 0.0,
+        "api_implementation_evidence": [],
+        "call_graph_score": 0.0,
+        "call_graph_bonus": 0.0,
+        "call_graph_evidence": [],
+        "final_score": 0.1791,
+        "component_path": 0.0,
+        "keyword_overlap": 0.4167,
+        "matching_terms": [
+          "all",
+          "non",
+          "check",
+          "our",
+          "astropy"
+        ],
+        "matching_domain_intents": [],
+        "matching_identifiers": [],
+        "matching_path_terms": [
+          "decorators"
+        ],
+        "matching_repository_proximity": [],
+        "file_aggregation_mode": "basic",
+        "file_chunk_count": 14,
+        "supporting_chunks": [
+          {
+            "chunk_id": "astropy/units/decorators.py:134-213:QuantityInput",
+            "symbol_qualified_name": "QuantityInput",
+            "start_line": 134,
+            "end_line": 213,
+            "score": 0.2489,
+            "retrieval_score": 0.2489
+          },
+          {
+            "chunk_id": "astropy/units/decorators.py:1-22:module",
+            "symbol_qualified_name": "",
+            "start_line": 1,
+            "end_line": 22,
+            "score": 0.2264,
+            "retrieval_score": 0.2264
+          },
+          {
+            "chunk_id": "astropy/units/decorators.py:95-131:_parse_annotation",
+            "symbol_qualified_name": "_parse_annotation",
+            "start_line": 95,
+            "end_line": 131,
+            "score": 0.2256,
+            "retrieval_score": 0.2256
+          }
+        ],
+        "chunk_score": 0.2559,
+        "support_evidence_threshold": 0.2047,
+        "support_evidence_count": 5,
+        "distinct_support_symbol_count": 4,
+        "supporting_chunk_bonus": 0.0,
+        "symbol_coverage_bonus": 0.0,
+        "file_aggregate_score": 0.2559,
+        "retrieval_score_before_llm": 0.2559,
+        "llm_rerank_score": 0.0,
+        "llm_blended_score": 0.1791,
+        "llm_rerank_batch": 1
+      },
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/units/decorators.py:134-213:QuantityInput",
+          "symbol_qualified_name": "QuantityInput",
+          "start_line": 134,
+          "end_line": 213,
+          "score": 0.2489,
+          "retrieval_score": 0.2489
+        },
+        {
+          "chunk_id": "astropy/units/decorators.py:1-22:module",
+          "symbol_qualified_name": "",
+          "start_line": 1,
+          "end_line": 22,
+          "score": 0.2264,
+          "retrieval_score": 0.2264
+        },
+        {
+          "chunk_id": "astropy/units/decorators.py:95-131:_parse_annotation",
+          "symbol_qualified_name": "_parse_annotation",
+          "start_line": 95,
+          "end_line": 131,
+          "score": 0.2256,
+          "retrieval_score": 0.2256
+        }
+      ]
+    }
+  ],
+  "localized_files": [
+    {
+      "rank": 1,
+      "file_path": "astropy/wcs/wcs.py",
+      "score": 0.2781,
+      "primary_symbol": "WCS.all_world2pix",
+      "line_start": 1892,
+      "line_end": 1905,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2155-2234:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2155,
+          "end_line": 2234,
+          "score": 0.3943,
+          "retrieval_score": 0.3943
+        },
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2035-2114:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2035,
+          "end_line": 2114,
+          "score": 0.3732,
+          "retrieval_score": 0.3732
+        },
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2095-2174:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2095,
+          "end_line": 2174,
+          "score": 0.3724,
+          "retrieval_score": 0.3724
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file_path": "astropy/wcs/wcsapi/fitswcs.py",
+      "score": 0.2275,
+      "primary_symbol": "FITSWCSAPIMixin.world_to_pixel_values",
+      "line_start": 325,
+      "line_end": 327,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:294-319:FITSWCSAPIMixin.axis_correlation_matrix",
+          "symbol_qualified_name": "FITSWCSAPIMixin.axis_correlation_matrix",
+          "start_line": 294,
+          "end_line": 319,
+          "score": 0.2857,
+          "retrieval_score": 0.2857
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:341-420:FITSWCSAPIMixin._get_components_and_classes",
+          "symbol_qualified_name": "FITSWCSAPIMixin._get_components_and_classes",
+          "start_line": 341,
+          "end_line": 420,
+          "score": 0.2796,
+          "retrieval_score": 0.2796
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:321-323:FITSWCSAPIMixin.pixel_to_world_values",
+          "symbol_qualified_name": "FITSWCSAPIMixin.pixel_to_world_values",
+          "start_line": 321,
+          "end_line": 323,
+          "score": 0.2755,
+          "retrieval_score": 0.2755
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file_path": "astropy/utils/decorators.py",
+      "score": 0.2003,
+      "primary_symbol": "wrapper",
+      "line_start": 488,
+      "line_end": 546,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/utils/decorators.py:85-164:deprecated",
+          "symbol_qualified_name": "deprecated",
+          "start_line": 85,
+          "end_line": 164,
+          "score": 0.2537,
+          "retrieval_score": 0.2537
+        },
+        {
+          "chunk_id": "astropy/utils/decorators.py:280-359:deprecated_renamed_argument",
+          "symbol_qualified_name": "deprecated_renamed_argument",
+          "start_line": 280,
+          "end_line": 359,
+          "score": 0.2462,
+          "retrieval_score": 0.2462
+        },
+        {
+          "chunk_id": "astropy/utils/decorators.py:869-948:format_doc",
+          "symbol_qualified_name": "format_doc",
+          "start_line": 869,
+          "end_line": 948,
+          "score": 0.2436,
+          "retrieval_score": 0.2436
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file_path": "astropy/nddata/decorators.py",
+      "score": 0.1992,
+      "primary_symbol": "support_nddata",
+      "line_start": 82,
+      "line_end": 161,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/nddata/decorators.py:202-278:support_nddata",
+          "symbol_qualified_name": "support_nddata",
+          "start_line": 202,
+          "end_line": 278,
+          "score": 0.2679,
+          "retrieval_score": 0.2679
+        },
+        {
+          "chunk_id": "astropy/nddata/decorators.py:142-221:support_nddata",
+          "symbol_qualified_name": "support_nddata",
+          "start_line": 142,
+          "end_line": 221,
+          "score": 0.2661,
+          "retrieval_score": 0.2661
+        },
+        {
+          "chunk_id": "astropy/nddata/decorators.py:1-21:module",
+          "symbol_qualified_name": "",
+          "start_line": 1,
+          "end_line": 21,
+          "score": 0.2311,
+          "retrieval_score": 0.2311
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file_path": "astropy/units/decorators.py",
+      "score": 0.1791,
+      "primary_symbol": "QuantityInput.wrapper",
+      "line_start": 226,
+      "line_end": 305,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/units/decorators.py:134-213:QuantityInput",
+          "symbol_qualified_name": "QuantityInput",
+          "start_line": 134,
+          "end_line": 213,
+          "score": 0.2489,
+          "retrieval_score": 0.2489
+        },
+        {
+          "chunk_id": "astropy/units/decorators.py:1-22:module",
+          "symbol_qualified_name": "",
+          "start_line": 1,
+          "end_line": 22,
+          "score": 0.2264,
+          "retrieval_score": 0.2264
+        },
+        {
+          "chunk_id": "astropy/units/decorators.py:95-131:_parse_annotation",
+          "symbol_qualified_name": "_parse_annotation",
+          "start_line": 95,
+          "end_line": 131,
+          "score": 0.2256,
+          "retrieval_score": 0.2256
+        }
+      ]
+    }
+  ],
+  "stage2_localized_files": [
+    {
+      "rank": 1,
+      "file_path": "astropy/wcs/wcs.py",
+      "score": 0.2781,
+      "primary_symbol": "WCS.all_world2pix",
+      "line_start": 1892,
+      "line_end": 1905,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2155-2234:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2155,
+          "end_line": 2234,
+          "score": 0.3943,
+          "retrieval_score": 0.3943
+        },
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2035-2114:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2035,
+          "end_line": 2114,
+          "score": 0.3732,
+          "retrieval_score": 0.3732
+        },
+        {
+          "chunk_id": "astropy/wcs/wcs.py:2095-2174:WCS",
+          "symbol_qualified_name": "WCS",
+          "start_line": 2095,
+          "end_line": 2174,
+          "score": 0.3724,
+          "retrieval_score": 0.3724
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file_path": "astropy/wcs/wcsapi/fitswcs.py",
+      "score": 0.2275,
+      "primary_symbol": "FITSWCSAPIMixin.world_to_pixel_values",
+      "line_start": 325,
+      "line_end": 327,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:294-319:FITSWCSAPIMixin.axis_correlation_matrix",
+          "symbol_qualified_name": "FITSWCSAPIMixin.axis_correlation_matrix",
+          "start_line": 294,
+          "end_line": 319,
+          "score": 0.2857,
+          "retrieval_score": 0.2857
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:341-420:FITSWCSAPIMixin._get_components_and_classes",
+          "symbol_qualified_name": "FITSWCSAPIMixin._get_components_and_classes",
+          "start_line": 341,
+          "end_line": 420,
+          "score": 0.2796,
+          "retrieval_score": 0.2796
+        },
+        {
+          "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:321-323:FITSWCSAPIMixin.pixel_to_world_values",
+          "symbol_qualified_name": "FITSWCSAPIMixin.pixel_to_world_values",
+          "start_line": 321,
+          "end_line": 323,
+          "score": 0.2755,
+          "retrieval_score": 0.2755
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file_path": "astropy/utils/decorators.py",
+      "score": 0.2003,
+      "primary_symbol": "wrapper",
+      "line_start": 488,
+      "line_end": 546,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/utils/decorators.py:85-164:deprecated",
+          "symbol_qualified_name": "deprecated",
+          "start_line": 85,
+          "end_line": 164,
+          "score": 0.2537,
+          "retrieval_score": 0.2537
+        },
+        {
+          "chunk_id": "astropy/utils/decorators.py:280-359:deprecated_renamed_argument",
+          "symbol_qualified_name": "deprecated_renamed_argument",
+          "start_line": 280,
+          "end_line": 359,
+          "score": 0.2462,
+          "retrieval_score": 0.2462
+        },
+        {
+          "chunk_id": "astropy/utils/decorators.py:869-948:format_doc",
+          "symbol_qualified_name": "format_doc",
+          "start_line": 869,
+          "end_line": 948,
+          "score": 0.2436,
+          "retrieval_score": 0.2436
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file_path": "astropy/nddata/decorators.py",
+      "score": 0.1992,
+      "primary_symbol": "support_nddata",
+      "line_start": 82,
+      "line_end": 161,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/nddata/decorators.py:202-278:support_nddata",
+          "symbol_qualified_name": "support_nddata",
+          "start_line": 202,
+          "end_line": 278,
+          "score": 0.2679,
+          "retrieval_score": 0.2679
+        },
+        {
+          "chunk_id": "astropy/nddata/decorators.py:142-221:support_nddata",
+          "symbol_qualified_name": "support_nddata",
+          "start_line": 142,
+          "end_line": 221,
+          "score": 0.2661,
+          "retrieval_score": 0.2661
+        },
+        {
+          "chunk_id": "astropy/nddata/decorators.py:1-21:module",
+          "symbol_qualified_name": "",
+          "start_line": 1,
+          "end_line": 21,
+          "score": 0.2311,
+          "retrieval_score": 0.2311
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file_path": "astropy/units/decorators.py",
+      "score": 0.1791,
+      "primary_symbol": "QuantityInput.wrapper",
+      "line_start": 226,
+      "line_end": 305,
+      "supporting_chunks": [
+        {
+          "chunk_id": "astropy/units/decorators.py:134-213:QuantityInput",
+          "symbol_qualified_name": "QuantityInput",
+          "start_line": 134,
+          "end_line": 213,
+          "score": 0.2489,
+          "retrieval_score": 0.2489
+        },
+        {
+          "chunk_id": "astropy/units/decorators.py:1-22:module",
+          "symbol_qualified_name": "",
+          "start_line": 1,
+          "end_line": 22,
+          "score": 0.2264,
+          "retrieval_score": 0.2264
+        },
+        {
+          "chunk_id": "astropy/units/decorators.py:95-131:_parse_annotation",
+          "symbol_qualified_name": "_parse_annotation",
+          "start_line": 95,
+          "end_line": 131,
+          "score": 0.2256,
+          "retrieval_score": 0.2256
+        }
+      ]
+    }
+  ],
+  "stage3_retrieval_symbols": [
+    {
+      "rank": 1,
+      "file_path": "astropy/wcs/wcs.py",
+      "symbol_qualified_name": "WCS",
+      "symbol_name": "WCS",
+      "symbol_kind": "class",
+      "start_line": 2155,
+      "end_line": 2234,
+      "score": 0.3997,
+      "retrieval_score": 0.3997,
+      "llm_score": null,
+      "reason": "WCS: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text.",
+      "chunk_id": "astropy/wcs/wcs.py:2155-2234:WCS",
+      "code_text": "        ...\n        NoConvergence: 'WCS.all_world2pix' failed to converge to the\n        requested accuracy. After 3 iterations, the solution is\n        diverging at least for one input point.\n\n        >>> # Now try to use some diverging data:\n        >>> divradec = w.all_pix2world([[1.0, 1.0],\n        ...                             [10000.0, 50000.0],\n        ...                             [3.0, 1.0]], 1)\n        >>> print(divradec)  # doctest: +FLOAT_CMP\n        [[  5.52645627 -72.05171757]\n         [  7.15976932 -70.8140779 ]\n         [  5.52653698 -72.05170795]]\n\n        >>> # First, turn detect_divergence on:\n        >>> try:  # doctest: +FLOAT_CMP\n        ...   xy = w.all_world2pix(divradec, 1, maxiter=20,\n        ...                        tolerance=1.0e-4, adaptive=False,\n        ...                        detect_divergence=True,\n        ...                        quiet=False)\n        ... except wcs.wcs.NoConvergence as e:\n        ...   print(\"Indices of diverging points: {{0}}\"\n        ...         .format(e.divergent))\n        ...   print(\"Indices of poorly converging points: {{0}}\"\n        ...         .format(e.slow_conv))\n        ...   print(\"Best solution:\\\\n{{0}}\".format(e.best_solution))\n        ...   print(\"Achieved accuracy:\\\\n{{0}}\".format(e.accuracy))\n        Indices of diverging points: [1]\n        Indices of poorly converging points: None\n        Best solution:\n        [[  1.00000238e+00   9.99999965e-01]\n         [ -1.99441636e+06   1.44309097e+06]\n         [  3.00000236e+00   9.99999966e-01]]\n        Achieved accuracy:\n        [[  6.13968380e-05   8.59638593e-07]\n         [  8.59526812e+11   6.61713548e+11]\n         [  6.09398446e-05   8.38759724e-07]]\n        >>> raise e\n        Traceback (most recent call last):\n        ...\n        NoConvergence: 'WCS.all_world2pix' failed to converge to the\n        requested accuracy.  After 5 iterations, the solution is\n        diverging at least for one input point.\n\n        >>> # This time turn detect_divergence off:\n        >>> try:  # doctest: +FLOAT_CMP\n        ...   xy = w.all_world2pix(divradec, 1, maxiter=20,\n        ...                        tolerance=1.0e-4, adaptive=False,\n        ...                        detect_divergence=False,\n        ...                        quiet=False)\n        ... except wcs.wcs.NoConvergence as e:\n        ...   print(\"Indices of diverging points: {{0}}\"\n        ...         .format(e.divergent))\n        ...   print(\"Indices of poorly converging points: {{0}}\"\n        ...         .format(e.slow_conv))\n        ...   print(\"Best solution:\\\\n{{0}}\".format(e.best_solution))\n        ...   print(\"Achieved accuracy:\\\\n{{0}}\".format(e.accuracy))\n        Indices of diverging points: [1]\n        Indices of poorly converging points: None\n        Best solution:\n        [[ 1.00000009  1.        ]\n         [        nan         nan]\n         [ 3.00000009  1.        ]]\n        Achieved accuracy:\n        [[  2.29417358e-06   3.21222995e-08]\n         [             nan              nan]\n         [  2.27407877e-06   3.13005639e-08]]\n        >>> raise e\n        Traceback (most recent call last):\n        ...\n        NoConvergence: 'WCS.all_world2pix' failed to converge to the\n        requested accuracy.  After 6 iterations, the solution is\n        diverging at least for one input point.\n\n        \"\"\".format(docstrings.TWO_OR_MORE_ARGS('naxis', 8),\n                   docstrings.RA_DEC_ORDER(8),\n                   docstrings.RETURNS('pixel coordinates', 8))\n\n    def wcs_world2pix(self, *args, **kwargs):\n        if self.wcs is None:"
+    },
+    {
+      "rank": 2,
+      "file_path": "astropy/wcs/wcs.py",
+      "symbol_qualified_name": "WCS.all_world2pix",
+      "symbol_name": "WCS.all_world2pix",
+      "symbol_kind": "method",
+      "start_line": 1892,
+      "end_line": 1905,
+      "score": 0.3993,
+      "retrieval_score": 0.3993,
+      "llm_score": null,
+      "reason": "WCS.all_world2pix: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text.",
+      "chunk_id": "astropy/wcs/wcs.py:1892-1905:WCS.all_world2pix",
+      "code_text": "    @deprecated_renamed_argument('accuracy', 'tolerance', '4.3')\n    def all_world2pix(self, *args, tolerance=1e-4, maxiter=20, adaptive=False,\n                      detect_divergence=True, quiet=False, **kwargs):\n        if self.wcs is None:\n            raise ValueError(\"No basic WCS settings were created.\")\n\n        return self._array_converter(\n            lambda *args, **kwargs:\n            self._all_world2pix(\n                *args, tolerance=tolerance, maxiter=maxiter,\n                adaptive=adaptive, detect_divergence=detect_divergence,\n                quiet=quiet),\n            'input', *args, **kwargs\n        )"
+    },
+    {
+      "rank": 3,
+      "file_path": "astropy/wcs/wcs.py",
+      "symbol_qualified_name": "WCS._all_world2pix",
+      "symbol_name": "WCS._all_world2pix",
+      "symbol_kind": "method",
+      "start_line": 1616,
+      "end_line": 1695,
+      "score": 0.397,
+      "retrieval_score": 0.397,
+      "llm_score": null,
+      "reason": "WCS._all_world2pix: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text.",
+      "chunk_id": "astropy/wcs/wcs.py:1616-1695:WCS._all_world2pix",
+      "code_text": "        # (7)   x_{i+1} = x'-(x_i+f(x_i))+x_i = x'-pix2foc(x_i)+x_i,\n        #\n        # where `x'=wcs_world2pix(w)` and it is computed only *once*\n        # before the beginning of the iterative process (and we also\n        # set `x_0=x'`). By using `pix2foc` at each iteration instead\n        # of `all_pix2world` we get about 25% increase in performance\n        # (by not performing the linear `W` transformation at each\n        # step) and we also avoid the \"RA wrapping\" issue described\n        # above (by working in focal plane coordinates and avoiding\n        # pix->world transformations).\n        #\n        # As an added benefit, the process converges to the correct\n        # solution in just one iteration when distortions are not\n        # present (compare to\n        # https://github.com/astropy/astropy/issues/1977 and\n        # https://github.com/astropy/astropy/pull/2294): in this case\n        # `pix2foc` is the identical transformation\n        # `x_i=pix2foc(x_i)` and from equation (7) we get:\n        #\n        # x' = x_0 = wcs_world2pix(w)\n        # x_1 = x' - pix2foc(x_0) + x_0 = x' - pix2foc(x') + x' = x'\n        #     = wcs_world2pix(w) = x_0\n        # =>\n        # |x_1-x_0| = 0 < tolerance (with tolerance > 0)\n        #\n        # However, for performance reasons, it is still better to\n        # avoid iterations altogether and return the exact linear\n        # solution (`wcs_world2pix`) right-away when non-linear\n        # distortions are not present by checking that attributes\n        # `sip`, `cpdis1`, `cpdis2`, `det2im1`, and `det2im2` are\n        # *all* `None`.\n        #\n        #\n        #         ### Outline of the Algorithm ###\n        #\n        #\n        # While the proposed code is relatively long (considering\n        # the simplicity of the algorithm), this is due to: 1)\n        # checking if iterative solution is necessary at all; 2)\n        # checking for divergence; 3) re-implementation of the\n        # completely vectorized algorithm as an \"adaptive\" vectorized\n        # algorithm (for cases when some points diverge for which we\n        # want to stop iterations). In my tests, the adaptive version\n        # of the algorithm is about 50% slower than non-adaptive\n        # version for all HST images.\n        #\n        # The essential part of the vectorized non-adaptive algorithm\n        # (without divergence and other checks) can be described\n        # as follows:\n        #\n        #     pix0 = self.wcs_world2pix(world, origin)\n        #     pix  = pix0.copy() # 0-order solution\n        #\n        #     for k in range(maxiter):\n        #         # find correction to the previous solution:\n        #         dpix = self.pix2foc(pix, origin) - pix0\n        #\n        #         # compute norm (L2) of the correction:\n        #         dn = np.linalg.norm(dpix, axis=1)\n        #\n        #         # apply correction:\n        #         pix -= dpix\n        #\n        #         # check convergence:\n        #         if np.max(dn) < tolerance:\n        #             break\n        #\n        #    return pix\n        #\n        # Here, the input parameter `world` can be a `MxN` array\n        # where `M` is the number of coordinate axes in WCS and `N`\n        # is the number of points to be converted simultaneously to\n        # image coordinates.\n        #\n        #\n        #                ###  IMPORTANT NOTE:  ###\n        #\n        # If, in the future releases of the `~astropy.wcs`,\n        # `pix2foc` will not apply all the required distortion\n        # corrections then in the code below, calls to `pix2foc` will"
+    },
+    {
+      "rank": 4,
+      "file_path": "astropy/wcs/wcs.py",
+      "symbol_qualified_name": "NoConvergence",
+      "symbol_name": "NoConvergence",
+      "symbol_kind": "class",
+      "start_line": 175,
+      "end_line": 224,
+      "score": 0.3507,
+      "retrieval_score": 0.3507,
+      "llm_score": null,
+      "reason": "NoConvergence: The ticket references this file. Shared report/code terms include: report, wcs, all_world2pix, all, world. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text.",
+      "chunk_id": "astropy/wcs/wcs.py:175-224:NoConvergence",
+      "code_text": "class NoConvergence(Exception):\n    \"\"\"\n    An error class used to report non-convergence and/or divergence\n    of numerical methods. It is used to report errors in the\n    iterative solution used by\n    the :py:meth:`~astropy.wcs.WCS.all_world2pix`.\n\n    Attributes\n    ----------\n\n    best_solution : `numpy.ndarray`\n        Best solution achieved by the numerical method.\n\n    accuracy : `numpy.ndarray`\n        Accuracy of the ``best_solution``.\n\n    niter : `int`\n        Number of iterations performed by the numerical method\n        to compute ``best_solution``.\n\n    divergent : None, `numpy.ndarray`\n        Indices of the points in ``best_solution`` array\n        for which the solution appears to be divergent. If the\n        solution does not diverge, ``divergent`` will be set to `None`.\n\n    slow_conv : None, `numpy.ndarray`\n        Indices of the solutions in ``best_solution`` array\n        for which the solution failed to converge within the\n        specified maximum number of iterations. If there are no\n        non-converging solutions (i.e., if the required accuracy\n        has been achieved for all input data points)\n        then ``slow_conv`` will be set to `None`.\n\n    \"\"\"\n\n    def __init__(self, *args, best_solution=None, accuracy=None, niter=None,\n                 divergent=None, slow_conv=None, **kwargs):\n        super().__init__(*args)\n\n        self.best_solution = best_solution\n        self.accuracy = accuracy\n        self.niter = niter\n        self.divergent = divergent\n        self.slow_conv = slow_conv\n\n        if kwargs:\n            warnings.warn(\"Function received unexpected arguments ({}) these \"\n                          \"are ignored but will raise an Exception in the \"\n                          \"future.\".format(list(kwargs)),\n                          AstropyDeprecationWarning)"
+    },
+    {
+      "rank": 5,
+      "file_path": "astropy/wcs/wcsapi/fitswcs.py",
+      "symbol_qualified_name": "FITSWCSAPIMixin",
+      "symbol_name": "FITSWCSAPIMixin",
+      "symbol_kind": "class",
+      "start_line": 316,
+      "end_line": 395,
+      "score": 0.3468,
+      "retrieval_score": 0.3468,
+      "llm_score": null,
+      "reason": "FITSWCSAPIMixin: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: fitswcs. The bug report vector is similar to the code chunk text.",
+      "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:316-395:FITSWCSAPIMixin",
+      "code_text": "                    matrix[world1] |= matrix[world2]\n                    matrix[world2] |= matrix[world1]\n\n        return matrix\n\n    def pixel_to_world_values(self, *pixel_arrays):\n        world = self.all_pix2world(*pixel_arrays, 0)\n        return world[0] if self.world_n_dim == 1 else tuple(world)\n\n    def world_to_pixel_values(self, *world_arrays):\n        pixel = self.all_world2pix(*world_arrays, 0)\n        return pixel[0] if self.pixel_n_dim == 1 else tuple(pixel)\n\n    @property\n    def world_axis_object_components(self):\n        return self._get_components_and_classes()[0]\n\n    @property\n    def world_axis_object_classes(self):\n        return self._get_components_and_classes()[1]\n\n    @property\n    def serialized_classes(self):\n        return False\n\n    def _get_components_and_classes(self):\n\n        # The aim of this function is to return whatever is needed for\n        # world_axis_object_components and world_axis_object_classes. It's easier\n        # to figure it out in one go and then return the values and let the\n        # properties return part of it.\n\n        # Since this method might get called quite a few times, we need to cache\n        # it. We start off by defining a hash based on the attributes of the\n        # WCS that matter here (we can't just use the WCS object as a hash since\n        # it is mutable)\n        wcs_hash = (self.naxis,\n                    list(self.wcs.ctype),\n                    list(self.wcs.cunit),\n                    self.wcs.radesys,\n                    self.wcs.specsys,\n                    self.wcs.equinox,\n                    self.wcs.dateobs,\n                    self.wcs.lng,\n                    self.wcs.lat)\n\n        # If the cache is present, we need to check that the 'hash' matches.\n        if getattr(self, '_components_and_classes_cache', None) is not None:\n            cache = self._components_and_classes_cache\n            if cache[0] == wcs_hash:\n                return cache[1]\n            else:\n                self._components_and_classes_cache = None\n\n        # Avoid circular imports by importing here\n        from astropy.wcs.utils import wcs_to_celestial_frame\n        from astropy.coordinates import SkyCoord, EarthLocation\n        from astropy.time.formats import FITS_DEPRECATED_SCALES\n        from astropy.time import Time, TimeDelta\n\n        components = [None] * self.naxis\n        classes = {}\n\n        # Let's start off by checking whether the WCS has a pair of celestial\n        # components\n\n        if self.has_celestial:\n\n            try:\n                celestial_frame = wcs_to_celestial_frame(self)\n            except ValueError:\n                # Some WCSes, e.g. solar, can be recognized by WCSLIB as being\n                # celestial but we don't necessarily have frames for them.\n                celestial_frame = None\n            else:\n\n                kwargs = {}\n                kwargs['frame'] = celestial_frame\n                kwargs['unit'] = u.deg\n"
+    }
+  ],
+  "stage3_ranked_symbols": [
+    {
+      "rank": 1,
+      "file_path": "astropy/wcs/wcs.py",
+      "symbol_qualified_name": "WCS",
+      "symbol_name": "WCS",
+      "symbol_kind": "class",
+      "start_line": 2155,
+      "end_line": 2234,
+      "score": 0.2798,
+      "retrieval_score": 0.3997,
+      "llm_score": 0.0,
+      "reason": "Symbol LLM rerank: short reason Retrieval: WCS: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text.",
+      "chunk_id": "astropy/wcs/wcs.py:2155-2234:WCS",
+      "code_text": "        ...\n        NoConvergence: 'WCS.all_world2pix' failed to converge to the\n        requested accuracy. After 3 iterations, the solution is\n        diverging at least for one input point.\n\n        >>> # Now try to use some diverging data:\n        >>> divradec = w.all_pix2world([[1.0, 1.0],\n        ...                             [10000.0, 50000.0],\n        ...                             [3.0, 1.0]], 1)\n        >>> print(divradec)  # doctest: +FLOAT_CMP\n        [[  5.52645627 -72.05171757]\n         [  7.15976932 -70.8140779 ]\n         [  5.52653698 -72.05170795]]\n\n        >>> # First, turn detect_divergence on:\n        >>> try:  # doctest: +FLOAT_CMP\n        ...   xy = w.all_world2pix(divradec, 1, maxiter=20,\n        ...                        tolerance=1.0e-4, adaptive=False,\n        ...                        detect_divergence=True,\n        ...                        quiet=False)\n        ... except wcs.wcs.NoConvergence as e:\n        ...   print(\"Indices of diverging points: {{0}}\"\n        ...         .format(e.divergent))\n        ...   print(\"Indices of poorly converging points: {{0}}\"\n        ...         .format(e.slow_conv))\n        ...   print(\"Best solution:\\\\n{{0}}\".format(e.best_solution))\n        ...   print(\"Achieved accuracy:\\\\n{{0}}\".format(e.accuracy))\n        Indices of diverging points: [1]\n        Indices of poorly converging points: None\n        Best solution:\n        [[  1.00000238e+00   9.99999965e-01]\n         [ -1.99441636e+06   1.44309097e+06]\n         [  3.00000236e+00   9.99999966e-01]]\n        Achieved accuracy:\n        [[  6.13968380e-05   8.59638593e-07]\n         [  8.59526812e+11   6.61713548e+11]\n         [  6.09398446e-05   8.38759724e-07]]\n        >>> raise e\n        Traceback (most recent call last):\n        ...\n        NoConvergence: 'WCS.all_world2pix' failed to converge to the\n        requested accuracy.  After 5 iterations, the solution is\n        diverging at least for one input point.\n\n        >>> # This time turn detect_divergence off:\n        >>> try:  # doctest: +FLOAT_CMP\n        ...   xy = w.all_world2pix(divradec, 1, maxiter=20,\n        ...                        tolerance=1.0e-4, adaptive=False,\n        ...                        detect_divergence=False,\n        ...                        quiet=False)\n        ... except wcs.wcs.NoConvergence as e:\n        ...   print(\"Indices of diverging points: {{0}}\"\n        ...         .format(e.divergent))\n        ...   print(\"Indices of poorly converging points: {{0}}\"\n        ...         .format(e.slow_conv))\n        ...   print(\"Best solution:\\\\n{{0}}\".format(e.best_solution))\n        ...   print(\"Achieved accuracy:\\\\n{{0}}\".format(e.accuracy))\n        Indices of diverging points: [1]\n        Indices of poorly converging points: None\n        Best solution:\n        [[ 1.00000009  1.        ]\n         [        nan         nan]\n         [ 3.00000009  1.        ]]\n        Achieved accuracy:\n        [[  2.29417358e-06   3.21222995e-08]\n         [             nan              nan]\n         [  2.27407877e-06   3.13005639e-08]]\n        >>> raise e\n        Traceback (most recent call last):\n        ...\n        NoConvergence: 'WCS.all_world2pix' failed to converge to the\n        requested accuracy.  After 6 iterations, the solution is\n        diverging at least for one input point.\n\n        \"\"\".format(docstrings.TWO_OR_MORE_ARGS('naxis', 8),\n                   docstrings.RA_DEC_ORDER(8),\n                   docstrings.RETURNS('pixel coordinates', 8))\n\n    def wcs_world2pix(self, *args, **kwargs):\n        if self.wcs is None:"
+    },
+    {
+      "rank": 2,
+      "file_path": "astropy/wcs/wcs.py",
+      "symbol_qualified_name": "WCS.all_world2pix",
+      "symbol_name": "WCS.all_world2pix",
+      "symbol_kind": "method",
+      "start_line": 1892,
+      "end_line": 1905,
+      "score": 0.2795,
+      "retrieval_score": 0.3993,
+      "llm_score": 0.0,
+      "reason": "Symbol LLM rerank: short reason Retrieval: WCS.all_world2pix: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text.",
+      "chunk_id": "astropy/wcs/wcs.py:1892-1905:WCS.all_world2pix",
+      "code_text": "    @deprecated_renamed_argument('accuracy', 'tolerance', '4.3')\n    def all_world2pix(self, *args, tolerance=1e-4, maxiter=20, adaptive=False,\n                      detect_divergence=True, quiet=False, **kwargs):\n        if self.wcs is None:\n            raise ValueError(\"No basic WCS settings were created.\")\n\n        return self._array_converter(\n            lambda *args, **kwargs:\n            self._all_world2pix(\n                *args, tolerance=tolerance, maxiter=maxiter,\n                adaptive=adaptive, detect_divergence=detect_divergence,\n                quiet=quiet),\n            'input', *args, **kwargs\n        )"
+    },
+    {
+      "rank": 3,
+      "file_path": "astropy/wcs/wcs.py",
+      "symbol_qualified_name": "WCS._all_world2pix",
+      "symbol_name": "WCS._all_world2pix",
+      "symbol_kind": "method",
+      "start_line": 1616,
+      "end_line": 1695,
+      "score": 0.2779,
+      "retrieval_score": 0.397,
+      "llm_score": 0.0,
+      "reason": "Symbol LLM rerank: short reason Retrieval: WCS._all_world2pix: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text.",
+      "chunk_id": "astropy/wcs/wcs.py:1616-1695:WCS._all_world2pix",
+      "code_text": "        # (7)   x_{i+1} = x'-(x_i+f(x_i))+x_i = x'-pix2foc(x_i)+x_i,\n        #\n        # where `x'=wcs_world2pix(w)` and it is computed only *once*\n        # before the beginning of the iterative process (and we also\n        # set `x_0=x'`). By using `pix2foc` at each iteration instead\n        # of `all_pix2world` we get about 25% increase in performance\n        # (by not performing the linear `W` transformation at each\n        # step) and we also avoid the \"RA wrapping\" issue described\n        # above (by working in focal plane coordinates and avoiding\n        # pix->world transformations).\n        #\n        # As an added benefit, the process converges to the correct\n        # solution in just one iteration when distortions are not\n        # present (compare to\n        # https://github.com/astropy/astropy/issues/1977 and\n        # https://github.com/astropy/astropy/pull/2294): in this case\n        # `pix2foc` is the identical transformation\n        # `x_i=pix2foc(x_i)` and from equation (7) we get:\n        #\n        # x' = x_0 = wcs_world2pix(w)\n        # x_1 = x' - pix2foc(x_0) + x_0 = x' - pix2foc(x') + x' = x'\n        #     = wcs_world2pix(w) = x_0\n        # =>\n        # |x_1-x_0| = 0 < tolerance (with tolerance > 0)\n        #\n        # However, for performance reasons, it is still better to\n        # avoid iterations altogether and return the exact linear\n        # solution (`wcs_world2pix`) right-away when non-linear\n        # distortions are not present by checking that attributes\n        # `sip`, `cpdis1`, `cpdis2`, `det2im1`, and `det2im2` are\n        # *all* `None`.\n        #\n        #\n        #         ### Outline of the Algorithm ###\n        #\n        #\n        # While the proposed code is relatively long (considering\n        # the simplicity of the algorithm), this is due to: 1)\n        # checking if iterative solution is necessary at all; 2)\n        # checking for divergence; 3) re-implementation of the\n        # completely vectorized algorithm as an \"adaptive\" vectorized\n        # algorithm (for cases when some points diverge for which we\n        # want to stop iterations). In my tests, the adaptive version\n        # of the algorithm is about 50% slower than non-adaptive\n        # version for all HST images.\n        #\n        # The essential part of the vectorized non-adaptive algorithm\n        # (without divergence and other checks) can be described\n        # as follows:\n        #\n        #     pix0 = self.wcs_world2pix(world, origin)\n        #     pix  = pix0.copy() # 0-order solution\n        #\n        #     for k in range(maxiter):\n        #         # find correction to the previous solution:\n        #         dpix = self.pix2foc(pix, origin) - pix0\n        #\n        #         # compute norm (L2) of the correction:\n        #         dn = np.linalg.norm(dpix, axis=1)\n        #\n        #         # apply correction:\n        #         pix -= dpix\n        #\n        #         # check convergence:\n        #         if np.max(dn) < tolerance:\n        #             break\n        #\n        #    return pix\n        #\n        # Here, the input parameter `world` can be a `MxN` array\n        # where `M` is the number of coordinate axes in WCS and `N`\n        # is the number of points to be converted simultaneously to\n        # image coordinates.\n        #\n        #\n        #                ###  IMPORTANT NOTE:  ###\n        #\n        # If, in the future releases of the `~astropy.wcs`,\n        # `pix2foc` will not apply all the required distortion\n        # corrections then in the code below, calls to `pix2foc` will"
+    },
+    {
+      "rank": 4,
+      "file_path": "astropy/wcs/wcs.py",
+      "symbol_qualified_name": "NoConvergence",
+      "symbol_name": "NoConvergence",
+      "symbol_kind": "class",
+      "start_line": 175,
+      "end_line": 224,
+      "score": 0.2455,
+      "retrieval_score": 0.3507,
+      "llm_score": 0.0,
+      "reason": "Symbol LLM rerank: short reason Retrieval: NoConvergence: The ticket references this file. Shared report/code terms include: report, wcs, all_world2pix, all, world. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text.",
+      "chunk_id": "astropy/wcs/wcs.py:175-224:NoConvergence",
+      "code_text": "class NoConvergence(Exception):\n    \"\"\"\n    An error class used to report non-convergence and/or divergence\n    of numerical methods. It is used to report errors in the\n    iterative solution used by\n    the :py:meth:`~astropy.wcs.WCS.all_world2pix`.\n\n    Attributes\n    ----------\n\n    best_solution : `numpy.ndarray`\n        Best solution achieved by the numerical method.\n\n    accuracy : `numpy.ndarray`\n        Accuracy of the ``best_solution``.\n\n    niter : `int`\n        Number of iterations performed by the numerical method\n        to compute ``best_solution``.\n\n    divergent : None, `numpy.ndarray`\n        Indices of the points in ``best_solution`` array\n        for which the solution appears to be divergent. If the\n        solution does not diverge, ``divergent`` will be set to `None`.\n\n    slow_conv : None, `numpy.ndarray`\n        Indices of the solutions in ``best_solution`` array\n        for which the solution failed to converge within the\n        specified maximum number of iterations. If there are no\n        non-converging solutions (i.e., if the required accuracy\n        has been achieved for all input data points)\n        then ``slow_conv`` will be set to `None`.\n\n    \"\"\"\n\n    def __init__(self, *args, best_solution=None, accuracy=None, niter=None,\n                 divergent=None, slow_conv=None, **kwargs):\n        super().__init__(*args)\n\n        self.best_solution = best_solution\n        self.accuracy = accuracy\n        self.niter = niter\n        self.divergent = divergent\n        self.slow_conv = slow_conv\n\n        if kwargs:\n            warnings.warn(\"Function received unexpected arguments ({}) these \"\n                          \"are ignored but will raise an Exception in the \"\n                          \"future.\".format(list(kwargs)),\n                          AstropyDeprecationWarning)"
+    },
+    {
+      "rank": 5,
+      "file_path": "astropy/wcs/wcsapi/fitswcs.py",
+      "symbol_qualified_name": "FITSWCSAPIMixin",
+      "symbol_name": "FITSWCSAPIMixin",
+      "symbol_kind": "class",
+      "start_line": 316,
+      "end_line": 395,
+      "score": 0.2428,
+      "retrieval_score": 0.3468,
+      "llm_score": 0.0,
+      "reason": "Symbol LLM rerank: short reason Retrieval: FITSWCSAPIMixin: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: fitswcs. The bug report vector is similar to the code chunk text.",
+      "chunk_id": "astropy/wcs/wcsapi/fitswcs.py:316-395:FITSWCSAPIMixin",
+      "code_text": "                    matrix[world1] |= matrix[world2]\n                    matrix[world2] |= matrix[world1]\n\n        return matrix\n\n    def pixel_to_world_values(self, *pixel_arrays):\n        world = self.all_pix2world(*pixel_arrays, 0)\n        return world[0] if self.world_n_dim == 1 else tuple(world)\n\n    def world_to_pixel_values(self, *world_arrays):\n        pixel = self.all_world2pix(*world_arrays, 0)\n        return pixel[0] if self.pixel_n_dim == 1 else tuple(pixel)\n\n    @property\n    def world_axis_object_components(self):\n        return self._get_components_and_classes()[0]\n\n    @property\n    def world_axis_object_classes(self):\n        return self._get_components_and_classes()[1]\n\n    @property\n    def serialized_classes(self):\n        return False\n\n    def _get_components_and_classes(self):\n\n        # The aim of this function is to return whatever is needed for\n        # world_axis_object_components and world_axis_object_classes. It's easier\n        # to figure it out in one go and then return the values and let the\n        # properties return part of it.\n\n        # Since this method might get called quite a few times, we need to cache\n        # it. We start off by defining a hash based on the attributes of the\n        # WCS that matter here (we can't just use the WCS object as a hash since\n        # it is mutable)\n        wcs_hash = (self.naxis,\n                    list(self.wcs.ctype),\n                    list(self.wcs.cunit),\n                    self.wcs.radesys,\n                    self.wcs.specsys,\n                    self.wcs.equinox,\n                    self.wcs.dateobs,\n                    self.wcs.lng,\n                    self.wcs.lat)\n\n        # If the cache is present, we need to check that the 'hash' matches.\n        if getattr(self, '_components_and_classes_cache', None) is not None:\n            cache = self._components_and_classes_cache\n            if cache[0] == wcs_hash:\n                return cache[1]\n            else:\n                self._components_and_classes_cache = None\n\n        # Avoid circular imports by importing here\n        from astropy.wcs.utils import wcs_to_celestial_frame\n        from astropy.coordinates import SkyCoord, EarthLocation\n        from astropy.time.formats import FITS_DEPRECATED_SCALES\n        from astropy.time import Time, TimeDelta\n\n        components = [None] * self.naxis\n        classes = {}\n\n        # Let's start off by checking whether the WCS has a pair of celestial\n        # components\n\n        if self.has_celestial:\n\n            try:\n                celestial_frame = wcs_to_celestial_frame(self)\n            except ValueError:\n                # Some WCSes, e.g. solar, can be recognized by WCSLIB as being\n                # celestial but we don't necessarily have frames for them.\n                celestial_frame = None\n            else:\n\n                kwargs = {}\n                kwargs['frame'] = celestial_frame\n                kwargs['unit'] = u.deg\n"
+    }
+  ],
+  "stage3_diagnostics": {
+    "requested": true,
+    "llm_rerank_used": true,
+    "source": "llm_blended_with_symbol_retrieval",
+    "stage2_file_count": 5,
+    "ast_symbol_pool_count": 258,
+    "returned_symbol_count": 5
+  },
+  "bug_location": {
+    "file": "astropy/wcs/wcs.py",
+    "function": "WCS.all_world2pix",
+    "line_start": 1892,
+    "line_end": 1905,
+    "reason": "LLM rerank: short reason Retrieval: WCS.all_world2pix: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched.",
+    "confidence_level": "medium",
+    "should_manual_review": true,
+    "recommend_patch_generation": false
+  },
+  "candidates": [
+    {
+      "file": "astropy/wcs/wcs.py",
+      "score": 0.2781,
+      "function": "WCS.all_world2pix",
+      "line_start": 1892,
+      "line_end": 1905,
+      "reason": "LLM rerank: short reason Retrieval: WCS.all_world2pix: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: wcs. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched."
+    },
+    {
+      "file": "astropy/wcs/wcsapi/fitswcs.py",
+      "score": 0.2275,
+      "function": "FITSWCSAPIMixin.world_to_pixel_values",
+      "line_start": 325,
+      "line_end": 327,
+      "reason": "LLM rerank: short reason Retrieval: FITSWCSAPIMixin.world_to_pixel_values: The ticket references this file. Shared report/code terms include: wcs, all_world2pix, all, world, pix. Ticket terms match the source path: fitswcs. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched."
+    },
+    {
+      "file": "astropy/utils/decorators.py",
+      "score": 0.2003,
+      "function": "wrapper",
+      "line_start": 488,
+      "line_end": 546,
+      "reason": "LLM rerank: short reason Retrieval: wrapper: The ticket references this file. Shared report/code terms include: check, https, github, com, astropy. Ticket terms match the source path: decorators. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched."
+    },
+    {
+      "file": "astropy/nddata/decorators.py",
+      "score": 0.1992,
+      "function": "support_nddata",
+      "line_start": 82,
+      "line_end": 161,
+      "reason": "LLM rerank: short reason Retrieval: support_nddata: The ticket references this file. Shared report/code terms include: wcs, all, you, need, check. Ticket terms match the source path: decorators. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched."
+    },
+    {
+      "file": "astropy/units/decorators.py",
+      "score": 0.1791,
+      "function": "QuantityInput.wrapper",
+      "line_start": 226,
+      "line_end": 305,
+      "reason": "LLM rerank: short reason Retrieval: QuantityInput.wrapper: The ticket references this file. Shared report/code terms include: all, non, check, our, astropy. Ticket terms match the source path: decorators. The bug report vector is similar to the code chunk text. 3 additional independent chunk(s) in this file also matched."
+    }
+  ],
+  "context_preview": "1892:     @deprecated_renamed_argument('accuracy', 'tolerance', '4.3')\n1893:     def all_world2pix(self, *args, tolerance=1e-4, maxiter=20, adaptive=False,\n1894:                       detect_divergence=True, quiet=False, **kwargs):\n1895:         if self.wcs is None:\n1896:             raise ValueError(\"No basic WCS settings were created.\")\n1897: \n1898:         return self._array_converter(\n1899:             lambda *args, **kwargs:\n1900:             self._all_world2pix(\n1901:                 *args, tolerance=tolerance, maxiter=maxiter,\n1902:                 adaptive=adaptive, detect_divergence=detect_divergence,\n1903:                 quiet=quiet),\n1904:             'input', *args, **kwargs\n1905:         )",
+  "input_validation": {
+    "status": "ok",
+    "is_valid": true,
+    "bug_report_chars": 24248,
+    "errors": [],
+    "warnings": [],
+    "signals_present": {
+      "stack_trace": true,
+      "path_hint": true,
+      "identifier": true
+    }
+  },
+  "confidence": {
+    "confidence_level": "medium",
+    "confidence_score": 0.2781,
+    "top1_top2_margin": 0.0506,
+    "uncertainty_reason": "top_score=0.2781; top1_top2_margin=0.0506; stack_trace_score=0.3500; optional LLM rerank was applied",
+    "should_manual_review": true,
+    "recommend_patch_generation": false,
+    "patch_generation_policy": "manual_review_before_patch"
+  },
+  "confidence_level": "medium",
+  "should_manual_review": true,
+  "recommend_patch_generation": false,
+  "patch_generation_policy": "manual_review_before_patch",
+  "repository_path": ".",
+  "evaluation_ready_fields": {
+    "candidate_stage": "stage1_candidate_files[*].file_path",
+    "file_level": "localized_files[*].file_path",
+    "symbol_level": "stage3_ranked_symbols[*].symbol_qualified_name",
+    "line_range": [
+      "localized_candidates[*].start_line",
+      "localized_candidates[*].end_line"
+    ]
+  },
+  "warnings": [],
+  "smoke_test": {
+    "model": "codellama:7b-instruct",
+    "json_schema": true,
+    "batch_size": 5,
+    "retrieval_score_hidden": true,
+    "elapsed_seconds": 42.72
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "rows": 13,
+  "gold_rows": 13,
+  "prediction_rows": 13,
+  "matched_prediction_rows": 13,
+  "missing_prediction_rows": 0,
+  "rows_with_file_ground_truth": 13,
+  "rows_with_symbol_ground_truth": 0,
+  "candidate_k": 20,
+  "rows_with_stage1_candidates": 13,
+  "rows_missing_stage1_output": 0,
+  "candidate_hit_at_20": 0.7692307692307693,
+  "candidate_recall_at_20": 0.7243589743589745,
+  "average_candidate_count_at_20": 20.0,
+  "candidate_outcomes_at_20": {
+    "full_recall_rows": 8,
+    "partial_recall_rows": 2,
+    "miss_rows": 3
+  },
+  "candidate_outcome_ticket_ids_at_20": {
+    "full_recall": [
+      "pylint-dev__pylint-5446",
+      "pylint-dev__pylint-4421",
+      "pylint-dev__pylint-4398",
+      "pylint-dev__pylint-4970",
+      "pylint-dev__pylint-4604",
+      "pylint-dev__pylint-4703",
+      "pylint-dev__pylint-8799",
+      "pylint-dev__pylint-8819"
+    ],
+    "partial_recall": [
+      "pylint-dev__pylint-6412",
+      "pylint-dev__pylint-8898"
+    ],
+    "miss": [
+      "pylint-dev__pylint-4339",
+      "pylint-dev__pylint-8757",
+      "pylint-dev__pylint-6526"
+    ]
+  },
+  "candidate_bootstrap_95_ci": {
+    "samples": 2000,
+    "seed": 42,
+    "candidate_hit_at_20": {
+      "lower": 0.538462,
+      "upper": 1.0
+    },
+    "candidate_recall_at_20": {
+      "lower": 0.487179,
+      "upper": 0.923077
+    }
+  },
+  "file_top_1_accuracy": 0.23076923076923078,
+  "file_top_3_accuracy": 0.5384615384615384,
+  "file_top_5_accuracy": 0.5384615384615384,
+  "file_mrr": 0.37179487179487175,
+  "symbol_top_1_accuracy": 0.0,
+  "symbol_top_3_accuracy": 0.0,
+  "symbol_top_5_accuracy": 0.0,
+  "symbol_mrr": 0.0,
+  "rows_with_ground_truth": 13,
+  "top_1_accuracy": 0.23076923076923078,
+  "top_3_accuracy": 0.5384615384615384,
+  "top_5_accuracy": 0.5384615384615384,
+  "mrr": 0.37179487179487175,
+  "base_commit_reachable_evaluation": {
+    "rows_with_reachable_file_ground_truth": 13,
+    "candidate_hit_at_20": 0.7692307692307693,
+    "candidate_recall_at_20": 0.7243589743589745,
+    "unreachable_gold_file_count": 0,
+    "unreachable_gold_files_by_ticket": {},
+    "bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 44,
+      "candidate_hit_at_20": {
+        "lower": 0.538462,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.474359,
+        "upper": 0.929487
+      }
+    },
+    "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+  },
+  "missing_file_ground_truth_rows": 0,
+  "missing_symbol_ground_truth_rows": 13,
+  "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  }
+}

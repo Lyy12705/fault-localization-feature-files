@@ -1,0 +1,69 @@
+{
+  "stage": "E3-C API namespace prefix guard",
+  "decision": "keep_original_e3_c",
+  "selected_method": "e3-c-api-implementation",
+  "rejected_method": "e3-c-api-namespace",
+  "validation_rows": 500,
+  "repositories": 12,
+  "holdout_used": false,
+  "acceptance_criteria": {
+    "minimum_recall_at_20_delta": 0.005,
+    "minimum_paired_ci_lower_bound": 0.0,
+    "maximum_hit_at_20_drop": 0.005,
+    "required_predictions": 500,
+    "required_unique_candidate_files": 20
+  },
+  "original": {
+    "hit_at_20": 0.914,
+    "recall_at_20": 0.8472155969634231,
+    "top_1_accuracy": 0.608,
+    "mrr_at_20": 0.702365475047828,
+    "full_recall_rows": 384,
+    "partial_recall_rows": 73,
+    "miss_rows": 43,
+    "api_evidence_tickets": 264,
+    "api_evidence_rows": 701,
+    "gold_api_evidence_tickets": 137,
+    "gold_api_evidence_rows": 232
+  },
+  "namespace": {
+    "hit_at_20": 0.914,
+    "recall_at_20": 0.8472155969634231,
+    "top_1_accuracy": 0.608,
+    "mrr_at_20": 0.702365475047828,
+    "full_recall_rows": 384,
+    "partial_recall_rows": 73,
+    "miss_rows": 43,
+    "api_evidence_tickets": 255,
+    "api_evidence_rows": 567,
+    "gold_api_evidence_tickets": 133,
+    "gold_api_evidence_rows": 202,
+    "tickets_with_rejected_namespace_names": 101,
+    "rejected_namespace_name_rows": 162,
+    "top_20_set_changed_tickets": 5,
+    "top_1_file_changed_tickets": 0,
+    "gold_files_added_to_top_20": 0,
+    "gold_files_removed_from_top_20": 0,
+    "recall_delta_vs_original": 0.0,
+    "recall_delta_bootstrap_95_ci": {
+      "lower": 0.0,
+      "upper": 0.0
+    },
+    "hit_at_20_delta_vs_original": 0.0,
+    "top_1_delta_vs_original": 0.0,
+    "mrr_at_20_delta_vs_original": 0.0,
+    "passes_minimum_recall_delta": false,
+    "passes_ci_lower_bound": true,
+    "passes_hit_drop_limit": true,
+    "passes_execution_requirements": true,
+    "retain": false,
+    "classification": "not_retained"
+  },
+  "lost_gold_api_evidence_ticket_ids": [
+    "django__django-16070",
+    "pallets__flask-4160",
+    "pydata__xarray-4419",
+    "sympy__sympy-19713"
+  ],
+  "reason": "The namespace guard reduces Top-20 API evidence rows by 19.1%, but all four paired Stage-1 metrics remain unchanged and Recall@20 does not reach the required +0.50 percentage-point improvement. It also removes gold-pointing API evidence from four tickets. Keep the original E3-C configuration as the E3-C experiment baseline and do not use Holdout for further tuning."
+}

@@ -1,0 +1,53 @@
+{
+  "rows": 1,
+  "gold_rows": 1,
+  "prediction_rows": 1,
+  "matched_prediction_rows": 1,
+  "missing_prediction_rows": 0,
+  "rows_with_file_ground_truth": 1,
+  "rows_with_symbol_ground_truth": 0,
+  "candidate_k": 20,
+  "rows_with_stage1_candidates": 1,
+  "rows_missing_stage1_output": 0,
+  "candidate_hit_at_20": 1.0,
+  "candidate_recall_at_20": 1.0,
+  "average_candidate_count_at_20": 20.0,
+  "candidate_outcomes_at_20": {
+    "full_recall_rows": 1,
+    "partial_recall_rows": 0,
+    "miss_rows": 0
+  },
+  "candidate_bootstrap_95_ci": {
+    "samples": 2000,
+    "seed": 42,
+    "candidate_hit_at_20": {
+      "lower": 1.0,
+      "upper": 1.0
+    },
+    "candidate_recall_at_20": {
+      "lower": 1.0,
+      "upper": 1.0
+    }
+  },
+  "file_top_1_accuracy": 0.0,
+  "file_top_3_accuracy": 0.0,
+  "file_top_5_accuracy": 0.0,
+  "file_mrr": 0.0,
+  "symbol_top_1_accuracy": 0.0,
+  "symbol_top_3_accuracy": 0.0,
+  "symbol_top_5_accuracy": 0.0,
+  "symbol_mrr": 0.0,
+  "rows_with_ground_truth": 1,
+  "top_1_accuracy": 0.0,
+  "top_3_accuracy": 0.0,
+  "top_5_accuracy": 0.0,
+  "mrr": 0.0,
+  "missing_file_ground_truth_rows": 0,
+  "missing_symbol_ground_truth_rows": 1,
+  "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  }
+}

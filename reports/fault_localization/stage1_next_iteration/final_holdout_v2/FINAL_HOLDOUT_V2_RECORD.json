@@ -1,0 +1,3001 @@
+{
+  "protocol": "swebench-full-stage1-final-holdout-v2",
+  "status": "holdout_evaluated_once_output_contract_failed",
+  "finalized_at_utc": "2026-08-24T16:49:59.128038+00:00",
+  "freeze_id": "stage1-v2-9db2a1fbec61bf3d",
+  "method_label": "e4-c-call-outgoing-top3",
+  "method_id": "tfidf-sbert-rerank-25ae3013f48f",
+  "method": {
+    "advanced_file_aggregation": false,
+    "api_implementation_parameters": {
+      "max_links_per_symbol": 4,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_wrapper_statements": 4,
+      "reexport_bonus": 0.04,
+      "wrapper_bonus": 0.05
+    },
+    "call_graph_mode": "outgoing-top3",
+    "call_graph_parameters": {
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_signal": 0.9,
+      "maximum_target_files_per_reference": 8,
+      "outgoing_signal": 0.9,
+      "rank_decay": 0.08,
+      "reference_file_k": 3
+    },
+    "candidate_file_k": 20,
+    "chunk_lines": 80,
+    "domain_path_routing": false,
+    "embedding_backend": "tfidf-sbert-rerank",
+    "file_aggregation": true,
+    "file_aggregation_mode": "basic",
+    "file_aggregation_parameters": {
+      "evidence_score_ratio": 0.8,
+      "max_evidence_chunks": 5,
+      "minimum_evidence_score": 0.05,
+      "package_bonus_cap": 0.1,
+      "support_bonus_cap": 0.05,
+      "support_bonus_per_additional_chunk": 0.0125,
+      "symbol_bonus_cap": 0.04,
+      "symbol_bonus_per_additional_symbol": 0.01
+    },
+    "generic_routing": false,
+    "import_graph_mode": "off",
+    "import_graph_parameters": {
+      "incoming_signal": 0.65,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_signal": 0.8,
+      "outgoing_signal": 0.8,
+      "rank_decay": 0.08,
+      "reference_file_k": 5
+    },
+    "include_tests": false,
+    "llm_candidate_k": 0,
+    "llm_rerank": false,
+    "max_file_bytes": 500000,
+    "method_version": "fault-localization-method-v19",
+    "min_ticket_chars": 20,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "overlap_lines": 20,
+    "repository_proximity": false,
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "symbol_expansion_mode": "symbol-definitions-api",
+    "symbol_expansion_parameters": {
+      "exact_match_bonus": 0.06,
+      "leaf_match_bonus": 0.04,
+      "max_files_per_symbol": 4,
+      "max_ticket_symbols": 20,
+      "maximum_bonus": 0.1,
+      "maximum_evidence_per_file": 4
+    },
+    "top_k": 5
+  },
+  "pre_holdout_freeze": {
+    "path": "reports/fault_localization/stage1_next_iteration/final_holdout_v2/stage1_v2_pre_holdout_freeze_v2.json",
+    "bytes": 8530,
+    "sha256": "327402494fa9da07919380da1f32a573d4371a679a766c5bbd1b669b4cb2292b"
+  },
+  "holdout_result": {
+    "rows": 500,
+    "rows_with_file_ground_truth": 496,
+    "candidate_hit_at_20": 0.8467741935483871,
+    "candidate_recall_at_20": 0.6716984598266237,
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.814516,
+        "upper": 0.877016
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.63814,
+        "upper": 0.703448
+      }
+    },
+    "file_top_1_accuracy": 0.4112903225806452,
+    "file_top_3_accuracy": 0.625,
+    "file_top_5_accuracy": 0.6995967741935484,
+    "file_mrr": 0.5248319892473118,
+    "outcomes": {
+      "full_recall_rows": 258,
+      "partial_recall_rows": 162,
+      "miss_rows": 76
+    },
+    "base_commit_reachable_evaluation": {
+      "rows_with_reachable_file_ground_truth": 487,
+      "candidate_hit_at_20": 0.8603696098562629,
+      "candidate_recall_at_20": 0.6920793677366739,
+      "unreachable_gold_file_count": 239,
+      "unreachable_gold_files_by_ticket": {
+        "Lightning-AI__lightning-2535": [
+          "pytorch_lightning/metrics/functional/nlp.py",
+          "pytorch_lightning/metrics/nlp.py"
+        ],
+        "Lightning-AI__lightning-1232": [
+          "pl_examples/domain_templates/reinforse_learn_Qnet.py"
+        ],
+        "PrefectHQ__prefect-214": [
+          "src/prefect/cli/configure.py"
+        ],
+        "PrefectHQ__prefect-192": [
+          "src/prefect/engine/executors/sync.py",
+          "src/prefect/utilities/executors.py"
+        ],
+        "Qiskit__qiskit-1975": [
+          "qiskit/dagcircuit/dagcircuit.py",
+          "qiskit/dagcircuit/dagnode.py"
+        ],
+        "Qiskit__qiskit-2869": [
+          "qiskit/pulse/commands/delay.py"
+        ],
+        "Qiskit__qiskit-7437": [
+          "qiskit/providers/fake_provider/__init__.py"
+        ],
+        "Qiskit__qiskit-8759": [
+          "qiskit/providers/backend_compat.py"
+        ],
+        "Qiskit__qiskit-1422": [
+          "qiskit/transpiler/passes/mapping/direction_mapper.py"
+        ],
+        "Qiskit__qiskit-9085": [
+          "qiskit/algorithms/gradients/base_qgt.py",
+          "qiskit/algorithms/gradients/lin_comb_qgt.py",
+          "qiskit/algorithms/gradients/qfi.py",
+          "qiskit/algorithms/gradients/qgt_result.py"
+        ],
+        "apache__airflow-10227": [
+          "airflow/migrations/versions/da3f683c3a5a_add_dag_hash_column_to_serialized_dag_.py"
+        ],
+        "apache__airflow-8671": [
+          "airflow/utils/mixins.py"
+        ],
+        "apache__airflow-32756": [
+          "airflow/auth/managers/fab/views/__init__.py",
+          "airflow/auth/managers/fab/views/user_details.py"
+        ],
+        "celery__celery-5954": [
+          "t/unit/tasks/unit_tasks.py"
+        ],
+        "conan-io__conan-4229": [
+          "conans/server/launcher.py"
+        ],
+        "conda__conda-2950": [
+          "conda-env/conda_env/__init__.py",
+          "conda-env/conda_env/cli/__init__.py",
+          "conda-env/conda_env/cli/main.py",
+          "conda-env/conda_env/cli/main_attach.py",
+          "conda-env/conda_env/cli/main_create.py",
+          "conda-env/conda_env/cli/main_export.py",
+          "conda-env/conda_env/cli/main_list.py",
+          "conda-env/conda_env/cli/main_remove.py",
+          "conda-env/conda_env/cli/main_update.py",
+          "conda-env/conda_env/cli/main_upload.py",
+          "conda-env/conda_env/compat.py",
+          "conda-env/conda_env/env.py",
+          "conda-env/conda_env/exceptions.py",
+          "conda-env/conda_env/installers/__init__.py",
+          "conda-env/conda_env/installers/base.py",
+          "conda-env/conda_env/installers/conda.py",
+          "conda-env/conda_env/installers/pip.py",
+          "conda-env/conda_env/pip_util.py",
+          "conda-env/conda_env/specs/__init__.py",
+          "conda-env/conda_env/specs/binstar.py",
+          "conda-env/conda_env/specs/notebook.py",
+          "conda-env/conda_env/specs/requirements.py",
+          "conda-env/conda_env/specs/yaml_file.py",
+          "conda-env/conda_env/utils/__init__.py",
+          "conda-env/conda_env/utils/notebooks.py",
+          "conda-env/conda_env/utils/uploader.py",
+          "conda-env/conda_env/yaml.py",
+          "conda-env/setup.py"
+        ],
+        "googleapis__google-cloud-python-11308": [
+          "packages/google-cloud-datacatalog/docs/conf.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog/gapic_version.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/gapic_version.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/async_client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/pagers.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/transports/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/transports/base.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/transports/grpc.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/transports/grpc_asyncio.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/async_client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/pagers.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/transports/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/transports/base.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/transports/grpc.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/transports/grpc_asyncio.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/async_client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/transports/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/transports/base.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/transports/grpc.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/transports/grpc_asyncio.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/bigquery.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/common.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/data_source.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/datacatalog.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/dataplex_spec.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/dump_content.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/gcs_fileset_spec.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/physical_schema.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/policytagmanager.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/policytagmanagerserialization.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/schema.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/search.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/table_spec.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/tags.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/timestamps.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/usage.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/gapic_version.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/async_client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/pagers.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/transports/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/transports/base.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/transports/grpc.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/transports/grpc_asyncio.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/async_client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/pagers.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/transports/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/transports/base.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/transports/grpc.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/transports/grpc_asyncio.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/async_client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/client.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/transports/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/transports/base.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/transports/grpc.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/transports/grpc_asyncio.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/__init__.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/common.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/datacatalog.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/gcs_fileset_spec.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/policytagmanager.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/policytagmanagerserialization.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/schema.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/search.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/table_spec.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/tags.py",
+          "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/timestamps.py",
+          "packages/google-cloud-datacatalog/noxfile.py",
+          "packages/google-cloud-datacatalog/scripts/fixup_datacatalog_v1_keywords.py",
+          "packages/google-cloud-datacatalog/scripts/fixup_datacatalog_v1beta1_keywords.py",
+          "packages/google-cloud-datacatalog/scripts/readme-gen/readme_gen.py",
+          "packages/google-cloud-datacatalog/setup.py"
+        ],
+        "googleapis__google-cloud-python-11168": [
+          "packages/google-cloud-iap/docs/conf.py",
+          "packages/google-cloud-iap/google/cloud/iap/__init__.py",
+          "packages/google-cloud-iap/google/cloud/iap/gapic_version.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/__init__.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/gapic_version.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/__init__.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/__init__.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/async_client.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/client.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/pagers.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/transports/__init__.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/transports/base.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/transports/grpc.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/transports/grpc_asyncio.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/transports/rest.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/__init__.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/async_client.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/client.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/pagers.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/transports/__init__.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/transports/base.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/transports/grpc.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/transports/grpc_asyncio.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/transports/rest.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/types/__init__.py",
+          "packages/google-cloud-iap/google/cloud/iap_v1/types/service.py",
+          "packages/google-cloud-iap/noxfile.py",
+          "packages/google-cloud-iap/scripts/fixup_iap_v1_keywords.py",
+          "packages/google-cloud-iap/scripts/readme-gen/readme_gen.py",
+          "packages/google-cloud-iap/setup.py"
+        ],
+        "googleapis__google-cloud-python-6196": [
+          "noxfile.py"
+        ],
+        "googleapis__google-cloud-python-11353": [
+          "packages/google-cloud-vm-migration/docs/conf.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration/__init__.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration/gapic_version.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/__init__.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/gapic_version.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/__init__.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/__init__.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/async_client.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/client.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/pagers.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/transports/__init__.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/transports/base.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/transports/grpc.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/transports/grpc_asyncio.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/transports/rest.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/types/__init__.py",
+          "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/types/vmmigration.py",
+          "packages/google-cloud-vm-migration/noxfile.py",
+          "packages/google-cloud-vm-migration/scripts/fixup_vmmigration_v1_keywords.py",
+          "packages/google-cloud-vm-migration/scripts/readme-gen/readme_gen.py",
+          "packages/google-cloud-vm-migration/setup.py"
+        ],
+        "googleapis__google-cloud-python-9584": [
+          "datacatalog/samples/__init__.py",
+          "datacatalog/samples/v1beta1/__init__.py",
+          "datacatalog/samples/v1beta1/create_entry_group.py"
+        ],
+        "googleapis__google-cloud-python-3069": [
+          "vision/google/cloud/vision/crop_hint.py",
+          "vision/google/cloud/vision/text.py",
+          "vision/google/cloud/vision/web.py"
+        ],
+        "googleapis__google-cloud-python-11371": [
+          "packages/google-cloud-iam-logging/docs/conf.py",
+          "packages/google-cloud-iam-logging/google/cloud/iam_logging/__init__.py",
+          "packages/google-cloud-iam-logging/google/cloud/iam_logging/gapic_version.py",
+          "packages/google-cloud-iam-logging/google/cloud/iam_logging_v1/__init__.py",
+          "packages/google-cloud-iam-logging/google/cloud/iam_logging_v1/gapic_version.py",
+          "packages/google-cloud-iam-logging/google/cloud/iam_logging_v1/services/__init__.py",
+          "packages/google-cloud-iam-logging/google/cloud/iam_logging_v1/types/__init__.py",
+          "packages/google-cloud-iam-logging/google/cloud/iam_logging_v1/types/audit_data.py",
+          "packages/google-cloud-iam-logging/noxfile.py",
+          "packages/google-cloud-iam-logging/scripts/fixup_iam_logging_v1_keywords.py",
+          "packages/google-cloud-iam-logging/scripts/readme-gen/readme_gen.py",
+          "packages/google-cloud-iam-logging/setup.py"
+        ],
+        "huggingface__transformers-21766": [
+          "src/transformers/models/mega/__init__.py",
+          "src/transformers/models/mega/configuration_mega.py",
+          "src/transformers/models/mega/convert_mega_original_pytorch_checkpoint_to_pytorch.py",
+          "src/transformers/models/mega/modeling_mega.py"
+        ],
+        "jupyterlab__jupyterlab-7079": [
+          "conftest.py"
+        ],
+        "pandas-dev__pandas-29212": [
+          "ci/deps/azure-36-minimum_versions.yaml",
+          "ci/deps/azure-macos-36.yaml"
+        ],
+        "pandas-dev__pandas-36403": [
+          "travis.yml"
+        ],
+        "pandas-dev__pandas-36716": [
+          "github/workflows/ci.yml"
+        ],
+        "pandas-dev__pandas-23147": [
+          "pandas/core/arrays/sparse.py"
+        ],
+        "pantsbuild__pants-14545": [
+          "src/python/pants/backend/codegen/soap/__init__.py",
+          "src/python/pants/backend/codegen/soap/java/__init__.py",
+          "src/python/pants/backend/codegen/soap/java/extra_fields.py",
+          "src/python/pants/backend/codegen/soap/java/jaxws.py",
+          "src/python/pants/backend/codegen/soap/java/rules.py",
+          "src/python/pants/backend/codegen/soap/rules.py",
+          "src/python/pants/backend/codegen/soap/tailor.py",
+          "src/python/pants/backend/codegen/soap/target_types.py"
+        ],
+        "pantsbuild__pants-6088": [
+          "src/python/pants/engine/console.py",
+          "src/python/pants/rules/__init__.py",
+          "src/python/pants/rules/core/__init__.py",
+          "src/python/pants/rules/core/fastlist.py",
+          "src/python/pants/rules/core/register.py"
+        ],
+        "pyca__cryptography-3686": [
+          "src/cryptography/hazmat/backends/openssl/x25519.py",
+          "src/cryptography/hazmat/primitives/asymmetric/x25519.py"
+        ],
+        "pypa__pip-8932": [
+          "src/pip/_internal/resolution/resolvelib/found_candidates.py"
+        ],
+        "ray-project__ray-6969": [
+          "python/ray/experimental/joblib/__init__.py",
+          "python/ray/experimental/joblib/ray_backend.py"
+        ],
+        "wagtail__wagtail-1412": [
+          "wagtail/wagtailcore/migrations/0016_change_page_url_path_to_text_field.py"
+        ],
+        "ytdl-org__youtube-dl-3744": [
+          "youtube_dl/extractor/cloudy.py"
+        ],
+        "ytdl-org__youtube-dl-6537": [
+          "youtube_dl/extractor/rtvnh.py"
+        ]
+      },
+      "bootstrap_95_ci": {
+        "samples": 2000,
+        "seed": 44,
+        "candidate_hit_at_20": {
+          "lower": 0.829569,
+          "upper": 0.89117
+        },
+        "candidate_recall_at_20": {
+          "lower": 0.658616,
+          "upper": 0.726001
+        }
+      },
+      "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+    },
+    "per_repository": {
+      "DataDog/integrations-core": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "DataDog__integrations-core-995",
+            "DataDog__integrations-core-4520"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "Lightning-AI/lightning": {
+        "rows": 10,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.7052380952380953,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 5,
+          "partial_recall_rows": 5,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "Lightning-AI__lightning-2974",
+            "Lightning-AI__lightning-1529",
+            "Lightning-AI__lightning-2665",
+            "Lightning-AI__lightning-1748",
+            "Lightning-AI__lightning-1385"
+          ],
+          "partial_recall": [
+            "Lightning-AI__lightning-2289",
+            "Lightning-AI__lightning-744",
+            "Lightning-AI__lightning-2535",
+            "Lightning-AI__lightning-1232",
+            "Lightning-AI__lightning-1561"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.482381,
+            "upper": 0.916667
+          }
+        },
+        "file_top_1_accuracy": 0.4,
+        "file_top_3_accuracy": 0.6,
+        "file_top_5_accuracy": 0.8,
+        "file_mrr": 0.55,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 10,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.7574358974358975,
+          "unreachable_gold_file_count": 3,
+          "unreachable_gold_files_by_ticket": {
+            "Lightning-AI__lightning-2535": [
+              "pytorch_lightning/metrics/functional/nlp.py",
+              "pytorch_lightning/metrics/nlp.py"
+            ],
+            "Lightning-AI__lightning-1232": [
+              "pl_examples/domain_templates/reinforse_learn_Qnet.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.534872,
+              "upper": 0.98
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "PrefectHQ/prefect": {
+        "rows": 11,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.7462386098749735,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 6,
+          "partial_recall_rows": 5,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "PrefectHQ__prefect-973",
+            "PrefectHQ__prefect-1532",
+            "PrefectHQ__prefect-1118",
+            "PrefectHQ__prefect-1052",
+            "PrefectHQ__prefect-2005",
+            "PrefectHQ__prefect-679"
+          ],
+          "partial_recall": [
+            "PrefectHQ__prefect-214",
+            "PrefectHQ__prefect-1577",
+            "PrefectHQ__prefect-610",
+            "PrefectHQ__prefect-1673",
+            "PrefectHQ__prefect-192"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.569082,
+            "upper": 0.913753
+          }
+        },
+        "file_top_1_accuracy": 0.6363636363636364,
+        "file_top_3_accuracy": 0.9090909090909091,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.7909090909090909,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 11,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.7550752278025005,
+          "unreachable_gold_file_count": 3,
+          "unreachable_gold_files_by_ticket": {
+            "PrefectHQ__prefect-214": [
+              "src/prefect/cli/configure.py"
+            ],
+            "PrefectHQ__prefect-192": [
+              "src/prefect/engine/executors/sync.py",
+              "src/prefect/utilities/executors.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.585378,
+              "upper": 0.92011
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "Qiskit/qiskit": {
+        "rows": 37,
+        "candidate_hit_at_20": 0.7837837837837838,
+        "candidate_recall_at_20": 0.6063808938808938,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 17,
+          "partial_recall_rows": 12,
+          "miss_rows": 8
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "Qiskit__qiskit-5705",
+            "Qiskit__qiskit-2735",
+            "Qiskit__qiskit-6925",
+            "Qiskit__qiskit-10366",
+            "Qiskit__qiskit-764",
+            "Qiskit__qiskit-3179",
+            "Qiskit__qiskit-8299",
+            "Qiskit__qiskit-2492",
+            "Qiskit__qiskit-5018",
+            "Qiskit__qiskit-5676",
+            "Qiskit__qiskit-4633",
+            "Qiskit__qiskit-1534",
+            "Qiskit__qiskit-8208",
+            "Qiskit__qiskit-2064",
+            "Qiskit__qiskit-5808",
+            "Qiskit__qiskit-5534",
+            "Qiskit__qiskit-10279"
+          ],
+          "partial_recall": [
+            "Qiskit__qiskit-4328",
+            "Qiskit__qiskit-1975",
+            "Qiskit__qiskit-2869",
+            "Qiskit__qiskit-8759",
+            "Qiskit__qiskit-1700",
+            "Qiskit__qiskit-10362",
+            "Qiskit__qiskit-911",
+            "Qiskit__qiskit-10392",
+            "Qiskit__qiskit-3683",
+            "Qiskit__qiskit-1422",
+            "Qiskit__qiskit-9085",
+            "Qiskit__qiskit-8944"
+          ],
+          "miss": [
+            "Qiskit__qiskit-8906",
+            "Qiskit__qiskit-2023",
+            "Qiskit__qiskit-2573",
+            "Qiskit__qiskit-6443",
+            "Qiskit__qiskit-7437",
+            "Qiskit__qiskit-2606",
+            "Qiskit__qiskit-6822",
+            "Qiskit__qiskit-5925"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.648649,
+            "upper": 0.918919
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.473894,
+            "upper": 0.731869
+          }
+        },
+        "file_top_1_accuracy": 0.32432432432432434,
+        "file_top_3_accuracy": 0.4864864864864865,
+        "file_top_5_accuracy": 0.5675675675675675,
+        "file_mrr": 0.4121621621621622,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 36,
+          "candidate_hit_at_20": 0.8055555555555556,
+          "candidate_recall_at_20": 0.6494212962962964,
+          "unreachable_gold_file_count": 10,
+          "unreachable_gold_files_by_ticket": {
+            "Qiskit__qiskit-1975": [
+              "qiskit/dagcircuit/dagcircuit.py",
+              "qiskit/dagcircuit/dagnode.py"
+            ],
+            "Qiskit__qiskit-2869": [
+              "qiskit/pulse/commands/delay.py"
+            ],
+            "Qiskit__qiskit-7437": [
+              "qiskit/providers/fake_provider/__init__.py"
+            ],
+            "Qiskit__qiskit-8759": [
+              "qiskit/providers/backend_compat.py"
+            ],
+            "Qiskit__qiskit-1422": [
+              "qiskit/transpiler/passes/mapping/direction_mapper.py"
+            ],
+            "Qiskit__qiskit-9085": [
+              "qiskit/algorithms/gradients/base_qgt.py",
+              "qiskit/algorithms/gradients/lin_comb_qgt.py",
+              "qiskit/algorithms/gradients/qfi.py",
+              "qiskit/algorithms/gradients/qgt_result.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.666667,
+              "upper": 0.916667
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.519048,
+              "upper": 0.781349
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "apache/airflow": {
+        "rows": 12,
+        "candidate_hit_at_20": 0.9166666666666666,
+        "candidate_recall_at_20": 0.7440476190476191,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 7,
+          "partial_recall_rows": 4,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "apache__airflow-19148",
+            "apache__airflow-15794",
+            "apache__airflow-22685",
+            "apache__airflow-8571",
+            "apache__airflow-19747",
+            "apache__airflow-19130",
+            "apache__airflow-9730"
+          ],
+          "partial_recall": [
+            "apache__airflow-10227",
+            "apache__airflow-8671",
+            "apache__airflow-32756",
+            "apache__airflow-22904"
+          ],
+          "miss": [
+            "apache__airflow-10317"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.75,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.541667,
+            "upper": 0.916667
+          }
+        },
+        "file_top_1_accuracy": 0.6666666666666666,
+        "file_top_3_accuracy": 0.8333333333333334,
+        "file_top_5_accuracy": 0.8333333333333334,
+        "file_mrr": 0.7222222222222222,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 12,
+          "candidate_hit_at_20": 0.9166666666666666,
+          "candidate_recall_at_20": 0.8138888888888888,
+          "unreachable_gold_file_count": 4,
+          "unreachable_gold_files_by_ticket": {
+            "apache__airflow-10227": [
+              "airflow/migrations/versions/da3f683c3a5a_add_dag_hash_column_to_serialized_dag_.py"
+            ],
+            "apache__airflow-8671": [
+              "airflow/utils/mixins.py"
+            ],
+            "apache__airflow-32756": [
+              "airflow/auth/managers/fab/views/__init__.py",
+              "airflow/auth/managers/fab/views/user_details.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.75,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.625,
+              "upper": 0.966667
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "celery/celery": {
+        "rows": 7,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.835978835978836,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 5,
+          "partial_recall_rows": 2,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "celery__celery-6378",
+            "celery__celery-4278",
+            "celery__celery-2783",
+            "celery__celery-423",
+            "celery__celery-7873"
+          ],
+          "partial_recall": [
+            "celery__celery-5954",
+            "celery__celery-2840"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.603175,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.5714285714285714,
+        "file_top_3_accuracy": 0.8571428571428571,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.7261904761904762,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 7,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.8364779874213838,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "celery__celery-5954": [
+              "t/unit/tasks/unit_tasks.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.604672,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "conan-io/conan": {
+        "rows": 22,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.8536796536796536,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 16,
+          "partial_recall_rows": 6,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "conan-io__conan-4948",
+            "conan-io__conan-3647",
+            "conan-io__conan-10213",
+            "conan-io__conan-2563",
+            "conan-io__conan-3768",
+            "conan-io__conan-2495",
+            "conan-io__conan-5275",
+            "conan-io__conan-5219",
+            "conan-io__conan-10981",
+            "conan-io__conan-12578",
+            "conan-io__conan-2794",
+            "conan-io__conan-3954",
+            "conan-io__conan-5112",
+            "conan-io__conan-5348",
+            "conan-io__conan-13285",
+            "conan-io__conan-5812"
+          ],
+          "partial_recall": [
+            "conan-io__conan-113",
+            "conan-io__conan-4229",
+            "conan-io__conan-6021",
+            "conan-io__conan-4716",
+            "conan-io__conan-11321",
+            "conan-io__conan-9099"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.751948,
+            "upper": 0.95
+          }
+        },
+        "file_top_1_accuracy": 0.5,
+        "file_top_3_accuracy": 0.5909090909090909,
+        "file_top_5_accuracy": 0.7727272727272727,
+        "file_mrr": 0.5787878787878787,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 22,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.8582251082251081,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "conan-io__conan-4229": [
+              "conans/server/launcher.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.749134,
+              "upper": 0.95368
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "conda/conda": {
+        "rows": 16,
+        "candidate_hit_at_20": 0.8125,
+        "candidate_recall_at_20": 0.7239583333333334,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 11,
+          "partial_recall_rows": 2,
+          "miss_rows": 3
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "conda__conda-3259",
+            "conda__conda-5190",
+            "conda__conda-6442",
+            "conda__conda-5835",
+            "conda__conda-5311",
+            "conda__conda-5231",
+            "conda__conda-6801",
+            "conda__conda-6911",
+            "conda__conda-3080",
+            "conda__conda-8053",
+            "conda__conda-5313"
+          ],
+          "partial_recall": [
+            "conda__conda-4626",
+            "conda__conda-5986"
+          ],
+          "miss": [
+            "conda__conda-6371",
+            "conda__conda-4585",
+            "conda__conda-2950"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.625,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.520833,
+            "upper": 0.911458
+          }
+        },
+        "file_top_1_accuracy": 0.125,
+        "file_top_3_accuracy": 0.5625,
+        "file_top_5_accuracy": 0.6875,
+        "file_mrr": 0.35416666666666663,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 15,
+          "candidate_hit_at_20": 0.8666666666666667,
+          "candidate_recall_at_20": 0.7722222222222223,
+          "unreachable_gold_file_count": 28,
+          "unreachable_gold_files_by_ticket": {
+            "conda__conda-2950": [
+              "conda-env/conda_env/__init__.py",
+              "conda-env/conda_env/cli/__init__.py",
+              "conda-env/conda_env/cli/main.py",
+              "conda-env/conda_env/cli/main_attach.py",
+              "conda-env/conda_env/cli/main_create.py",
+              "conda-env/conda_env/cli/main_export.py",
+              "conda-env/conda_env/cli/main_list.py",
+              "conda-env/conda_env/cli/main_remove.py",
+              "conda-env/conda_env/cli/main_update.py",
+              "conda-env/conda_env/cli/main_upload.py",
+              "conda-env/conda_env/compat.py",
+              "conda-env/conda_env/env.py",
+              "conda-env/conda_env/exceptions.py",
+              "conda-env/conda_env/installers/__init__.py",
+              "conda-env/conda_env/installers/base.py",
+              "conda-env/conda_env/installers/conda.py",
+              "conda-env/conda_env/installers/pip.py",
+              "conda-env/conda_env/pip_util.py",
+              "conda-env/conda_env/specs/__init__.py",
+              "conda-env/conda_env/specs/binstar.py",
+              "conda-env/conda_env/specs/notebook.py",
+              "conda-env/conda_env/specs/requirements.py",
+              "conda-env/conda_env/specs/yaml_file.py",
+              "conda-env/conda_env/utils/__init__.py",
+              "conda-env/conda_env/utils/notebooks.py",
+              "conda-env/conda_env/utils/uploader.py",
+              "conda-env/conda_env/yaml.py",
+              "conda-env/setup.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.666667,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.561111,
+              "upper": 0.95
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "dagster-io/dagster": {
+        "rows": 4,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.9166666666666666,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 3,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "dagster-io__dagster-12633",
+            "dagster-io__dagster-9901",
+            "dagster-io__dagster-9505"
+          ],
+          "partial_recall": [
+            "dagster-io__dagster-8689"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.75,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 4,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.9166666666666666,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.75,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "docker/compose": {
+        "rows": 16,
+        "candidate_hit_at_20": 0.9375,
+        "candidate_recall_at_20": 0.8604166666666666,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 12,
+          "partial_recall_rows": 3,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "docker__compose-6352",
+            "docker__compose-3291",
+            "docker__compose-3980",
+            "docker__compose-5303",
+            "docker__compose-2880",
+            "docker__compose-2341",
+            "docker__compose-171",
+            "docker__compose-1933",
+            "docker__compose-5455",
+            "docker__compose-6134",
+            "docker__compose-5558",
+            "docker__compose-5271"
+          ],
+          "partial_recall": [
+            "docker__compose-6389",
+            "docker__compose-6126",
+            "docker__compose-6835"
+          ],
+          "miss": [
+            "docker__compose-6451"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.8125,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.710417,
+            "upper": 0.979167
+          }
+        },
+        "file_top_1_accuracy": 0.5,
+        "file_top_3_accuracy": 0.6875,
+        "file_top_5_accuracy": 0.75,
+        "file_mrr": 0.5958333333333333,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 16,
+          "candidate_hit_at_20": 0.9375,
+          "candidate_recall_at_20": 0.8604166666666666,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.8125,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.708333,
+              "upper": 0.975
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "explosion/spaCy": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "explosion__spaCy-3405"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "gitpython-developers/GitPython": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "gitpython-developers__GitPython-841",
+            "gitpython-developers__GitPython-818"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.5,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.29166666666666663,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "google/jax": {
+        "rows": 9,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.9629629629629629,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 8,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "google__jax-2786",
+            "google__jax-232",
+            "google__jax-3097",
+            "google__jax-2807",
+            "google__jax-312",
+            "google__jax-1015",
+            "google__jax-3166",
+            "google__jax-2966"
+          ],
+          "partial_recall": [
+            "google__jax-1298"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.888889,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.6666666666666666,
+        "file_top_3_accuracy": 0.7777777777777778,
+        "file_top_5_accuracy": 0.8888888888888888,
+        "file_mrr": 0.75,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 9,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.9629629629629629,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.888889,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "googleapis/google-cloud-python": {
+        "rows": 24,
+        "candidate_hit_at_20": 0.75,
+        "candidate_recall_at_20": 0.6909722222222223,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 16,
+          "partial_recall_rows": 2,
+          "miss_rows": 6
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "googleapis__google-cloud-python-5899",
+            "googleapis__google-cloud-python-5343",
+            "googleapis__google-cloud-python-326",
+            "googleapis__google-cloud-python-2527",
+            "googleapis__google-cloud-python-9145",
+            "googleapis__google-cloud-python-323",
+            "googleapis__google-cloud-python-2002",
+            "googleapis__google-cloud-python-9915",
+            "googleapis__google-cloud-python-448",
+            "googleapis__google-cloud-python-6196",
+            "googleapis__google-cloud-python-66",
+            "googleapis__google-cloud-python-541",
+            "googleapis__google-cloud-python-276",
+            "googleapis__google-cloud-python-3722",
+            "googleapis__google-cloud-python-198",
+            "googleapis__google-cloud-python-1425"
+          ],
+          "partial_recall": [
+            "googleapis__google-cloud-python-430",
+            "googleapis__google-cloud-python-3069"
+          ],
+          "miss": [
+            "googleapis__google-cloud-python-11308",
+            "googleapis__google-cloud-python-11168",
+            "googleapis__google-cloud-python-5263",
+            "googleapis__google-cloud-python-11353",
+            "googleapis__google-cloud-python-9584",
+            "googleapis__google-cloud-python-11371"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.541667,
+            "upper": 0.916667
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.503472,
+            "upper": 0.857639
+          }
+        },
+        "file_top_1_accuracy": 0.4583333333333333,
+        "file_top_3_accuracy": 0.5833333333333334,
+        "file_top_5_accuracy": 0.6666666666666666,
+        "file_mrr": 0.5326388888888888,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 19,
+          "candidate_hit_at_20": 0.8947368421052632,
+          "candidate_recall_at_20": 0.8216374269005847,
+          "unreachable_gold_file_count": 158,
+          "unreachable_gold_files_by_ticket": {
+            "googleapis__google-cloud-python-11308": [
+              "packages/google-cloud-datacatalog/docs/conf.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog/gapic_version.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/gapic_version.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/async_client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/pagers.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/transports/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/transports/base.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/transports/grpc.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/data_catalog/transports/grpc_asyncio.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/async_client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/pagers.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/transports/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/transports/base.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/transports/grpc.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager/transports/grpc_asyncio.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/async_client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/transports/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/transports/base.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/transports/grpc.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/services/policy_tag_manager_serialization/transports/grpc_asyncio.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/bigquery.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/common.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/data_source.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/datacatalog.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/dataplex_spec.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/dump_content.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/gcs_fileset_spec.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/physical_schema.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/policytagmanager.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/policytagmanagerserialization.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/schema.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/search.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/table_spec.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/tags.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/timestamps.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1/types/usage.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/gapic_version.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/async_client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/pagers.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/transports/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/transports/base.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/transports/grpc.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/data_catalog/transports/grpc_asyncio.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/async_client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/pagers.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/transports/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/transports/base.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/transports/grpc.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager/transports/grpc_asyncio.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/async_client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/client.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/transports/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/transports/base.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/transports/grpc.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/services/policy_tag_manager_serialization/transports/grpc_asyncio.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/__init__.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/common.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/datacatalog.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/gcs_fileset_spec.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/policytagmanager.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/policytagmanagerserialization.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/schema.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/search.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/table_spec.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/tags.py",
+              "packages/google-cloud-datacatalog/google/cloud/datacatalog_v1beta1/types/timestamps.py",
+              "packages/google-cloud-datacatalog/noxfile.py",
+              "packages/google-cloud-datacatalog/scripts/fixup_datacatalog_v1_keywords.py",
+              "packages/google-cloud-datacatalog/scripts/fixup_datacatalog_v1beta1_keywords.py",
+              "packages/google-cloud-datacatalog/scripts/readme-gen/readme_gen.py",
+              "packages/google-cloud-datacatalog/setup.py"
+            ],
+            "googleapis__google-cloud-python-11168": [
+              "packages/google-cloud-iap/docs/conf.py",
+              "packages/google-cloud-iap/google/cloud/iap/__init__.py",
+              "packages/google-cloud-iap/google/cloud/iap/gapic_version.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/__init__.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/gapic_version.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/__init__.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/__init__.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/async_client.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/client.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/pagers.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/transports/__init__.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/transports/base.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/transports/grpc.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/transports/grpc_asyncio.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_admin_service/transports/rest.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/__init__.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/async_client.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/client.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/pagers.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/transports/__init__.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/transports/base.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/transports/grpc.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/transports/grpc_asyncio.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/services/identity_aware_proxy_o_auth_service/transports/rest.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/types/__init__.py",
+              "packages/google-cloud-iap/google/cloud/iap_v1/types/service.py",
+              "packages/google-cloud-iap/noxfile.py",
+              "packages/google-cloud-iap/scripts/fixup_iap_v1_keywords.py",
+              "packages/google-cloud-iap/scripts/readme-gen/readme_gen.py",
+              "packages/google-cloud-iap/setup.py"
+            ],
+            "googleapis__google-cloud-python-6196": [
+              "noxfile.py"
+            ],
+            "googleapis__google-cloud-python-11353": [
+              "packages/google-cloud-vm-migration/docs/conf.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration/__init__.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration/gapic_version.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/__init__.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/gapic_version.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/__init__.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/__init__.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/async_client.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/client.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/pagers.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/transports/__init__.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/transports/base.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/transports/grpc.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/transports/grpc_asyncio.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/services/vm_migration/transports/rest.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/types/__init__.py",
+              "packages/google-cloud-vm-migration/google/cloud/vmmigration_v1/types/vmmigration.py",
+              "packages/google-cloud-vm-migration/noxfile.py",
+              "packages/google-cloud-vm-migration/scripts/fixup_vmmigration_v1_keywords.py",
+              "packages/google-cloud-vm-migration/scripts/readme-gen/readme_gen.py",
+              "packages/google-cloud-vm-migration/setup.py"
+            ],
+            "googleapis__google-cloud-python-9584": [
+              "datacatalog/samples/__init__.py",
+              "datacatalog/samples/v1beta1/__init__.py",
+              "datacatalog/samples/v1beta1/create_entry_group.py"
+            ],
+            "googleapis__google-cloud-python-3069": [
+              "vision/google/cloud/vision/crop_hint.py",
+              "vision/google/cloud/vision/text.py",
+              "vision/google/cloud/vision/web.py"
+            ],
+            "googleapis__google-cloud-python-11371": [
+              "packages/google-cloud-iam-logging/docs/conf.py",
+              "packages/google-cloud-iam-logging/google/cloud/iam_logging/__init__.py",
+              "packages/google-cloud-iam-logging/google/cloud/iam_logging/gapic_version.py",
+              "packages/google-cloud-iam-logging/google/cloud/iam_logging_v1/__init__.py",
+              "packages/google-cloud-iam-logging/google/cloud/iam_logging_v1/gapic_version.py",
+              "packages/google-cloud-iam-logging/google/cloud/iam_logging_v1/services/__init__.py",
+              "packages/google-cloud-iam-logging/google/cloud/iam_logging_v1/types/__init__.py",
+              "packages/google-cloud-iam-logging/google/cloud/iam_logging_v1/types/audit_data.py",
+              "packages/google-cloud-iam-logging/noxfile.py",
+              "packages/google-cloud-iam-logging/scripts/fixup_iam_logging_v1_keywords.py",
+              "packages/google-cloud-iam-logging/scripts/readme-gen/readme_gen.py",
+              "packages/google-cloud-iam-logging/setup.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.736842,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.643275,
+              "upper": 0.953216
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "huggingface/transformers": {
+        "rows": 28,
+        "candidate_hit_at_20": 0.8571428571428571,
+        "candidate_recall_at_20": 0.7265692640692639,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 18,
+          "partial_recall_rows": 6,
+          "miss_rows": 4
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "huggingface__transformers-22942",
+            "huggingface__transformers-24274",
+            "huggingface__transformers-16778",
+            "huggingface__transformers-23127",
+            "huggingface__transformers-4385",
+            "huggingface__transformers-18387",
+            "huggingface__transformers-22279",
+            "huggingface__transformers-18786",
+            "huggingface__transformers-18470",
+            "huggingface__transformers-18402",
+            "huggingface__transformers-13829",
+            "huggingface__transformers-7078",
+            "huggingface__transformers-23856",
+            "huggingface__transformers-16357",
+            "huggingface__transformers-17188",
+            "huggingface__transformers-16465",
+            "huggingface__transformers-23897",
+            "huggingface__transformers-7263"
+          ],
+          "partial_recall": [
+            "huggingface__transformers-2134",
+            "huggingface__transformers-7767",
+            "huggingface__transformers-17082",
+            "huggingface__transformers-9183",
+            "huggingface__transformers-21144",
+            "huggingface__transformers-4243"
+          ],
+          "miss": [
+            "huggingface__transformers-21766",
+            "huggingface__transformers-13919",
+            "huggingface__transformers-17496",
+            "huggingface__transformers-25049"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.714286,
+            "upper": 0.964286
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.572619,
+            "upper": 0.857522
+          }
+        },
+        "file_top_1_accuracy": 0.5714285714285714,
+        "file_top_3_accuracy": 0.7142857142857143,
+        "file_top_5_accuracy": 0.75,
+        "file_mrr": 0.6398809523809523,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 28,
+          "candidate_hit_at_20": 0.8571428571428571,
+          "candidate_recall_at_20": 0.7265692640692639,
+          "unreachable_gold_file_count": 4,
+          "unreachable_gold_files_by_ticket": {
+            "huggingface__transformers-21766": [
+              "src/transformers/models/mega/__init__.py",
+              "src/transformers/models/mega/configuration_mega.py",
+              "src/transformers/models/mega/convert_mega_original_pytorch_checkpoint_to_pytorch.py",
+              "src/transformers/models/mega/modeling_mega.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.714286,
+              "upper": 0.964286
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.577165,
+              "upper": 0.868236
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "ipython/ipython": {
+        "rows": 22,
+        "candidate_hit_at_20": 0.8636363636363636,
+        "candidate_recall_at_20": 0.8106060606060607,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 17,
+          "partial_recall_rows": 2,
+          "miss_rows": 3
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "ipython__ipython-10321",
+            "ipython__ipython-6825",
+            "ipython__ipython-12889",
+            "ipython__ipython-11718",
+            "ipython__ipython-6727",
+            "ipython__ipython-10561",
+            "ipython__ipython-9228",
+            "ipython__ipython-4517",
+            "ipython__ipython-9335",
+            "ipython__ipython-3477",
+            "ipython__ipython-9711",
+            "ipython__ipython-3854",
+            "ipython__ipython-6076",
+            "ipython__ipython-2744",
+            "ipython__ipython-6935",
+            "ipython__ipython-3184",
+            "ipython__ipython-13612"
+          ],
+          "partial_recall": [
+            "ipython__ipython-3538",
+            "ipython__ipython-13592"
+          ],
+          "miss": [
+            "ipython__ipython-4464",
+            "ipython__ipython-448",
+            "ipython__ipython-11358"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.727273,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.636364,
+            "upper": 0.954545
+          }
+        },
+        "file_top_1_accuracy": 0.22727272727272727,
+        "file_top_3_accuracy": 0.4090909090909091,
+        "file_top_5_accuracy": 0.5,
+        "file_mrr": 0.3234848484848485,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 22,
+          "candidate_hit_at_20": 0.8636363636363636,
+          "candidate_recall_at_20": 0.8106060606060607,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.681818,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.643939,
+              "upper": 0.954545
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "jupyterlab/jupyterlab": {
+        "rows": 5,
+        "candidate_hit_at_20": 0.4,
+        "candidate_recall_at_20": 0.37142857142857144,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 1,
+          "miss_rows": 3
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "jupyterlab__jupyterlab-7461"
+          ],
+          "partial_recall": [
+            "jupyterlab__jupyterlab-7079"
+          ],
+          "miss": [
+            "jupyterlab__jupyterlab-9489",
+            "jupyterlab__jupyterlab-6445",
+            "jupyterlab__jupyterlab-7136"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.0,
+            "upper": 0.8
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.0,
+            "upper": 0.771429
+          }
+        },
+        "file_top_1_accuracy": 0.4,
+        "file_top_3_accuracy": 0.4,
+        "file_top_5_accuracy": 0.4,
+        "file_mrr": 0.4,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 5,
+          "candidate_hit_at_20": 0.4,
+          "candidate_recall_at_20": 0.4,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "jupyterlab__jupyterlab-7079": [
+              "conftest.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.0,
+              "upper": 0.8
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.0,
+              "upper": 0.8
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "mesonbuild/meson": {
+        "rows": 25,
+        "candidate_hit_at_20": 0.88,
+        "candidate_recall_at_20": 0.785,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 16,
+          "partial_recall_rows": 6,
+          "miss_rows": 3
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "mesonbuild__meson-5607",
+            "mesonbuild__meson-1320",
+            "mesonbuild__meson-10140",
+            "mesonbuild__meson-4907",
+            "mesonbuild__meson-190",
+            "mesonbuild__meson-4514",
+            "mesonbuild__meson-3721",
+            "mesonbuild__meson-3744",
+            "mesonbuild__meson-5558",
+            "mesonbuild__meson-1964",
+            "mesonbuild__meson-6689",
+            "mesonbuild__meson-7266",
+            "mesonbuild__meson-490",
+            "mesonbuild__meson-11982",
+            "mesonbuild__meson-2840",
+            "mesonbuild__meson-8804"
+          ],
+          "partial_recall": [
+            "mesonbuild__meson-3101",
+            "mesonbuild__meson-3483",
+            "mesonbuild__meson-5197",
+            "mesonbuild__meson-1620",
+            "mesonbuild__meson-5560",
+            "mesonbuild__meson-9603"
+          ],
+          "miss": [
+            "mesonbuild__meson-5255",
+            "mesonbuild__meson-12038",
+            "mesonbuild__meson-11050"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.76,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.648333,
+            "upper": 0.911667
+          }
+        },
+        "file_top_1_accuracy": 0.16,
+        "file_top_3_accuracy": 0.48,
+        "file_top_5_accuracy": 0.72,
+        "file_mrr": 0.3646666666666667,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 25,
+          "candidate_hit_at_20": 0.88,
+          "candidate_recall_at_20": 0.785,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.76,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.638333,
+              "upper": 0.913333
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "numpy/numpy": {
+        "rows": 25,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.9155555555555555,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 21,
+          "partial_recall_rows": 4,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "numpy__numpy-7870",
+            "numpy__numpy-12920",
+            "numpy__numpy-4463",
+            "numpy__numpy-22388",
+            "numpy__numpy-9302",
+            "numpy__numpy-16399",
+            "numpy__numpy-23269",
+            "numpy__numpy-8255",
+            "numpy__numpy-7853",
+            "numpy__numpy-6643",
+            "numpy__numpy-14912",
+            "numpy__numpy-7417",
+            "numpy__numpy-10698",
+            "numpy__numpy-10653",
+            "numpy__numpy-8596",
+            "numpy__numpy-6630",
+            "numpy__numpy-10588",
+            "numpy__numpy-7053",
+            "numpy__numpy-17377",
+            "numpy__numpy-22748",
+            "numpy__numpy-22002"
+          ],
+          "partial_recall": [
+            "numpy__numpy-9299",
+            "numpy__numpy-3097",
+            "numpy__numpy-19388",
+            "numpy__numpy-6363"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.828889,
+            "upper": 0.986667
+          }
+        },
+        "file_top_1_accuracy": 0.48,
+        "file_top_3_accuracy": 0.64,
+        "file_top_5_accuracy": 0.72,
+        "file_mrr": 0.578,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 25,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.9155555555555555,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.824444,
+              "upper": 0.98
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "open-mmlab/mmdetection": {
+        "rows": 3,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 3,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "open-mmlab__mmdetection-7585",
+            "open-mmlab__mmdetection-8136",
+            "open-mmlab__mmdetection-2492"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.6666666666666666,
+        "file_top_3_accuracy": 0.6666666666666666,
+        "file_top_5_accuracy": 0.6666666666666666,
+        "file_mrr": 0.6666666666666666,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 3,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pandas-dev/pandas": {
+        "rows": 133,
+        "candidate_hit_at_20": 0.7829457364341085,
+        "candidate_recall_at_20": 0.4472426299567536,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 19,
+          "partial_recall_rows": 82,
+          "miss_rows": 28
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "pandas-dev__pandas-10418",
+            "pandas-dev__pandas-17169",
+            "pandas-dev__pandas-27988",
+            "pandas-dev__pandas-38387",
+            "pandas-dev__pandas-22423",
+            "pandas-dev__pandas-35408",
+            "pandas-dev__pandas-2661",
+            "pandas-dev__pandas-18717",
+            "pandas-dev__pandas-23143",
+            "pandas-dev__pandas-5220",
+            "pandas-dev__pandas-4123",
+            "pandas-dev__pandas-4250",
+            "pandas-dev__pandas-26994",
+            "pandas-dev__pandas-19913",
+            "pandas-dev__pandas-38272",
+            "pandas-dev__pandas-21350",
+            "pandas-dev__pandas-14537",
+            "pandas-dev__pandas-20457",
+            "pandas-dev__pandas-10593"
+          ],
+          "partial_recall": [
+            "pandas-dev__pandas-14582",
+            "pandas-dev__pandas-6365",
+            "pandas-dev__pandas-7092",
+            "pandas-dev__pandas-5105",
+            "pandas-dev__pandas-7832",
+            "pandas-dev__pandas-29212",
+            "pandas-dev__pandas-14056",
+            "pandas-dev__pandas-36691",
+            "pandas-dev__pandas-20288",
+            "pandas-dev__pandas-19024",
+            "pandas-dev__pandas-36862",
+            "pandas-dev__pandas-31524",
+            "pandas-dev__pandas-10879",
+            "pandas-dev__pandas-26685",
+            "pandas-dev__pandas-7736",
+            "pandas-dev__pandas-5564",
+            "pandas-dev__pandas-34595",
+            "pandas-dev__pandas-6812",
+            "pandas-dev__pandas-7350",
+            "pandas-dev__pandas-18852",
+            "pandas-dev__pandas-16834",
+            "pandas-dev__pandas-21728",
+            "pandas-dev__pandas-18997",
+            "pandas-dev__pandas-6977",
+            "pandas-dev__pandas-22651",
+            "pandas-dev__pandas-9441",
+            "pandas-dev__pandas-36403",
+            "pandas-dev__pandas-38331",
+            "pandas-dev__pandas-30858",
+            "pandas-dev__pandas-26022",
+            "pandas-dev__pandas-16295",
+            "pandas-dev__pandas-3635",
+            "pandas-dev__pandas-6114",
+            "pandas-dev__pandas-34816",
+            "pandas-dev__pandas-4117",
+            "pandas-dev__pandas-37707",
+            "pandas-dev__pandas-39216",
+            "pandas-dev__pandas-36563",
+            "pandas-dev__pandas-22679",
+            "pandas-dev__pandas-10967",
+            "pandas-dev__pandas-23692",
+            "pandas-dev__pandas-30508",
+            "pandas-dev__pandas-19772",
+            "pandas-dev__pandas-35673",
+            "pandas-dev__pandas-27615",
+            "pandas-dev__pandas-18191",
+            "pandas-dev__pandas-9377",
+            "pandas-dev__pandas-18645",
+            "pandas-dev__pandas-4748",
+            "pandas-dev__pandas-4507",
+            "pandas-dev__pandas-3040",
+            "pandas-dev__pandas-36876",
+            "pandas-dev__pandas-21313",
+            "pandas-dev__pandas-26404",
+            "pandas-dev__pandas-37794",
+            "pandas-dev__pandas-36174",
+            "pandas-dev__pandas-36385",
+            "pandas-dev__pandas-10290",
+            "pandas-dev__pandas-4113",
+            "pandas-dev__pandas-20549",
+            "pandas-dev__pandas-29872",
+            "pandas-dev__pandas-35377",
+            "pandas-dev__pandas-8472",
+            "pandas-dev__pandas-10335",
+            "pandas-dev__pandas-24759",
+            "pandas-dev__pandas-32202",
+            "pandas-dev__pandas-20782",
+            "pandas-dev__pandas-24581",
+            "pandas-dev__pandas-27932",
+            "pandas-dev__pandas-31232",
+            "pandas-dev__pandas-25720",
+            "pandas-dev__pandas-23112",
+            "pandas-dev__pandas-23291",
+            "pandas-dev__pandas-23265",
+            "pandas-dev__pandas-34484",
+            "pandas-dev__pandas-21432",
+            "pandas-dev__pandas-30588",
+            "pandas-dev__pandas-22482",
+            "pandas-dev__pandas-34599",
+            "pandas-dev__pandas-10812",
+            "pandas-dev__pandas-23147",
+            "pandas-dev__pandas-6481"
+          ],
+          "miss": [
+            "pandas-dev__pandas-11309",
+            "pandas-dev__pandas-39272",
+            "pandas-dev__pandas-5875",
+            "pandas-dev__pandas-16731",
+            "pandas-dev__pandas-28018",
+            "pandas-dev__pandas-36050",
+            "pandas-dev__pandas-39308",
+            "pandas-dev__pandas-36716",
+            "pandas-dev__pandas-34416",
+            "pandas-dev__pandas-35140",
+            "pandas-dev__pandas-34991",
+            "pandas-dev__pandas-17823",
+            "pandas-dev__pandas-17751",
+            "pandas-dev__pandas-35195",
+            "pandas-dev__pandas-36580",
+            "pandas-dev__pandas-24322",
+            "pandas-dev__pandas-31155",
+            "pandas-dev__pandas-8238",
+            "pandas-dev__pandas-21187",
+            "pandas-dev__pandas-35507",
+            "pandas-dev__pandas-17768",
+            "pandas-dev__pandas-19552",
+            "pandas-dev__pandas-6078",
+            "pandas-dev__pandas-29431",
+            "pandas-dev__pandas-27300",
+            "pandas-dev__pandas-21036",
+            "pandas-dev__pandas-21507",
+            "pandas-dev__pandas-32566"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.705426,
+            "upper": 0.852713
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.39525,
+            "upper": 0.5012
+          }
+        },
+        "file_top_1_accuracy": 0.40310077519379844,
+        "file_top_3_accuracy": 0.627906976744186,
+        "file_top_5_accuracy": 0.6511627906976745,
+        "file_mrr": 0.5127906976744186,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 129,
+          "candidate_hit_at_20": 0.7829457364341085,
+          "candidate_recall_at_20": 0.44840035402829437,
+          "unreachable_gold_file_count": 5,
+          "unreachable_gold_files_by_ticket": {
+            "pandas-dev__pandas-29212": [
+              "ci/deps/azure-36-minimum_versions.yaml",
+              "ci/deps/azure-macos-36.yaml"
+            ],
+            "pandas-dev__pandas-36403": [
+              "travis.yml"
+            ],
+            "pandas-dev__pandas-36716": [
+              "github/workflows/ci.yml"
+            ],
+            "pandas-dev__pandas-23147": [
+              "pandas/core/arrays/sparse.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.705426,
+              "upper": 0.852713
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.396723,
+              "upper": 0.502867
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pantsbuild/pants": {
+        "rows": 24,
+        "candidate_hit_at_20": 0.75,
+        "candidate_recall_at_20": 0.5479479949874687,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 11,
+          "partial_recall_rows": 7,
+          "miss_rows": 6
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "pantsbuild__pants-13447",
+            "pantsbuild__pants-14822",
+            "pantsbuild__pants-14895",
+            "pantsbuild__pants-16250",
+            "pantsbuild__pants-11499",
+            "pantsbuild__pants-17518",
+            "pantsbuild__pants-6624",
+            "pantsbuild__pants-5400",
+            "pantsbuild__pants-11115",
+            "pantsbuild__pants-15230",
+            "pantsbuild__pants-12579"
+          ],
+          "partial_recall": [
+            "pantsbuild__pants-10511",
+            "pantsbuild__pants-18262",
+            "pantsbuild__pants-15916",
+            "pantsbuild__pants-4399",
+            "pantsbuild__pants-19220",
+            "pantsbuild__pants-6088",
+            "pantsbuild__pants-19023"
+          ],
+          "miss": [
+            "pantsbuild__pants-17939",
+            "pantsbuild__pants-11604",
+            "pantsbuild__pants-4487",
+            "pantsbuild__pants-14545",
+            "pantsbuild__pants-4690",
+            "pantsbuild__pants-6472"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.583333,
+            "upper": 0.916667
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.373575,
+            "upper": 0.728869
+          }
+        },
+        "file_top_1_accuracy": 0.4166666666666667,
+        "file_top_3_accuracy": 0.6666666666666666,
+        "file_top_5_accuracy": 0.7083333333333334,
+        "file_mrr": 0.5430555555555556,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 23,
+          "candidate_hit_at_20": 0.782608695652174,
+          "candidate_recall_at_20": 0.574223602484472,
+          "unreachable_gold_file_count": 13,
+          "unreachable_gold_files_by_ticket": {
+            "pantsbuild__pants-14545": [
+              "src/python/pants/backend/codegen/soap/__init__.py",
+              "src/python/pants/backend/codegen/soap/java/__init__.py",
+              "src/python/pants/backend/codegen/soap/java/extra_fields.py",
+              "src/python/pants/backend/codegen/soap/java/jaxws.py",
+              "src/python/pants/backend/codegen/soap/java/rules.py",
+              "src/python/pants/backend/codegen/soap/rules.py",
+              "src/python/pants/backend/codegen/soap/tailor.py",
+              "src/python/pants/backend/codegen/soap/target_types.py"
+            ],
+            "pantsbuild__pants-6088": [
+              "src/python/pants/engine/console.py",
+              "src/python/pants/rules/__init__.py",
+              "src/python/pants/rules/core/__init__.py",
+              "src/python/pants/rules/core/fastlist.py",
+              "src/python/pants/rules/core/register.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.565217,
+              "upper": 0.913043
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.396894,
+              "upper": 0.743168
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pyca/cryptography": {
+        "rows": 9,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.8888888888888888,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 7,
+          "partial_recall_rows": 2,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "pyca__cryptography-2855",
+            "pyca__cryptography-1330",
+            "pyca__cryptography-2219",
+            "pyca__cryptography-8617",
+            "pyca__cryptography-5800",
+            "pyca__cryptography-2196",
+            "pyca__cryptography-1346"
+          ],
+          "partial_recall": [
+            "pyca__cryptography-3686",
+            "pyca__cryptography-3361"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.703704,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.5555555555555556,
+        "file_top_3_accuracy": 0.7777777777777778,
+        "file_top_5_accuracy": 0.8888888888888888,
+        "file_mrr": 0.6944444444444444,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 9,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.9629629629629629,
+          "unreachable_gold_file_count": 2,
+          "unreachable_gold_files_by_ticket": {
+            "pyca__cryptography-3686": [
+              "src/cryptography/hazmat/backends/openssl/x25519.py",
+              "src/cryptography/hazmat/primitives/asymmetric/x25519.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.888889,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pypa/pip": {
+        "rows": 18,
+        "candidate_hit_at_20": 0.8888888888888888,
+        "candidate_recall_at_20": 0.7867003367003366,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 12,
+          "partial_recall_rows": 4,
+          "miss_rows": 2
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "pypa__pip-4293",
+            "pypa__pip-2133",
+            "pypa__pip-4855",
+            "pypa__pip-7072",
+            "pypa__pip-10145",
+            "pypa__pip-7965",
+            "pypa__pip-8167",
+            "pypa__pip-8974",
+            "pypa__pip-8061",
+            "pypa__pip-11940",
+            "pypa__pip-10282",
+            "pypa__pip-6678"
+          ],
+          "partial_recall": [
+            "pypa__pip-6764",
+            "pypa__pip-8394",
+            "pypa__pip-8932",
+            "pypa__pip-11874"
+          ],
+          "miss": [
+            "pypa__pip-6225",
+            "pypa__pip-10079"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.722222,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.620034,
+            "upper": 0.937037
+          }
+        },
+        "file_top_1_accuracy": 0.2777777777777778,
+        "file_top_3_accuracy": 0.6111111111111112,
+        "file_top_5_accuracy": 0.6666666666666666,
+        "file_mrr": 0.4490740740740741,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 18,
+          "candidate_hit_at_20": 0.8888888888888888,
+          "candidate_recall_at_20": 0.8052188552188552,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "pypa__pip-8932": [
+              "src/pip/_internal/resolution/resolvelib/found_candidates.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.722222,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.627441,
+              "upper": 0.944444
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "ray-project/ray": {
+        "rows": 9,
+        "candidate_hit_at_20": 0.6666666666666666,
+        "candidate_recall_at_20": 0.6666666666666666,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 6,
+          "partial_recall_rows": 0,
+          "miss_rows": 3
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "ray-project__ray-3431",
+            "ray-project__ray-3630",
+            "ray-project__ray-1783",
+            "ray-project__ray-5287",
+            "ray-project__ray-2320",
+            "ray-project__ray-6475"
+          ],
+          "partial_recall": [],
+          "miss": [
+            "ray-project__ray-2036",
+            "ray-project__ray-6969",
+            "ray-project__ray-2784"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.333333,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.333333,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.3333333333333333,
+        "file_top_3_accuracy": 0.6666666666666666,
+        "file_top_5_accuracy": 0.6666666666666666,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 8,
+          "candidate_hit_at_20": 0.75,
+          "candidate_recall_at_20": 0.75,
+          "unreachable_gold_file_count": 2,
+          "unreachable_gold_files_by_ticket": {
+            "ray-project__ray-6969": [
+              "python/ray/experimental/joblib/__init__.py",
+              "python/ray/experimental/joblib/ray_backend.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.5,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.375,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "scipy/scipy": {
+        "rows": 3,
+        "candidate_hit_at_20": 0.6666666666666666,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 1,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "scipy__scipy-3313"
+          ],
+          "partial_recall": [
+            "scipy__scipy-3924"
+          ],
+          "miss": [
+            "scipy__scipy-423"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.6666666666666666,
+        "file_top_3_accuracy": 0.6666666666666666,
+        "file_top_5_accuracy": 0.6666666666666666,
+        "file_mrr": 0.6666666666666666,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 3,
+          "candidate_hit_at_20": 0.6666666666666666,
+          "candidate_recall_at_20": 0.5,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "tensorflow/models": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "tensorflow__models-5844"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "tiangolo/fastapi": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "tiangolo__fastapi-1534"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 0.0,
+        "file_mrr": 0.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "twisted/twisted": {
+        "rows": 2,
+        "candidate_hit_at_20": 0.5,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "twisted__twisted-11739"
+          ],
+          "partial_recall": [],
+          "miss": [
+            "twisted__twisted-11622"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.5,
+        "file_top_3_accuracy": 0.5,
+        "file_top_5_accuracy": 0.5,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 0.5,
+          "candidate_recall_at_20": 0.5,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "wagtail/wagtail": {
+        "rows": 11,
+        "candidate_hit_at_20": 0.9090909090909091,
+        "candidate_recall_at_20": 0.7348484848484849,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 7,
+          "partial_recall_rows": 3,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "wagtail__wagtail-8933",
+            "wagtail__wagtail-4402",
+            "wagtail__wagtail-5559",
+            "wagtail__wagtail-8122",
+            "wagtail__wagtail-7388",
+            "wagtail__wagtail-6086",
+            "wagtail__wagtail-1879"
+          ],
+          "partial_recall": [
+            "wagtail__wagtail-9153",
+            "wagtail__wagtail-1412",
+            "wagtail__wagtail-291"
+          ],
+          "miss": [
+            "wagtail__wagtail-7069"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.727273,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.939394
+          }
+        },
+        "file_top_1_accuracy": 0.2727272727272727,
+        "file_top_3_accuracy": 0.6363636363636364,
+        "file_top_5_accuracy": 0.8181818181818182,
+        "file_mrr": 0.45,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 11,
+          "candidate_hit_at_20": 0.9090909090909091,
+          "candidate_recall_at_20": 0.7803030303030304,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "wagtail__wagtail-1412": [
+              "wagtail/wagtailcore/migrations/0016_change_page_url_path_to_text_field.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.727273,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.545455,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "ytdl-org/youtube-dl": {
+        "rows": 8,
+        "candidate_hit_at_20": 0.75,
+        "candidate_recall_at_20": 0.6875,
+        "average_candidate_count_at_20": 16.5,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 5,
+          "partial_recall_rows": 1,
+          "miss_rows": 2
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "ytdl-org__youtube-dl-428",
+            "ytdl-org__youtube-dl-488",
+            "ytdl-org__youtube-dl-621",
+            "ytdl-org__youtube-dl-30366",
+            "ytdl-org__youtube-dl-16250"
+          ],
+          "partial_recall": [
+            "ytdl-org__youtube-dl-6537"
+          ],
+          "miss": [
+            "ytdl-org__youtube-dl-3744",
+            "ytdl-org__youtube-dl-29682"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.375,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.375,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.125,
+        "file_top_3_accuracy": 0.625,
+        "file_top_5_accuracy": 0.625,
+        "file_mrr": 0.3125,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 8,
+          "candidate_hit_at_20": 0.75,
+          "candidate_recall_at_20": 0.75,
+          "unreachable_gold_file_count": 2,
+          "unreachable_gold_files_by_ticket": {
+            "ytdl-org__youtube-dl-3744": [
+              "youtube_dl/extractor/cloudy.py"
+            ],
+            "ytdl-org__youtube-dl-6537": [
+              "youtube_dl/extractor/rtvnh.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.375,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.375,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      }
+    }
+  },
+  "output_contract": {
+    "required_candidates_per_ticket": 20,
+    "exact_top20_rows": 497,
+    "short_rows": 3,
+    "long_rows": 0,
+    "candidate_count_distribution": {
+      "7": 2,
+      "18": 1,
+      "20": 497
+    },
+    "standard_finalizer_result": "rejected",
+    "standard_finalizer_error": "Holdout output does not contain exactly 20 candidates per ticket."
+  },
+  "evaluation_order": {
+    "prediction_only_shards": true,
+    "predictions_completed_before_gold_access": true,
+    "sealed_gold_accessed_during_ranking": false
+  },
+  "holdout_artifacts": {
+    "run_manifest": {
+      "path": "reports/fault_localization/stage1_next_iteration/final_holdout_v2/run/run_manifest.json",
+      "bytes": 155775,
+      "sha256": "1f3711a5055c9da0766307e24564c0174e1bac25a927eb6eaa1dcfcbe9ae6fcf"
+    },
+    "predictions": {
+      "path": "reports/fault_localization/stage1_next_iteration/final_holdout_v2/run/predictions.jsonl",
+      "bytes": 48272822,
+      "sha256": "b41233ff8577a3694543c043e83ce3c3459746a832e786e118efd4897ca94df4"
+    },
+    "metrics": {
+      "path": "reports/fault_localization/stage1_next_iteration/final_holdout_v2/run/metrics.json",
+      "bytes": 131837,
+      "sha256": "a1c1060ec149746e186dfd286cba341106a7a7c9305018be07f82e797991feab"
+    },
+    "tickets": {
+      "path": "data/fault_localization/swebench_full/final_holdout_v2/final_holdout_tickets.jsonl",
+      "bytes": 2964394,
+      "sha256": "d219c3975a1d9bea3bedcec3f6986cd61d9a068ddc743b110c5be87c419b42c9"
+    },
+    "gold": {
+      "path": "data/fault_localization/swebench_full/final_holdout_v2/sealed/final_holdout_gold.jsonl",
+      "bytes": 260865,
+      "sha256": "50762a9b29b7d4c1581d09d24b99770d3b4d7b1ed29e3c2c27dda1e7f2e6723d"
+    }
+  },
+  "post_evaluation_policy": "This Final Holdout was evaluated exactly once. Do not modify or rerun E6 on it. Any output-contract fix requires a new experiment ID and a new unseen holdout."
+}

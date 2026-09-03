@@ -1,0 +1,33 @@
+COMMAND
+/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py --tickets reports/fault_localization/stage1_next_iteration/e7_development_1294/e7_a/shards/sympy_sympy/tickets.jsonl --prediction-only --repo-cache-dir data/fault_localization/swebench_full/snapshots --snapshot-cache-dir reports/fault_localization/stage1_next_iteration/e7_development_1294/e7_a/ephemeral_snapshots --index-cache-dir data/fault_localization/swebench_full/indexes --import-graph-cache-dir data/fault_localization/swebench_full/indexes/import_graphs --call-graph-cache-dir data/fault_localization/swebench_full/indexes/call_graphs --output-dir reports/fault_localization/stage1_next_iteration/e7_development_1294/e7_a/shards/sympy_sympy/run --candidate-file-k 20 --ephemeral-snapshots --checkpoint-every 10 --progress none --embedding-backend tfidf-sbert-rerank --semantic-candidate-k 50 --no-domain-path-routing --file-aggregation-mode basic --symbol-expansion-mode symbol-definitions-api --call-graph-mode outgoing-top3 --resume
+
+STDOUT
+
+STDERR
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 12757.30it/s]
+Traceback (most recent call last):
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py", line 1319, in <module>
+    main()
+    ~~~~^^
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py", line 361, in main
+    summary = run_batch(config)
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py", line 468, in run_batch
+    index.call_graph, call_graph_source = load_or_build_call_graph(
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~^
+        ticket,
+        ^^^^^^^
+    ...<2 lines>...
+        reporter,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py", line 797, in load_or_build_call_graph
+    graph = build_call_graph(index.chunks, index.symbol_definitions)
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/src/utils/fault_localization.py", line 3786, in build_call_graph
+    tree = ast.parse(source)
+  File "/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/ast.py", line 54, in parse
+    return compile(source, filename, mode, flags,
+                   _feature_version=feature_version, optimize=optimize)
+KeyboardInterrupt

@@ -1,0 +1,103 @@
+{
+  "protocol": "swebench-live-stage1-e8-holdout-v1",
+  "status": "prepared_not_evaluated",
+  "created_at_utc": "2026-09-01T13:30:43.080084+00:00",
+  "dataset": "SWE-bench-Live/SWE-bench-Live",
+  "source_split": "verified",
+  "source_url": "https://huggingface.co/datasets/SWE-bench-Live/SWE-bench-Live/tree/a3165f4df45702cdcb7225e70403d055f74d9d01",
+  "source_parquet_url": "https://huggingface.co/datasets/SWE-bench-Live/SWE-bench-Live/resolve/a3165f4df45702cdcb7225e70403d055f74d9d01/data/verified-00000-of-00001.parquet",
+  "source_rows": 500,
+  "eligible_repository_disjoint_rows": 382,
+  "selected_rows": 100,
+  "selected_repositories": 53,
+  "repository_counts": {
+    "Delgan/loguru": 1,
+    "Kozea/WeasyPrint": 3,
+    "PyPSA/PyPSA": 1,
+    "ag2ai/faststream": 1,
+    "aiogram/aiogram": 1,
+    "apify/crawlee-python": 1,
+    "arviz-devs/arviz": 1,
+    "aws-cloudformation/cfn-lint": 14,
+    "beetbox/beets": 1,
+    "beeware/briefcase": 2,
+    "bridgecrewio/checkov": 3,
+    "cyclotruc/gitingest": 1,
+    "deepset-ai/haystack": 5,
+    "encode/starlette": 1,
+    "falconry/falcon": 2,
+    "fonttools/fonttools": 1,
+    "geopandas/geopandas": 1,
+    "huggingface/datasets": 1,
+    "huggingface/smolagents": 1,
+    "icloud-photos-downloader/icloud_photos_downloader": 1,
+    "instructlab/instructlab": 3,
+    "jarun/buku": 1,
+    "jlowin/fastmcp": 1,
+    "joke2k/faker": 3,
+    "jupyterlab/jupyter-ai": 2,
+    "kedro-org/kedro": 1,
+    "keras-team/keras": 4,
+    "koxudaxi/datamodel-code-generator": 2,
+    "mikedh/trimesh": 1,
+    "networktocode/ntc-templates": 1,
+    "patroni/patroni": 2,
+    "pdm-project/pdm": 3,
+    "privacyidea/privacyidea": 2,
+    "projectmesa/mesa": 1,
+    "pvlib/pvlib-python": 2,
+    "pybamm-team/PyBaMM": 1,
+    "python-attrs/attrs": 1,
+    "python-babel/babel": 2,
+    "python-control/python-control": 2,
+    "python-poetry/poetry": 1,
+    "python-telegram-bot/python-telegram-bot": 1,
+    "pytorch/torchtune": 2,
+    "qtile/qtile": 1,
+    "reflex-dev/reflex": 4,
+    "run-llama/llama_deploy": 1,
+    "shapely/shapely": 1,
+    "sissbruecker/linkding": 2,
+    "stanfordnlp/dspy": 1,
+    "streamlink/streamlink": 4,
+    "theOehrly/Fast-F1": 1,
+    "wemake-services/wemake-python-styleguide": 1,
+    "wireservice/csvkit": 1,
+    "yt-dlp/yt-dlp": 1
+  },
+  "selection_policy": {
+    "seed": "swebench-live-stage1-e8-holdout-v1-20260901",
+    "repository_exclusion": "Exclude every repository present in the complete seen-ticket artifact.",
+    "ticket_exclusion": "Exclude every ticket ID in the complete seen-ticket artifact.",
+    "sampling": "Deterministic repository-stratified proportional sampling using only instance_id and repository; patch and gold contents are not selection features."
+  },
+  "leakage_checks": {
+    "ticket_id_overlap_with_seen": 0,
+    "repository_overlap_with_seen": 0,
+    "unique_selected_ticket_ids": true
+  },
+  "artifacts": {
+    "source_parquet": {
+      "path": "data\\fault_localization\\swebench_live\\raw\\verified-a3165f4.parquet",
+      "bytes": 24696977,
+      "sha256": "080e36e46198bf9c177a6b077624d4028baf6ff04d661c332cc1fe1e5dfa50b2"
+    },
+    "seen_tickets": {
+      "path": "data\\fault_localization\\swebench_live\\e8_holdout_v1\\seen_tickets_all_prior.jsonl",
+      "bytes": 39622655,
+      "sha256": "9b8b4b239927d6acd6321ee8379da0b656ecb8922939ac9524331a1c2ff0f8c8"
+    },
+    "tickets": {
+      "path": "data\\fault_localization\\swebench_live\\e8_holdout_v1\\final_holdout_tickets.jsonl",
+      "bytes": 20808030,
+      "sha256": "e8071575d381f2431cdf5bc66a2123ab566cee0bf791b20e691e80819fdd7c6d"
+    },
+    "sealed_gold": {
+      "path": "data\\fault_localization\\swebench_live\\e8_holdout_v1\\sealed\\final_holdout_gold.jsonl",
+      "bytes": 51633,
+      "sha256": "df8b070119001f48d54dd54ea16598a3a0e5379778463eb3f1aa4813e09e7768"
+    }
+  },
+  "gold_access_policy": "Do not inspect sealed gold before prediction completes. The one-time runner may use it only for final metric calculation after the frozen method produces predictions.",
+  "evaluation_policy": "Execute the frozen method once. Do not tune, rerank, or rerun based on these results."
+}

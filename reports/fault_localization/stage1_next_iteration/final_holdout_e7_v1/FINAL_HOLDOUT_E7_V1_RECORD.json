@@ -1,0 +1,518 @@
+{
+  "protocol": "swebench-full-stage1-e7-unseen-holdout-v1",
+  "status": "holdout_evaluated_once_output_contract_failed",
+  "finalized_at_utc": "2026-09-01T13:21:23.454942+00:00",
+  "freeze_id": "stage1-e7-047d563271a0fa02",
+  "method_label": "e7-a-e6-development-baseline",
+  "method_id": "tfidf-sbert-rerank-25ae3013f48f",
+  "method": {
+    "advanced_file_aggregation": false,
+    "api_implementation_parameters": {
+      "max_links_per_symbol": 4,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_wrapper_statements": 4,
+      "reexport_bonus": 0.04,
+      "wrapper_bonus": 0.05
+    },
+    "call_graph_mode": "outgoing-top3",
+    "call_graph_parameters": {
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_signal": 0.9,
+      "maximum_target_files_per_reference": 8,
+      "outgoing_signal": 0.9,
+      "rank_decay": 0.08,
+      "reference_file_k": 3
+    },
+    "candidate_file_k": 20,
+    "chunk_lines": 80,
+    "domain_path_routing": false,
+    "embedding_backend": "tfidf-sbert-rerank",
+    "file_aggregation": true,
+    "file_aggregation_mode": "basic",
+    "file_aggregation_parameters": {
+      "evidence_score_ratio": 0.8,
+      "max_evidence_chunks": 5,
+      "minimum_evidence_score": 0.05,
+      "package_bonus_cap": 0.1,
+      "support_bonus_cap": 0.05,
+      "support_bonus_per_additional_chunk": 0.0125,
+      "symbol_bonus_cap": 0.04,
+      "symbol_bonus_per_additional_symbol": 0.01
+    },
+    "generic_routing": false,
+    "import_graph_mode": "off",
+    "import_graph_parameters": {
+      "incoming_signal": 0.65,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_signal": 0.8,
+      "outgoing_signal": 0.8,
+      "rank_decay": 0.08,
+      "reference_file_k": 5
+    },
+    "include_tests": false,
+    "llm_candidate_k": 0,
+    "llm_rerank": false,
+    "max_file_bytes": 500000,
+    "method_version": "fault-localization-method-v19",
+    "min_ticket_chars": 20,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "overlap_lines": 20,
+    "repository_proximity": false,
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "symbol_expansion_mode": "symbol-definitions-api",
+    "symbol_expansion_parameters": {
+      "exact_match_bonus": 0.06,
+      "leaf_match_bonus": 0.04,
+      "max_files_per_symbol": 4,
+      "max_ticket_symbols": 20,
+      "maximum_bonus": 0.1,
+      "maximum_evidence_per_file": 4
+    },
+    "top_k": 5
+  },
+  "pre_holdout_freeze": {
+    "path": "reports\\fault_localization\\stage1_next_iteration\\final_holdout_e7_v1\\stage1_e7_pre_holdout_freeze.json",
+    "bytes": 7601,
+    "sha256": "aefbc2265f017a763d4eb72b677be16f2cc68170f17af87d55af5f12a7d2853f"
+  },
+  "holdout_result": {
+    "rows": 27,
+    "rows_with_file_ground_truth": 27,
+    "candidate_hit_at_20": 0.7037037037037037,
+    "candidate_recall_at_20": 0.6262962962962964,
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.518519,
+        "upper": 0.851852
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.45037,
+        "upper": 0.796296
+      }
+    },
+    "file_top_1_accuracy": 0.4074074074074074,
+    "file_top_3_accuracy": 0.5925925925925926,
+    "file_top_5_accuracy": 0.6296296296296297,
+    "file_mrr": 0.5030864197530863,
+    "outcomes": {
+      "full_recall_rows": 15,
+      "partial_recall_rows": 4,
+      "miss_rows": 8
+    },
+    "base_commit_reachable_evaluation": {
+      "rows_with_reachable_file_ground_truth": 22,
+      "candidate_hit_at_20": 0.8636363636363636,
+      "candidate_recall_at_20": 0.7947860962566845,
+      "unreachable_gold_file_count": 31,
+      "unreachable_gold_files_by_ticket": {
+        "JohnSnowLabs__spark-nlp-13873": [
+          "python/docs/conf.py",
+          "python/setup.py",
+          "python/sparknlp/__init__.py",
+          "python/sparknlp/annotator/embeddings/__init__.py",
+          "python/sparknlp/annotator/embeddings/e5_embeddings.py",
+          "python/sparknlp/annotator/embeddings/instructor_embeddings.py",
+          "python/sparknlp/annotator/similarity/__init__.py",
+          "python/sparknlp/annotator/similarity/document_similarity_ranker.py",
+          "python/sparknlp/common/annotator_type.py",
+          "python/sparknlp/internal/__init__.py"
+        ],
+        "JohnSnowLabs__spark-nlp-13912": [
+          "python/docs/conf.py",
+          "python/setup.py",
+          "python/sparknlp/__init__.py",
+          "python/sparknlp/annotator/classifier_dl/__init__.py",
+          "python/sparknlp/annotator/classifier_dl/xlm_roberta_for_zero_shot_classification.py",
+          "python/sparknlp/internal/__init__.py"
+        ],
+        "JohnSnowLabs__spark-nlp-13798": [
+          "python/sparknlp/annotator/classifier_dl/bert_for_zero_shot_classification.py",
+          "python/sparknlp/annotator/classifier_dl/distil_bert_for_zero_shot_classification.py",
+          "python/sparknlp/annotator/classifier_dl/roberta_bert_for_zero_shot_classification.py",
+          "python/sparknlp/base/document_assembler.py"
+        ],
+        "apache__mxnet-627": [
+          "example/image-classification/symbol_alexnet.py",
+          "example/image-classification/symbol_googlenet.py",
+          "example/image-classification/symbol_inception-bn-28-small.py",
+          "example/image-classification/symbol_inception-bn-full.py",
+          "example/image-classification/symbol_inception-bn.py",
+          "example/image-classification/symbol_vgg.py",
+          "python/mxnet/lr_scheduler.py",
+          "tools/launch.py"
+        ],
+        "kubeflow__pipelines-954": [
+          "sdk/python/kfp/azure.py"
+        ],
+        "python__typeshed-8798": [
+          "scripts/runtests.py"
+        ],
+        "python__typeshed-5614": [
+          "scripts/update-stubtest-allowlist.py"
+        ]
+      },
+      "bootstrap_95_ci": {
+        "samples": 2000,
+        "seed": 44,
+        "candidate_hit_at_20": {
+          "lower": 0.727273,
+          "upper": 1.0
+        },
+        "candidate_recall_at_20": {
+          "lower": 0.634358,
+          "upper": 0.942513
+        }
+      },
+      "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+    },
+    "per_repository": {
+      "JohnSnowLabs/spark-nlp": {
+        "rows": 3,
+        "candidate_hit_at_20": 0.0,
+        "candidate_recall_at_20": 0.0,
+        "average_candidate_count_at_20": 0.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 0,
+          "miss_rows": 3
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [],
+          "miss": [
+            "JohnSnowLabs__spark-nlp-13873",
+            "JohnSnowLabs__spark-nlp-13912",
+            "JohnSnowLabs__spark-nlp-13798"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.0,
+            "upper": 0.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 0.0,
+        "file_mrr": 0.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 0,
+          "candidate_hit_at_20": 0.0,
+          "candidate_recall_at_20": 0.0,
+          "unreachable_gold_file_count": 20,
+          "unreachable_gold_files_by_ticket": {
+            "JohnSnowLabs__spark-nlp-13873": [
+              "python/docs/conf.py",
+              "python/setup.py",
+              "python/sparknlp/__init__.py",
+              "python/sparknlp/annotator/embeddings/__init__.py",
+              "python/sparknlp/annotator/embeddings/e5_embeddings.py",
+              "python/sparknlp/annotator/embeddings/instructor_embeddings.py",
+              "python/sparknlp/annotator/similarity/__init__.py",
+              "python/sparknlp/annotator/similarity/document_similarity_ranker.py",
+              "python/sparknlp/common/annotator_type.py",
+              "python/sparknlp/internal/__init__.py"
+            ],
+            "JohnSnowLabs__spark-nlp-13912": [
+              "python/docs/conf.py",
+              "python/setup.py",
+              "python/sparknlp/__init__.py",
+              "python/sparknlp/annotator/classifier_dl/__init__.py",
+              "python/sparknlp/annotator/classifier_dl/xlm_roberta_for_zero_shot_classification.py",
+              "python/sparknlp/internal/__init__.py"
+            ],
+            "JohnSnowLabs__spark-nlp-13798": [
+              "python/sparknlp/annotator/classifier_dl/bert_for_zero_shot_classification.py",
+              "python/sparknlp/annotator/classifier_dl/distil_bert_for_zero_shot_classification.py",
+              "python/sparknlp/annotator/classifier_dl/roberta_bert_for_zero_shot_classification.py",
+              "python/sparknlp/base/document_assembler.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.0,
+              "upper": 0.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.0,
+              "upper": 0.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "apache/mxnet": {
+        "rows": 5,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.8320000000000001,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 4,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "apache__mxnet-1661",
+            "apache__mxnet-724",
+            "apache__mxnet-1318",
+            "apache__mxnet-613"
+          ],
+          "partial_recall": [
+            "apache__mxnet-627"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.496,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.6,
+        "file_top_3_accuracy": 0.8,
+        "file_top_5_accuracy": 0.8,
+        "file_mrr": 0.7,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 5,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.8470588235294118,
+          "unreachable_gold_file_count": 8,
+          "unreachable_gold_files_by_ticket": {
+            "apache__mxnet-627": [
+              "example/image-classification/symbol_alexnet.py",
+              "example/image-classification/symbol_googlenet.py",
+              "example/image-classification/symbol_inception-bn-28-small.py",
+              "example/image-classification/symbol_inception-bn-full.py",
+              "example/image-classification/symbol_inception-bn.py",
+              "example/image-classification/symbol_vgg.py",
+              "python/mxnet/lr_scheduler.py",
+              "tools/launch.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.541176,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "kubeflow/pipelines": {
+        "rows": 14,
+        "candidate_hit_at_20": 0.7142857142857143,
+        "candidate_recall_at_20": 0.6607142857142857,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 8,
+          "partial_recall_rows": 2,
+          "miss_rows": 4
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "kubeflow__pipelines-268",
+            "kubeflow__pipelines-1399",
+            "kubeflow__pipelines-1154",
+            "kubeflow__pipelines-1666",
+            "kubeflow__pipelines-1137",
+            "kubeflow__pipelines-1595",
+            "kubeflow__pipelines-1459",
+            "kubeflow__pipelines-1476"
+          ],
+          "partial_recall": [
+            "kubeflow__pipelines-522",
+            "kubeflow__pipelines-1269"
+          ],
+          "miss": [
+            "kubeflow__pipelines-954",
+            "kubeflow__pipelines-1032",
+            "kubeflow__pipelines-1936",
+            "kubeflow__pipelines-1886"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.5,
+            "upper": 0.928571
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.410714,
+            "upper": 0.857143
+          }
+        },
+        "file_top_1_accuracy": 0.2857142857142857,
+        "file_top_3_accuracy": 0.5714285714285714,
+        "file_top_5_accuracy": 0.6428571428571429,
+        "file_mrr": 0.4345238095238096,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 13,
+          "candidate_hit_at_20": 0.7692307692307693,
+          "candidate_recall_at_20": 0.7115384615384616,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "kubeflow__pipelines-954": [
+              "sdk/python/kfp/azure.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.538462,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.480769,
+              "upper": 0.923077
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "python/typeshed": {
+        "rows": 5,
+        "candidate_hit_at_20": 0.8,
+        "candidate_recall_at_20": 0.7,
+        "average_candidate_count_at_20": 15.6,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 3,
+          "partial_recall_rows": 1,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "python__typeshed-8813",
+            "python__typeshed-8775",
+            "python__typeshed-8843"
+          ],
+          "partial_recall": [
+            "python__typeshed-8798"
+          ],
+          "miss": [
+            "python__typeshed-5614"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.4,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.3,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.8,
+        "file_top_3_accuracy": 0.8,
+        "file_top_5_accuracy": 0.8,
+        "file_mrr": 0.8,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 4,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 2,
+          "unreachable_gold_files_by_ticket": {
+            "python__typeshed-8798": [
+              "scripts/runtests.py"
+            ],
+            "python__typeshed-5614": [
+              "scripts/update-stubtest-allowlist.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      }
+    }
+  },
+  "output_contract": {
+    "required_candidates_per_ticket": 20,
+    "exact_top20_rows": 20,
+    "short_rows": 7,
+    "long_rows": 0,
+    "candidate_count_distribution": {
+      "0": 3,
+      "1": 1,
+      "19": 3,
+      "20": 20
+    },
+    "standard_finalizer_result": "rejected",
+    "standard_finalizer_error": "Holdout output does not contain exactly 20 candidates per ticket."
+  },
+  "evaluation_order": {
+    "prediction_only_shards": true,
+    "predictions_completed_before_gold_access": true,
+    "sealed_gold_accessed_during_ranking": false
+  },
+  "holdout_artifacts": {
+    "run_manifest": {
+      "path": "reports\\fault_localization\\stage1_next_iteration\\final_holdout_e7_v1\\run\\run_manifest.json",
+      "bytes": 22000,
+      "sha256": "82f3577e6d02f78ddcf1b562e4157d63ce0dde4e809fc424eae06c10475cb6e5"
+    },
+    "predictions": {
+      "path": "reports\\fault_localization\\stage1_next_iteration\\final_holdout_e7_v1\\run\\predictions.jsonl",
+      "bytes": 1990362,
+      "sha256": "f8be705f5b3b5c669f13397e505ec478a994026ad73fbfaf1994a7a32305b2e0"
+    },
+    "metrics": {
+      "path": "reports\\fault_localization\\stage1_next_iteration\\final_holdout_e7_v1\\run\\metrics.json",
+      "bytes": 15396,
+      "sha256": "62b2ed3eb6ed4472af58ba4ae3a46e47916fa85d1352bae69e4f1643095ae17c"
+    },
+    "tickets": {
+      "path": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1\\final_holdout_tickets.jsonl",
+      "bytes": 124271,
+      "sha256": "f3e5ba534bd84041ec1cb44f0a6fec5e2bc7a0712b2dd8a7e14ebfadefe77649"
+    },
+    "gold": {
+      "path": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1\\sealed\\final_holdout_gold.jsonl",
+      "bytes": 13990,
+      "sha256": "65f5ae4da3ad623ec2fa1de3fab2e0fb0319e1728eb6b1da926c179f84472a73"
+    }
+  },
+  "post_evaluation_policy": "This Final Holdout was evaluated exactly once. Do not modify or rerun the selected method on it. Any output-contract fix requires a new experiment ID and a new unseen holdout."
+}

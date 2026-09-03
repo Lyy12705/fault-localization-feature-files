@@ -1,0 +1,427 @@
+{
+  "analysis_scope": "Raw TF-IDF file-level Top-50 coverage by E5 repository-size group",
+  "method": {
+    "embedding_backend": "tfidf",
+    "ranking_level": "best TF-IDF chunk per file",
+    "candidate_file_k": 50,
+    "file_aggregation": true,
+    "symbol_expansion": false,
+    "api_implementation_expansion": false,
+    "import_graph": false,
+    "call_graph": false,
+    "sbert_rerank": false
+  },
+  "data_policy": {
+    "split": "Validation only",
+    "holdout_used": false,
+    "group_assignment_uses_gold": false,
+    "ranking_uses_gold": false,
+    "gold_usage": "Gold is used only after TF-IDF ranking to calculate metrics."
+  },
+  "definitions": {
+    "hit_at_50": "Fraction of tickets with at least one gold file in raw TF-IDF Top-50.",
+    "recall_at_50": "Mean fraction of all gold files recovered in raw TF-IDF Top-50.",
+    "index_recall": "Mean fraction of gold files that exist in the Code Index.",
+    "mrr_at_50": "Mean reciprocal rank of the first gold file in raw TF-IDF Top-50."
+  },
+  "overall": {
+    "tickets": 500,
+    "index_hit": 1.0,
+    "index_recall": 0.9928181504485852,
+    "hit_at_50": 0.94,
+    "recall_at_50": 0.8893656142167011,
+    "retrieval_recall_gap": 0.1034525362318841,
+    "mrr_at_50": 0.6260201185690066,
+    "full_recall_rows": 411,
+    "partial_recall_rows": 59,
+    "miss_rows": 30,
+    "top50_candidate_count": {
+      "minimum": 31.0,
+      "median": 50.0,
+      "maximum": 50.0,
+      "mean": 49.924
+    }
+  },
+  "groups": [
+    {
+      "tickets": 42,
+      "index_hit": 1.0,
+      "index_recall": 0.9806393571921522,
+      "hit_at_50": 1.0,
+      "recall_at_50": 0.9497559893522627,
+      "retrieval_recall_gap": 0.03088336783988954,
+      "mrr_at_50": 0.6854591836734694,
+      "full_recall_rows": 34,
+      "partial_recall_rows": 8,
+      "miss_rows": 0,
+      "top50_candidate_count": {
+        "minimum": 31.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 49.095238095238095
+      },
+      "size_group": "small",
+      "size_group_zh": "小型",
+      "repository_count": 4,
+      "repositories": [
+        "mwaskom/seaborn",
+        "pallets/flask",
+        "psf/requests",
+        "pydata/xarray"
+      ],
+      "macro_repository_metrics": {
+        "index_hit": 1.0,
+        "index_recall": 0.9854505096352922,
+        "hit_at_50": 1.0,
+        "recall_at_50": 0.9527860726230291,
+        "retrieval_recall_gap": 0.032664437012263126,
+        "mrr_at_50": 0.7751551689051689
+      }
+    },
+    {
+      "tickets": 133,
+      "index_hit": 1.0,
+      "index_recall": 0.9943609022556391,
+      "hit_at_50": 0.9022556390977443,
+      "recall_at_50": 0.857858933046903,
+      "retrieval_recall_gap": 0.13650196920873614,
+      "mrr_at_50": 0.5749252918893598,
+      "full_recall_rows": 107,
+      "partial_recall_rows": 13,
+      "miss_rows": 13,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "size_group": "medium",
+      "size_group_zh": "中型",
+      "repository_count": 4,
+      "repositories": [
+        "pylint-dev/pylint",
+        "pytest-dev/pytest",
+        "scikit-learn/scikit-learn",
+        "sphinx-doc/sphinx"
+      ],
+      "macro_repository_metrics": {
+        "index_hit": 1.0,
+        "index_recall": 0.9955288461538461,
+        "hit_at_50": 0.892231663685152,
+        "recall_at_50": 0.8494948994803646,
+        "retrieval_recall_gap": 0.14603394667348152,
+        "mrr_at_50": 0.5176978427892046
+      }
+    },
+    {
+      "tickets": 325,
+      "index_hit": 1.0,
+      "index_recall": 0.9937606837606838,
+      "hit_at_50": 0.9476923076923077,
+      "recall_at_50": 0.894454822954823,
+      "retrieval_recall_gap": 0.09930586080586079,
+      "mrr_at_50": 0.6392483376890239,
+      "full_recall_rows": 270,
+      "partial_recall_rows": 38,
+      "miss_rows": 17,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "size_group": "large",
+      "size_group_zh": "大型",
+      "repository_count": 4,
+      "repositories": [
+        "astropy/astropy",
+        "django/django",
+        "matplotlib/matplotlib",
+        "sympy/sympy"
+      ],
+      "macro_repository_metrics": {
+        "index_hit": 1.0,
+        "index_recall": 0.9828082655826558,
+        "hit_at_50": 0.9360627442546849,
+        "recall_at_50": 0.8720361406573132,
+        "retrieval_recall_gap": 0.11077212492534269,
+        "mrr_at_50": 0.6273149941248695
+      }
+    }
+  ],
+  "repositories": [
+    {
+      "tickets": 5,
+      "index_hit": 1.0,
+      "index_recall": 0.9666666666666666,
+      "hit_at_50": 1.0,
+      "recall_at_50": 0.8666666666666666,
+      "retrieval_recall_gap": 0.09999999999999998,
+      "mrr_at_50": 0.7666666666666667,
+      "full_recall_rows": 3,
+      "partial_recall_rows": 2,
+      "miss_rows": 0,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "mwaskom/seaborn",
+      "size_group": "small",
+      "size_group_zh": "小型"
+    },
+    {
+      "tickets": 2,
+      "index_hit": 1.0,
+      "index_recall": 1.0,
+      "hit_at_50": 1.0,
+      "recall_at_50": 1.0,
+      "retrieval_recall_gap": 0.0,
+      "mrr_at_50": 1.0,
+      "full_recall_rows": 2,
+      "partial_recall_rows": 0,
+      "miss_rows": 0,
+      "top50_candidate_count": {
+        "minimum": 31.0,
+        "median": 31.0,
+        "maximum": 31.0,
+        "mean": 31.0
+      },
+      "repository": "pallets/flask",
+      "size_group": "small",
+      "size_group_zh": "小型"
+    },
+    {
+      "tickets": 9,
+      "index_hit": 1.0,
+      "index_recall": 1.0,
+      "hit_at_50": 1.0,
+      "recall_at_50": 1.0,
+      "retrieval_recall_gap": 0.0,
+      "mrr_at_50": 0.6898148148148148,
+      "full_recall_rows": 9,
+      "partial_recall_rows": 0,
+      "miss_rows": 0,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "psf/requests",
+      "size_group": "small",
+      "size_group_zh": "小型"
+    },
+    {
+      "tickets": 26,
+      "index_hit": 1.0,
+      "index_recall": 0.9751353718745024,
+      "hit_at_50": 1.0,
+      "recall_at_50": 0.9444776238254499,
+      "retrieval_recall_gap": 0.030657748049052524,
+      "mrr_at_50": 0.6441391941391941,
+      "full_recall_rows": 20,
+      "partial_recall_rows": 6,
+      "miss_rows": 0,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "pydata/xarray",
+      "size_group": "small",
+      "size_group_zh": "小型"
+    },
+    {
+      "tickets": 13,
+      "index_hit": 1.0,
+      "index_recall": 1.0,
+      "hit_at_50": 0.8461538461538461,
+      "recall_at_50": 0.8205128205128205,
+      "retrieval_recall_gap": 0.17948717948717952,
+      "mrr_at_50": 0.35282121724429416,
+      "full_recall_rows": 10,
+      "partial_recall_rows": 1,
+      "miss_rows": 2,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "pylint-dev/pylint",
+      "size_group": "medium",
+      "size_group_zh": "中型"
+    },
+    {
+      "tickets": 25,
+      "index_hit": 1.0,
+      "index_recall": 0.9933333333333333,
+      "hit_at_50": 0.92,
+      "recall_at_50": 0.88,
+      "retrieval_recall_gap": 0.11333333333333329,
+      "mrr_at_50": 0.4994766990807163,
+      "full_recall_rows": 21,
+      "partial_recall_rows": 2,
+      "miss_rows": 2,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "pytest-dev/pytest",
+      "size_group": "medium",
+      "size_group_zh": "中型"
+    },
+    {
+      "tickets": 52,
+      "index_hit": 1.0,
+      "index_recall": 0.9887820512820512,
+      "hit_at_50": 0.9423076923076923,
+      "recall_at_50": 0.9375,
+      "retrieval_recall_gap": 0.05128205128205121,
+      "mrr_at_50": 0.7773613291470435,
+      "full_recall_rows": 48,
+      "partial_recall_rows": 1,
+      "miss_rows": 3,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "scikit-learn/scikit-learn",
+      "size_group": "medium",
+      "size_group_zh": "中型"
+    },
+    {
+      "tickets": 43,
+      "index_hit": 1.0,
+      "index_recall": 1.0,
+      "hit_at_50": 0.8604651162790697,
+      "recall_at_50": 0.7599667774086379,
+      "retrieval_recall_gap": 0.24003322259136206,
+      "mrr_at_50": 0.4411321256847644,
+      "full_recall_rows": 28,
+      "partial_recall_rows": 9,
+      "miss_rows": 6,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "sphinx-doc/sphinx",
+      "size_group": "medium",
+      "size_group_zh": "中型"
+    },
+    {
+      "tickets": 22,
+      "index_hit": 1.0,
+      "index_recall": 0.9583333333333333,
+      "hit_at_50": 0.9545454545454546,
+      "recall_at_50": 0.9063852813852814,
+      "retrieval_recall_gap": 0.051948051948051854,
+      "mrr_at_50": 0.7035353535353536,
+      "full_recall_rows": 18,
+      "partial_recall_rows": 3,
+      "miss_rows": 1,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "astropy/astropy",
+      "size_group": "large",
+      "size_group_zh": "大型"
+    },
+    {
+      "tickets": 184,
+      "index_hit": 1.0,
+      "index_recall": 1.0,
+      "hit_at_50": 0.9782608695652174,
+      "recall_at_50": 0.9420990769496204,
+      "retrieval_recall_gap": 0.05790092305037964,
+      "mrr_at_50": 0.6714133595991012,
+      "full_recall_rows": 164,
+      "partial_recall_rows": 16,
+      "miss_rows": 4,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "django/django",
+      "size_group": "large",
+      "size_group_zh": "大型"
+    },
+    {
+      "tickets": 41,
+      "index_hit": 1.0,
+      "index_recall": 0.9728997289972899,
+      "hit_at_50": 0.926829268292683,
+      "recall_at_50": 0.8238482384823849,
+      "retrieval_recall_gap": 0.14905149051490507,
+      "mrr_at_50": 0.5334703983122014,
+      "full_recall_rows": 30,
+      "partial_recall_rows": 8,
+      "miss_rows": 3,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "matplotlib/matplotlib",
+      "size_group": "large",
+      "size_group_zh": "大型"
+    },
+    {
+      "tickets": 78,
+      "index_hit": 1.0,
+      "index_recall": 1.0,
+      "hit_at_50": 0.8846153846153846,
+      "recall_at_50": 0.8158119658119658,
+      "retrieval_recall_gap": 0.1841880341880342,
+      "mrr_at_50": 0.6008408650528215,
+      "full_recall_rows": 58,
+      "partial_recall_rows": 11,
+      "miss_rows": 9,
+      "top50_candidate_count": {
+        "minimum": 50.0,
+        "median": 50.0,
+        "maximum": 50.0,
+        "mean": 50.0
+      },
+      "repository": "sympy/sympy",
+      "size_group": "large",
+      "size_group_zh": "大型"
+    }
+  ],
+  "sources": {
+    "tickets": "data/fault_localization/swebench_full/protocol_v1/validation_tickets.jsonl",
+    "gold": "data/fault_localization/swebench_full/protocol_v1/validation_gold.jsonl",
+    "repository_groups": "reports/fault_localization/stage1_next_iteration/e5_repository_size/repository_size_groups.json",
+    "index_cache_dirs": [
+      "data/fault_localization/swebench_full/indexes",
+      "../bug_tracking_llm_system/data/fault_localization/swebench_lite/indexes"
+    ],
+    "seed_caches": [
+      "reports/fault_localization/stage1_next_iteration/tfidf_top50_cache/validation.jsonl"
+    ],
+    "complete_top50_cache": "reports/fault_localization/stage1_next_iteration/e5_repository_size/tfidf_top50_all_500.jsonl"
+  },
+  "execution": {
+    "cache_rows_reused": 124,
+    "cache_rows_computed": 376,
+    "cache_rows_total": 500,
+    "max_workers": 3,
+    "wall_seconds": 931.641,
+    "last_analysis_refresh_seconds": 0.316
+  }
+}

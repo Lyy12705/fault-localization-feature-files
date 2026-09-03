@@ -1,0 +1,83 @@
+{
+  "rows": 22,
+  "gold_rows": 22,
+  "prediction_rows": 22,
+  "matched_prediction_rows": 22,
+  "missing_prediction_rows": 0,
+  "rows_with_file_ground_truth": 22,
+  "rows_with_symbol_ground_truth": 0,
+  "candidate_k": 20,
+  "rows_with_stage1_candidates": 22,
+  "rows_missing_stage1_output": 0,
+  "candidate_hit_at_20": 0.9090909090909091,
+  "candidate_recall_at_20": 0.801948051948052,
+  "average_candidate_count_at_20": 20.0,
+  "candidate_outcomes_at_20": {
+    "full_recall_rows": 16,
+    "partial_recall_rows": 4,
+    "miss_rows": 2
+  },
+  "candidate_outcome_ticket_ids_at_20": {
+    "full_recall": [
+      "astropy__astropy-12057",
+      "astropy__astropy-8005",
+      "astropy__astropy-13734",
+      "astropy__astropy-13842",
+      "astropy__astropy-13033",
+      "astropy__astropy-14484",
+      "astropy__astropy-13453",
+      "astropy__astropy-14371",
+      "astropy__astropy-13390",
+      "astropy__astropy-14628",
+      "astropy__astropy-12544",
+      "astropy__astropy-8263",
+      "astropy__astropy-8251",
+      "astropy__astropy-14938",
+      "astropy__astropy-14295",
+      "astropy__astropy-13068"
+    ],
+    "partial_recall": [
+      "astropy__astropy-14439",
+      "astropy__astropy-13075",
+      "astropy__astropy-13158",
+      "astropy__astropy-8707"
+    ],
+    "miss": [
+      "astropy__astropy-14566",
+      "astropy__astropy-14907"
+    ]
+  },
+  "candidate_bootstrap_95_ci": {
+    "samples": 2000,
+    "seed": 42,
+    "candidate_hit_at_20": {
+      "lower": 0.772727,
+      "upper": 1.0
+    },
+    "candidate_recall_at_20": {
+      "lower": 0.642857,
+      "upper": 0.931818
+    }
+  },
+  "file_top_1_accuracy": 0.36363636363636365,
+  "file_top_3_accuracy": 0.6818181818181818,
+  "file_top_5_accuracy": 0.6818181818181818,
+  "file_mrr": 0.5,
+  "symbol_top_1_accuracy": 0.0,
+  "symbol_top_3_accuracy": 0.0,
+  "symbol_top_5_accuracy": 0.0,
+  "symbol_mrr": 0.0,
+  "rows_with_ground_truth": 22,
+  "top_1_accuracy": 0.36363636363636365,
+  "top_3_accuracy": 0.6818181818181818,
+  "top_5_accuracy": 0.6818181818181818,
+  "mrr": 0.5,
+  "missing_file_ground_truth_rows": 0,
+  "missing_symbol_ground_truth_rows": 22,
+  "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  }
+}

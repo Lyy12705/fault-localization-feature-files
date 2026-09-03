@@ -1,0 +1,111 @@
+{
+  "baseline": "lexical",
+  "runs": [
+    {
+      "label": "lexical",
+      "is_baseline": true,
+      "rows_with_file_ground_truth": 210,
+      "rows_with_symbol_ground_truth": 0,
+      "metrics": {
+        "candidate_hit_at_20": 0.8714285714285714,
+        "candidate_recall_at_20": 0.8714285714285714,
+        "file_top_1_accuracy": 0.49523809523809526,
+        "file_top_3_accuracy": 0.6761904761904762,
+        "file_top_5_accuracy": 0.7238095238095238,
+        "file_mrr": 0.5869047619047618,
+        "symbol_top_1_accuracy": 0.0,
+        "symbol_top_3_accuracy": 0.0,
+        "symbol_top_5_accuracy": 0.0,
+        "symbol_mrr": 0.0
+      },
+      "run_diagnostics": {
+        "llm_rerank_requested": false,
+        "llm_rerank_used_predictions": 0,
+        "llm_rerank_fallback_predictions": 0
+      },
+      "delta_vs_baseline": {
+        "candidate_hit_at_20": 0.0,
+        "candidate_recall_at_20": 0.0,
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 0.0,
+        "file_mrr": 0.0,
+        "symbol_top_1_accuracy": 0.0,
+        "symbol_top_3_accuracy": 0.0,
+        "symbol_top_5_accuracy": 0.0,
+        "symbol_mrr": 0.0
+      }
+    },
+    {
+      "label": "routed",
+      "is_baseline": false,
+      "rows_with_file_ground_truth": 210,
+      "rows_with_symbol_ground_truth": 0,
+      "metrics": {
+        "candidate_hit_at_20": 0.9333333333333333,
+        "candidate_recall_at_20": 0.9333333333333333,
+        "file_top_1_accuracy": 0.5428571428571428,
+        "file_top_3_accuracy": 0.7428571428571429,
+        "file_top_5_accuracy": 0.7857142857142857,
+        "file_mrr": 0.6404761904761903,
+        "symbol_top_1_accuracy": 0.0,
+        "symbol_top_3_accuracy": 0.0,
+        "symbol_top_5_accuracy": 0.0,
+        "symbol_mrr": 0.0
+      },
+      "run_diagnostics": {
+        "llm_rerank_requested": false,
+        "llm_rerank_used_predictions": 0,
+        "llm_rerank_fallback_predictions": 0
+      },
+      "delta_vs_baseline": {
+        "candidate_hit_at_20": 0.061905,
+        "candidate_recall_at_20": 0.061905,
+        "file_top_1_accuracy": 0.047619,
+        "file_top_3_accuracy": 0.066667,
+        "file_top_5_accuracy": 0.061905,
+        "file_mrr": 0.053571,
+        "symbol_top_1_accuracy": 0.0,
+        "symbol_top_3_accuracy": 0.0,
+        "symbol_top_5_accuracy": 0.0,
+        "symbol_mrr": 0.0
+      }
+    },
+    {
+      "label": "sbert_unique_files",
+      "is_baseline": false,
+      "rows_with_file_ground_truth": 210,
+      "rows_with_symbol_ground_truth": 0,
+      "metrics": {
+        "candidate_hit_at_20": 0.861904761904762,
+        "candidate_recall_at_20": 0.861904761904762,
+        "file_top_1_accuracy": 0.5476190476190477,
+        "file_top_3_accuracy": 0.7333333333333333,
+        "file_top_5_accuracy": 0.780952380952381,
+        "file_mrr": 0.6384920634920632,
+        "symbol_top_1_accuracy": 0.0,
+        "symbol_top_3_accuracy": 0.0,
+        "symbol_top_5_accuracy": 0.0,
+        "symbol_mrr": 0.0
+      },
+      "run_diagnostics": {
+        "llm_rerank_requested": false,
+        "llm_rerank_used_predictions": 0,
+        "llm_rerank_fallback_predictions": 0
+      },
+      "delta_vs_baseline": {
+        "candidate_hit_at_20": -0.009524,
+        "candidate_recall_at_20": -0.009524,
+        "file_top_1_accuracy": 0.052381,
+        "file_top_3_accuracy": 0.057143,
+        "file_top_5_accuracy": 0.057143,
+        "file_mrr": 0.051587,
+        "symbol_top_1_accuracy": 0.0,
+        "symbol_top_3_accuracy": 0.0,
+        "symbol_top_5_accuracy": 0.0,
+        "symbol_mrr": 0.0
+      }
+    }
+  ],
+  "warnings": []
+}

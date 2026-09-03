@@ -1,0 +1,384 @@
+{
+  "status": "ready",
+  "created_at_utc": "2026-09-01T13:35:04.139674+00:00",
+  "tickets": "data\\fault_localization\\swebench_live\\e8_holdout_v1\\final_holdout_tickets.jsonl",
+  "repository_count": 53,
+  "ready_count": 53,
+  "failure_count": 0,
+  "repo_cache_dir": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos",
+  "repositories": [
+    {
+      "repository": "Delgan/loguru",
+      "repository_url": "https://github.com/Delgan/loguru",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\Delgan__loguru",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "Kozea/WeasyPrint",
+      "repository_url": "https://github.com/Kozea/WeasyPrint",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\Kozea__WeasyPrint",
+      "status": "cached",
+      "required_commits": 3
+    },
+    {
+      "repository": "PyPSA/PyPSA",
+      "repository_url": "https://github.com/PyPSA/PyPSA",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\PyPSA__PyPSA",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "ag2ai/faststream",
+      "repository_url": "https://github.com/ag2ai/faststream",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\ag2ai__faststream",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "aiogram/aiogram",
+      "repository_url": "https://github.com/aiogram/aiogram",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\aiogram__aiogram",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "apify/crawlee-python",
+      "repository_url": "https://github.com/apify/crawlee-python",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\apify__crawlee-python",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "arviz-devs/arviz",
+      "repository_url": "https://github.com/arviz-devs/arviz",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\arviz-devs__arviz",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "aws-cloudformation/cfn-lint",
+      "repository_url": "https://github.com/aws-cloudformation/cfn-lint",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\aws-cloudformation__cfn-lint",
+      "status": "cached",
+      "required_commits": 14
+    },
+    {
+      "repository": "beetbox/beets",
+      "repository_url": "https://github.com/beetbox/beets",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\beetbox__beets",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "beeware/briefcase",
+      "repository_url": "https://github.com/beeware/briefcase",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\beeware__briefcase",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "bridgecrewio/checkov",
+      "repository_url": "https://github.com/bridgecrewio/checkov",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\bridgecrewio__checkov",
+      "status": "cached",
+      "required_commits": 3
+    },
+    {
+      "repository": "cyclotruc/gitingest",
+      "repository_url": "https://github.com/cyclotruc/gitingest",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\cyclotruc__gitingest",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "deepset-ai/haystack",
+      "repository_url": "https://github.com/deepset-ai/haystack",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\deepset-ai__haystack",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "encode/starlette",
+      "repository_url": "https://github.com/encode/starlette",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\encode__starlette",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "falconry/falcon",
+      "repository_url": "https://github.com/falconry/falcon",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\falconry__falcon",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "fonttools/fonttools",
+      "repository_url": "https://github.com/fonttools/fonttools",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\fonttools__fonttools",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "geopandas/geopandas",
+      "repository_url": "https://github.com/geopandas/geopandas",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\geopandas__geopandas",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "huggingface/datasets",
+      "repository_url": "https://github.com/huggingface/datasets",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\huggingface__datasets",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "huggingface/smolagents",
+      "repository_url": "https://github.com/huggingface/smolagents",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\huggingface__smolagents",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "icloud-photos-downloader/icloud_photos_downloader",
+      "repository_url": "https://github.com/icloud-photos-downloader/icloud_photos_downloader",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\icloud-photos-downloader__icloud_photos_downloader",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "instructlab/instructlab",
+      "repository_url": "https://github.com/instructlab/instructlab",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\instructlab__instructlab",
+      "status": "cached",
+      "required_commits": 3
+    },
+    {
+      "repository": "jarun/buku",
+      "repository_url": "https://github.com/jarun/buku",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\jarun__buku",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "jlowin/fastmcp",
+      "repository_url": "https://github.com/jlowin/fastmcp",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\jlowin__fastmcp",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "joke2k/faker",
+      "repository_url": "https://github.com/joke2k/faker",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\joke2k__faker",
+      "status": "cached",
+      "required_commits": 3
+    },
+    {
+      "repository": "jupyterlab/jupyter-ai",
+      "repository_url": "https://github.com/jupyterlab/jupyter-ai",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\jupyterlab__jupyter-ai",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "kedro-org/kedro",
+      "repository_url": "https://github.com/kedro-org/kedro",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\kedro-org__kedro",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "keras-team/keras",
+      "repository_url": "https://github.com/keras-team/keras",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\keras-team__keras",
+      "status": "cached",
+      "required_commits": 4
+    },
+    {
+      "repository": "koxudaxi/datamodel-code-generator",
+      "repository_url": "https://github.com/koxudaxi/datamodel-code-generator",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\koxudaxi__datamodel-code-generator",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "mikedh/trimesh",
+      "repository_url": "https://github.com/mikedh/trimesh",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\mikedh__trimesh",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "networktocode/ntc-templates",
+      "repository_url": "https://github.com/networktocode/ntc-templates",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\networktocode__ntc-templates",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "patroni/patroni",
+      "repository_url": "https://github.com/patroni/patroni",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\patroni__patroni",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "pdm-project/pdm",
+      "repository_url": "https://github.com/pdm-project/pdm",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\pdm-project__pdm",
+      "status": "cached",
+      "required_commits": 3
+    },
+    {
+      "repository": "privacyidea/privacyidea",
+      "repository_url": "https://github.com/privacyidea/privacyidea",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\privacyidea__privacyidea",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "projectmesa/mesa",
+      "repository_url": "https://github.com/projectmesa/mesa",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\projectmesa__mesa",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "pvlib/pvlib-python",
+      "repository_url": "https://github.com/pvlib/pvlib-python",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\pvlib__pvlib-python",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "pybamm-team/PyBaMM",
+      "repository_url": "https://github.com/pybamm-team/PyBaMM",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\pybamm-team__PyBaMM",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "python-attrs/attrs",
+      "repository_url": "https://github.com/python-attrs/attrs",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\python-attrs__attrs",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "python-babel/babel",
+      "repository_url": "https://github.com/python-babel/babel",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\python-babel__babel",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "python-control/python-control",
+      "repository_url": "https://github.com/python-control/python-control",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\python-control__python-control",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "python-poetry/poetry",
+      "repository_url": "https://github.com/python-poetry/poetry",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\python-poetry__poetry",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "python-telegram-bot/python-telegram-bot",
+      "repository_url": "https://github.com/python-telegram-bot/python-telegram-bot",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\python-telegram-bot__python-telegram-bot",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "pytorch/torchtune",
+      "repository_url": "https://github.com/pytorch/torchtune",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\pytorch__torchtune",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "qtile/qtile",
+      "repository_url": "https://github.com/qtile/qtile",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\qtile__qtile",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "reflex-dev/reflex",
+      "repository_url": "https://github.com/reflex-dev/reflex",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\reflex-dev__reflex",
+      "status": "cached",
+      "required_commits": 4
+    },
+    {
+      "repository": "run-llama/llama_deploy",
+      "repository_url": "https://github.com/run-llama/llama_deploy",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\run-llama__llama_deploy",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "shapely/shapely",
+      "repository_url": "https://github.com/shapely/shapely",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\shapely__shapely",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "sissbruecker/linkding",
+      "repository_url": "https://github.com/sissbruecker/linkding",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\sissbruecker__linkding",
+      "status": "cached",
+      "required_commits": 2
+    },
+    {
+      "repository": "stanfordnlp/dspy",
+      "repository_url": "https://github.com/stanfordnlp/dspy",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\stanfordnlp__dspy",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "streamlink/streamlink",
+      "repository_url": "https://github.com/streamlink/streamlink",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\streamlink__streamlink",
+      "status": "cached",
+      "required_commits": 4
+    },
+    {
+      "repository": "theOehrly/Fast-F1",
+      "repository_url": "https://github.com/theOehrly/Fast-F1",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\theOehrly__Fast-F1",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "wemake-services/wemake-python-styleguide",
+      "repository_url": "https://github.com/wemake-services/wemake-python-styleguide",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\wemake-services__wemake-python-styleguide",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "wireservice/csvkit",
+      "repository_url": "https://github.com/wireservice/csvkit",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\wireservice__csvkit",
+      "status": "cached",
+      "required_commits": 1
+    },
+    {
+      "repository": "yt-dlp/yt-dlp",
+      "repository_url": "https://github.com/yt-dlp/yt-dlp",
+      "cache_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos\\yt-dlp__yt-dlp",
+      "status": "cached",
+      "required_commits": 1
+    }
+  ],
+  "gold_accessed": false,
+  "evaluation_started": false
+}

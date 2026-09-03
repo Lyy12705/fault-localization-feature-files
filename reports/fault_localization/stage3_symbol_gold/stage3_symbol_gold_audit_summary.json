@@ -1,0 +1,36 @@
+{
+  "sample_count": 50,
+  "expected_sample_count": 50,
+  "repository_count": 12,
+  "required_repository_count": 5,
+  "stratum_counts": {
+    "deletion": 28,
+    "module_level": 10,
+    "multi_file_ticket": 23,
+    "nested_symbol": 23,
+    "pure_addition": 12
+  },
+  "stratum_minimums": {
+    "deletion": 5,
+    "module_level": 5,
+    "multi_file_ticket": 10,
+    "nested_symbol": 10,
+    "pure_addition": 5
+  },
+  "sampling_gate_status": "passed",
+  "sampling_issues": [],
+  "reviewed_count": 50,
+  "exact_count": 50,
+  "exact_rate": 1.0,
+  "exact_threshold": 0.95,
+  "exact_gate_status": "passed",
+  "review_error_count": 0,
+  "review_errors": [],
+  "provenance_complete_count": 50,
+  "provenance_complete_rate": 1.0,
+  "provenance_gate_status": "passed",
+  "provenance_errors": [],
+  "overall_gate_status": "passed",
+  "command": "validate",
+  "input": "D:\\bug-llm-project\\fault_localization_feature_files\\fault_localization_feature_files\\reports\\fault_localization\\stage3_symbol_gold\\stage3_symbol_gold_audit_sample_50.csv"
+}

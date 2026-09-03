@@ -1,0 +1,125 @@
+{
+  "metric_scope": "Stage-1 Top-20 candidate files only",
+  "gold_path": "data/fault_localization/swebench_full/protocol_v1/development_gold.jsonl",
+  "rows": 40,
+  "methods": {
+    "legacy": {
+      "rows": 40,
+      "hit_at_20": 1.0,
+      "recall_at_20": 0.9554166666666667,
+      "top_1_accuracy": 0.775,
+      "mrr_at_20": 0.8471130952380953,
+      "full_recall_rows": 35,
+      "partial_recall_rows": 5,
+      "miss_rows": 0,
+      "bootstrap_95_ci": {
+        "hit_at_20": {
+          "lower": 1.0,
+          "upper": 1.0
+        },
+        "recall_at_20": {
+          "lower": 0.91375,
+          "upper": 0.98875
+        },
+        "top_1_accuracy": {
+          "lower": 0.65,
+          "upper": 0.9
+        },
+        "mrr_at_20": {
+          "lower": 0.752321,
+          "upper": 0.930655
+        }
+      },
+      "per_repository": {
+        "astropy/astropy": {
+          "rows": 40,
+          "hit_at_20": 1.0,
+          "recall_at_20": 0.9554166666666667,
+          "top_1_accuracy": 0.775,
+          "mrr_at_20": 0.8471130952380953,
+          "miss_rows": 0
+        }
+      }
+    },
+    "e3_c": {
+      "rows": 40,
+      "hit_at_20": 1.0,
+      "recall_at_20": 0.9554166666666667,
+      "top_1_accuracy": 0.775,
+      "mrr_at_20": 0.8471130952380953,
+      "full_recall_rows": 35,
+      "partial_recall_rows": 5,
+      "miss_rows": 0,
+      "bootstrap_95_ci": {
+        "hit_at_20": {
+          "lower": 1.0,
+          "upper": 1.0
+        },
+        "recall_at_20": {
+          "lower": 0.912917,
+          "upper": 0.98875
+        },
+        "top_1_accuracy": {
+          "lower": 0.625,
+          "upper": 0.9
+        },
+        "mrr_at_20": {
+          "lower": 0.750089,
+          "upper": 0.932143
+        }
+      },
+      "per_repository": {
+        "astropy/astropy": {
+          "rows": 40,
+          "hit_at_20": 1.0,
+          "recall_at_20": 0.9554166666666667,
+          "top_1_accuracy": 0.775,
+          "mrr_at_20": 0.8471130952380953,
+          "miss_rows": 0
+        }
+      }
+    }
+  },
+  "paired_baseline": "legacy",
+  "paired_differences": {
+    "e3_c": {
+      "rows": 40,
+      "hit_at_20": {
+        "mean_difference": 0.0,
+        "bootstrap_95_ci": {
+          "lower": 0.0,
+          "upper": 0.0
+        }
+      },
+      "recall_at_20": {
+        "mean_difference": 0.0,
+        "bootstrap_95_ci": {
+          "lower": 0.0,
+          "upper": 0.0
+        }
+      },
+      "top_1_accuracy": {
+        "mean_difference": 0.0,
+        "bootstrap_95_ci": {
+          "lower": 0.0,
+          "upper": 0.0
+        }
+      },
+      "mrr_at_20": {
+        "mean_difference": 0.0,
+        "bootstrap_95_ci": {
+          "lower": 0.0,
+          "upper": 0.0
+        }
+      }
+    }
+  },
+  "bootstrap_samples": 10000,
+  "seed": 20260822,
+  "definitions": {
+    "hit_at_20": "Fraction of tickets with at least one gold file in the first 20 candidates.",
+    "recall_at_20": "Mean fraction of all gold files recovered in the first 20 candidates.",
+    "top_1_accuracy": "Fraction of tickets whose first candidate matches a gold file.",
+    "mrr_at_20": "Mean reciprocal rank of the first gold file within candidates 1-20; zero on misses."
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "version": "e5-repository-size-groups-v1",
+  "created_from": "reports/fault_localization/stage1_next_iteration/e5_repository_size/repository_size_groups.json",
+  "grouping_policy": "Median Code Index file count across Validation base commits; four repositories per group",
+  "groups": {
+    "small": [
+      "pallets/flask",
+      "psf/requests",
+      "pydata/xarray",
+      "mwaskom/seaborn"
+    ],
+    "medium": [
+      "pylint-dev/pylint",
+      "pytest-dev/pytest",
+      "sphinx-doc/sphinx",
+      "scikit-learn/scikit-learn"
+    ],
+    "large": [
+      "astropy/astropy",
+      "sympy/sympy",
+      "django/django",
+      "matplotlib/matplotlib"
+    ]
+  }
+}

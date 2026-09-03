@@ -1,0 +1,164 @@
+COMMAND
+/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py --tickets reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/scikit-learn_scikit-learn/tickets.jsonl --gold reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/scikit-learn_scikit-learn/gold.jsonl --repo-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/repos --snapshot-cache-dir reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/ephemeral_snapshots --index-cache-dir data/fault_localization/swebench_full/indexes --output-dir reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/scikit-learn_scikit-learn/run --candidate-file-k 20 --ephemeral-snapshots --checkpoint-every 1 --progress none --embedding-backend tfidf-sbert-rerank --semantic-candidate-k 50 --no-domain-path-routing --fallback-index-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/indexes --resume
+
+STDOUT
+{
+  "started_at_utc": "2026-08-16T19:03:56.333918+00:00",
+  "completed_at_utc": "2026-08-16T19:08:30.972817+00:00",
+  "method_id": "tfidf-sbert-rerank-43260d1c9be2",
+  "method": {
+    "method_version": "fault-localization-method-v11",
+    "embedding_backend": "tfidf-sbert-rerank",
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20
+  },
+  "frozen_protocol": "",
+  "tickets_selected": 52,
+  "predictions": 52,
+  "failures": 0,
+  "processed_this_run": 52,
+  "skipped_existing": 0,
+  "index_cache_hits": 7,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/scikit-learn_scikit-learn/run/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/scikit-learn_scikit-learn/run/test_metrics.json",
+  "failures_output": "reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/scikit-learn_scikit-learn/run/test_failures.jsonl",
+  "metrics": {
+    "rows": 52,
+    "gold_rows": 52,
+    "prediction_rows": 52,
+    "matched_prediction_rows": 52,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 52,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 52,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.9807692307692307,
+    "candidate_recall_at_20": 0.877396214896215,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 42,
+      "partial_recall_rows": 9,
+      "miss_rows": 1
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "scikit-learn__scikit-learn-14053",
+        "scikit-learn__scikit-learn-24769",
+        "scikit-learn__scikit-learn-26242",
+        "scikit-learn__scikit-learn-10687",
+        "scikit-learn__scikit-learn-13933",
+        "scikit-learn__scikit-learn-25589",
+        "scikit-learn__scikit-learn-14999",
+        "scikit-learn__scikit-learn-12827",
+        "scikit-learn__scikit-learn-25931",
+        "scikit-learn__scikit-learn-15028",
+        "scikit-learn__scikit-learn-14458",
+        "scikit-learn__scikit-learn-10452",
+        "scikit-learn__scikit-learn-15086",
+        "scikit-learn__scikit-learn-10581",
+        "scikit-learn__scikit-learn-13447",
+        "scikit-learn__scikit-learn-13302",
+        "scikit-learn__scikit-learn-10881",
+        "scikit-learn__scikit-learn-10377",
+        "scikit-learn__scikit-learn-15096",
+        "scikit-learn__scikit-learn-9775",
+        "scikit-learn__scikit-learn-12585",
+        "scikit-learn__scikit-learn-12961",
+        "scikit-learn__scikit-learn-10443",
+        "scikit-learn__scikit-learn-26323",
+        "scikit-learn__scikit-learn-10397",
+        "scikit-learn__scikit-learn-13974",
+        "scikit-learn__scikit-learn-10870",
+        "scikit-learn__scikit-learn-10982",
+        "scikit-learn__scikit-learn-11635",
+        "scikit-learn__scikit-learn-13046",
+        "scikit-learn__scikit-learn-12583",
+        "scikit-learn__scikit-learn-11333",
+        "scikit-learn__scikit-learn-13017",
+        "scikit-learn__scikit-learn-13726",
+        "scikit-learn__scikit-learn-25733",
+        "scikit-learn__scikit-learn-13165",
+        "scikit-learn__scikit-learn-12758",
+        "scikit-learn__scikit-learn-10774",
+        "scikit-learn__scikit-learn-11574",
+        "scikit-learn__scikit-learn-12908",
+        "scikit-learn__scikit-learn-9939",
+        "scikit-learn__scikit-learn-10495"
+      ],
+      "partial_recall": [
+        "scikit-learn__scikit-learn-10382",
+        "scikit-learn__scikit-learn-11585",
+        "scikit-learn__scikit-learn-13915",
+        "scikit-learn__scikit-learn-12784",
+        "scikit-learn__scikit-learn-14464",
+        "scikit-learn__scikit-learn-10427",
+        "scikit-learn__scikit-learn-10331",
+        "scikit-learn__scikit-learn-11596",
+        "scikit-learn__scikit-learn-11206"
+      ],
+      "miss": [
+        "scikit-learn__scikit-learn-13436"
+      ]
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.942308,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.800687,
+        "upper": 0.950321
+      }
+    },
+    "file_top_1_accuracy": 0.6153846153846154,
+    "file_top_3_accuracy": 0.8076923076923077,
+    "file_top_5_accuracy": 0.8461538461538461,
+    "file_mrr": 0.7137820512820513,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 52,
+    "top_1_accuracy": 0.6153846153846154,
+    "top_3_accuracy": 0.8076923076923077,
+    "top_5_accuracy": 0.8461538461538461,
+    "mrr": 0.7137820512820513,
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 52,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}
+
+STDERR
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 12109.35it/s]

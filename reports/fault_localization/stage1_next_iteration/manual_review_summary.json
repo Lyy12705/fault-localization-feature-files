@@ -1,0 +1,1616 @@
+{
+  "review_scope": "Stratified 30-case Stage-1 failure sample",
+  "analysis_path": "reports/fault_localization/stage1_next_iteration/failure_analysis.json",
+  "sample_path": "reports/fault_localization/stage1_next_iteration/manual_review_sample.csv",
+  "repo_cache_dir": "../bug_tracking_llm_system/data/fault_localization/swebench_lite/repos",
+  "manual_inspection_complete": true,
+  "summary": {
+    "reviewed_rows": 30,
+    "review_status_counts": {
+      "confirmed": 30
+    },
+    "failure_stage_counts": {
+      "index_coverage_failure": 8,
+      "initial_retrieval_miss": 8,
+      "mixed_retrieval_and_rerank": 7,
+      "reranker_demotion": 7
+    },
+    "index_absence_reason_counts": {
+      "existing_file_excluded_by_index_rules": 1,
+      "file_absent_at_base_commit": 8
+    },
+    "manual_inspection_completed_rows": 30
+  },
+  "reviews": [
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "astropy__astropy-13075",
+      "repo": "astropy/astropy",
+      "title": "Register format ``html`` to ``Cosmology.write`` with nice mathjax",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage_zh": "正確檔案未進入Code Index",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；至少一個正確檔案不在Code Index。原因：file_absent_at_base_commit=1。",
+      "index_absence_details": [
+        {
+          "gold_file": "astropy/cosmology/io/html.py",
+          "reason": "file_absent_at_base_commit"
+        }
+      ],
+      "gold_files": [
+        "astropy/cosmology/io/__init__.py",
+        "astropy/cosmology/io/html.py"
+      ],
+      "missing_gold_files": [
+        "astropy/cosmology/io/html.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/cosmology/io/__init__.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 25,
+          "final_top20_rank": 17
+        },
+        {
+          "gold_file": "astropy/cosmology/io/html.py",
+          "status": "index_coverage_failure",
+          "index_present": false,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "astropy__astropy-14439",
+      "repo": "astropy/astropy",
+      "title": "Regarding FITS standard definition for 'Jy/beam'",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage_zh": "正確檔案未進入TF-IDF前50名",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；1個遺漏檔案存在索引中，但未進入TF-IDF前50名。",
+      "index_absence_details": [],
+      "gold_files": [
+        "astropy/modeling/physical_models.py",
+        "astropy/units/format/generic.py"
+      ],
+      "missing_gold_files": [
+        "astropy/modeling/physical_models.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/modeling/physical_models.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "astropy/units/format/generic.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 14,
+          "final_top20_rank": 9
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "astropy__astropy-13158",
+      "repo": "astropy/astropy",
+      "title": "Model evaluation fails if any model parameter is a `MagUnit` type value",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage_zh": "同一Ticket同時包含初步檢索與重新排序遺漏",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；包含2個初步檢索遺漏與4個SBERT重排遺漏。",
+      "index_absence_details": [],
+      "gold_files": [
+        "astropy/modeling/bounding_box.py",
+        "astropy/modeling/core.py",
+        "astropy/modeling/functional_models.py",
+        "astropy/modeling/parameters.py",
+        "astropy/modeling/powerlaws.py",
+        "astropy/modeling/rotations.py",
+        "astropy/modeling/utils.py"
+      ],
+      "missing_gold_files": [
+        "astropy/modeling/bounding_box.py",
+        "astropy/modeling/functional_models.py",
+        "astropy/modeling/parameters.py",
+        "astropy/modeling/powerlaws.py",
+        "astropy/modeling/rotations.py",
+        "astropy/modeling/utils.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/modeling/bounding_box.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 19,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "astropy/modeling/core.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 1,
+          "final_top20_rank": 1
+        },
+        {
+          "gold_file": "astropy/modeling/functional_models.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 20,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "astropy/modeling/parameters.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 25,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "astropy/modeling/powerlaws.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 33,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "astropy/modeling/rotations.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "astropy/modeling/utils.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "astropy__astropy-14566",
+      "repo": "astropy/astropy",
+      "title": "Problem with \"decimalyear\" applied to MaskedColumn type",
+      "outcome": "miss",
+      "automatic_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage_zh": "正確檔案在TF-IDF前50名，但被SBERT排出前20名",
+      "automatic_primary_category": "reranker_demotion",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；正確檔案原在TF-IDF第21名，重排後未進Top-20。",
+      "index_absence_details": [],
+      "gold_files": [
+        "astropy/time/formats.py"
+      ],
+      "missing_gold_files": [
+        "astropy/time/formats.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/time/formats.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 21,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "astropy__astropy-13398",
+      "repo": "astropy/astropy",
+      "title": "A direct approach to ITRS to Observed transformations that stays within the ITRS.",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage_zh": "正確檔案未進入Code Index",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；至少一個正確檔案不在Code Index。原因：file_absent_at_base_commit=1。",
+      "index_absence_details": [
+        {
+          "gold_file": "astropy/coordinates/builtin_frames/itrs_observed_transforms.py",
+          "reason": "file_absent_at_base_commit"
+        }
+      ],
+      "gold_files": [
+        "astropy/coordinates/builtin_frames/__init__.py",
+        "astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py",
+        "astropy/coordinates/builtin_frames/itrs.py",
+        "astropy/coordinates/builtin_frames/itrs_observed_transforms.py"
+      ],
+      "missing_gold_files": [
+        "astropy/coordinates/builtin_frames/itrs_observed_transforms.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/coordinates/builtin_frames/__init__.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 4,
+          "final_top20_rank": 4
+        },
+        {
+          "gold_file": "astropy/coordinates/builtin_frames/intermediate_rotation_transforms.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 3,
+          "final_top20_rank": 2
+        },
+        {
+          "gold_file": "astropy/coordinates/builtin_frames/itrs.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 19,
+          "final_top20_rank": 6
+        },
+        {
+          "gold_file": "astropy/coordinates/builtin_frames/itrs_observed_transforms.py",
+          "status": "index_coverage_failure",
+          "index_present": false,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "astropy__astropy-8715",
+      "repo": "astropy/astropy",
+      "title": "Silence warnings by default when reading in VO Tables",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage_zh": "正確檔案未進入TF-IDF前50名",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；1個遺漏檔案存在索引中，但未進入TF-IDF前50名。",
+      "index_absence_details": [],
+      "gold_files": [
+        "astropy/io/votable/__init__.py",
+        "astropy/io/votable/connect.py",
+        "astropy/io/votable/converters.py",
+        "astropy/io/votable/exceptions.py",
+        "astropy/io/votable/table.py",
+        "astropy/io/votable/tree.py",
+        "astropy/io/votable/validator/result.py"
+      ],
+      "missing_gold_files": [
+        "astropy/io/votable/validator/result.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/io/votable/__init__.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 31,
+          "final_top20_rank": 20
+        },
+        {
+          "gold_file": "astropy/io/votable/connect.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 11,
+          "final_top20_rank": 7
+        },
+        {
+          "gold_file": "astropy/io/votable/converters.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 12,
+          "final_top20_rank": 10
+        },
+        {
+          "gold_file": "astropy/io/votable/exceptions.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 2,
+          "final_top20_rank": 2
+        },
+        {
+          "gold_file": "astropy/io/votable/table.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 1,
+          "final_top20_rank": 1
+        },
+        {
+          "gold_file": "astropy/io/votable/tree.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 7,
+          "final_top20_rank": 8
+        },
+        {
+          "gold_file": "astropy/io/votable/validator/result.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "django__django-11539",
+      "repo": "django/django",
+      "title": "Move index name checks from Index.__init__ into system checks.",
+      "outcome": "miss",
+      "automatic_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage_zh": "同一Ticket同時包含初步檢索與重新排序遺漏",
+      "automatic_primary_category": "mixed_retrieval_and_rerank",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；包含1個初步檢索遺漏與1個SBERT重排遺漏。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/db/models/base.py",
+        "django/db/models/indexes.py"
+      ],
+      "missing_gold_files": [
+        "django/db/models/base.py",
+        "django/db/models/indexes.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/db/models/base.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/db/models/indexes.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 45,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "astropy__astropy-12842",
+      "repo": "astropy/astropy",
+      "title": "No longer able to read BinnedTimeSeries with datetime column saved as ECSV after upgrading from 4.2.1 -> 5.0+",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage_zh": "正確檔案在TF-IDF前50名，但被SBERT排出前20名",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；正確檔案原在TF-IDF第43名，重排後未進Top-20。",
+      "index_absence_details": [],
+      "gold_files": [
+        "astropy/time/core.py",
+        "astropy/time/formats.py"
+      ],
+      "missing_gold_files": [
+        "astropy/time/formats.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/time/core.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 9,
+          "final_top20_rank": 6
+        },
+        {
+          "gold_file": "astropy/time/formats.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 43,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "pydata__xarray-6971",
+      "repo": "pydata/xarray",
+      "title": "Public API for setting new indexes: add a set_xindex method?",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage_zh": "正確檔案未進入Code Index",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；至少一個正確檔案不在Code Index。原因：file_absent_at_base_commit=1。",
+      "index_absence_details": [
+        {
+          "gold_file": "xarray/indexes/__init__.py",
+          "reason": "file_absent_at_base_commit"
+        }
+      ],
+      "gold_files": [
+        "xarray/core/dataarray.py",
+        "xarray/core/dataset.py",
+        "xarray/core/indexes.py",
+        "xarray/indexes/__init__.py"
+      ],
+      "missing_gold_files": [
+        "xarray/indexes/__init__.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "xarray/core/dataarray.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 2,
+          "final_top20_rank": 1
+        },
+        {
+          "gold_file": "xarray/core/dataset.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 1,
+          "final_top20_rank": 3
+        },
+        {
+          "gold_file": "xarray/core/indexes.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 5,
+          "final_top20_rank": 7
+        },
+        {
+          "gold_file": "xarray/indexes/__init__.py",
+          "status": "index_coverage_failure",
+          "index_present": false,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "django__django-17046",
+      "repo": "django/django",
+      "title": "Deleting objects after searching related many to many field crashes the admin page",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage_zh": "正確檔案未進入TF-IDF前50名",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；1個遺漏檔案存在索引中，但未進入TF-IDF前50名。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/contrib/admin/views/main.py",
+        "django/db/models/query.py"
+      ],
+      "missing_gold_files": [
+        "django/contrib/admin/views/main.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/contrib/admin/views/main.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/db/models/query.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 4,
+          "final_top20_rank": 2
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "astropy__astropy-14907",
+      "repo": "astropy/astropy",
+      "title": "TST: test_table_group_by[True] and test_group_by_masked[True] failed with numpy 1.25rc1",
+      "outcome": "miss",
+      "automatic_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage_zh": "同一Ticket同時包含初步檢索與重新排序遺漏",
+      "automatic_primary_category": "mixed_retrieval_and_rerank",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；包含1個初步檢索遺漏與1個SBERT重排遺漏。",
+      "index_absence_details": [],
+      "gold_files": [
+        "astropy/table/index.py",
+        "astropy/time/core.py"
+      ],
+      "missing_gold_files": [
+        "astropy/table/index.py",
+        "astropy/time/core.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/table/index.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "astropy/time/core.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 26,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "astropy__astropy-8707",
+      "repo": "astropy/astropy",
+      "title": "Header.fromstring does not accept Python 3 bytes",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage_zh": "正確檔案在TF-IDF前50名，但被SBERT排出前20名",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；正確檔案原在TF-IDF第6名，重排後未進Top-20。",
+      "index_absence_details": [],
+      "gold_files": [
+        "astropy/io/fits/card.py",
+        "astropy/io/fits/header.py"
+      ],
+      "missing_gold_files": [
+        "astropy/io/fits/card.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/io/fits/card.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 6,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "astropy/io/fits/header.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 3,
+          "final_top20_rank": 2
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "astropy__astropy-13132",
+      "repo": "astropy/astropy",
+      "title": "Add __array_func__ for astropy.time.Time",
+      "outcome": "miss",
+      "automatic_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage_zh": "正確檔案未進入Code Index",
+      "automatic_primary_category": "index_coverage_failure",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；至少一個正確檔案不在Code Index。原因：file_absent_at_base_commit=2。",
+      "index_absence_details": [
+        {
+          "gold_file": "astropy/time/time_helper/__init__.py",
+          "reason": "file_absent_at_base_commit"
+        },
+        {
+          "gold_file": "astropy/time/time_helper/function_helpers.py",
+          "reason": "file_absent_at_base_commit"
+        }
+      ],
+      "gold_files": [
+        "astropy/time/core.py",
+        "astropy/time/time_helper/__init__.py",
+        "astropy/time/time_helper/function_helpers.py"
+      ],
+      "missing_gold_files": [
+        "astropy/time/core.py",
+        "astropy/time/time_helper/__init__.py",
+        "astropy/time/time_helper/function_helpers.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/time/core.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 6,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "astropy/time/time_helper/__init__.py",
+          "status": "index_coverage_failure",
+          "index_present": false,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "astropy/time/time_helper/function_helpers.py",
+          "status": "index_coverage_failure",
+          "index_present": false,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "astropy__astropy-13438",
+      "repo": "astropy/astropy",
+      "title": "[Security] Jquery 3.1.1 is vulnerable to untrusted code execution",
+      "outcome": "miss",
+      "automatic_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage_zh": "正確檔案未進入TF-IDF前50名",
+      "automatic_primary_category": "initial_retrieval_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；1個遺漏檔案存在索引中，但未進入TF-IDF前50名。",
+      "index_absence_details": [],
+      "gold_files": [
+        "astropy/table/jsviewer.py"
+      ],
+      "missing_gold_files": [
+        "astropy/table/jsviewer.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "astropy/table/jsviewer.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "django__django-13841",
+      "repo": "django/django",
+      "title": "Access __file__ lazily rather than at module level",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage_zh": "同一Ticket同時包含初步檢索與重新排序遺漏",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；包含2個初步檢索遺漏與1個SBERT重排遺漏。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/contrib/auth/password_validation.py",
+        "django/forms/renderers.py",
+        "django/utils/version.py",
+        "django/views/debug.py"
+      ],
+      "missing_gold_files": [
+        "django/contrib/auth/password_validation.py",
+        "django/forms/renderers.py",
+        "django/utils/version.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/contrib/auth/password_validation.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 34,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/forms/renderers.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/utils/version.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/views/debug.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 28,
+          "final_top20_rank": 3
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "django__django-16117",
+      "repo": "django/django",
+      "title": "Generated migration file is not detected by django because of the name of newly generated migration file",
+      "outcome": "miss",
+      "automatic_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage_zh": "正確檔案在TF-IDF前50名，但被SBERT排出前20名",
+      "automatic_primary_category": "reranker_demotion",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；正確檔案原在TF-IDF第17名，重排後未進Top-20。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/db/migrations/migration.py"
+      ],
+      "missing_gold_files": [
+        "django/db/migrations/migration.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/db/migrations/migration.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 17,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "pylint-dev__pylint-4661",
+      "repo": "pylint-dev/pylint",
+      "title": "Make pylint XDG Base Directory Specification compliant",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage_zh": "正確檔案未進入Code Index",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；至少一個正確檔案不在Code Index。原因：existing_file_excluded_by_index_rules=1。",
+      "index_absence_details": [
+        {
+          "gold_file": "setup.cfg",
+          "reason": "existing_file_excluded_by_index_rules"
+        }
+      ],
+      "gold_files": [
+        "pylint/config/__init__.py",
+        "setup.cfg"
+      ],
+      "missing_gold_files": [
+        "setup.cfg"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "pylint/config/__init__.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 1,
+          "final_top20_rank": 1
+        },
+        {
+          "gold_file": "setup.cfg",
+          "status": "index_coverage_failure",
+          "index_present": false,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "django__django-5470",
+      "repo": "django/django",
+      "title": "Set script prefix in django.setup() to allow its usage outside of requests",
+      "outcome": "miss",
+      "automatic_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage_zh": "正確檔案未進入TF-IDF前50名",
+      "automatic_primary_category": "initial_retrieval_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；2個遺漏檔案存在索引中，但未進入TF-IDF前50名。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/__init__.py",
+        "django/core/wsgi.py"
+      ],
+      "missing_gold_files": [
+        "django/__init__.py",
+        "django/core/wsgi.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/__init__.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/core/wsgi.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "django__django-11281",
+      "repo": "django/django",
+      "title": "Improve typography of user facing strings.",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage_zh": "同一Ticket同時包含初步檢索與重新排序遺漏",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；包含20個初步檢索遺漏與1個SBERT重排遺漏。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/contrib/admin/models.py",
+        "django/contrib/admin/options.py",
+        "django/contrib/auth/forms.py",
+        "django/contrib/auth/password_validation.py",
+        "django/contrib/contenttypes/views.py",
+        "django/contrib/flatpages/forms.py",
+        "django/contrib/flatpages/migrations/0001_initial.py",
+        "django/contrib/flatpages/models.py",
+        "django/contrib/gis/db/models/fields.py",
+        "django/contrib/gis/views.py",
+        "django/contrib/postgres/fields/hstore.py",
+        "django/contrib/postgres/forms/jsonb.py",
+        "django/contrib/redirects/migrations/0001_initial.py",
+        "django/contrib/redirects/models.py",
+        "django/core/validators.py",
+        "django/db/models/fields/__init__.py",
+        "django/forms/models.py",
+        "django/forms/utils.py",
+        "django/views/csrf.py",
+        "django/views/generic/dates.py",
+        "django/views/generic/list.py",
+        "django/views/static.py"
+      ],
+      "missing_gold_files": [
+        "django/contrib/admin/models.py",
+        "django/contrib/admin/options.py",
+        "django/contrib/auth/forms.py",
+        "django/contrib/auth/password_validation.py",
+        "django/contrib/contenttypes/views.py",
+        "django/contrib/flatpages/forms.py",
+        "django/contrib/flatpages/migrations/0001_initial.py",
+        "django/contrib/flatpages/models.py",
+        "django/contrib/gis/db/models/fields.py",
+        "django/contrib/gis/views.py",
+        "django/contrib/postgres/fields/hstore.py",
+        "django/contrib/postgres/forms/jsonb.py",
+        "django/contrib/redirects/migrations/0001_initial.py",
+        "django/contrib/redirects/models.py",
+        "django/core/validators.py",
+        "django/db/models/fields/__init__.py",
+        "django/forms/models.py",
+        "django/forms/utils.py",
+        "django/views/generic/dates.py",
+        "django/views/generic/list.py",
+        "django/views/static.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/contrib/admin/models.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/admin/options.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/auth/forms.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 3,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/auth/password_validation.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/contenttypes/views.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/flatpages/forms.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/flatpages/migrations/0001_initial.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/flatpages/models.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/gis/db/models/fields.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/gis/views.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/postgres/fields/hstore.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/postgres/forms/jsonb.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/redirects/migrations/0001_initial.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/contrib/redirects/models.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/core/validators.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/db/models/fields/__init__.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/forms/models.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/forms/utils.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/views/csrf.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 1,
+          "final_top20_rank": 1
+        },
+        {
+          "gold_file": "django/views/generic/dates.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/views/generic/list.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/views/static.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "django__django-12198",
+      "repo": "django/django",
+      "title": "Allow sensitive_variables() to preserve the signature of its decorated function",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage_zh": "正確檔案在TF-IDF前50名，但被SBERT排出前20名",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；正確檔案原在TF-IDF第17, 44名，重排後未進Top-20。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/contrib/auth/__init__.py",
+        "django/db/models/sql/query.py",
+        "django/template/base.py"
+      ],
+      "missing_gold_files": [
+        "django/db/models/sql/query.py",
+        "django/template/base.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/contrib/auth/__init__.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 1,
+          "final_top20_rank": 3
+        },
+        {
+          "gold_file": "django/db/models/sql/query.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 17,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/template/base.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 44,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "matplotlib__matplotlib-25515",
+      "repo": "matplotlib/matplotlib",
+      "title": "[ENH]: hi-res plot directive...",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage_zh": "正確檔案未進入Code Index",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；至少一個正確檔案不在Code Index。原因：file_absent_at_base_commit=1。",
+      "index_absence_details": [
+        {
+          "gold_file": "lib/matplotlib/sphinxext/figmpl_directive.py",
+          "reason": "file_absent_at_base_commit"
+        }
+      ],
+      "gold_files": [
+        "doc/conf.py",
+        "lib/matplotlib/sphinxext/figmpl_directive.py",
+        "lib/matplotlib/sphinxext/plot_directive.py"
+      ],
+      "missing_gold_files": [
+        "doc/conf.py",
+        "lib/matplotlib/sphinxext/figmpl_directive.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "doc/conf.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "lib/matplotlib/sphinxext/figmpl_directive.py",
+          "status": "index_coverage_failure",
+          "index_present": false,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "lib/matplotlib/sphinxext/plot_directive.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 1,
+          "final_top20_rank": 1
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "django__django-14387",
+      "repo": "django/django",
+      "title": "Incorrect SQL generation filtering OR-combined queries",
+      "outcome": "miss",
+      "automatic_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage_zh": "正確檔案未進入TF-IDF前50名",
+      "automatic_primary_category": "initial_retrieval_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；1個遺漏檔案存在索引中，但未進入TF-IDF前50名。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/utils/tree.py"
+      ],
+      "missing_gold_files": [
+        "django/utils/tree.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/utils/tree.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "django__django-10301",
+      "repo": "django/django",
+      "title": "SQLite functions crashes on NULL values",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage_zh": "同一Ticket同時包含初步檢索與重新排序遺漏",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；包含2個初步檢索遺漏與1個SBERT重排遺漏。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/db/backends/oracle/operations.py",
+        "django/db/backends/sqlite3/base.py",
+        "django/db/models/functions/datetime.py",
+        "django/db/models/functions/text.py"
+      ],
+      "missing_gold_files": [
+        "django/db/backends/oracle/operations.py",
+        "django/db/models/functions/datetime.py",
+        "django/db/models/functions/text.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/db/backends/oracle/operations.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/db/backends/sqlite3/base.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 1,
+          "final_top20_rank": 1
+        },
+        {
+          "gold_file": "django/db/models/functions/datetime.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 36,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/db/models/functions/text.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "django__django-11740",
+      "repo": "django/django",
+      "title": "Change uuid field to FK does not create dependency",
+      "outcome": "miss",
+      "automatic_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage_zh": "正確檔案在TF-IDF前50名，但被SBERT排出前20名",
+      "automatic_primary_category": "reranker_demotion",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；正確檔案原在TF-IDF第26名，重排後未進Top-20。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/db/migrations/autodetector.py"
+      ],
+      "missing_gold_files": [
+        "django/db/migrations/autodetector.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/db/migrations/autodetector.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 26,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "pytest-dev__pytest-7122",
+      "repo": "pytest-dev/pytest",
+      "title": "-k mishandles numbers",
+      "outcome": "miss",
+      "automatic_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage_zh": "正確檔案未進入Code Index",
+      "automatic_primary_category": "index_coverage_failure",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；至少一個正確檔案不在Code Index。原因：file_absent_at_base_commit=1。",
+      "index_absence_details": [
+        {
+          "gold_file": "src/_pytest/mark/expression.py",
+          "reason": "file_absent_at_base_commit"
+        }
+      ],
+      "gold_files": [
+        "src/_pytest/mark/expression.py",
+        "src/_pytest/mark/legacy.py"
+      ],
+      "missing_gold_files": [
+        "src/_pytest/mark/expression.py",
+        "src/_pytest/mark/legacy.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "src/_pytest/mark/expression.py",
+          "status": "index_coverage_failure",
+          "index_present": false,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "src/_pytest/mark/legacy.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "django__django-11532",
+      "repo": "django/django",
+      "title": "Email messages crash on non-ASCII domain when email encoding is non-unicode.",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage_zh": "正確檔案未進入TF-IDF前50名",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；1個遺漏檔案存在索引中，但未進入TF-IDF前50名。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/core/mail/message.py",
+        "django/core/mail/utils.py",
+        "django/core/validators.py",
+        "django/utils/encoding.py",
+        "django/utils/html.py"
+      ],
+      "missing_gold_files": [
+        "django/utils/html.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/core/mail/message.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 1,
+          "final_top20_rank": 1
+        },
+        {
+          "gold_file": "django/core/mail/utils.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 12,
+          "final_top20_rank": 13
+        },
+        {
+          "gold_file": "django/core/validators.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 7,
+          "final_top20_rank": 18
+        },
+        {
+          "gold_file": "django/utils/encoding.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 28,
+          "final_top20_rank": 11
+        },
+        {
+          "gold_file": "django/utils/html.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "django__django-12431",
+      "repo": "django/django",
+      "title": "FileResponse with temporary file closing connection.",
+      "outcome": "miss",
+      "automatic_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage": "mixed_retrieval_and_rerank",
+      "reviewed_failure_stage_zh": "同一Ticket同時包含初步檢索與重新排序遺漏",
+      "automatic_primary_category": "mixed_retrieval_and_rerank",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；包含2個初步檢索遺漏與1個SBERT重排遺漏。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/core/handlers/base.py",
+        "django/core/handlers/wsgi.py",
+        "django/http/response.py"
+      ],
+      "missing_gold_files": [
+        "django/core/handlers/base.py",
+        "django/core/handlers/wsgi.py",
+        "django/http/response.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/core/handlers/base.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 36,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/core/handlers/wsgi.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "django/http/response.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "frozen_holdout_v1_posthoc",
+      "ticket_id": "django__django-10910",
+      "repo": "django/django",
+      "title": "Using database functions with tzinfo=datetime.timezone(datetime.timedelta(...)) results in an incorrect query",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage": "reranker_demotion",
+      "reviewed_failure_stage_zh": "正確檔案在TF-IDF前50名，但被SBERT排出前20名",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；正確檔案原在TF-IDF第33名，重排後未進Top-20。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/db/backends/mysql/operations.py",
+        "django/db/backends/oracle/operations.py",
+        "django/db/backends/postgresql/operations.py",
+        "django/db/backends/sqlite3/base.py"
+      ],
+      "missing_gold_files": [
+        "django/db/backends/sqlite3/base.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/db/backends/mysql/operations.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 18,
+          "final_top20_rank": 7
+        },
+        {
+          "gold_file": "django/db/backends/oracle/operations.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 11,
+          "final_top20_rank": 20
+        },
+        {
+          "gold_file": "django/db/backends/postgresql/operations.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 12,
+          "final_top20_rank": 16
+        },
+        {
+          "gold_file": "django/db/backends/sqlite3/base.py",
+          "status": "reranker_demotion",
+          "index_present": true,
+          "tfidf_top50_rank": 33,
+          "final_top20_rank": null
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "matplotlib__matplotlib-24691",
+      "repo": "matplotlib/matplotlib",
+      "title": "[ENH]: set facecolor and edgecolor alpha separately",
+      "outcome": "partial_recall",
+      "automatic_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage": "index_coverage_failure",
+      "reviewed_failure_stage_zh": "正確檔案未進入Code Index",
+      "automatic_primary_category": "cross_file_partial_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；至少一個正確檔案不在Code Index。原因：file_absent_at_base_commit=1。",
+      "index_absence_details": [
+        {
+          "gold_file": "galleries/examples/color/set_alpha.py",
+          "reason": "file_absent_at_base_commit"
+        }
+      ],
+      "gold_files": [
+        "galleries/examples/color/set_alpha.py",
+        "galleries/users_explain/colors/colors.py",
+        "lib/matplotlib/colors.py"
+      ],
+      "missing_gold_files": [
+        "galleries/examples/color/set_alpha.py",
+        "galleries/users_explain/colors/colors.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "galleries/examples/color/set_alpha.py",
+          "status": "index_coverage_failure",
+          "index_present": false,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "galleries/users_explain/colors/colors.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        },
+        {
+          "gold_file": "lib/matplotlib/colors.py",
+          "status": "recovered_final_top20",
+          "index_present": true,
+          "tfidf_top50_rank": 22,
+          "final_top20_rank": 15
+        }
+      ]
+    },
+    {
+      "split": "validation",
+      "ticket_id": "django__django-14681",
+      "repo": "django/django",
+      "title": "CSRF failure incorrectly reported on upload when there is a problem with storage",
+      "outcome": "miss",
+      "automatic_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage": "initial_retrieval_miss",
+      "reviewed_failure_stage_zh": "正確檔案未進入TF-IDF前50名",
+      "automatic_primary_category": "initial_retrieval_miss",
+      "review_status": "confirmed",
+      "manual_inspection": "completed",
+      "evidence_issues": [],
+      "review_note": "分類正確；1個遺漏檔案存在索引中，但未進入TF-IDF前50名。",
+      "index_absence_details": [],
+      "gold_files": [
+        "django/middleware/csrf.py"
+      ],
+      "missing_gold_files": [
+        "django/middleware/csrf.py"
+      ],
+      "gold_file_evidence": [
+        {
+          "gold_file": "django/middleware/csrf.py",
+          "status": "initial_retrieval_miss",
+          "index_present": true,
+          "tfidf_top50_rank": null,
+          "final_top20_rank": null
+        }
+      ]
+    }
+  ]
+}

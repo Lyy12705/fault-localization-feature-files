@@ -1,0 +1,80 @@
+{
+  "stage": "E4 static one-hop Call Graph with Top-3 source files",
+  "decision": "retain_for_e6_combination",
+  "baseline_method": "e3-c-api-implementation",
+  "selected_method": "e4-c-call-outgoing-top3",
+  "validation_rows": 500,
+  "repositories": 12,
+  "holdout_used": false,
+  "acceptance_criteria": {
+    "minimum_recall_at_20_delta": 0.005,
+    "minimum_paired_ci_lower_bound": 0.0,
+    "maximum_hit_at_20_drop": 0.005,
+    "required_predictions": 500,
+    "required_unique_candidate_files": 20,
+    "ranking_must_not_use_gold_patch_or_post_fix_code": true
+  },
+  "baseline": {
+    "hit_at_20": 0.914,
+    "recall_at_20": 0.8472155969634231,
+    "top_1_accuracy": 0.608,
+    "mrr_at_20": 0.702365475047828,
+    "full_recall_rows": 384,
+    "partial_recall_rows": 73,
+    "miss_rows": 43
+  },
+  "e4_top3": {
+    "hit_at_20": 0.918,
+    "recall_at_20": 0.8591739302967564,
+    "top_1_accuracy": 0.562,
+    "mrr_at_20": 0.6774736761174842,
+    "full_recall_rows": 392,
+    "partial_recall_rows": 67,
+    "miss_rows": 41,
+    "hit_at_20_delta_vs_baseline": 0.004,
+    "hit_at_20_delta_bootstrap_95_ci": {
+      "lower": -0.006,
+      "upper": 0.016
+    },
+    "recall_at_20_delta_vs_baseline": 0.011958333333333335,
+    "recall_at_20_delta_bootstrap_95_ci": {
+      "lower": 0.000887,
+      "upper": 0.023571
+    },
+    "top_1_delta_vs_baseline": -0.046,
+    "top_1_delta_bootstrap_95_ci": {
+      "lower": -0.072,
+      "upper": -0.022
+    },
+    "mrr_at_20_delta_vs_baseline": -0.024891798930343823,
+    "mrr_at_20_delta_bootstrap_95_ci": {
+      "lower": -0.038777,
+      "upper": -0.011228
+    },
+    "recall_improved_rows": 19,
+    "recall_declined_rows": 5,
+    "recall_unchanged_rows": 476,
+    "hit_improved_rows": 5,
+    "hit_declined_rows": 3,
+    "top_1_improved_rows": 9,
+    "top_1_declined_rows": 32,
+    "ranking_changed_rows": 451,
+    "top_20_set_changed_rows": 399,
+    "top_1_file_changed_rows": 86,
+    "tickets_with_call_graph_evidence": 453,
+    "candidate_files_with_call_graph_evidence": 1858,
+    "call_graph_evidence_edges": 4396,
+    "predictions": 500,
+    "failures": 0,
+    "all_rows_have_20_unique_candidate_files": true,
+    "passes_minimum_recall_delta": true,
+    "passes_ci_lower_bound": true,
+    "passes_hit_drop_limit": true,
+    "passes_execution_requirements": true,
+    "passes_no_leakage_requirement": true,
+    "retain": true,
+    "classification": "retained_for_e6_combination"
+  },
+  "tradeoff": "E4 Top-3 provides a statistically supported Recall@20 improvement, but significantly lowers Top-1 accuracy and MRR@20. It is retained as a recall-oriented signal for E6 rather than declared the final v2 method.",
+  "next_experiment": "E5 repository-size analysis and semantic candidate-pool comparison at 50, 75, and 100 files."
+}

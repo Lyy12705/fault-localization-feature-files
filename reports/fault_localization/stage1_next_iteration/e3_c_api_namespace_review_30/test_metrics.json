@@ -1,0 +1,259 @@
+{
+  "rows": 30,
+  "gold_rows": 30,
+  "prediction_rows": 30,
+  "matched_prediction_rows": 30,
+  "missing_prediction_rows": 0,
+  "rows_with_file_ground_truth": 30,
+  "rows_with_symbol_ground_truth": 0,
+  "candidate_k": 20,
+  "rows_with_stage1_candidates": 30,
+  "rows_missing_stage1_output": 0,
+  "candidate_hit_at_20": 0.9666666666666667,
+  "candidate_recall_at_20": 0.9055555555555554,
+  "average_candidate_count_at_20": 20.0,
+  "candidate_outcomes_at_20": {
+    "full_recall_rows": 25,
+    "partial_recall_rows": 4,
+    "miss_rows": 1
+  },
+  "candidate_outcome_ticket_ids_at_20": {
+    "full_recall": [
+      "astropy__astropy-14995",
+      "astropy__astropy-12880",
+      "astropy__astropy-12962",
+      "astropy__astropy-14598",
+      "astropy__astropy-14182",
+      "astropy__astropy-13572",
+      "astropy__astropy-14528",
+      "astropy__astropy-13465",
+      "astropy__astropy-13838",
+      "astropy__astropy-14539",
+      "astropy__astropy-12825",
+      "astropy__astropy-13234",
+      "astropy__astropy-13477",
+      "astropy__astropy-7973",
+      "astropy__astropy-13073",
+      "astropy__astropy-14702",
+      "django__django-15018",
+      "django__django-11356",
+      "django__django-15098",
+      "django__django-15483",
+      "django__django-11749",
+      "django__django-12961",
+      "django__django-13267",
+      "django__django-17045",
+      "django__django-13401"
+    ],
+    "partial_recall": [
+      "astropy__astropy-14701",
+      "astropy__astropy-13933",
+      "astropy__astropy-14413",
+      "astropy__astropy-13417"
+    ],
+    "miss": [
+      "astropy__astropy-13306"
+    ]
+  },
+  "candidate_bootstrap_95_ci": {
+    "samples": 2000,
+    "seed": 42,
+    "candidate_hit_at_20": {
+      "lower": 0.9,
+      "upper": 1.0
+    },
+    "candidate_recall_at_20": {
+      "lower": 0.816667,
+      "upper": 0.972222
+    }
+  },
+  "file_top_1_accuracy": 0.4666666666666667,
+  "file_top_3_accuracy": 0.7666666666666667,
+  "file_top_5_accuracy": 0.8,
+  "file_mrr": 0.6083333333333333,
+  "symbol_top_1_accuracy": 0.0,
+  "symbol_top_3_accuracy": 0.0,
+  "symbol_top_5_accuracy": 0.0,
+  "symbol_mrr": 0.0,
+  "rows_with_ground_truth": 30,
+  "top_1_accuracy": 0.4666666666666667,
+  "top_3_accuracy": 0.7666666666666667,
+  "top_5_accuracy": 0.8,
+  "mrr": 0.6083333333333333,
+  "base_commit_reachable_evaluation": {
+    "rows_with_reachable_file_ground_truth": 30,
+    "candidate_hit_at_20": 0.9666666666666667,
+    "candidate_recall_at_20": 0.9222222222222223,
+    "unreachable_gold_file_count": 1,
+    "unreachable_gold_files_by_ticket": {
+      "astropy__astropy-14701": [
+        "astropy/cosmology/io/latex.py"
+      ]
+    },
+    "bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 44,
+      "candidate_hit_at_20": {
+        "lower": 0.9,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.827778,
+        "upper": 0.988889
+      }
+    },
+    "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+  },
+  "missing_file_ground_truth_rows": 0,
+  "missing_symbol_ground_truth_rows": 30,
+  "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+  "per_repository": {
+    "astropy/astropy": {
+      "rows": 21,
+      "candidate_hit_at_20": 0.9523809523809523,
+      "candidate_recall_at_20": 0.865079365079365,
+      "average_candidate_count_at_20": 20.0,
+      "candidate_outcomes_at_20": {
+        "full_recall_rows": 16,
+        "partial_recall_rows": 4,
+        "miss_rows": 1
+      },
+      "candidate_outcome_ticket_ids_at_20": {
+        "full_recall": [
+          "astropy__astropy-14995",
+          "astropy__astropy-12880",
+          "astropy__astropy-12962",
+          "astropy__astropy-14598",
+          "astropy__astropy-14182",
+          "astropy__astropy-13572",
+          "astropy__astropy-14528",
+          "astropy__astropy-13465",
+          "astropy__astropy-13838",
+          "astropy__astropy-14539",
+          "astropy__astropy-12825",
+          "astropy__astropy-13234",
+          "astropy__astropy-13477",
+          "astropy__astropy-7973",
+          "astropy__astropy-13073",
+          "astropy__astropy-14702"
+        ],
+        "partial_recall": [
+          "astropy__astropy-14701",
+          "astropy__astropy-13933",
+          "astropy__astropy-14413",
+          "astropy__astropy-13417"
+        ],
+        "miss": [
+          "astropy__astropy-13306"
+        ]
+      },
+      "candidate_bootstrap_95_ci": {
+        "samples": 2000,
+        "seed": 42,
+        "candidate_hit_at_20": {
+          "lower": 0.857143,
+          "upper": 1.0
+        },
+        "candidate_recall_at_20": {
+          "lower": 0.738095,
+          "upper": 0.960317
+        }
+      },
+      "file_top_1_accuracy": 0.5714285714285714,
+      "file_top_3_accuracy": 0.8571428571428571,
+      "file_top_5_accuracy": 0.8571428571428571,
+      "file_mrr": 0.6904761904761905,
+      "base_commit_reachable_evaluation": {
+        "rows_with_reachable_file_ground_truth": 21,
+        "candidate_hit_at_20": 0.9523809523809523,
+        "candidate_recall_at_20": 0.888888888888889,
+        "unreachable_gold_file_count": 1,
+        "unreachable_gold_files_by_ticket": {
+          "astropy__astropy-14701": [
+            "astropy/cosmology/io/latex.py"
+          ]
+        },
+        "bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 44,
+          "candidate_hit_at_20": {
+            "lower": 0.857143,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.761905,
+            "upper": 0.984127
+          }
+        },
+        "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+      }
+    },
+    "django/django": {
+      "rows": 9,
+      "candidate_hit_at_20": 1.0,
+      "candidate_recall_at_20": 1.0,
+      "average_candidate_count_at_20": 20.0,
+      "candidate_outcomes_at_20": {
+        "full_recall_rows": 9,
+        "partial_recall_rows": 0,
+        "miss_rows": 0
+      },
+      "candidate_outcome_ticket_ids_at_20": {
+        "full_recall": [
+          "django__django-15018",
+          "django__django-11356",
+          "django__django-15098",
+          "django__django-15483",
+          "django__django-11749",
+          "django__django-12961",
+          "django__django-13267",
+          "django__django-17045",
+          "django__django-13401"
+        ],
+        "partial_recall": [],
+        "miss": []
+      },
+      "candidate_bootstrap_95_ci": {
+        "samples": 2000,
+        "seed": 42,
+        "candidate_hit_at_20": {
+          "lower": 1.0,
+          "upper": 1.0
+        },
+        "candidate_recall_at_20": {
+          "lower": 1.0,
+          "upper": 1.0
+        }
+      },
+      "file_top_1_accuracy": 0.2222222222222222,
+      "file_top_3_accuracy": 0.5555555555555556,
+      "file_top_5_accuracy": 0.6666666666666666,
+      "file_mrr": 0.4166666666666667,
+      "base_commit_reachable_evaluation": {
+        "rows_with_reachable_file_ground_truth": 9,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "unreachable_gold_file_count": 0,
+        "unreachable_gold_files_by_ticket": {},
+        "bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 44,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+      }
+    }
+  },
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  }
+}

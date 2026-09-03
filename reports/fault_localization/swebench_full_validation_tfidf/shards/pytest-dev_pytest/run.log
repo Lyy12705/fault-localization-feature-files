@@ -1,0 +1,134 @@
+COMMAND
+/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py --tickets reports/fault_localization/swebench_full_validation_tfidf/shards/pytest-dev_pytest/tickets.jsonl --gold reports/fault_localization/swebench_full_validation_tfidf/shards/pytest-dev_pytest/gold.jsonl --repo-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/repos --snapshot-cache-dir reports/fault_localization/swebench_full_validation_tfidf/ephemeral_snapshots --index-cache-dir data/fault_localization/swebench_full/indexes --output-dir reports/fault_localization/swebench_full_validation_tfidf/shards/pytest-dev_pytest/run --candidate-file-k 20 --ephemeral-snapshots --checkpoint-every 1 --progress none --embedding-backend tfidf --no-domain-path-routing --fallback-index-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/indexes --resume
+
+STDOUT
+{
+  "started_at_utc": "2026-08-16T18:05:48.900474+00:00",
+  "completed_at_utc": "2026-08-16T18:06:40.684984+00:00",
+  "method_id": "tfidf-00b0ca0e9ba9",
+  "method": {
+    "method_version": "fault-localization-method-v11",
+    "embedding_backend": "tfidf",
+    "sbert_model": "",
+    "semantic_candidate_k": 0,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20
+  },
+  "frozen_protocol": "",
+  "tickets_selected": 25,
+  "predictions": 25,
+  "failures": 0,
+  "processed_this_run": 25,
+  "skipped_existing": 0,
+  "index_cache_hits": 0,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/swebench_full_validation_tfidf/shards/pytest-dev_pytest/run/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/swebench_full_validation_tfidf/shards/pytest-dev_pytest/run/test_metrics.json",
+  "failures_output": "reports/fault_localization/swebench_full_validation_tfidf/shards/pytest-dev_pytest/run/test_failures.jsonl",
+  "metrics": {
+    "rows": 25,
+    "gold_rows": 25,
+    "prediction_rows": 25,
+    "matched_prediction_rows": 25,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 25,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 25,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.84,
+    "candidate_recall_at_20": 0.7633333333333333,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 18,
+      "partial_recall_rows": 3,
+      "miss_rows": 4
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "pytest-dev__pytest-10115",
+        "pytest-dev__pytest-7481",
+        "pytest-dev__pytest-7205",
+        "pytest-dev__pytest-8641",
+        "pytest-dev__pytest-9681",
+        "pytest-dev__pytest-7314",
+        "pytest-dev__pytest-10356",
+        "pytest-dev__pytest-7283",
+        "pytest-dev__pytest-6197",
+        "pytest-dev__pytest-10343",
+        "pytest-dev__pytest-9066",
+        "pytest-dev__pytest-6926",
+        "pytest-dev__pytest-10624",
+        "pytest-dev__pytest-5262",
+        "pytest-dev__pytest-9911",
+        "pytest-dev__pytest-11178",
+        "pytest-dev__pytest-11047",
+        "pytest-dev__pytest-9064"
+      ],
+      "partial_recall": [
+        "pytest-dev__pytest-8463",
+        "pytest-dev__pytest-7985",
+        "pytest-dev__pytest-9956"
+      ],
+      "miss": [
+        "pytest-dev__pytest-5840",
+        "pytest-dev__pytest-6214",
+        "pytest-dev__pytest-10758",
+        "pytest-dev__pytest-7982"
+      ]
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.68,
+        "upper": 0.96
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.603333,
+        "upper": 0.906667
+      }
+    },
+    "file_top_1_accuracy": 0.4,
+    "file_top_3_accuracy": 0.52,
+    "file_top_5_accuracy": 0.6,
+    "file_mrr": 0.4713333333333333,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 25,
+    "top_1_accuracy": 0.4,
+    "top_3_accuracy": 0.52,
+    "top_5_accuracy": 0.6,
+    "mrr": 0.4713333333333333,
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 25,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}
+
+STDERR
