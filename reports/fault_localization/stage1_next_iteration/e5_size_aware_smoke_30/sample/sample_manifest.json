@@ -1,0 +1,50 @@
+{
+  "purpose": "E5 size-aware semantic candidate pool smoke test",
+  "selection": "Lowest deterministic SHA-256 score within each repository-size group",
+  "seed": 20260823,
+  "per_group": 10,
+  "tickets": 30,
+  "group_counts": {
+    "small": 10,
+    "medium": 10,
+    "large": 10
+  },
+  "ticket_ids": [
+    "astropy__astropy-7737",
+    "astropy__astropy-8715",
+    "django__django-11070",
+    "django__django-11270",
+    "django__django-11740",
+    "django__django-11991",
+    "django__django-13537",
+    "matplotlib__matplotlib-26479",
+    "mwaskom__seaborn-3216",
+    "pallets__flask-4074",
+    "psf__requests-1339",
+    "psf__requests-1713",
+    "psf__requests-1724",
+    "psf__requests-774",
+    "pydata__xarray-4510",
+    "pydata__xarray-5033",
+    "pydata__xarray-5455",
+    "pydata__xarray-7444",
+    "pytest-dev__pytest-10624",
+    "pytest-dev__pytest-6926",
+    "scikit-learn__scikit-learn-11043",
+    "scikit-learn__scikit-learn-12486",
+    "scikit-learn__scikit-learn-13135",
+    "scikit-learn__scikit-learn-13467",
+    "sphinx-doc__sphinx-10353",
+    "sphinx-doc__sphinx-8951",
+    "sphinx-doc__sphinx-9309",
+    "sphinx-doc__sphinx-9591",
+    "sympy__sympy-15875",
+    "sympy__sympy-19091"
+  ],
+  "sources": {
+    "tickets": "data/fault_localization/swebench_full/protocol_v1/validation_tickets.jsonl",
+    "gold": "data/fault_localization/swebench_full/protocol_v1/validation_gold.jsonl",
+    "repository_size_groups": "configs/fault_localization/e5_repository_size_groups.json"
+  },
+  "holdout_used": false
+}

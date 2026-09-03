@@ -1,0 +1,122 @@
+{
+  "e4cg-2183788c1ed6": {
+    "classification": "irrelevant_mapping",
+    "reason": "Ticket處理InheritDocstrings屬性文件；設定檔讀取ConfigObj與此錯誤流程無關。"
+  },
+  "e4cg-6fe148a2bdd2": {
+    "classification": "irrelevant_mapping",
+    "reason": "Ticket重點是QTable分組鍵遺失單位；Table.mask到FalseArray的遮罩流程與分組鍵無關。"
+  },
+  "e4cg-bea83d88abb1": {
+    "classification": "irrelevant_mapping",
+    "reason": "Table.iloc與TableILoc屬於索引存取，不是QTable group keys保留單位的處理流程。"
+  },
+  "e4cg-82bf78ef421b": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "Quantity.to_value與單位轉換會使用is_effectively_unity，和littleh等價換算相關，但本次修改在equivalencies.py。"
+  },
+  "e4cg-540e163302e6": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "UnitBase相等判斷與單位換算相關，is_effectively_unity也是有效底層工具，但不是本次修改位置。"
+  },
+  "e4cg-64a22b0b8468": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "EarthLocation座標位置與矩陣轉置都屬ITRS轉換流程，但新增的直接轉換實作位於其他Gold檔案。"
+  },
+  "e4cg-f827b6b3e09d": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "Time.strptime呼叫_strptime是日期字串解析的有效路徑，但分數日解析錯誤的修改點在time/formats.py。"
+  },
+  "e4cg-951e4bf04f23": {
+    "classification": "irrelevant_mapping",
+    "reason": "座標小時角範圍警告與Time日期字串的分數日解析問題無關。"
+  },
+  "e4cg-5d1d37a76d57": {
+    "classification": "irrelevant_mapping",
+    "reason": "FITS便利函式info開啟HDUList是通用I/O流程，與Card浮點數字串格式化問題無關。"
+  },
+  "e4cg-60cb03ca6f13": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "Header會包含Card，_makehdu建立Header與FITS標頭功能相關，但浮點格式化修正在card.py。"
+  },
+  "e4cg-7f5bbaa3b1b5": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "Card._parse_value呼叫_str_to_num屬Card數值處理的直接路徑，但目標util.py不是本次修改檔案。"
+  },
+  "e4cg-de5ffa73c5fa": {
+    "classification": "irrelevant_mapping",
+    "reason": "RA_DEC_ORDER只是WCS文件常數，與SlicedLowLevelWCS的world_to_pixel計算錯誤無關。"
+  },
+  "e4cg-fcdf0628e0b7": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "UnitBase.to_string到格式選擇屬單位輸出流程，與Angle字串中的值／單位間距相關，但非本次修改點。"
+  },
+  "e4cg-80c4932e6851": {
+    "classification": "correct_mapping",
+    "reason": "VOTable驗證呼叫警告解析，目標exceptions.py屬本Ticket的Gold修改檔案。"
+  },
+  "e4cg-284dd1721e8c": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "Quantity.to與Unit是Quantity的核心單位處理流程，和dtype問題屬同一功能區域，但修改位置在quantity.py。"
+  },
+  "e4cg-63ef6ac0b643": {
+    "classification": "irrelevant_mapping",
+    "reason": "座標frame表示類別選擇與SkyCoord子類別__getattr__錯誤訊息無關。"
+  },
+  "e4cg-3fc32d920d1e": {
+    "classification": "irrelevant_mapping",
+    "reason": "WCS座標框架轉換與SkyCoord子類別屬性存取錯誤無關。"
+  },
+  "e4cg-77752dc50235": {
+    "classification": "irrelevant_mapping",
+    "reason": "FITS驗證錯誤清單與jQuery套件安全漏洞及版本更新完全無關。"
+  },
+  "e4cg-626b497ce5f0": {
+    "classification": "correct_mapping",
+    "reason": "ASDF的BlackBody轉換直接呼叫BlackBody，目標physical_models.py是本Ticket的Gold修改檔案。"
+  },
+  "e4cg-44f1b643df05": {
+    "classification": "correct_mapping",
+    "reason": "FITS_rec.from_columns呼叫ColDefs，目標column.py是物件欄位寫入錯誤的Gold修改檔案。"
+  },
+  "e4cg-8b7c7c3f8e7d": {
+    "classification": "irrelevant_mapping",
+    "reason": "Table欄位分組功能與將object dtype寫入FITS失敗無關。"
+  },
+  "e4cg-1cbf3685d1a6": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "Angle格式檢查呼叫IllegalHourError屬角度輸入驗證流程，來源也是Gold檔案，但錯誤類別檔非修改位置。"
+  },
+  "e4cg-092782415232": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "Angle格式檢查呼叫IllegalHourWarning屬角度輸入驗證流程，來源也是Gold檔案，但警告類別檔非修改位置。"
+  },
+  "e4cg-40bf3da285f9": {
+    "classification": "irrelevant_mapping",
+    "reason": "ERFA的ldn單位輔助函式與Angle的dms tuple符號處理無關。"
+  },
+  "e4cg-b26f9f879b2e": {
+    "classification": "irrelevant_mapping",
+    "reason": "排序欄位名稱解析與duration expression的資料庫轉換錯誤無關。"
+  },
+  "e4cg-a0f9f6e546fe": {
+    "classification": "correct_mapping",
+    "reason": "QuerySet建立Value expression時目標expressions.py屬本Ticket的Gold修改檔案。"
+  },
+  "e4cg-37e32d8610d0": {
+    "classification": "irrelevant_mapping",
+    "reason": "管理命令預設選項處理與Index名稱檢查移至model system checks無關。"
+  },
+  "e4cg-6ede9fed4fd8": {
+    "classification": "irrelevant_mapping",
+    "reason": "template的verbatim標籤與Context建立都不是延遲讀取__file__的五個問題模組。"
+  },
+  "e4cg-7ec113bd58c1": {
+    "classification": "irrelevant_mapping",
+    "reason": "admindocs解析view docstring與Technical 404頁面顯示CBV名稱錯誤無關。"
+  },
+  "e4cg-d8499fbea42a": {
+    "classification": "correct_mapping",
+    "reason": "語言檢查呼叫to_locale，目標translation/__init__.py屬本Ticket的Gold修改檔案。"
+  }
+}

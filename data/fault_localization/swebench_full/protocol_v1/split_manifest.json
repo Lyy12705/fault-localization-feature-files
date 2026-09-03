@@ -1,0 +1,95 @@
+{
+  "protocol": "swebench-full-stage1-protocol-v1",
+  "dataset": "princeton-nlp/SWE-bench test split",
+  "source_tickets_path": "data/fault_localization/swebench_full/test_tickets.jsonl",
+  "source_tickets_sha256": "c6ab04c414afc273734c9a1a58087a47d4a7bd2275831041d2b56a38d270ff53",
+  "source_gold_path": "data/fault_localization/swebench_full/test_gold.jsonl",
+  "source_gold_sha256": "a32320f68872b3c90c129c62078281a7527e8ef9341b2798ba31717ba10b9ed7",
+  "source_rows": 2294,
+  "previously_seen_tickets_path": "../bug_tracking_llm_system/data/fault_localization/swebench_lite/test_tickets.jsonl",
+  "previously_seen_source_rows": 300,
+  "previously_seen_ids_in_full": 300,
+  "seed": "swebench-full-stage1-protocol-v1",
+  "split_strategy": "Repository-stratified deterministic selection. All previously evaluated SWE-bench Lite instances are assigned to Development and excluded from Validation/Frozen Holdout.",
+  "split_files": {
+    "development": {
+      "tickets_path": "data/fault_localization/swebench_full/protocol_v1/development_tickets.jsonl",
+      "tickets_sha256": "28dcafa34e3ec58c255e8f98e59a1e5b7781c4f7be797e233983b2572004415b",
+      "gold_path": "data/fault_localization/swebench_full/protocol_v1/development_gold.jsonl",
+      "gold_sha256": "8e980f920c1fb86189974ad3bf8ccb1a328cc5723c8527d25b86d535673f5f92",
+      "tickets": 1294,
+      "repositories": 12,
+      "repository_counts": {
+        "astropy/astropy": 51,
+        "django/django": 481,
+        "matplotlib/matplotlib": 103,
+        "mwaskom/seaborn": 13,
+        "pallets/flask": 7,
+        "psf/requests": 25,
+        "pydata/xarray": 58,
+        "pylint-dev/pylint": 31,
+        "pytest-dev/pytest": 68,
+        "scikit-learn/scikit-learn": 125,
+        "sphinx-doc/sphinx": 101,
+        "sympy/sympy": 231
+      }
+    },
+    "validation": {
+      "tickets_path": "data/fault_localization/swebench_full/protocol_v1/validation_tickets.jsonl",
+      "tickets_sha256": "315708e629d5f205e08aba71fcb5069eee9b59edee1bf67772e10c5f2f9af5ea",
+      "gold_path": "data/fault_localization/swebench_full/protocol_v1/validation_gold.jsonl",
+      "gold_sha256": "71ab1600acc611bfd1c41ab617365b2cabbc0e1673dc5cdc17d66011ea29c2c3",
+      "tickets": 500,
+      "repositories": 12,
+      "repository_counts": {
+        "astropy/astropy": 22,
+        "django/django": 184,
+        "matplotlib/matplotlib": 41,
+        "mwaskom/seaborn": 5,
+        "pallets/flask": 2,
+        "psf/requests": 9,
+        "pydata/xarray": 26,
+        "pylint-dev/pylint": 13,
+        "pytest-dev/pytest": 25,
+        "scikit-learn/scikit-learn": 52,
+        "sphinx-doc/sphinx": 43,
+        "sympy/sympy": 78
+      }
+    },
+    "frozen_holdout": {
+      "tickets_path": "data/fault_localization/swebench_full/protocol_v1/frozen_holdout_tickets.jsonl",
+      "tickets_sha256": "c7687e10eba4ea7556e87297074ced0e40f8833978515c41c09b91f64f363ebb",
+      "gold_path": "data/fault_localization/swebench_full/protocol_v1/frozen_holdout_gold.jsonl",
+      "gold_sha256": "afabc75c983c49d3e3cb788ae2bad75d914974ea15bf74568a2672fd91b35743",
+      "tickets": 500,
+      "repositories": 12,
+      "repository_counts": {
+        "astropy/astropy": 22,
+        "django/django": 185,
+        "matplotlib/matplotlib": 40,
+        "mwaskom/seaborn": 4,
+        "pallets/flask": 2,
+        "psf/requests": 10,
+        "pydata/xarray": 26,
+        "pylint-dev/pylint": 13,
+        "pytest-dev/pytest": 26,
+        "scikit-learn/scikit-learn": 52,
+        "sphinx-doc/sphinx": 43,
+        "sympy/sympy": 77
+      }
+    }
+  },
+  "leakage_checks": {
+    "development_validation_overlap": 0,
+    "development_holdout_overlap": 0,
+    "validation_holdout_overlap": 0,
+    "previously_seen_in_validation": 0,
+    "previously_seen_in_frozen_holdout": 0,
+    "all_source_ids_assigned_once": true
+  },
+  "evaluation_policy": {
+    "development": "Implementation checks and exploratory error analysis.",
+    "validation": "Compare candidate-retrieval methods and select one configuration.",
+    "frozen_holdout": "Run the selected configuration once after method selection."
+  }
+}

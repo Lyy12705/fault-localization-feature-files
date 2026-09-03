@@ -1,0 +1,40 @@
+COMMAND
+/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py --tickets reports/fault_localization/stage1_next_iteration/e7_development_1294/e7_a/shards/astropy_astropy/tickets.jsonl --prediction-only --repo-cache-dir data/fault_localization/swebench_full/snapshots --snapshot-cache-dir reports/fault_localization/stage1_next_iteration/e7_development_1294/e7_a/ephemeral_snapshots --index-cache-dir data/fault_localization/swebench_full/indexes --import-graph-cache-dir data/fault_localization/swebench_full/indexes/import_graphs --call-graph-cache-dir data/fault_localization/swebench_full/indexes/call_graphs --output-dir reports/fault_localization/stage1_next_iteration/e7_development_1294/e7_a/shards/astropy_astropy/run --candidate-file-k 20 --ephemeral-snapshots --checkpoint-every 10 --progress none --embedding-backend tfidf-sbert-rerank --semantic-candidate-k 50 --no-domain-path-routing --file-aggregation-mode basic --symbol-expansion-mode symbol-definitions-api --call-graph-mode outgoing-top3 --resume
+
+STDOUT
+
+STDERR
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 12236.95it/s]
+Traceback (most recent call last):
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py", line 1319, in <module>
+    main()
+    ~~~~^^
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py", line 361, in main
+    summary = run_batch(config)
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py", line 483, in run_batch
+    result = localize_ticket(
+        ticket,
+    ...<19 lines>...
+        min_ticket_chars=config.min_ticket_chars,
+    )
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/src/utils/fault_localization.py", line 1690, in localize_ticket
+    ).localize(ticket_json)
+      ~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/src/utils/fault_localization.py", line 799, in localize
+    candidates, backend_name = rank_code_chunks(
+                               ~~~~~~~~~~~~~~~~^
+        ticket_json,
+        ^^^^^^^^^^^^
+    ...<18 lines>...
+        api_implementation_links=index.api_implementation_links,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/src/utils/fault_localization.py", line 1736, in rank_code_chunks
+    tokenized_search_texts = [_tokenize(search_text) for search_text in search_texts]
+                              ~~~~~~~~~^^^^^^^^^^^^^
+  File "/Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/src/utils/fault_localization.py", line 2831, in _tokenize
+    lowered = raw.lower()
+KeyboardInterrupt

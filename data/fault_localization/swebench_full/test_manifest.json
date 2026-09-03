@@ -1,0 +1,21 @@
+{
+  "dataset_name": "princeton-nlp/SWE-bench",
+  "dataset_variant": "full",
+  "split": "test",
+  "rows": 2294,
+  "unique_repositories": 12,
+  "license": "MIT",
+  "dataset_source_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench",
+  "project_source_url": "https://github.com/SWE-bench/SWE-bench",
+  "parquet_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench/resolve/main/data/test-00000-of-00001.parquet",
+  "parquet_path": "data/fault_localization/swebench_full/test.parquet",
+  "tickets_path": "data/fault_localization/swebench_full/test_tickets.jsonl",
+  "gold_path": "data/fault_localization/swebench_full/test_gold.jsonl",
+  "repo_manifest_path": "data/fault_localization/swebench_full/test_repos.jsonl",
+  "ground_truth_definition": "fixed_files are parsed from the developer patch field, excluding test_patch.",
+  "evaluation_notes": [
+    "Use problem_statement as the bug report.",
+    "Use repo and base_commit to check out the exact source snapshot before running localization.",
+    "SWE-bench provides file-level ground truth; symbol-level ground truth is not provided by default."
+  ]
+}

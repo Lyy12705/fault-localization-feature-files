@@ -1,0 +1,97 @@
+{
+  "status": "ready",
+  "created_at_utc": "2026-09-02T12:02:12.490899+00:00",
+  "tickets": "data\\fault_localization\\swebench_full\\stage3_symbol_gold\\development_source_tickets.jsonl",
+  "repository_count": 12,
+  "ready_count": 12,
+  "failure_count": 0,
+  "repo_cache_dir": "data\\fault_localization\\swebench_full\\e7_development_repos",
+  "repositories": [
+    {
+      "repository": "astropy/astropy",
+      "repository_url": "https://github.com/astropy/astropy",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\astropy__astropy",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "django/django",
+      "repository_url": "https://github.com/django/django",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\django__django",
+      "status": "cached",
+      "required_commits": 6
+    },
+    {
+      "repository": "matplotlib/matplotlib",
+      "repository_url": "https://github.com/matplotlib/matplotlib",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\matplotlib__matplotlib",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "mwaskom/seaborn",
+      "repository_url": "https://github.com/mwaskom/seaborn",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\mwaskom__seaborn",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "pallets/flask",
+      "repository_url": "https://github.com/pallets/flask",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\pallets__flask",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "psf/requests",
+      "repository_url": "https://github.com/psf/requests",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\psf__requests",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "pydata/xarray",
+      "repository_url": "https://github.com/pydata/xarray",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\pydata__xarray",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "pylint-dev/pylint",
+      "repository_url": "https://github.com/pylint-dev/pylint",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\pylint-dev__pylint",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "pytest-dev/pytest",
+      "repository_url": "https://github.com/pytest-dev/pytest",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\pytest-dev__pytest",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "scikit-learn/scikit-learn",
+      "repository_url": "https://github.com/scikit-learn/scikit-learn",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\scikit-learn__scikit-learn",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "sphinx-doc/sphinx",
+      "repository_url": "https://github.com/sphinx-doc/sphinx",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\sphinx-doc__sphinx",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "sympy/sympy",
+      "repository_url": "https://github.com/sympy/sympy",
+      "cache_path": "data\\fault_localization\\swebench_full\\e7_development_repos\\sympy__sympy",
+      "status": "cached",
+      "required_commits": 5
+    }
+  ],
+  "gold_accessed": false,
+  "evaluation_started": false
+}

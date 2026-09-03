@@ -1,0 +1,182 @@
+{
+  "protocol": "swebench-full-stage1-protocol-v1",
+  "evaluation_protocol": "swebench-full-stage1-e7-unseen-holdout-v1",
+  "status": "frozen_before_holdout",
+  "created_at_utc": "2026-09-01T10:00:11.036897+00:00",
+  "research_stage": "E7-A post-selection unseen repository holdout",
+  "selection_policy": "E7-A is retained because E7-B failed the prespecified overall Recall@20 and paired-CI gates. The holdout contains every remaining repository-disjoint train row and is evaluated once.",
+  "selected_method_label": "e7-a-e6-development-baseline",
+  "selected_method_id": "tfidf-sbert-rerank-25ae3013f48f",
+  "selected_method": {
+    "advanced_file_aggregation": false,
+    "api_implementation_parameters": {
+      "max_links_per_symbol": 4,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_wrapper_statements": 4,
+      "reexport_bonus": 0.04,
+      "wrapper_bonus": 0.05
+    },
+    "call_graph_mode": "outgoing-top3",
+    "call_graph_parameters": {
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_signal": 0.9,
+      "maximum_target_files_per_reference": 8,
+      "outgoing_signal": 0.9,
+      "rank_decay": 0.08,
+      "reference_file_k": 3
+    },
+    "candidate_file_k": 20,
+    "chunk_lines": 80,
+    "domain_path_routing": false,
+    "embedding_backend": "tfidf-sbert-rerank",
+    "file_aggregation": true,
+    "file_aggregation_mode": "basic",
+    "file_aggregation_parameters": {
+      "evidence_score_ratio": 0.8,
+      "max_evidence_chunks": 5,
+      "minimum_evidence_score": 0.05,
+      "package_bonus_cap": 0.1,
+      "support_bonus_cap": 0.05,
+      "support_bonus_per_additional_chunk": 0.0125,
+      "symbol_bonus_cap": 0.04,
+      "symbol_bonus_per_additional_symbol": 0.01
+    },
+    "generic_routing": false,
+    "import_graph_mode": "off",
+    "import_graph_parameters": {
+      "incoming_signal": 0.65,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_signal": 0.8,
+      "outgoing_signal": 0.8,
+      "rank_decay": 0.08,
+      "reference_file_k": 5
+    },
+    "include_tests": false,
+    "llm_candidate_k": 0,
+    "llm_rerank": false,
+    "max_file_bytes": 500000,
+    "method_version": "fault-localization-method-v19",
+    "min_ticket_chars": 20,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "overlap_lines": 20,
+    "repository_proximity": false,
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "symbol_expansion_mode": "symbol-definitions-api",
+    "symbol_expansion_parameters": {
+      "exact_match_bonus": 0.06,
+      "leaf_match_bonus": 0.04,
+      "max_files_per_symbol": 4,
+      "max_ticket_symbols": 20,
+      "maximum_bonus": 0.1,
+      "maximum_evidence_per_file": 4
+    },
+    "top_k": 5
+  },
+  "selected_development_evidence": {
+    "rows": 1294,
+    "candidate_hit_at_20": 0.9250386398763524,
+    "candidate_recall_at_20": 0.8789195220305842,
+    "file_top_1_accuracy": 0.5610510046367851,
+    "file_mrr_runner_scope": 0.6657908294693464,
+    "decision": "not_retained",
+    "selected_method": "E7-A"
+  },
+  "selection_artifacts": {
+    "selection": {
+      "path": "reports/fault_localization/stage1_next_iteration/e7_development_1294/selection.json",
+      "bytes": 1658,
+      "sha256": "b294834fa9db71b7ff56622f75952ebd61385ded4ea2e40f06bf71a79bbc53e0"
+    },
+    "baseline_development_run": {
+      "path": "reports/fault_localization/stage1_next_iteration/e7_development_1294/e7_a/run_manifest.json",
+      "bytes": 133383,
+      "sha256": "2c0112722810970f291a8a48fe2a5f1cd9264cee730082e96ee7a029816ec5d0"
+    },
+    "candidate_development_run": {
+      "path": "reports/fault_localization/stage1_next_iteration/e7_development_1294/e7_b/run_manifest.json",
+      "bytes": 134014,
+      "sha256": "4297337d5f866dd7ea4d7bc67beeba0cd411434acb48428aa25317728ef8a06c"
+    },
+    "paired_analysis": {
+      "path": "reports/fault_localization/stage1_next_iteration/e7_development_1294/e7_a_vs_e7_b_paired_analysis.json",
+      "bytes": 9381,
+      "sha256": "424a45981650368c5e7f5a622be43b68a21ad40b3172821051c0aa6c604a3a76"
+    }
+  },
+  "final_holdout_rows": 27,
+  "final_holdout_repositories": 4,
+  "final_holdout_manifest": {
+    "path": "data/fault_localization/swebench_full/final_holdout_e7_v1/final_holdout_manifest.json",
+    "bytes": 2621,
+    "sha256": "9f23d976e93e474a1b1cf0a2b39f3eddb89b875c5549c84d7cda39d72a93fe76"
+  },
+  "frozen_holdout_artifacts": {
+    "tickets": {
+      "path": "data/fault_localization/swebench_full/final_holdout_e7_v1/final_holdout_tickets.jsonl",
+      "bytes": 124271,
+      "sha256": "f3e5ba534bd84041ec1cb44f0a6fec5e2bc7a0712b2dd8a7e14ebfadefe77649"
+    },
+    "gold": {
+      "path": "data/fault_localization/swebench_full/final_holdout_e7_v1/sealed/final_holdout_gold.jsonl",
+      "bytes": 13990,
+      "sha256": "65f5ae4da3ad623ec2fa1de3fab2e0fb0319e1728eb6b1da926c179f84472a73"
+    }
+  },
+  "implementation": {
+    "src/utils/fault_localization.py": {
+      "path": "src/utils/fault_localization.py",
+      "bytes": 186583,
+      "sha256": "0d29636c595cb26f978789aaa43eaecb20f8d3cceff8d501e59ff9f880a972a3"
+    },
+    "src/modules/bug_localizer.py": {
+      "path": "src/modules/bug_localizer.py",
+      "bytes": 6098,
+      "sha256": "4608e4fc67e3bb9c3751412b5d821c2d4e973340ebd7bd08356a5ff9081ca8be"
+    },
+    "scripts/run_swebench_lite_fault_localization.py": {
+      "path": "scripts/run_swebench_lite_fault_localization.py",
+      "bytes": 54194,
+      "sha256": "bfef0a87ff09f1775956bf8418debaa53bfcfdd7554460f536c910b3ba272667"
+    },
+    "scripts/run_swebench_full_stage1_experiment.py": {
+      "path": "scripts/run_swebench_full_stage1_experiment.py",
+      "bytes": 23200,
+      "sha256": "aba85addf4e96eccdc96334b1db56475692496508521875412611fc62bbf0f7e"
+    },
+    "scripts/evaluate_fault_localization.py": {
+      "path": "scripts/evaluate_fault_localization.py",
+      "bytes": 24374,
+      "sha256": "d6474c69037e6b21436493b9f12bf5cd5c4a5b02e58a483840f49058036b9ece"
+    },
+    "scripts/analyze_swebench_full_stage1_results.py": {
+      "path": "scripts/analyze_swebench_full_stage1_results.py",
+      "bytes": 9074,
+      "sha256": "c531bee6779ebd951cd8514ed5e1faa52fc2d05e4e93d2ebc9a7a2bdd75d017f"
+    },
+    "scripts/create_swebench_full_final_holdout.py": {
+      "path": "scripts/create_swebench_full_final_holdout.py",
+      "bytes": 13731,
+      "sha256": "33e6c3923651029ccfc48a0801ef143f0d7806a02c0fa36f6cc80d8e50245e22"
+    },
+    "scripts/finalize_swebench_full_stage1_v2.py": {
+      "path": "scripts/finalize_swebench_full_stage1_v2.py",
+      "bytes": 6620,
+      "sha256": "e9d57ec9d67260ae689dd8562dad3b49108356352d50d6b53c5114cfa223e24b"
+    },
+    "scripts/freeze_swebench_full_stage1_e7.py": {
+      "path": "scripts/freeze_swebench_full_stage1_e7.py",
+      "bytes": 10755,
+      "sha256": "04b79aa564c2088ee446c42b22a5752ffe33a8f15275656353598f9742ac9644"
+    }
+  },
+  "authorized_output_dir": "reports/fault_localization/stage1_next_iteration/final_holdout_e7_v1/run",
+  "final_record_path": "reports/fault_localization/stage1_next_iteration/final_holdout_e7_v1/FINAL_HOLDOUT_E7_V1_RECORD.json",
+  "holdout_policy": "Run this exact E7-A method once. Do not inspect sealed gold before predictions complete; do not tune or rerun after metrics are observed.",
+  "holdout_evaluated": false,
+  "freeze_id": "stage1-e7-047d563271a0fa02"
+}

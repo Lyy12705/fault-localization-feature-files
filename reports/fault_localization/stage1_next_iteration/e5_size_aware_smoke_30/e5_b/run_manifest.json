@@ -1,0 +1,946 @@
+{
+  "protocol": "swebench-full-stage1-protocol-v1",
+  "started_at_utc": "2026-08-22T17:54:51.714587+00:00",
+  "completed_at_utc": "2026-08-22T17:55:55.133352+00:00",
+  "wall_seconds": 63.417,
+  "method_label": "e5-b-size-aware-75",
+  "method_id": "tfidf-sbert-rerank-c41dceea382d",
+  "method": {
+    "advanced_file_aggregation": false,
+    "api_implementation_parameters": {
+      "max_links_per_symbol": 4,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_wrapper_statements": 4,
+      "reexport_bonus": 0.04,
+      "wrapper_bonus": 0.05
+    },
+    "call_graph_mode": "off",
+    "call_graph_parameters": {
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_signal": 0.9,
+      "maximum_target_files_per_reference": 8,
+      "outgoing_signal": 0.9,
+      "rank_decay": 0.08,
+      "reference_file_k": 5
+    },
+    "candidate_file_k": 20,
+    "chunk_lines": 80,
+    "domain_path_routing": false,
+    "embedding_backend": "tfidf-sbert-rerank",
+    "file_aggregation": true,
+    "file_aggregation_mode": "basic",
+    "file_aggregation_parameters": {
+      "evidence_score_ratio": 0.8,
+      "max_evidence_chunks": 5,
+      "minimum_evidence_score": 0.05,
+      "package_bonus_cap": 0.1,
+      "support_bonus_cap": 0.05,
+      "support_bonus_per_additional_chunk": 0.0125,
+      "symbol_bonus_cap": 0.04,
+      "symbol_bonus_per_additional_symbol": 0.01
+    },
+    "generic_routing": false,
+    "import_graph_mode": "off",
+    "import_graph_parameters": {
+      "incoming_signal": 0.65,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_signal": 0.8,
+      "outgoing_signal": 0.8,
+      "rank_decay": 0.08,
+      "reference_file_k": 5
+    },
+    "include_tests": false,
+    "llm_candidate_k": 0,
+    "llm_rerank": false,
+    "max_file_bytes": 500000,
+    "method_version": "fault-localization-method-v19",
+    "min_ticket_chars": 20,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "overlap_lines": 20,
+    "repository_proximity": false,
+    "repository_size_groups": {
+      "astropy/astropy": "large",
+      "django/django": "large",
+      "matplotlib/matplotlib": "large",
+      "mwaskom/seaborn": "small",
+      "pallets/flask": "small",
+      "psf/requests": "small",
+      "pydata/xarray": "small",
+      "pylint-dev/pylint": "medium",
+      "pytest-dev/pytest": "medium",
+      "scikit-learn/scikit-learn": "medium",
+      "sphinx-doc/sphinx": "medium",
+      "sympy/sympy": "large"
+    },
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "semantic_candidate_k_by_repository_size": {
+      "large": 75,
+      "medium": 75,
+      "small": 50
+    },
+    "semantic_candidate_policy": "repository-size",
+    "symbol_expansion_mode": "symbol-definitions-api",
+    "symbol_expansion_parameters": {
+      "exact_match_bonus": 0.06,
+      "leaf_match_bonus": 0.04,
+      "max_files_per_symbol": 4,
+      "max_ticket_symbols": 20,
+      "maximum_bonus": 0.1,
+      "maximum_evidence_per_file": 4
+    },
+    "top_k": 5
+  },
+  "tickets_path": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/sample/tickets.jsonl",
+  "gold_path": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/sample/gold.jsonl",
+  "tickets": 30,
+  "predictions": 30,
+  "failures": 0,
+  "repositories": 11,
+  "max_workers": 3,
+  "predictions_output": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/predictions.jsonl",
+  "metrics_output": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/metrics.json",
+  "failures_output": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/failures.jsonl",
+  "repository_runs": [
+    {
+      "repository": "astropy/astropy",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 34.295,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/astropy_astropy/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/astropy_astropy/run/test_run_manifest.json"
+    },
+    {
+      "repository": "django/django",
+      "tickets": 5,
+      "returncode": 0,
+      "predictions": 5,
+      "failures": 0,
+      "wall_seconds": 26.263,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/django_django/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/django_django/run/test_run_manifest.json"
+    },
+    {
+      "repository": "matplotlib/matplotlib",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 10.524,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/matplotlib_matplotlib/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/matplotlib_matplotlib/run/test_run_manifest.json"
+    },
+    {
+      "repository": "mwaskom/seaborn",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 5.311,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/mwaskom_seaborn/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/mwaskom_seaborn/run/test_run_manifest.json"
+    },
+    {
+      "repository": "pallets/flask",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 4.889,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/pallets_flask/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/pallets_flask/run/test_run_manifest.json"
+    },
+    {
+      "repository": "psf/requests",
+      "tickets": 4,
+      "returncode": 0,
+      "predictions": 4,
+      "failures": 0,
+      "wall_seconds": 8.885,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/psf_requests/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/psf_requests/run/test_run_manifest.json"
+    },
+    {
+      "repository": "pydata/xarray",
+      "tickets": 4,
+      "returncode": 0,
+      "predictions": 4,
+      "failures": 0,
+      "wall_seconds": 11.973,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/pydata_xarray/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/pydata_xarray/run/test_run_manifest.json"
+    },
+    {
+      "repository": "pytest-dev/pytest",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 9.264,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/pytest-dev_pytest/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/pytest-dev_pytest/run/test_run_manifest.json"
+    },
+    {
+      "repository": "scikit-learn/scikit-learn",
+      "tickets": 4,
+      "returncode": 0,
+      "predictions": 4,
+      "failures": 0,
+      "wall_seconds": 19.053,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/scikit-learn_scikit-learn/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/scikit-learn_scikit-learn/run/test_run_manifest.json"
+    },
+    {
+      "repository": "sphinx-doc/sphinx",
+      "tickets": 4,
+      "returncode": 0,
+      "predictions": 4,
+      "failures": 0,
+      "wall_seconds": 17.285,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/sphinx-doc_sphinx/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/sphinx-doc_sphinx/run/test_run_manifest.json"
+    },
+    {
+      "repository": "sympy/sympy",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 23.547,
+      "log": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/sympy_sympy/run.log",
+      "manifest": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_b/shards/sympy_sympy/run/test_run_manifest.json"
+    }
+  ],
+  "metrics": {
+    "rows": 30,
+    "gold_rows": 30,
+    "prediction_rows": 30,
+    "matched_prediction_rows": 30,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 30,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 30,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.9333333333333333,
+    "candidate_recall_at_20": 0.8641269841269842,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 22,
+      "partial_recall_rows": 6,
+      "miss_rows": 2
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "astropy__astropy-7737",
+        "django__django-11070",
+        "django__django-11270",
+        "django__django-13537",
+        "pallets__flask-4074",
+        "psf__requests-1339",
+        "psf__requests-1713",
+        "psf__requests-1724",
+        "psf__requests-774",
+        "pydata__xarray-4510",
+        "pydata__xarray-5033",
+        "pytest-dev__pytest-10624",
+        "pytest-dev__pytest-6926",
+        "scikit-learn__scikit-learn-11043",
+        "scikit-learn__scikit-learn-12486",
+        "scikit-learn__scikit-learn-13135",
+        "scikit-learn__scikit-learn-13467",
+        "sphinx-doc__sphinx-8951",
+        "sphinx-doc__sphinx-9309",
+        "sphinx-doc__sphinx-9591",
+        "sympy__sympy-15875",
+        "sympy__sympy-19091"
+      ],
+      "partial_recall": [
+        "astropy__astropy-8715",
+        "django__django-11991",
+        "matplotlib__matplotlib-26479",
+        "mwaskom__seaborn-3216",
+        "pydata__xarray-5455",
+        "pydata__xarray-7444"
+      ],
+      "miss": [
+        "django__django-11740",
+        "sphinx-doc__sphinx-10353"
+      ]
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.833333,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.761905,
+        "upper": 0.957778
+      }
+    },
+    "file_top_1_accuracy": 0.6666666666666666,
+    "file_top_3_accuracy": 0.8,
+    "file_top_5_accuracy": 0.8666666666666667,
+    "file_mrr": 0.75,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 30,
+    "top_1_accuracy": 0.6666666666666666,
+    "top_3_accuracy": 0.8,
+    "top_5_accuracy": 0.8666666666666667,
+    "mrr": 0.75,
+    "base_commit_reachable_evaluation": {
+      "rows_with_reachable_file_ground_truth": 30,
+      "candidate_hit_at_20": 0.9333333333333333,
+      "candidate_recall_at_20": 0.8641269841269842,
+      "unreachable_gold_file_count": 0,
+      "unreachable_gold_files_by_ticket": {},
+      "bootstrap_95_ci": {
+        "samples": 2000,
+        "seed": 44,
+        "candidate_hit_at_20": {
+          "lower": 0.833333,
+          "upper": 1.0
+        },
+        "candidate_recall_at_20": {
+          "lower": 0.75,
+          "upper": 0.957619
+        }
+      },
+      "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+    },
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 30,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "per_repository": {
+      "astropy/astropy": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.9285714285714286,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "astropy__astropy-7737"
+          ],
+          "partial_recall": [
+            "astropy__astropy-8715"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.857143,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.9285714285714286,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.857143,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "django/django": {
+        "rows": 5,
+        "candidate_hit_at_20": 0.8,
+        "candidate_recall_at_20": 0.7333333333333333,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 3,
+          "partial_recall_rows": 1,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "django__django-11070",
+            "django__django-11270",
+            "django__django-13537"
+          ],
+          "partial_recall": [
+            "django__django-11991"
+          ],
+          "miss": [
+            "django__django-11740"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.4,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.333333,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.4,
+        "file_top_3_accuracy": 0.4,
+        "file_top_5_accuracy": 0.6,
+        "file_mrr": 0.45,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 5,
+          "candidate_hit_at_20": 0.8,
+          "candidate_recall_at_20": 0.7333333333333333,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.4,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.333333,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "matplotlib/matplotlib": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "matplotlib__matplotlib-26479"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.5,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 0.5
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "mwaskom/seaborn": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "mwaskom__seaborn-3216"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.5,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 0.5
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pallets/flask": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "pallets__flask-4074"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "psf/requests": {
+        "rows": 4,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 4,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "psf__requests-1339",
+            "psf__requests-1713",
+            "psf__requests-1724",
+            "psf__requests-774"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.75,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.875,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 4,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pydata/xarray": {
+        "rows": 4,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.85,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 2,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "pydata__xarray-4510",
+            "pydata__xarray-5033"
+          ],
+          "partial_recall": [
+            "pydata__xarray-5455",
+            "pydata__xarray-7444"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.6,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.5,
+        "file_top_3_accuracy": 0.75,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.6875,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 4,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.85,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.625,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pytest-dev/pytest": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "pytest-dev__pytest-10624",
+            "pytest-dev__pytest-6926"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "scikit-learn/scikit-learn": {
+        "rows": 4,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 4,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "scikit-learn__scikit-learn-11043",
+            "scikit-learn__scikit-learn-12486",
+            "scikit-learn__scikit-learn-13135",
+            "scikit-learn__scikit-learn-13467"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 4,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "sphinx-doc/sphinx": {
+        "rows": 4,
+        "candidate_hit_at_20": 0.75,
+        "candidate_recall_at_20": 0.75,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 3,
+          "partial_recall_rows": 0,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "sphinx-doc__sphinx-8951",
+            "sphinx-doc__sphinx-9309",
+            "sphinx-doc__sphinx-9591"
+          ],
+          "partial_recall": [],
+          "miss": [
+            "sphinx-doc__sphinx-10353"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.25,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.25,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.5,
+        "file_top_3_accuracy": 0.5,
+        "file_top_5_accuracy": 0.5,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 4,
+          "candidate_hit_at_20": 0.75,
+          "candidate_recall_at_20": 0.75,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.25,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.25,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "sympy/sympy": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "sympy__sympy-15875",
+            "sympy__sympy-19091"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      }
+    }
+  }
+}

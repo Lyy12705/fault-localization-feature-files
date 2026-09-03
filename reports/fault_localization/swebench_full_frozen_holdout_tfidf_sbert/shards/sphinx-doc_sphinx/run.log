@@ -1,0 +1,155 @@
+COMMAND
+/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py --tickets reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/sphinx-doc_sphinx/tickets.jsonl --gold reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/sphinx-doc_sphinx/gold.jsonl --repo-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/repos --snapshot-cache-dir reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/ephemeral_snapshots --index-cache-dir data/fault_localization/swebench_full/indexes --output-dir reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/sphinx-doc_sphinx/run --candidate-file-k 20 --ephemeral-snapshots --checkpoint-every 1 --progress none --embedding-backend tfidf-sbert-rerank --semantic-candidate-k 50 --no-domain-path-routing --fallback-index-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/indexes --resume
+
+STDOUT
+{
+  "started_at_utc": "2026-08-16T19:05:06.118261+00:00",
+  "completed_at_utc": "2026-08-16T19:08:36.150283+00:00",
+  "method_id": "tfidf-sbert-rerank-43260d1c9be2",
+  "method": {
+    "method_version": "fault-localization-method-v11",
+    "embedding_backend": "tfidf-sbert-rerank",
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20
+  },
+  "frozen_protocol": "",
+  "tickets_selected": 43,
+  "predictions": 43,
+  "failures": 0,
+  "processed_this_run": 43,
+  "skipped_existing": 0,
+  "index_cache_hits": 1,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/sphinx-doc_sphinx/run/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/sphinx-doc_sphinx/run/test_metrics.json",
+  "failures_output": "reports/fault_localization/swebench_full_frozen_holdout_tfidf_sbert/shards/sphinx-doc_sphinx/run/test_failures.jsonl",
+  "metrics": {
+    "rows": 43,
+    "gold_rows": 43,
+    "prediction_rows": 43,
+    "matched_prediction_rows": 43,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 43,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 43,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.7441860465116279,
+    "candidate_recall_at_20": 0.7183462532299741,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 30,
+      "partial_recall_rows": 2,
+      "miss_rows": 11
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "sphinx-doc__sphinx-11502",
+        "sphinx-doc__sphinx-10504",
+        "sphinx-doc__sphinx-11312",
+        "sphinx-doc__sphinx-10492",
+        "sphinx-doc__sphinx-8007",
+        "sphinx-doc__sphinx-9461",
+        "sphinx-doc__sphinx-9386",
+        "sphinx-doc__sphinx-9229",
+        "sphinx-doc__sphinx-9171",
+        "sphinx-doc__sphinx-7268",
+        "sphinx-doc__sphinx-10427",
+        "sphinx-doc__sphinx-7501",
+        "sphinx-doc__sphinx-7670",
+        "sphinx-doc__sphinx-9180",
+        "sphinx-doc__sphinx-8120",
+        "sphinx-doc__sphinx-9467",
+        "sphinx-doc__sphinx-9367",
+        "sphinx-doc__sphinx-8579",
+        "sphinx-doc__sphinx-8719",
+        "sphinx-doc__sphinx-9931",
+        "sphinx-doc__sphinx-9289",
+        "sphinx-doc__sphinx-7597",
+        "sphinx-doc__sphinx-7961",
+        "sphinx-doc__sphinx-11311",
+        "sphinx-doc__sphinx-9281",
+        "sphinx-doc__sphinx-7814",
+        "sphinx-doc__sphinx-8658",
+        "sphinx-doc__sphinx-8028",
+        "sphinx-doc__sphinx-9207",
+        "sphinx-doc__sphinx-7762"
+      ],
+      "partial_recall": [
+        "sphinx-doc__sphinx-10673",
+        "sphinx-doc__sphinx-10067"
+      ],
+      "miss": [
+        "sphinx-doc__sphinx-8679",
+        "sphinx-doc__sphinx-9128",
+        "sphinx-doc__sphinx-9982",
+        "sphinx-doc__sphinx-8264",
+        "sphinx-doc__sphinx-7615",
+        "sphinx-doc__sphinx-9658",
+        "sphinx-doc__sphinx-9104",
+        "sphinx-doc__sphinx-9230",
+        "sphinx-doc__sphinx-7593",
+        "sphinx-doc__sphinx-8633",
+        "sphinx-doc__sphinx-10449"
+      ]
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.604651,
+        "upper": 0.860465
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.581395,
+        "upper": 0.839793
+      }
+    },
+    "file_top_1_accuracy": 0.37209302325581395,
+    "file_top_3_accuracy": 0.6046511627906976,
+    "file_top_5_accuracy": 0.6744186046511628,
+    "file_mrr": 0.48914728682170544,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 43,
+    "top_1_accuracy": 0.37209302325581395,
+    "top_3_accuracy": 0.6046511627906976,
+    "top_5_accuracy": 0.6744186046511628,
+    "mrr": 0.48914728682170544,
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 43,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}
+
+STDERR
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 9264.11it/s]

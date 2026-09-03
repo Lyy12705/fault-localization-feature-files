@@ -1,0 +1,140 @@
+{
+  "rows": 52,
+  "gold_rows": 52,
+  "prediction_rows": 52,
+  "matched_prediction_rows": 52,
+  "missing_prediction_rows": 0,
+  "rows_with_file_ground_truth": 52,
+  "rows_with_symbol_ground_truth": 0,
+  "candidate_k": 20,
+  "rows_with_stage1_candidates": 52,
+  "rows_missing_stage1_output": 0,
+  "candidate_hit_at_20": 0.9615384615384616,
+  "candidate_recall_at_20": 0.9375,
+  "average_candidate_count_at_20": 20.0,
+  "candidate_outcomes_at_20": {
+    "full_recall_rows": 47,
+    "partial_recall_rows": 3,
+    "miss_rows": 2
+  },
+  "candidate_outcome_ticket_ids_at_20": {
+    "full_recall": [
+      "scikit-learn__scikit-learn-11264",
+      "scikit-learn__scikit-learn-12760",
+      "scikit-learn__scikit-learn-10986",
+      "scikit-learn__scikit-learn-12626",
+      "scikit-learn__scikit-learn-25601",
+      "scikit-learn__scikit-learn-14141",
+      "scikit-learn__scikit-learn-13368",
+      "scikit-learn__scikit-learn-12486",
+      "scikit-learn__scikit-learn-26194",
+      "scikit-learn__scikit-learn-14764",
+      "scikit-learn__scikit-learn-13554",
+      "scikit-learn__scikit-learn-10913",
+      "scikit-learn__scikit-learn-25299",
+      "scikit-learn__scikit-learn-11310",
+      "scikit-learn__scikit-learn-14890",
+      "scikit-learn__scikit-learn-13135",
+      "scikit-learn__scikit-learn-11578",
+      "scikit-learn__scikit-learn-26318",
+      "scikit-learn__scikit-learn-15393",
+      "scikit-learn__scikit-learn-15495",
+      "scikit-learn__scikit-learn-11243",
+      "scikit-learn__scikit-learn-13221",
+      "scikit-learn__scikit-learn-13174",
+      "scikit-learn__scikit-learn-11346",
+      "scikit-learn__scikit-learn-13280",
+      "scikit-learn__scikit-learn-12704",
+      "scikit-learn__scikit-learn-14520",
+      "scikit-learn__scikit-learn-13704",
+      "scikit-learn__scikit-learn-23099",
+      "scikit-learn__scikit-learn-15120",
+      "scikit-learn__scikit-learn-12421",
+      "scikit-learn__scikit-learn-12682",
+      "scikit-learn__scikit-learn-25697",
+      "scikit-learn__scikit-learn-11043",
+      "scikit-learn__scikit-learn-13828",
+      "scikit-learn__scikit-learn-12258",
+      "scikit-learn__scikit-learn-10577",
+      "scikit-learn__scikit-learn-11496",
+      "scikit-learn__scikit-learn-25672",
+      "scikit-learn__scikit-learn-14806",
+      "scikit-learn__scikit-learn-25774",
+      "scikit-learn__scikit-learn-14732",
+      "scikit-learn__scikit-learn-13253",
+      "scikit-learn__scikit-learn-15138",
+      "scikit-learn__scikit-learn-25443",
+      "scikit-learn__scikit-learn-13467",
+      "scikit-learn__scikit-learn-15100"
+    ],
+    "partial_recall": [
+      "scikit-learn__scikit-learn-13536",
+      "scikit-learn__scikit-learn-12557",
+      "scikit-learn__scikit-learn-25102"
+    ],
+    "miss": [
+      "scikit-learn__scikit-learn-14067",
+      "scikit-learn__scikit-learn-14125"
+    ]
+  },
+  "candidate_bootstrap_95_ci": {
+    "samples": 2000,
+    "seed": 42,
+    "candidate_hit_at_20": {
+      "lower": 0.903846,
+      "upper": 1.0
+    },
+    "candidate_recall_at_20": {
+      "lower": 0.870192,
+      "upper": 0.990385
+    }
+  },
+  "file_top_1_accuracy": 0.7307692307692307,
+  "file_top_3_accuracy": 0.9038461538461539,
+  "file_top_5_accuracy": 0.9230769230769231,
+  "file_mrr": 0.8179487179487179,
+  "symbol_top_1_accuracy": 0.0,
+  "symbol_top_3_accuracy": 0.0,
+  "symbol_top_5_accuracy": 0.0,
+  "symbol_mrr": 0.0,
+  "rows_with_ground_truth": 52,
+  "top_1_accuracy": 0.7307692307692307,
+  "top_3_accuracy": 0.9038461538461539,
+  "top_5_accuracy": 0.9230769230769231,
+  "mrr": 0.8179487179487179,
+  "base_commit_reachable_evaluation": {
+    "rows_with_reachable_file_ground_truth": 52,
+    "candidate_hit_at_20": 0.9615384615384616,
+    "candidate_recall_at_20": 0.9423076923076923,
+    "unreachable_gold_file_count": 2,
+    "unreachable_gold_files_by_ticket": {
+      "scikit-learn__scikit-learn-14067": [
+        "sklearn/externals/_scipy_linalg.py"
+      ],
+      "scikit-learn__scikit-learn-12557": [
+        "examples/svm/plot_svm_tie_breaking.py"
+      ]
+    },
+    "bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 44,
+      "candidate_hit_at_20": {
+        "lower": 0.903846,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.875,
+        "upper": 0.990385
+      }
+    },
+    "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+  },
+  "missing_file_ground_truth_rows": 0,
+  "missing_symbol_ground_truth_rows": 52,
+  "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  }
+}

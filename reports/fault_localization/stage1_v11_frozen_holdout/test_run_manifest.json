@@ -1,0 +1,418 @@
+{
+  "started_at_utc": "2026-08-15T14:54:19.244911+00:00",
+  "completed_at_utc": "2026-08-15T15:06:30.098086+00:00",
+  "method_id": "tfidf-3e5e3b3cba1a",
+  "method": {
+    "method_version": "fault-localization-method-v11",
+    "embedding_backend": "tfidf",
+    "sbert_model": "",
+    "semantic_candidate_k": 0,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": true,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20
+  },
+  "frozen_protocol": "stage1-v11",
+  "tickets_selected": 90,
+  "predictions": 90,
+  "failures": 0,
+  "processed_this_run": 90,
+  "skipped_existing": 0,
+  "index_cache_hits": 0,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/stage1_v11_frozen_holdout/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/stage1_v11_frozen_holdout/test_metrics.json",
+  "failures_output": "reports/fault_localization/stage1_v11_frozen_holdout/test_failures.jsonl",
+  "metrics": {
+    "rows": 90,
+    "gold_rows": 90,
+    "prediction_rows": 90,
+    "matched_prediction_rows": 90,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 90,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 90,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.8444444444444444,
+    "candidate_recall_at_20": 0.8444444444444444,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 76,
+      "partial_recall_rows": 0,
+      "miss_rows": 14
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "astropy__astropy-12907",
+        "astropy__astropy-14365",
+        "astropy__astropy-14995",
+        "astropy__astropy-6938",
+        "astropy__astropy-7746",
+        "mwaskom__seaborn-2848",
+        "mwaskom__seaborn-3010",
+        "mwaskom__seaborn-3190",
+        "mwaskom__seaborn-3407",
+        "pallets__flask-4045",
+        "pallets__flask-4992",
+        "pallets__flask-5063",
+        "sympy__sympy-11400",
+        "sympy__sympy-11870",
+        "sympy__sympy-11897",
+        "sympy__sympy-12171",
+        "sympy__sympy-12419",
+        "sympy__sympy-12454",
+        "sympy__sympy-12481",
+        "sympy__sympy-13031",
+        "sympy__sympy-13043",
+        "sympy__sympy-13177",
+        "sympy__sympy-13437",
+        "sympy__sympy-13471",
+        "sympy__sympy-13480",
+        "sympy__sympy-13647",
+        "sympy__sympy-13773",
+        "sympy__sympy-13971",
+        "sympy__sympy-14308",
+        "sympy__sympy-14317",
+        "sympy__sympy-14396",
+        "sympy__sympy-14774",
+        "sympy__sympy-14817",
+        "sympy__sympy-15011",
+        "sympy__sympy-15308",
+        "sympy__sympy-15345",
+        "sympy__sympy-15346",
+        "sympy__sympy-15609",
+        "sympy__sympy-15678",
+        "sympy__sympy-16106",
+        "sympy__sympy-16281",
+        "sympy__sympy-16503",
+        "sympy__sympy-16792",
+        "sympy__sympy-16988",
+        "sympy__sympy-17139",
+        "sympy__sympy-17630",
+        "sympy__sympy-17655",
+        "sympy__sympy-18057",
+        "sympy__sympy-18189",
+        "sympy__sympy-18199",
+        "sympy__sympy-18532",
+        "sympy__sympy-18621",
+        "sympy__sympy-18698",
+        "sympy__sympy-18835",
+        "sympy__sympy-19007",
+        "sympy__sympy-19254",
+        "sympy__sympy-19487",
+        "sympy__sympy-20049",
+        "sympy__sympy-20154",
+        "sympy__sympy-20212",
+        "sympy__sympy-20442",
+        "sympy__sympy-20639",
+        "sympy__sympy-21055",
+        "sympy__sympy-21171",
+        "sympy__sympy-21847",
+        "sympy__sympy-22005",
+        "sympy__sympy-22714",
+        "sympy__sympy-22840",
+        "sympy__sympy-23117",
+        "sympy__sympy-23191",
+        "sympy__sympy-23262",
+        "sympy__sympy-24066",
+        "sympy__sympy-24102",
+        "sympy__sympy-24152",
+        "sympy__sympy-24213",
+        "sympy__sympy-24909"
+      ],
+      "partial_recall": [],
+      "miss": [
+        "astropy__astropy-14182",
+        "sympy__sympy-12236",
+        "sympy__sympy-13146",
+        "sympy__sympy-13895",
+        "sympy__sympy-13915",
+        "sympy__sympy-14024",
+        "sympy__sympy-17022",
+        "sympy__sympy-18087",
+        "sympy__sympy-20322",
+        "sympy__sympy-20590",
+        "sympy__sympy-21379",
+        "sympy__sympy-21612",
+        "sympy__sympy-21614",
+        "sympy__sympy-21627"
+      ]
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.766667,
+        "upper": 0.922222
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.766667,
+        "upper": 0.911111
+      }
+    },
+    "file_top_1_accuracy": 0.5333333333333333,
+    "file_top_3_accuracy": 0.7555555555555555,
+    "file_top_5_accuracy": 0.7888888888888889,
+    "file_mrr": 0.6324074074074075,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 90,
+    "top_1_accuracy": 0.5333333333333333,
+    "top_3_accuracy": 0.7555555555555555,
+    "top_5_accuracy": 0.7888888888888889,
+    "mrr": 0.6324074074074075,
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 90,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "per_repository": {
+      "astropy/astropy": {
+        "rows": 6,
+        "candidate_hit_at_20": 0.8333333333333334,
+        "candidate_recall_at_20": 0.8333333333333334,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 5,
+          "partial_recall_rows": 0,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "astropy__astropy-12907",
+            "astropy__astropy-14365",
+            "astropy__astropy-14995",
+            "astropy__astropy-6938",
+            "astropy__astropy-7746"
+          ],
+          "partial_recall": [],
+          "miss": [
+            "astropy__astropy-14182"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.5,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.8333333333333334,
+        "file_top_3_accuracy": 0.8333333333333334,
+        "file_top_5_accuracy": 0.8333333333333334,
+        "file_mrr": 0.8333333333333334
+      },
+      "mwaskom/seaborn": {
+        "rows": 4,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 4,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "mwaskom__seaborn-2848",
+            "mwaskom__seaborn-3010",
+            "mwaskom__seaborn-3190",
+            "mwaskom__seaborn-3407"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.75,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.875
+      },
+      "pallets/flask": {
+        "rows": 3,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 3,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "pallets__flask-4045",
+            "pallets__flask-4992",
+            "pallets__flask-5063"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0
+      },
+      "sympy/sympy": {
+        "rows": 77,
+        "candidate_hit_at_20": 0.8311688311688312,
+        "candidate_recall_at_20": 0.8311688311688312,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 64,
+          "partial_recall_rows": 0,
+          "miss_rows": 13
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "sympy__sympy-11400",
+            "sympy__sympy-11870",
+            "sympy__sympy-11897",
+            "sympy__sympy-12171",
+            "sympy__sympy-12419",
+            "sympy__sympy-12454",
+            "sympy__sympy-12481",
+            "sympy__sympy-13031",
+            "sympy__sympy-13043",
+            "sympy__sympy-13177",
+            "sympy__sympy-13437",
+            "sympy__sympy-13471",
+            "sympy__sympy-13480",
+            "sympy__sympy-13647",
+            "sympy__sympy-13773",
+            "sympy__sympy-13971",
+            "sympy__sympy-14308",
+            "sympy__sympy-14317",
+            "sympy__sympy-14396",
+            "sympy__sympy-14774",
+            "sympy__sympy-14817",
+            "sympy__sympy-15011",
+            "sympy__sympy-15308",
+            "sympy__sympy-15345",
+            "sympy__sympy-15346",
+            "sympy__sympy-15609",
+            "sympy__sympy-15678",
+            "sympy__sympy-16106",
+            "sympy__sympy-16281",
+            "sympy__sympy-16503",
+            "sympy__sympy-16792",
+            "sympy__sympy-16988",
+            "sympy__sympy-17139",
+            "sympy__sympy-17630",
+            "sympy__sympy-17655",
+            "sympy__sympy-18057",
+            "sympy__sympy-18189",
+            "sympy__sympy-18199",
+            "sympy__sympy-18532",
+            "sympy__sympy-18621",
+            "sympy__sympy-18698",
+            "sympy__sympy-18835",
+            "sympy__sympy-19007",
+            "sympy__sympy-19254",
+            "sympy__sympy-19487",
+            "sympy__sympy-20049",
+            "sympy__sympy-20154",
+            "sympy__sympy-20212",
+            "sympy__sympy-20442",
+            "sympy__sympy-20639",
+            "sympy__sympy-21055",
+            "sympy__sympy-21171",
+            "sympy__sympy-21847",
+            "sympy__sympy-22005",
+            "sympy__sympy-22714",
+            "sympy__sympy-22840",
+            "sympy__sympy-23117",
+            "sympy__sympy-23191",
+            "sympy__sympy-23262",
+            "sympy__sympy-24066",
+            "sympy__sympy-24102",
+            "sympy__sympy-24152",
+            "sympy__sympy-24213",
+            "sympy__sympy-24909"
+          ],
+          "partial_recall": [],
+          "miss": [
+            "sympy__sympy-12236",
+            "sympy__sympy-13146",
+            "sympy__sympy-13895",
+            "sympy__sympy-13915",
+            "sympy__sympy-14024",
+            "sympy__sympy-17022",
+            "sympy__sympy-18087",
+            "sympy__sympy-20322",
+            "sympy__sympy-20590",
+            "sympy__sympy-21379",
+            "sympy__sympy-21612",
+            "sympy__sympy-21614",
+            "sympy__sympy-21627"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.74026,
+            "upper": 0.909091
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.74026,
+            "upper": 0.909091
+          }
+        },
+        "file_top_1_accuracy": 0.4805194805194805,
+        "file_top_3_accuracy": 0.7272727272727273,
+        "file_top_5_accuracy": 0.7662337662337663,
+        "file_mrr": 0.5898268398268398
+      }
+    },
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "experiment": "E1 file score aggregation",
+  "validation_rows": 500,
+  "selected_method": "E1-A",
+  "selected_mode": "basic",
+  "decision": "keep_current_baseline",
+  "reason": "E1-B improved Recall@20 by 0.9576 percentage points, but the paired 95% confidence interval lower bound was -0.3078 percentage points, below the predefined non-negative threshold.",
+  "methods": {
+    "E1-A": {
+      "hit_at_20": 0.898,
+      "recall_at_20": 0.8298346445824707,
+      "reachable_recall_at_20": 0.8332333333333333,
+      "top_1_accuracy": 0.562,
+      "mrr_at_20": 0.659668275025628,
+      "full_recall_rows": 376,
+      "partial_recall_rows": 73,
+      "miss_rows": 51
+    },
+    "E1-B": {
+      "hit_at_20": 0.91,
+      "recall_at_20": 0.8394104899930988,
+      "reachable_recall_at_20": 0.8445396825396823,
+      "top_1_accuracy": 0.566,
+      "mrr_at_20": 0.66542716216532,
+      "full_recall_rows": 383,
+      "partial_recall_rows": 72,
+      "miss_rows": 45,
+      "recall_delta_vs_e1_a": 0.009575845410628019,
+      "recall_delta_bootstrap_95_ci": {
+        "lower": -0.003078,
+        "upper": 0.022729
+      }
+    },
+    "E1-C": {
+      "hit_at_20": 0.908,
+      "recall_at_20": 0.8333037957211871,
+      "reachable_recall_at_20": 0.8384634920634919,
+      "top_1_accuracy": 0.52,
+      "mrr_at_20": 0.6407024653365211,
+      "full_recall_rows": 379,
+      "partial_recall_rows": 75,
+      "miss_rows": 46,
+      "recall_delta_vs_e1_a": 0.0034691511387163563,
+      "recall_delta_bootstrap_95_ci": {
+        "lower": -0.014529,
+        "upper": 0.021448
+      }
+    },
+    "E1-D": {
+      "hit_at_20": 0.9,
+      "recall_at_20": 0.8227839544513457,
+      "reachable_recall_at_20": 0.8280103174603174,
+      "top_1_accuracy": 0.526,
+      "mrr_at_20": 0.6380392992628287,
+      "full_recall_rows": 372,
+      "partial_recall_rows": 78,
+      "miss_rows": 50,
+      "recall_delta_vs_e1_a": -0.007050690131124914,
+      "recall_delta_bootstrap_95_ci": {
+        "lower": -0.025019,
+        "upper": 0.010765
+      }
+    }
+  },
+  "unreachable_gold_files_at_base_commit": 23,
+  "next_stage_baseline": "E1-A"
+}

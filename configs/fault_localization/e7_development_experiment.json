@@ -1,0 +1,35 @@
+{
+  "version": "stage1-e7-development-v1",
+  "data_policy": {
+    "tuning_split": "data/fault_localization/swebench_full/protocol_v1/development_tickets.jsonl",
+    "gold": "data/fault_localization/swebench_full/protocol_v1/development_gold.jsonl",
+    "rows": 1294,
+    "allowed_use": "Development-only failure analysis and E7 method comparison",
+    "forbidden_use": "Do not read or rerun the existing Final Holdout"
+  },
+  "priority": [
+    "Initial TF-IDF retrieval misses",
+    "Large multi-module repositories"
+  ],
+  "methods": {
+    "E7-A": "e7-a-e6-development-baseline",
+    "E7-B": "e7-b-large-only-100"
+  },
+  "semantic_candidate_k": {
+    "E7-A": {"small": 50, "medium": 50, "large": 50},
+    "E7-B": {"small": 50, "medium": 50, "large": 100}
+  },
+  "shared_pipeline": {
+    "embedding_backend": "tfidf-sbert-rerank",
+    "file_aggregation_mode": "basic",
+    "symbol_expansion_mode": "symbol-definitions-api",
+    "call_graph_mode": "outgoing-top3",
+    "candidate_file_k": 20
+  },
+  "selection_rules": {
+    "minimum_recall_at_20_gain_percentage_points": 0.5,
+    "paired_95_ci_lower_bound_percentage_points": 0.0,
+    "maximum_hit_at_20_drop_percentage_points": 0.5,
+    "require_exactly_20_unique_files": true
+  }
+}

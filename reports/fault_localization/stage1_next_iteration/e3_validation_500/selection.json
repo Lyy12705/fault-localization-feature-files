@@ -1,0 +1,44 @@
+{
+  "stage": "E3 dotted-name leaf fallback",
+  "decision": "keep_legacy",
+  "selected_method": "e3-b-symbol-definitions",
+  "rejected_method": "e3-b-symbol-definitions-guarded",
+  "validation_rows": 500,
+  "holdout_used": false,
+  "acceptance_criteria": {
+    "minimum_recall_at_20_delta": 0.005,
+    "minimum_paired_ci_lower_bound": 0.0,
+    "maximum_hit_at_20_drop": 0.005,
+    "required_predictions": 500,
+    "required_unique_candidate_files": 20
+  },
+  "legacy": {
+    "hit_at_20": 0.914,
+    "recall_at_20": 0.8472155969634231,
+    "top_1_accuracy": 0.608,
+    "mrr_at_20": 0.7023764640588169,
+    "base_commit_reachable_recall_at_20": 0.8523476190476192
+  },
+  "guarded": {
+    "hit_at_20": 0.914,
+    "recall_at_20": 0.8455489302967564,
+    "top_1_accuracy": 0.612,
+    "mrr_at_20": 0.7042973090634855,
+    "base_commit_reachable_recall_at_20": 0.8506809523809524,
+    "recall_delta_vs_legacy": -0.0016666666666666666,
+    "recall_delta_bootstrap_95_ci": {
+      "lower": -0.004333,
+      "upper": 0.0
+    },
+    "hit_at_20_delta_vs_legacy": 0.0,
+    "top_1_delta_vs_legacy": 0.004,
+    "mrr_at_20_delta_vs_legacy": 0.0019208450046685342,
+    "passes_minimum_recall_delta": false,
+    "passes_ci_lower_bound": false,
+    "passes_hit_drop_limit": true,
+    "passes_execution_requirements": true,
+    "retain": false,
+    "classification": "not_retained"
+  },
+  "reason": "Guarded keeps Hit@20 unchanged and slightly raises Top-1/MRR@20, but Recall@20 falls by 0.17 percentage points. Its paired 95% confidence interval is -0.43 to 0.00 percentage points, and no Validation ticket gains Recall@20. It therefore fails the predeclared Recall improvement and confidence-interval criteria."
+}

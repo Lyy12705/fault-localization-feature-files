@@ -1,0 +1,439 @@
+{
+  "status": "ready",
+  "created_at_utc": "2026-09-01T13:35:06.960745+00:00",
+  "tickets": "data\\fault_localization\\swebench_live\\e8_holdout_v1\\final_holdout_tickets.jsonl",
+  "repo_cache_dir": "data\\fault_localization\\swebench_live\\e8_holdout_v1_repos",
+  "ticket_count": 100,
+  "repository_count": 53,
+  "base_commit_count": 100,
+  "reachable_count": 100,
+  "missing_count": 0,
+  "repositories": [
+    {
+      "repository": "Delgan/loguru",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "Kozea/WeasyPrint",
+      "ticket_count": 3,
+      "base_commit_count": 3,
+      "reachable_count": 3,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "PyPSA/PyPSA",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "ag2ai/faststream",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "aiogram/aiogram",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "apify/crawlee-python",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "arviz-devs/arviz",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "aws-cloudformation/cfn-lint",
+      "ticket_count": 14,
+      "base_commit_count": 14,
+      "reachable_count": 14,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "beetbox/beets",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "beeware/briefcase",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "bridgecrewio/checkov",
+      "ticket_count": 3,
+      "base_commit_count": 3,
+      "reachable_count": 3,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "cyclotruc/gitingest",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "deepset-ai/haystack",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "encode/starlette",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "falconry/falcon",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "fonttools/fonttools",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "geopandas/geopandas",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "huggingface/datasets",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "huggingface/smolagents",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "icloud-photos-downloader/icloud_photos_downloader",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "instructlab/instructlab",
+      "ticket_count": 3,
+      "base_commit_count": 3,
+      "reachable_count": 3,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "jarun/buku",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "jlowin/fastmcp",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "joke2k/faker",
+      "ticket_count": 3,
+      "base_commit_count": 3,
+      "reachable_count": 3,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "jupyterlab/jupyter-ai",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "kedro-org/kedro",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "keras-team/keras",
+      "ticket_count": 4,
+      "base_commit_count": 4,
+      "reachable_count": 4,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "koxudaxi/datamodel-code-generator",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "mikedh/trimesh",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "networktocode/ntc-templates",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "patroni/patroni",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pdm-project/pdm",
+      "ticket_count": 3,
+      "base_commit_count": 3,
+      "reachable_count": 3,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "privacyidea/privacyidea",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "projectmesa/mesa",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pvlib/pvlib-python",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pybamm-team/PyBaMM",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "python-attrs/attrs",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "python-babel/babel",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "python-control/python-control",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "python-poetry/poetry",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "python-telegram-bot/python-telegram-bot",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pytorch/torchtune",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "qtile/qtile",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "reflex-dev/reflex",
+      "ticket_count": 4,
+      "base_commit_count": 4,
+      "reachable_count": 4,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "run-llama/llama_deploy",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "shapely/shapely",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "sissbruecker/linkding",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "stanfordnlp/dspy",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "streamlink/streamlink",
+      "ticket_count": 4,
+      "base_commit_count": 4,
+      "reachable_count": 4,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "theOehrly/Fast-F1",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "wemake-services/wemake-python-styleguide",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "wireservice/csvkit",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "yt-dlp/yt-dlp",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    }
+  ],
+  "gold_accessed": false,
+  "evaluation_started": false
+}

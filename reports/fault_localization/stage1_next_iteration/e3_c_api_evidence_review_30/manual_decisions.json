@@ -1,0 +1,122 @@
+{
+  "astropy__astropy-14995": {
+    "classification": "irrelevant_mapping",
+    "reason": "Ticket重點是NDDataRef的mask傳遞；constant被對到constants套件，與錯誤流程無關。"
+  },
+  "astropy__astropy-12880": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "read/write確實是表格I/O入口，但證據指向通用ascii UI與core，本次修改位置是ecsv.py。"
+  },
+  "astropy__astropy-12962": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "HDU類別的重新匯出關係正確且與需求相關，但本次新增轉換邏輯位於ccddata.py。"
+  },
+  "astropy__astropy-14598": {
+    "classification": "irrelevant_mapping",
+    "reason": "Ticket中的fits套件名稱被錯對到units.format.Fits；真正問題在FITS Card。"
+  },
+  "astropy__astropy-14182": {
+    "classification": "correct_mapping",
+    "reason": "rst公開格式名稱直接連到Gold檔案astropy/io/ascii/rst.py。"
+  },
+  "astropy__astropy-13572": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "nutation_matrix確實委派matrix_product，但本次錯誤應修改wrapper所在的earth_orientation.py。"
+  },
+  "astropy__astropy-14528": {
+    "classification": "correct_mapping",
+    "reason": "ImageHDU公開名稱直接連到Gold檔案astropy/io/fits/hdu/image.py。"
+  },
+  "astropy__astropy-13465": {
+    "classification": "irrelevant_mapping",
+    "reason": "fits字樣被錯對到units格式類別，與FITSDiff容差計算無關。"
+  },
+  "astropy__astropy-13838": {
+    "classification": "irrelevant_mapping",
+    "reason": "程式片段中的p.group被錯對到FITS Group，與Table列印問題無關。"
+  },
+  "astropy__astropy-14539": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "BinTableHDU是問題涉及的資料型別，但本次比較邏輯修改在diff.py，不在table.py。"
+  },
+  "astropy__astropy-14701": {
+    "classification": "irrelevant_mapping",
+    "reason": "io.html來自說明中的文件網址，錯對到ascii HTML，與Cosmology latex輸出無關。"
+  },
+  "astropy__astropy-12825": {
+    "classification": "correct_mapping",
+    "reason": "group_by wrapper直接連到Gold檔案astropy/table/groups.py。"
+  },
+  "astropy__astropy-13234": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "Table read/write是序列化入口，但證據只連到通用ascii I/O，本次修改在table/serialize.py。"
+  },
+  "astropy__astropy-13933": {
+    "classification": "irrelevant_mapping",
+    "reason": "Angle.to_string被同名碰撞到OGIP單位格式器，並非Ticket中的Angle實作。"
+  },
+  "astropy__astropy-13477": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "ICRS是比較案例使用的座標框架，重新匯出關係正確，但修改點在baseframe與sky_coordinate。"
+  },
+  "astropy__astropy-7973": {
+    "classification": "irrelevant_mapping",
+    "reason": "fits名稱再次被錯對到units.format.Fits，與WCS資料尺寸記錄無關。"
+  },
+  "astropy__astropy-14413": {
+    "classification": "correct_mapping",
+    "reason": "Unicode與Console公開格式名稱直接連到兩個Gold修改檔案。"
+  },
+  "astropy__astropy-13417": {
+    "classification": "correct_mapping",
+    "reason": "FITS_rec重新匯出直接連到Gold檔案astropy/io/fits/fitsrec.py。"
+  },
+  "astropy__astropy-13306": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "vstack是問題的公開操作，連到operations.py的關係正確，但實際修正位於utils/metadata.py。"
+  },
+  "astropy__astropy-13073": {
+    "classification": "correct_mapping",
+    "reason": "ASCII讀取流程的wrapper證據連到Gold檔案astropy/io/ascii/core.py。"
+  },
+  "astropy__astropy-14702": {
+    "classification": "correct_mapping",
+    "reason": "VOTable公開名稱連到Gold檔案astropy/io/votable/tree.py。"
+  },
+  "django__django-15018": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "BaseCommand是call_command流程中的有效API，來源檔即Gold，但底層base.py不是本次修改位置。"
+  },
+  "django__django-11356": {
+    "classification": "correct_mapping",
+    "reason": "ForeignKey重新匯出直接連到Gold檔案django/db/models/fields/related.py。"
+  },
+  "django__django-15098": {
+    "classification": "irrelevant_mapping",
+    "reason": "HttpResponse只出現在重現範例，與語系解析錯誤及translation實作無關。"
+  },
+  "django__django-15483": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "ModelAdmin與register是相關admin公開API，但AppAdmin功能的修改位置是sites.py。"
+  },
+  "django__django-11749": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "CommandError是call_command錯誤路徑的有效API，來源檔為Gold，但base.py並非修改點。"
+  },
+  "django__django-12961": {
+    "classification": "irrelevant_mapping",
+    "reason": "timezone.now只是查詢範例中的運算式，錯誤核心是union後的order_by編譯。"
+  },
+  "django__django-13267": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "ForeignKey是錯誤情境的核心欄位API，但本次修正是Model實例化流程的base.py。"
+  },
+  "django__django-17045": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "NoReverseMatch是錯誤表現且重新匯出關係正確，但應修改RoutePattern所在的resolvers.py。"
+  },
+  "django__django-13401": {
+    "classification": "relationship_correct_not_modified",
+    "reason": "Model基底類別與抽象模型情境相關，但本次欄位相等性修正在fields/__init__.py。"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "rows": 43,
+  "gold_rows": 43,
+  "prediction_rows": 43,
+  "matched_prediction_rows": 43,
+  "missing_prediction_rows": 0,
+  "rows_with_file_ground_truth": 43,
+  "rows_with_symbol_ground_truth": 0,
+  "candidate_k": 20,
+  "rows_with_stage1_candidates": 43,
+  "rows_missing_stage1_output": 0,
+  "candidate_hit_at_20": 0.8372093023255814,
+  "candidate_recall_at_20": 0.7702104097452935,
+  "average_candidate_count_at_20": 20.0,
+  "candidate_outcomes_at_20": {
+    "full_recall_rows": 31,
+    "partial_recall_rows": 5,
+    "miss_rows": 7
+  },
+  "candidate_outcome_ticket_ids_at_20": {
+    "full_recall": [
+      "sphinx-doc__sphinx-10021",
+      "sphinx-doc__sphinx-8037",
+      "sphinx-doc__sphinx-10757",
+      "sphinx-doc__sphinx-8951",
+      "sphinx-doc__sphinx-11266",
+      "sphinx-doc__sphinx-8058",
+      "sphinx-doc__sphinx-11550",
+      "sphinx-doc__sphinx-7910",
+      "sphinx-doc__sphinx-10191",
+      "sphinx-doc__sphinx-10551",
+      "sphinx-doc__sphinx-9799",
+      "sphinx-doc__sphinx-7889",
+      "sphinx-doc__sphinx-9711",
+      "sphinx-doc__sphinx-9350",
+      "sphinx-doc__sphinx-8684",
+      "sphinx-doc__sphinx-9261",
+      "sphinx-doc__sphinx-9464",
+      "sphinx-doc__sphinx-9309",
+      "sphinx-doc__sphinx-8269",
+      "sphinx-doc__sphinx-10457",
+      "sphinx-doc__sphinx-8969",
+      "sphinx-doc__sphinx-8548",
+      "sphinx-doc__sphinx-9591",
+      "sphinx-doc__sphinx-9665",
+      "sphinx-doc__sphinx-10481",
+      "sphinx-doc__sphinx-9673",
+      "sphinx-doc__sphinx-8731",
+      "sphinx-doc__sphinx-10360",
+      "sphinx-doc__sphinx-8481",
+      "sphinx-doc__sphinx-10137",
+      "sphinx-doc__sphinx-9654"
+    ],
+    "partial_recall": [
+      "sphinx-doc__sphinx-8674",
+      "sphinx-doc__sphinx-10207",
+      "sphinx-doc__sphinx-7356",
+      "sphinx-doc__sphinx-9997",
+      "sphinx-doc__sphinx-9459"
+    ],
+    "miss": [
+      "sphinx-doc__sphinx-8278",
+      "sphinx-doc__sphinx-8265",
+      "sphinx-doc__sphinx-9987",
+      "sphinx-doc__sphinx-10353",
+      "sphinx-doc__sphinx-11510",
+      "sphinx-doc__sphinx-7930",
+      "sphinx-doc__sphinx-8075"
+    ]
+  },
+  "candidate_bootstrap_95_ci": {
+    "samples": 2000,
+    "seed": 42,
+    "candidate_hit_at_20": {
+      "lower": 0.72093,
+      "upper": 0.930233
+    },
+    "candidate_recall_at_20": {
+      "lower": 0.650055,
+      "upper": 0.878738
+    }
+  },
+  "file_top_1_accuracy": 0.4418604651162791,
+  "file_top_3_accuracy": 0.5813953488372093,
+  "file_top_5_accuracy": 0.6976744186046512,
+  "file_mrr": 0.5282945736434108,
+  "symbol_top_1_accuracy": 0.0,
+  "symbol_top_3_accuracy": 0.0,
+  "symbol_top_5_accuracy": 0.0,
+  "symbol_mrr": 0.0,
+  "rows_with_ground_truth": 43,
+  "top_1_accuracy": 0.4418604651162791,
+  "top_3_accuracy": 0.5813953488372093,
+  "top_5_accuracy": 0.6976744186046512,
+  "mrr": 0.5282945736434108,
+  "base_commit_reachable_evaluation": {
+    "rows_with_reachable_file_ground_truth": 43,
+    "candidate_hit_at_20": 0.8372093023255814,
+    "candidate_recall_at_20": 0.7702104097452935,
+    "unreachable_gold_file_count": 0,
+    "unreachable_gold_files_by_ticket": {},
+    "bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 44,
+      "candidate_hit_at_20": {
+        "lower": 0.72093,
+        "upper": 0.930233
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.652824,
+        "upper": 0.883721
+      }
+    },
+    "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+  },
+  "missing_file_ground_truth_rows": 0,
+  "missing_symbol_ground_truth_rows": 43,
+  "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  }
+}

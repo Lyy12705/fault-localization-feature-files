@@ -1,0 +1,54 @@
+{
+  "protocol": "swebench-full-stage1-final-holdout-v2",
+  "status": "prepared_not_evaluated",
+  "created_at_utc": "2026-09-01T09:49:37.835518+00:00",
+  "dataset": "princeton-nlp/SWE-bench",
+  "source_split": "train",
+  "source_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench",
+  "source_parquet_url": "https://huggingface.co/datasets/princeton-nlp/SWE-bench/resolve/main/data/train-00000-of-00001.parquet",
+  "source_rows": 19008,
+  "eligible_repository_disjoint_rows": 27,
+  "selected_rows": 27,
+  "selected_repositories": 4,
+  "repository_counts": {
+    "JohnSnowLabs/spark-nlp": 3,
+    "apache/mxnet": 5,
+    "kubeflow/pipelines": 14,
+    "python/typeshed": 5
+  },
+  "selection_policy": {
+    "seed": "swebench-full-stage1-e7-unseen-holdout-v1-20260901",
+    "repository_exclusion": "Exclude every repository present in the complete seen-ticket artifact.",
+    "ticket_exclusion": "Exclude every ticket ID in the complete seen-ticket artifact.",
+    "sampling": "Deterministic repository-stratified proportional sampling using only instance_id and repository; patch and gold contents are not selection features."
+  },
+  "leakage_checks": {
+    "ticket_id_overlap_with_seen": 0,
+    "repository_overlap_with_seen": 0,
+    "unique_selected_ticket_ids": true
+  },
+  "artifacts": {
+    "source_parquet": {
+      "path": "data\\fault_localization\\swebench_full\\raw\\train-00000-of-00001.parquet",
+      "bytes": 106606519,
+      "sha256": "0ba403a7060af657e1f0476937a703726c07da15b759836694b16e553705a10f"
+    },
+    "seen_tickets": {
+      "path": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1\\seen_tickets_all_prior.jsonl",
+      "bytes": 39498411,
+      "sha256": "2d54302607b5ecf69934ce9fc56a58ac541a9c84065154b23ad62cca25fa5418"
+    },
+    "tickets": {
+      "path": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1\\final_holdout_tickets.jsonl",
+      "bytes": 124271,
+      "sha256": "f3e5ba534bd84041ec1cb44f0a6fec5e2bc7a0712b2dd8a7e14ebfadefe77649"
+    },
+    "sealed_gold": {
+      "path": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1\\sealed\\final_holdout_gold.jsonl",
+      "bytes": 13990,
+      "sha256": "65f5ae4da3ad623ec2fa1de3fab2e0fb0319e1728eb6b1da926c179f84472a73"
+    }
+  },
+  "gold_access_policy": "Do not inspect sealed gold before prediction completes. The one-time runner may use it only for final metric calculation after the frozen method produces predictions.",
+  "evaluation_policy": "Execute the frozen method once. Do not tune, rerank, or rerun based on these results."
+}

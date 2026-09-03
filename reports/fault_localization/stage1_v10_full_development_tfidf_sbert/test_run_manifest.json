@@ -1,0 +1,311 @@
+{
+  "started_at_utc": "2026-08-15T14:09:32.288481+00:00",
+  "completed_at_utc": "2026-08-15T14:22:58.579140+00:00",
+  "method_id": "tfidf-sbert-rerank-e764f9ff47dd",
+  "method": {
+    "method_version": "fault-localization-method-v10",
+    "embedding_backend": "tfidf-sbert-rerank",
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000
+  },
+  "tickets_selected": 210,
+  "predictions": 210,
+  "failures": 0,
+  "processed_this_run": 210,
+  "skipped_existing": 0,
+  "index_cache_hits": 0,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/stage1_v10_full_development_tfidf_sbert/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/stage1_v10_full_development_tfidf_sbert/test_metrics.json",
+  "failures_output": "reports/fault_localization/stage1_v10_full_development_tfidf_sbert/test_failures.jsonl",
+  "metrics": {
+    "rows": 210,
+    "gold_rows": 210,
+    "prediction_rows": 210,
+    "matched_prediction_rows": 210,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 210,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 210,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.8238095238095238,
+    "candidate_recall_at_20": 0.8238095238095238,
+    "average_candidate_count_at_20": 12.566666666666666,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 173,
+      "partial_recall_rows": 0,
+      "miss_rows": 37
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.771429,
+        "upper": 0.87619
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.771429,
+        "upper": 0.871429
+      }
+    },
+    "file_top_1_accuracy": 0.5285714285714286,
+    "file_top_3_accuracy": 0.7238095238095238,
+    "file_top_5_accuracy": 0.7761904761904762,
+    "file_mrr": 0.6317460317460316,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 210,
+    "top_1_accuracy": 0.5285714285714286,
+    "top_3_accuracy": 0.7238095238095238,
+    "top_5_accuracy": 0.7761904761904762,
+    "mrr": 0.6317460317460316,
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 210,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "per_repository": {
+      "django/django": {
+        "rows": 114,
+        "candidate_hit_at_20": 0.8596491228070176,
+        "candidate_recall_at_20": 0.8596491228070176,
+        "average_candidate_count_at_20": 13.070175438596491,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 98,
+          "partial_recall_rows": 0,
+          "miss_rows": 16
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.789474,
+            "upper": 0.921053
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.789474,
+            "upper": 0.921053
+          }
+        },
+        "file_top_1_accuracy": 0.5614035087719298,
+        "file_top_3_accuracy": 0.7631578947368421,
+        "file_top_5_accuracy": 0.8157894736842105,
+        "file_mrr": 0.6678362573099415
+      },
+      "matplotlib/matplotlib": {
+        "rows": 23,
+        "candidate_hit_at_20": 0.7391304347826086,
+        "candidate_recall_at_20": 0.7391304347826086,
+        "average_candidate_count_at_20": 10.043478260869565,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 17,
+          "partial_recall_rows": 0,
+          "miss_rows": 6
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.521739,
+            "upper": 0.913043
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.565217,
+            "upper": 0.913043
+          }
+        },
+        "file_top_1_accuracy": 0.5652173913043478,
+        "file_top_3_accuracy": 0.7391304347826086,
+        "file_top_5_accuracy": 0.7391304347826086,
+        "file_mrr": 0.644927536231884
+      },
+      "psf/requests": {
+        "rows": 6,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 10.833333333333334,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 6,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.3333333333333333,
+        "file_top_3_accuracy": 0.8333333333333334,
+        "file_top_5_accuracy": 0.8333333333333334,
+        "file_mrr": 0.5833333333333334
+      },
+      "pydata/xarray": {
+        "rows": 5,
+        "candidate_hit_at_20": 0.8,
+        "candidate_recall_at_20": 0.8,
+        "average_candidate_count_at_20": 6.8,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 4,
+          "partial_recall_rows": 0,
+          "miss_rows": 1
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.4,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.4,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.6,
+        "file_top_3_accuracy": 0.8,
+        "file_top_5_accuracy": 0.8,
+        "file_mrr": 0.6666666666666667
+      },
+      "pylint-dev/pylint": {
+        "rows": 6,
+        "candidate_hit_at_20": 0.5,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 16.833333333333332,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 3,
+          "partial_recall_rows": 0,
+          "miss_rows": 3
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.166667,
+            "upper": 0.833333
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.166667,
+            "upper": 0.833333
+          }
+        },
+        "file_top_1_accuracy": 0.5,
+        "file_top_3_accuracy": 0.5,
+        "file_top_5_accuracy": 0.5,
+        "file_mrr": 0.5
+      },
+      "pytest-dev/pytest": {
+        "rows": 17,
+        "candidate_hit_at_20": 0.7058823529411765,
+        "candidate_recall_at_20": 0.7058823529411765,
+        "average_candidate_count_at_20": 12.411764705882353,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 12,
+          "partial_recall_rows": 0,
+          "miss_rows": 5
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.470588,
+            "upper": 0.941176
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.470588,
+            "upper": 0.882353
+          }
+        },
+        "file_top_1_accuracy": 0.29411764705882354,
+        "file_top_3_accuracy": 0.47058823529411764,
+        "file_top_5_accuracy": 0.5882352941176471,
+        "file_mrr": 0.4088235294117647
+      },
+      "scikit-learn/scikit-learn": {
+        "rows": 23,
+        "candidate_hit_at_20": 0.9130434782608695,
+        "candidate_recall_at_20": 0.9130434782608695,
+        "average_candidate_count_at_20": 12.08695652173913,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 21,
+          "partial_recall_rows": 0,
+          "miss_rows": 2
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.782609,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.782609,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.6086956521739131,
+        "file_top_3_accuracy": 0.782608695652174,
+        "file_top_5_accuracy": 0.9130434782608695,
+        "file_mrr": 0.713768115942029
+      },
+      "sphinx-doc/sphinx": {
+        "rows": 16,
+        "candidate_hit_at_20": 0.75,
+        "candidate_recall_at_20": 0.75,
+        "average_candidate_count_at_20": 14.3125,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 12,
+          "partial_recall_rows": 0,
+          "miss_rows": 4
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.5,
+            "upper": 0.9375
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.9375
+          }
+        },
+        "file_top_1_accuracy": 0.4375,
+        "file_top_3_accuracy": 0.625,
+        "file_top_5_accuracy": 0.625,
+        "file_mrr": 0.53125
+      }
+    },
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "rows": 2,
+  "gold_rows": 2,
+  "prediction_rows": 2,
+  "matched_prediction_rows": 2,
+  "missing_prediction_rows": 0,
+  "rows_with_file_ground_truth": 2,
+  "rows_with_symbol_ground_truth": 0,
+  "candidate_k": 20,
+  "rows_with_stage1_candidates": 2,
+  "rows_missing_stage1_output": 0,
+  "candidate_hit_at_20": 1.0,
+  "candidate_recall_at_20": 1.0,
+  "average_candidate_count_at_20": 20.0,
+  "candidate_outcomes_at_20": {
+    "full_recall_rows": 2,
+    "partial_recall_rows": 0,
+    "miss_rows": 0
+  },
+  "candidate_outcome_ticket_ids_at_20": {
+    "full_recall": [
+      "pytest-dev__pytest-10624",
+      "pytest-dev__pytest-6926"
+    ],
+    "partial_recall": [],
+    "miss": []
+  },
+  "candidate_bootstrap_95_ci": {
+    "samples": 2000,
+    "seed": 42,
+    "candidate_hit_at_20": {
+      "lower": 1.0,
+      "upper": 1.0
+    },
+    "candidate_recall_at_20": {
+      "lower": 1.0,
+      "upper": 1.0
+    }
+  },
+  "file_top_1_accuracy": 1.0,
+  "file_top_3_accuracy": 1.0,
+  "file_top_5_accuracy": 1.0,
+  "file_mrr": 1.0,
+  "symbol_top_1_accuracy": 0.0,
+  "symbol_top_3_accuracy": 0.0,
+  "symbol_top_5_accuracy": 0.0,
+  "symbol_mrr": 0.0,
+  "rows_with_ground_truth": 2,
+  "top_1_accuracy": 1.0,
+  "top_3_accuracy": 1.0,
+  "top_5_accuracy": 1.0,
+  "mrr": 1.0,
+  "base_commit_reachable_evaluation": {
+    "rows_with_reachable_file_ground_truth": 2,
+    "candidate_hit_at_20": 1.0,
+    "candidate_recall_at_20": 1.0,
+    "unreachable_gold_file_count": 0,
+    "unreachable_gold_files_by_ticket": {},
+    "bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 44,
+      "candidate_hit_at_20": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 1.0,
+        "upper": 1.0
+      }
+    },
+    "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+  },
+  "missing_file_ground_truth_rows": 0,
+  "missing_symbol_ground_truth_rows": 2,
+  "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  }
+}

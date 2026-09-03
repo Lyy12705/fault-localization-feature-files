@@ -1,0 +1,12 @@
+{"repo": "astropy/astropy", "repository_url": "https://github.com/astropy/astropy", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/astropy__astropy"}
+{"repo": "django/django", "repository_url": "https://github.com/django/django", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/django__django"}
+{"repo": "matplotlib/matplotlib", "repository_url": "https://github.com/matplotlib/matplotlib", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/matplotlib__matplotlib"}
+{"repo": "mwaskom/seaborn", "repository_url": "https://github.com/mwaskom/seaborn", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/mwaskom__seaborn"}
+{"repo": "pallets/flask", "repository_url": "https://github.com/pallets/flask", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/pallets__flask"}
+{"repo": "psf/requests", "repository_url": "https://github.com/psf/requests", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/psf__requests"}
+{"repo": "pydata/xarray", "repository_url": "https://github.com/pydata/xarray", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/pydata__xarray"}
+{"repo": "pylint-dev/pylint", "repository_url": "https://github.com/pylint-dev/pylint", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/pylint-dev__pylint"}
+{"repo": "pytest-dev/pytest", "repository_url": "https://github.com/pytest-dev/pytest", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/pytest-dev__pytest"}
+{"repo": "scikit-learn/scikit-learn", "repository_url": "https://github.com/scikit-learn/scikit-learn", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/scikit-learn__scikit-learn"}
+{"repo": "sphinx-doc/sphinx", "repository_url": "https://github.com/sphinx-doc/sphinx", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/sphinx-doc__sphinx"}
+{"repo": "sympy/sympy", "repository_url": "https://github.com/sympy/sympy", "suggested_cache_dir": "data/fault_localization/swebench_lite/repos/sympy__sympy"}

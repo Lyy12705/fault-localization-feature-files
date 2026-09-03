@@ -1,0 +1,102 @@
+{
+  "started_at_utc": "2026-08-16T17:57:29.328700+00:00",
+  "completed_at_utc": "2026-08-16T17:57:39.706723+00:00",
+  "method_id": "tfidf-00b0ca0e9ba9",
+  "method": {
+    "method_version": "fault-localization-method-v11",
+    "embedding_backend": "tfidf",
+    "sbert_model": "",
+    "semantic_candidate_k": 0,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20
+  },
+  "frozen_protocol": "",
+  "tickets_selected": 1,
+  "predictions": 1,
+  "failures": 0,
+  "processed_this_run": 1,
+  "skipped_existing": 0,
+  "index_cache_hits": 1,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/swebench_full_smoke_optimized/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/swebench_full_smoke_optimized/test_metrics.json",
+  "failures_output": "reports/fault_localization/swebench_full_smoke_optimized/test_failures.jsonl",
+  "metrics": {
+    "rows": 1,
+    "gold_rows": 1,
+    "prediction_rows": 1,
+    "matched_prediction_rows": 1,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 1,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 1,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 1.0,
+    "candidate_recall_at_20": 1.0,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 1,
+      "partial_recall_rows": 0,
+      "miss_rows": 0
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "astropy__astropy-7166"
+      ],
+      "partial_recall": [],
+      "miss": []
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 1.0,
+        "upper": 1.0
+      }
+    },
+    "file_top_1_accuracy": 1.0,
+    "file_top_3_accuracy": 1.0,
+    "file_top_5_accuracy": 1.0,
+    "file_mrr": 1.0,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 1,
+    "top_1_accuracy": 1.0,
+    "top_3_accuracy": 1.0,
+    "top_5_accuracy": 1.0,
+    "mrr": 1.0,
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 1,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}

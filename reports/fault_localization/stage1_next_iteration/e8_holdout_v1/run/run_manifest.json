@@ -1,0 +1,3861 @@
+{
+  "protocol": "swebench-full-stage1-protocol-v1",
+  "started_at_utc": "2026-09-01T13:47:15.549259+00:00",
+  "prediction_phase_completed_at_utc": "2026-09-01T13:47:25.585752+00:00",
+  "completed_at_utc": "2026-09-01T13:47:35.207630+00:00",
+  "wall_seconds": 19.659,
+  "method_label": "e8-a-source-extension-contract",
+  "method_id": "tfidf-sbert-rerank-a075b6f2b2d3",
+  "method": {
+    "advanced_file_aggregation": false,
+    "api_implementation_parameters": {
+      "max_links_per_symbol": 4,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_wrapper_statements": 4,
+      "reexport_bonus": 0.04,
+      "wrapper_bonus": 0.05
+    },
+    "call_graph_mode": "outgoing-top3",
+    "call_graph_parameters": {
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_signal": 0.9,
+      "maximum_target_files_per_reference": 8,
+      "outgoing_signal": 0.9,
+      "rank_decay": 0.08,
+      "reference_file_k": 3
+    },
+    "candidate_file_k": 20,
+    "chunk_lines": 80,
+    "domain_path_routing": false,
+    "embedding_backend": "tfidf-sbert-rerank",
+    "file_aggregation": true,
+    "file_aggregation_mode": "basic",
+    "file_aggregation_parameters": {
+      "evidence_score_ratio": 0.8,
+      "max_evidence_chunks": 5,
+      "minimum_evidence_score": 0.05,
+      "package_bonus_cap": 0.1,
+      "support_bonus_cap": 0.05,
+      "support_bonus_per_additional_chunk": 0.0125,
+      "symbol_bonus_cap": 0.04,
+      "symbol_bonus_per_additional_symbol": 0.01
+    },
+    "generic_routing": false,
+    "import_graph_mode": "off",
+    "import_graph_parameters": {
+      "incoming_signal": 0.65,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_signal": 0.8,
+      "outgoing_signal": 0.8,
+      "rank_decay": 0.08,
+      "reference_file_k": 5
+    },
+    "include_tests": false,
+    "llm_candidate_k": 0,
+    "llm_rerank": false,
+    "max_file_bytes": 500000,
+    "method_version": "fault-localization-method-v20",
+    "min_ticket_chars": 20,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "overlap_lines": 20,
+    "repository_proximity": false,
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "symbol_expansion_mode": "symbol-definitions-api",
+    "symbol_expansion_parameters": {
+      "exact_match_bonus": 0.06,
+      "leaf_match_bonus": 0.04,
+      "max_files_per_symbol": 4,
+      "max_ticket_symbols": 20,
+      "maximum_bonus": 0.1,
+      "maximum_evidence_per_file": 4
+    },
+    "top_k": 5
+  },
+  "tickets_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1\\final_holdout_tickets.jsonl",
+  "gold_path": "data\\fault_localization\\swebench_live\\e8_holdout_v1\\sealed\\final_holdout_gold.jsonl",
+  "tickets": 100,
+  "predictions": 100,
+  "failures": 0,
+  "repositories": 53,
+  "max_workers": 4,
+  "predictions_output": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\predictions.jsonl",
+  "metrics_output": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\metrics.json",
+  "failures_output": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\failures.jsonl",
+  "repository_runs": [
+    {
+      "repository": "Delgan/loguru",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\Delgan_loguru\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\Delgan_loguru\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "Kozea/WeasyPrint",
+      "tickets": 3,
+      "returncode": 0,
+      "predictions": 3,
+      "failures": 0,
+      "wall_seconds": 0.122,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\Kozea_WeasyPrint\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\Kozea_WeasyPrint\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "PyPSA/PyPSA",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\PyPSA_PyPSA\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\PyPSA_PyPSA\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "ag2ai/faststream",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\ag2ai_faststream\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\ag2ai_faststream\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "aiogram/aiogram",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.112,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\aiogram_aiogram\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\aiogram_aiogram\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "apify/crawlee-python",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.112,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\apify_crawlee-python\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\apify_crawlee-python\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "arviz-devs/arviz",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.11,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\arviz-devs_arviz\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\arviz-devs_arviz\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "aws-cloudformation/cfn-lint",
+      "tickets": 14,
+      "returncode": 0,
+      "predictions": 14,
+      "failures": 0,
+      "wall_seconds": 0.129,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\aws-cloudformation_cfn-lint\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\aws-cloudformation_cfn-lint\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "beetbox/beets",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.113,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\beetbox_beets\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\beetbox_beets\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "beeware/briefcase",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\beeware_briefcase\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\beeware_briefcase\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "bridgecrewio/checkov",
+      "tickets": 3,
+      "returncode": 0,
+      "predictions": 3,
+      "failures": 0,
+      "wall_seconds": 0.118,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\bridgecrewio_checkov\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\bridgecrewio_checkov\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "cyclotruc/gitingest",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.114,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\cyclotruc_gitingest\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\cyclotruc_gitingest\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "deepset-ai/haystack",
+      "tickets": 5,
+      "returncode": 0,
+      "predictions": 5,
+      "failures": 0,
+      "wall_seconds": 0.12,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\deepset-ai_haystack\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\deepset-ai_haystack\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "encode/starlette",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.112,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\encode_starlette\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\encode_starlette\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "falconry/falcon",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.111,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\falconry_falcon\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\falconry_falcon\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "fonttools/fonttools",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.116,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\fonttools_fonttools\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\fonttools_fonttools\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "geopandas/geopandas",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.112,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\geopandas_geopandas\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\geopandas_geopandas\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "huggingface/datasets",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.11,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\huggingface_datasets\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\huggingface_datasets\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "huggingface/smolagents",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.106,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\huggingface_smolagents\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\huggingface_smolagents\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "icloud-photos-downloader/icloud_photos_downloader",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 9.169,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\icloud-photos-downloader_icloud_photos_downloader\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\icloud-photos-downloader_icloud_photos_downloader\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "instructlab/instructlab",
+      "tickets": 3,
+      "returncode": 0,
+      "predictions": 3,
+      "failures": 0,
+      "wall_seconds": 0.12,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\instructlab_instructlab\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\instructlab_instructlab\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "jarun/buku",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.119,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\jarun_buku\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\jarun_buku\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "jlowin/fastmcp",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.119,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\jlowin_fastmcp\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\jlowin_fastmcp\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "joke2k/faker",
+      "tickets": 3,
+      "returncode": 0,
+      "predictions": 3,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\joke2k_faker\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\joke2k_faker\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "jupyterlab/jupyter-ai",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.113,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\jupyterlab_jupyter-ai\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\jupyterlab_jupyter-ai\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "kedro-org/kedro",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.112,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\kedro-org_kedro\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\kedro-org_kedro\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "keras-team/keras",
+      "tickets": 4,
+      "returncode": 0,
+      "predictions": 4,
+      "failures": 0,
+      "wall_seconds": 0.129,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\keras-team_keras\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\keras-team_keras\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "koxudaxi/datamodel-code-generator",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\koxudaxi_datamodel-code-generator\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\koxudaxi_datamodel-code-generator\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "mikedh/trimesh",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.114,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\mikedh_trimesh\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\mikedh_trimesh\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "networktocode/ntc-templates",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.112,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\networktocode_ntc-templates\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\networktocode_ntc-templates\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "patroni/patroni",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.111,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\patroni_patroni\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\patroni_patroni\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "pdm-project/pdm",
+      "tickets": 3,
+      "returncode": 0,
+      "predictions": 3,
+      "failures": 0,
+      "wall_seconds": 0.114,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\pdm-project_pdm\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\pdm-project_pdm\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "privacyidea/privacyidea",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.111,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\privacyidea_privacyidea\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\privacyidea_privacyidea\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "projectmesa/mesa",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.11,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\projectmesa_mesa\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\projectmesa_mesa\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "pvlib/pvlib-python",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\pvlib_pvlib-python\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\pvlib_pvlib-python\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "pybamm-team/PyBaMM",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.114,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\pybamm-team_PyBaMM\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\pybamm-team_PyBaMM\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "python-attrs/attrs",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.111,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\python-attrs_attrs\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\python-attrs_attrs\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "python-babel/babel",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.117,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\python-babel_babel\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\python-babel_babel\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "python-control/python-control",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.113,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\python-control_python-control\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\python-control_python-control\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "python-poetry/poetry",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.11,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\python-poetry_poetry\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\python-poetry_poetry\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "python-telegram-bot/python-telegram-bot",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.114,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\python-telegram-bot_python-telegram-bot\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\python-telegram-bot_python-telegram-bot\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "pytorch/torchtune",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.118,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\pytorch_torchtune\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\pytorch_torchtune\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "qtile/qtile",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.117,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\qtile_qtile\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\qtile_qtile\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "reflex-dev/reflex",
+      "tickets": 4,
+      "returncode": 0,
+      "predictions": 4,
+      "failures": 0,
+      "wall_seconds": 0.125,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\reflex-dev_reflex\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\reflex-dev_reflex\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "run-llama/llama_deploy",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.114,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\run-llama_llama_deploy\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\run-llama_llama_deploy\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "shapely/shapely",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.114,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\shapely_shapely\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\shapely_shapely\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "sissbruecker/linkding",
+      "tickets": 2,
+      "returncode": 0,
+      "predictions": 2,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\sissbruecker_linkding\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\sissbruecker_linkding\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "stanfordnlp/dspy",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\stanfordnlp_dspy\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\stanfordnlp_dspy\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "streamlink/streamlink",
+      "tickets": 4,
+      "returncode": 0,
+      "predictions": 4,
+      "failures": 0,
+      "wall_seconds": 0.126,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\streamlink_streamlink\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\streamlink_streamlink\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "theOehrly/Fast-F1",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.114,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\theOehrly_Fast-F1\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\theOehrly_Fast-F1\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "wemake-services/wemake-python-styleguide",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\wemake-services_wemake-python-styleguide\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\wemake-services_wemake-python-styleguide\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "wireservice/csvkit",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.115,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\wireservice_csvkit\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\wireservice_csvkit\\run\\test_run_manifest.json"
+    },
+    {
+      "repository": "yt-dlp/yt-dlp",
+      "tickets": 1,
+      "returncode": 0,
+      "predictions": 1,
+      "failures": 0,
+      "wall_seconds": 0.111,
+      "log": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\yt-dlp_yt-dlp\\run.log",
+      "manifest": "reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\run\\shards\\yt-dlp_yt-dlp\\run\\test_run_manifest.json"
+    }
+  ],
+  "evaluation_order": {
+    "prediction_only_shards": true,
+    "predictions_completed_before_gold_access": true,
+    "sealed_gold_accessed_during_ranking": false
+  },
+  "metrics": {
+    "rows": 100,
+    "gold_rows": 100,
+    "prediction_rows": 100,
+    "matched_prediction_rows": 100,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 100,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 100,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.89,
+    "candidate_recall_at_20": 0.6888731751340448,
+    "average_candidate_count_at_20": 19.81,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 51,
+      "partial_recall_rows": 38,
+      "miss_rows": 11
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "kozea__weasyprint-2300",
+        "kozea__weasyprint-2326",
+        "kozea__weasyprint-2404",
+        "apify__crawlee-python-1155",
+        "arviz-devs__arviz-2404",
+        "aws-cloudformation__cfn-lint-3817",
+        "aws-cloudformation__cfn-lint-3764",
+        "aws-cloudformation__cfn-lint-4045",
+        "aws-cloudformation__cfn-lint-3639",
+        "aws-cloudformation__cfn-lint-4002",
+        "aws-cloudformation__cfn-lint-3875",
+        "aws-cloudformation__cfn-lint-4023",
+        "aws-cloudformation__cfn-lint-3759",
+        "bridgecrewio__checkov-7119",
+        "bridgecrewio__checkov-7124",
+        "bridgecrewio__checkov-7002",
+        "cyclotruc__gitingest-134",
+        "encode__starlette-2812",
+        "huggingface__datasets-7522",
+        "huggingface__smolagents-285",
+        "instructlab__instructlab-3118",
+        "joke2k__faker-2175",
+        "joke2k__faker-2104",
+        "keras-team__keras-20120",
+        "koxudaxi__datamodel-code-generator-2327",
+        "koxudaxi__datamodel-code-generator-2293",
+        "patroni__patroni-3119",
+        "privacyidea__privacyidea-4247",
+        "projectmesa__mesa-2523",
+        "python-babel__babel-1163",
+        "python-babel__babel-1126",
+        "python-control__python-control-1104",
+        "python-control__python-control-1138",
+        "python-poetry__poetry-10324",
+        "pytorch__torchtune-2560",
+        "pytorch__torchtune-1697",
+        "qtile__qtile-4991",
+        "reflex-dev__reflex-4230",
+        "reflex-dev__reflex-4620",
+        "reflex-dev__reflex-5081",
+        "run-llama__llama_deploy-397",
+        "shapely__shapely-2255",
+        "sissbruecker__linkding-989",
+        "sissbruecker__linkding-993",
+        "stanfordnlp__dspy-1472",
+        "streamlink__streamlink-6328",
+        "streamlink__streamlink-6207",
+        "streamlink__streamlink-6420",
+        "streamlink__streamlink-6397",
+        "theoehrly__fast-f1-701",
+        "yt-dlp__yt-dlp-11880"
+      ],
+      "partial_recall": [
+        "delgan__loguru-1236",
+        "pypsa__pypsa-1172",
+        "ag2ai__faststream-1796",
+        "aiogram__aiogram-1585",
+        "aws-cloudformation__cfn-lint-3563",
+        "beetbox__beets-5437",
+        "beeware__briefcase-2125",
+        "beeware__briefcase-2035",
+        "deepset-ai__haystack-9270",
+        "deepset-ai__haystack-8609",
+        "deepset-ai__haystack-8879",
+        "deepset-ai__haystack-8708",
+        "falconry__falcon-2450",
+        "falconry__falcon-2426",
+        "fonttools__fonttools-3726",
+        "geopandas__geopandas-3502",
+        "icloud-photos-downloader__icloud_photos_downloader-1082",
+        "instructlab__instructlab-3125",
+        "instructlab__instructlab-1762",
+        "jarun__buku-778",
+        "jlowin__fastmcp-279",
+        "joke2k__faker-2203",
+        "jupyterlab__jupyter-ai-943",
+        "kedro-org__kedro-4092",
+        "keras-team__keras-20880",
+        "mikedh__trimesh-2265",
+        "patroni__patroni-3198",
+        "pdm-project__pdm-3440",
+        "pdm-project__pdm-3109",
+        "pdm-project__pdm-3170",
+        "privacyidea__privacyidea-4206",
+        "pvlib__pvlib-python-2347",
+        "pvlib__pvlib-python-2292",
+        "pybamm-team__pybamm-4644",
+        "python-attrs__attrs-1319",
+        "python-telegram-bot__python-telegram-bot-4626",
+        "wemake-services__wemake-python-styleguide-3129",
+        "wireservice__csvkit-1281"
+      ],
+      "miss": [
+        "aws-cloudformation__cfn-lint-3908",
+        "aws-cloudformation__cfn-lint-3498",
+        "aws-cloudformation__cfn-lint-3663",
+        "aws-cloudformation__cfn-lint-3982",
+        "aws-cloudformation__cfn-lint-3596",
+        "deepset-ai__haystack-8993",
+        "jupyterlab__jupyter-ai-879",
+        "keras-team__keras-20609",
+        "keras-team__keras-21072",
+        "networktocode__ntc-templates-2115",
+        "reflex-dev__reflex-4958"
+      ]
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.83,
+        "upper": 0.94
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.617721,
+        "upper": 0.754972
+      }
+    },
+    "file_top_1_accuracy": 0.54,
+    "file_top_3_accuracy": 0.68,
+    "file_top_5_accuracy": 0.73,
+    "file_mrr": 0.6143333333333334,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 100,
+    "top_1_accuracy": 0.54,
+    "top_3_accuracy": 0.68,
+    "top_5_accuracy": 0.73,
+    "mrr": 0.6143333333333334,
+    "base_commit_reachable_evaluation": {
+      "rows_with_reachable_file_ground_truth": 100,
+      "candidate_hit_at_20": 0.89,
+      "candidate_recall_at_20": 0.7477739687848383,
+      "unreachable_gold_file_count": 22,
+      "unreachable_gold_files_by_ticket": {
+        "aiogram__aiogram-1585": [
+          "CHANGES/1583.feature.rst"
+        ],
+        "beeware__briefcase-2125": [
+          "changes/1907.feature.rst"
+        ],
+        "beeware__briefcase-2035": [
+          "changes/2034.bugfix.rst"
+        ],
+        "deepset-ai__haystack-9270": [
+          "releasenotes/notes/add-openai-client-config-components-7012c9cb19f82f62.yaml"
+        ],
+        "deepset-ai__haystack-8609": [
+          "releasenotes/notes/remove-deprecated-converter-init-parameter-8a225b535e05af79.yaml"
+        ],
+        "deepset-ai__haystack-8879": [
+          "releasenotes/notes/fix-openai-chat-generator-with-tools-and-streaming-9776040f0732a8aa.yaml"
+        ],
+        "deepset-ai__haystack-8708": [
+          "releasenotes/notes/pdfminer-docid-b9f1b2f1b936b228.yaml"
+        ],
+        "deepset-ai__haystack-8993": [
+          "releasenotes/notes/fix-type-sede-optional-ea3c9a6b9de60c6e.yaml"
+        ],
+        "falconry__falcon-2450": [
+          "docs/_newsfragments/2243.newandimproved.rst"
+        ],
+        "falconry__falcon-2426": [
+          "docs/_newsfragments/2244.newandimproved.rst"
+        ],
+        "fonttools__fonttools-3726": [
+          "Tests/feaLib/data/contextual_inline_format_4.fea",
+          "Tests/feaLib/data/contextual_inline_format_4.ttx"
+        ],
+        "jarun__buku-778": [
+          "bukuserver/static/bukuserver/js/filters_fix.js"
+        ],
+        "patroni__patroni-3198": [
+          "features/steps/recovery.py"
+        ],
+        "pdm-project__pdm-3440": [
+          "news/3407.bugfix.md"
+        ],
+        "pdm-project__pdm-3109": [
+          "news/3108.bugfix.md"
+        ],
+        "pdm-project__pdm-3170": [
+          "news/3169.bugfix.md"
+        ],
+        "python-attrs__attrs-1319": [
+          "changelog.d/1319.change.md"
+        ],
+        "python-telegram-bot__python-telegram-bot-4626": [
+          "telegram/ext/_utils/asyncio.py"
+        ],
+        "reflex-dev__reflex-4958": [
+          "github/workflows/check_outdated_dependencies.yml",
+          "github/workflows/integration_app_harness.yml",
+          "github/workflows/pre-commit.yml"
+        ]
+      },
+      "bootstrap_95_ci": {
+        "samples": 2000,
+        "seed": 44,
+        "candidate_hit_at_20": {
+          "lower": 0.83,
+          "upper": 0.95
+        },
+        "candidate_recall_at_20": {
+          "lower": 0.675986,
+          "upper": 0.819941
+        }
+      },
+      "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+    },
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 100,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "per_repository": {
+      "Delgan/loguru": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.6666666666666666,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "delgan__loguru-1236"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.6666666666666666,
+            "upper": 0.6666666666666666
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.6666666666666666,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.6666666666666666,
+              "upper": 0.6666666666666666
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "Kozea/WeasyPrint": {
+        "rows": 3,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 3,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "kozea__weasyprint-2300",
+            "kozea__weasyprint-2326",
+            "kozea__weasyprint-2404"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.3333333333333333,
+        "file_top_5_accuracy": 0.3333333333333333,
+        "file_mrr": 0.1111111111111111,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 3,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "PyPSA/PyPSA": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "pypsa__pypsa-1172"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 0.0,
+        "file_mrr": 0.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.5,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 0.5
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "ag2ai/faststream": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "ag2ai__faststream-1796"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.5,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 0.5
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "aiogram/aiogram": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "aiogram__aiogram-1585"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "aiogram__aiogram-1585": [
+              "CHANGES/1583.feature.rst"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "apify/crawlee-python": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "apify__crawlee-python-1155"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 0.0,
+        "file_mrr": 0.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "arviz-devs/arviz": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "arviz-devs__arviz-2404"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "aws-cloudformation/cfn-lint": {
+        "rows": 14,
+        "candidate_hit_at_20": 0.6428571428571429,
+        "candidate_recall_at_20": 0.5833333333333334,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 8,
+          "partial_recall_rows": 1,
+          "miss_rows": 5
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "aws-cloudformation__cfn-lint-3817",
+            "aws-cloudformation__cfn-lint-3764",
+            "aws-cloudformation__cfn-lint-4045",
+            "aws-cloudformation__cfn-lint-3639",
+            "aws-cloudformation__cfn-lint-4002",
+            "aws-cloudformation__cfn-lint-3875",
+            "aws-cloudformation__cfn-lint-4023",
+            "aws-cloudformation__cfn-lint-3759"
+          ],
+          "partial_recall": [
+            "aws-cloudformation__cfn-lint-3563"
+          ],
+          "miss": [
+            "aws-cloudformation__cfn-lint-3908",
+            "aws-cloudformation__cfn-lint-3498",
+            "aws-cloudformation__cfn-lint-3663",
+            "aws-cloudformation__cfn-lint-3982",
+            "aws-cloudformation__cfn-lint-3596"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.357143,
+            "upper": 0.857143
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.309524,
+            "upper": 0.809524
+          }
+        },
+        "file_top_1_accuracy": 0.35714285714285715,
+        "file_top_3_accuracy": 0.42857142857142855,
+        "file_top_5_accuracy": 0.42857142857142855,
+        "file_mrr": 0.39285714285714285,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 14,
+          "candidate_hit_at_20": 0.6428571428571429,
+          "candidate_recall_at_20": 0.5833333333333334,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.357143,
+              "upper": 0.857143
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.333333,
+              "upper": 0.857143
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "beetbox/beets": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "beetbox__beets-5437"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.5,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 0.5
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "beeware/briefcase": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.6388888888888888,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 2,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "beeware__briefcase-2125",
+            "beeware__briefcase-2035"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.777778
+          }
+        },
+        "file_top_1_accuracy": 0.5,
+        "file_top_3_accuracy": 0.5,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.6,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.9375,
+          "unreachable_gold_file_count": 2,
+          "unreachable_gold_files_by_ticket": {
+            "beeware__briefcase-2125": [
+              "changes/1907.feature.rst"
+            ],
+            "beeware__briefcase-2035": [
+              "changes/2034.bugfix.rst"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.875,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "bridgecrewio/checkov": {
+        "rows": 3,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 3,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "bridgecrewio__checkov-7119",
+            "bridgecrewio__checkov-7124",
+            "bridgecrewio__checkov-7002"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 3,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "cyclotruc/gitingest": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "cyclotruc__gitingest-134"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "deepset-ai/haystack": {
+        "rows": 5,
+        "candidate_hit_at_20": 0.8,
+        "candidate_recall_at_20": 0.4714285714285714,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 4,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "deepset-ai__haystack-9270",
+            "deepset-ai__haystack-8609",
+            "deepset-ai__haystack-8879",
+            "deepset-ai__haystack-8708"
+          ],
+          "miss": [
+            "deepset-ai__haystack-8993"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.4,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.2,
+            "upper": 0.714286
+          }
+        },
+        "file_top_1_accuracy": 0.6,
+        "file_top_3_accuracy": 0.6,
+        "file_top_5_accuracy": 0.8,
+        "file_mrr": 0.65,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 5,
+          "candidate_hit_at_20": 0.8,
+          "candidate_recall_at_20": 0.8,
+          "unreachable_gold_file_count": 5,
+          "unreachable_gold_files_by_ticket": {
+            "deepset-ai__haystack-9270": [
+              "releasenotes/notes/add-openai-client-config-components-7012c9cb19f82f62.yaml"
+            ],
+            "deepset-ai__haystack-8609": [
+              "releasenotes/notes/remove-deprecated-converter-init-parameter-8a225b535e05af79.yaml"
+            ],
+            "deepset-ai__haystack-8879": [
+              "releasenotes/notes/fix-openai-chat-generator-with-tools-and-streaming-9776040f0732a8aa.yaml"
+            ],
+            "deepset-ai__haystack-8708": [
+              "releasenotes/notes/pdfminer-docid-b9f1b2f1b936b228.yaml"
+            ],
+            "deepset-ai__haystack-8993": [
+              "releasenotes/notes/fix-type-sede-optional-ea3c9a6b9de60c6e.yaml"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.4,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.4,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "encode/starlette": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "encode__starlette-2812"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "falconry/falcon": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.41666666666666663,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 2,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "falconry__falcon-2450",
+            "falconry__falcon-2426"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.333333,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 0.5,
+        "file_mrr": 0.125,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.75,
+          "unreachable_gold_file_count": 2,
+          "unreachable_gold_files_by_ticket": {
+            "falconry__falcon-2450": [
+              "docs/_newsfragments/2243.newandimproved.rst"
+            ],
+            "falconry__falcon-2426": [
+              "docs/_newsfragments/2244.newandimproved.rst"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "fonttools/fonttools": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "fonttools__fonttools-3726"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 2,
+          "unreachable_gold_files_by_ticket": {
+            "fonttools__fonttools-3726": [
+              "Tests/feaLib/data/contextual_inline_format_4.fea",
+              "Tests/feaLib/data/contextual_inline_format_4.ttx"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "geopandas/geopandas": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "geopandas__geopandas-3502"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.5,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 0.5
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "huggingface/datasets": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "huggingface__datasets-7522"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "huggingface/smolagents": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "huggingface__smolagents-285"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "icloud-photos-downloader/icloud_photos_downloader": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.75,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "icloud-photos-downloader__icloud_photos_downloader-1082"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.75,
+            "upper": 0.75
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.75,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.75,
+              "upper": 0.75
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "instructlab/instructlab": {
+        "rows": 3,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.7666666666666666,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 2,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "instructlab__instructlab-3118"
+          ],
+          "partial_recall": [
+            "instructlab__instructlab-3125",
+            "instructlab__instructlab-1762"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.3333333333333333,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.611111111111111,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 3,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.7666666666666666,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "jarun/buku": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.2,
+        "average_candidate_count_at_20": 17.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "jarun__buku-778"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.2,
+            "upper": 0.2
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.25,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "jarun__buku-778": [
+              "bukuserver/static/bukuserver/js/filters_fix.js"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.25,
+              "upper": 0.25
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "jlowin/fastmcp": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.3333333333333333,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "jlowin__fastmcp-279"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.3333333333333333,
+            "upper": 0.3333333333333333
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.3333333333333333,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.3333333333333333,
+              "upper": 0.3333333333333333
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "joke2k/faker": {
+        "rows": 3,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.8666666666666667,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "joke2k__faker-2175",
+            "joke2k__faker-2104"
+          ],
+          "partial_recall": [
+            "joke2k__faker-2203"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.6,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.6666666666666666,
+        "file_top_3_accuracy": 0.6666666666666666,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.7333333333333334,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 3,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.8666666666666667,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.6,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "jupyterlab/jupyter-ai": {
+        "rows": 2,
+        "candidate_hit_at_20": 0.5,
+        "candidate_recall_at_20": 0.4375,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "jupyterlab__jupyter-ai-943"
+          ],
+          "miss": [
+            "jupyterlab__jupyter-ai-879"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.0,
+            "upper": 0.875
+          }
+        },
+        "file_top_1_accuracy": 0.5,
+        "file_top_3_accuracy": 0.5,
+        "file_top_5_accuracy": 0.5,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 0.5,
+          "candidate_recall_at_20": 0.4375,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.0,
+              "upper": 0.875
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "kedro-org/kedro": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.3333333333333333,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "kedro-org__kedro-4092"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.3333333333333333,
+            "upper": 0.3333333333333333
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.3333333333333333,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.3333333333333333,
+              "upper": 0.3333333333333333
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "keras-team/keras": {
+        "rows": 4,
+        "candidate_hit_at_20": 0.5,
+        "candidate_recall_at_20": 0.266304347826087,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 1,
+          "miss_rows": 2
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "keras-team__keras-20120"
+          ],
+          "partial_recall": [
+            "keras-team__keras-20880"
+          ],
+          "miss": [
+            "keras-team__keras-20609",
+            "keras-team__keras-21072"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.0,
+            "upper": 0.75
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.25,
+        "file_top_5_accuracy": 0.25,
+        "file_mrr": 0.125,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 4,
+          "candidate_hit_at_20": 0.5,
+          "candidate_recall_at_20": 0.266304347826087,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.0,
+              "upper": 0.766304
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "koxudaxi/datamodel-code-generator": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "koxudaxi__datamodel-code-generator-2327",
+            "koxudaxi__datamodel-code-generator-2293"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.5,
+        "file_top_5_accuracy": 0.5,
+        "file_mrr": 0.25,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "mikedh/trimesh": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.15384615384615385,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "mikedh__trimesh-2265"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.15384615384615385,
+            "upper": 0.15384615384615385
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.15384615384615385,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.15384615384615385,
+              "upper": 0.15384615384615385
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "networktocode/ntc-templates": {
+        "rows": 1,
+        "candidate_hit_at_20": 0.0,
+        "candidate_recall_at_20": 0.0,
+        "average_candidate_count_at_20": 4.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 0,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [],
+          "miss": [
+            "networktocode__ntc-templates-2115"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.0,
+            "upper": 0.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.0,
+            "upper": 0.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 0.0,
+        "file_mrr": 0.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 0.0,
+          "candidate_recall_at_20": 0.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.0,
+              "upper": 0.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.0,
+              "upper": 0.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "patroni/patroni": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.6666666666666666,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "patroni__patroni-3119"
+          ],
+          "partial_recall": [
+            "patroni__patroni-3198"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.333333,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 0.0,
+        "file_mrr": 0.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.75,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "patroni__patroni-3198": [
+              "features/steps/recovery.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pdm-project/pdm": {
+        "rows": 3,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.41111111111111115,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 3,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "pdm-project__pdm-3440",
+            "pdm-project__pdm-3109",
+            "pdm-project__pdm-3170"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.333333,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 0.3333333333333333,
+        "file_top_3_accuracy": 0.6666666666666666,
+        "file_top_5_accuracy": 0.6666666666666666,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 3,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.6666666666666666,
+          "unreachable_gold_file_count": 3,
+          "unreachable_gold_files_by_ticket": {
+            "pdm-project__pdm-3440": [
+              "news/3407.bugfix.md"
+            ],
+            "pdm-project__pdm-3109": [
+              "news/3108.bugfix.md"
+            ],
+            "pdm-project__pdm-3170": [
+              "news/3169.bugfix.md"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "privacyidea/privacyidea": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.8125,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "privacyidea__privacyidea-4247"
+          ],
+          "partial_recall": [
+            "privacyidea__privacyidea-4206"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.625,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.8125,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.625,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "projectmesa/mesa": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "projectmesa__mesa-2523"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pvlib/pvlib-python": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 2,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "pvlib__pvlib-python-2347",
+            "pvlib__pvlib-python-2292"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.5,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.5,
+              "upper": 0.5
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pybamm-team/PyBaMM": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.2,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "pybamm-team__pybamm-4644"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.2,
+            "upper": 0.2
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.3333333333333333,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.2,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.2,
+              "upper": 0.2
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "python-attrs/attrs": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "python-attrs__attrs-1319"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "python-attrs__attrs-1319": [
+              "changelog.d/1319.change.md"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "python-babel/babel": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "python-babel__babel-1163",
+            "python-babel__babel-1126"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "python-control/python-control": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "python-control__python-control-1104",
+            "python-control__python-control-1138"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "python-poetry/poetry": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "python-poetry__poetry-10324"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.2,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "python-telegram-bot/python-telegram-bot": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.5,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "python-telegram-bot__python-telegram-bot-4626"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 0.5
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 0.0,
+        "file_mrr": 0.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 1,
+          "unreachable_gold_files_by_ticket": {
+            "python-telegram-bot__python-telegram-bot-4626": [
+              "telegram/ext/_utils/asyncio.py"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "pytorch/torchtune": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "pytorch__torchtune-2560",
+            "pytorch__torchtune-1697"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "qtile/qtile": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "qtile__qtile-4991"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "reflex-dev/reflex": {
+        "rows": 4,
+        "candidate_hit_at_20": 0.75,
+        "candidate_recall_at_20": 0.75,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 3,
+          "partial_recall_rows": 0,
+          "miss_rows": 1
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "reflex-dev__reflex-4230",
+            "reflex-dev__reflex-4620",
+            "reflex-dev__reflex-5081"
+          ],
+          "partial_recall": [],
+          "miss": [
+            "reflex-dev__reflex-4958"
+          ]
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.25,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.25,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.5,
+        "file_top_3_accuracy": 0.75,
+        "file_top_5_accuracy": 0.75,
+        "file_mrr": 0.5833333333333333,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 4,
+          "candidate_hit_at_20": 0.75,
+          "candidate_recall_at_20": 0.75,
+          "unreachable_gold_file_count": 3,
+          "unreachable_gold_files_by_ticket": {
+            "reflex-dev__reflex-4958": [
+              "github/workflows/check_outdated_dependencies.yml",
+              "github/workflows/integration_app_harness.yml",
+              "github/workflows/pre-commit.yml"
+            ]
+          },
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 0.25,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.25,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "run-llama/llama_deploy": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "run-llama__llama_deploy-397"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "shapely/shapely": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "shapely__shapely-2255"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "sissbruecker/linkding": {
+        "rows": 2,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 2,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "sissbruecker__linkding-989",
+            "sissbruecker__linkding-993"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 0.0,
+        "file_top_5_accuracy": 0.0,
+        "file_mrr": 0.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 2,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "stanfordnlp/dspy": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "stanfordnlp__dspy-1472"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "streamlink/streamlink": {
+        "rows": 4,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 4,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "streamlink__streamlink-6328",
+            "streamlink__streamlink-6207",
+            "streamlink__streamlink-6420",
+            "streamlink__streamlink-6397"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 4,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "theOehrly/Fast-F1": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "theoehrly__fast-f1-701"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "wemake-services/wemake-python-styleguide": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.3333333333333333,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "wemake-services__wemake-python-styleguide-3129"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.3333333333333333,
+            "upper": 0.3333333333333333
+          }
+        },
+        "file_top_1_accuracy": 0.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 0.5,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.3333333333333333,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.3333333333333333,
+              "upper": 0.3333333333333333
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "wireservice/csvkit": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 0.25,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 0,
+          "partial_recall_rows": 1,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [],
+          "partial_recall": [
+            "wireservice__csvkit-1281"
+          ],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.25,
+            "upper": 0.25
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 0.25,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 0.25,
+              "upper": 0.25
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      },
+      "yt-dlp/yt-dlp": {
+        "rows": 1,
+        "candidate_hit_at_20": 1.0,
+        "candidate_recall_at_20": 1.0,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 1,
+          "partial_recall_rows": 0,
+          "miss_rows": 0
+        },
+        "candidate_outcome_ticket_ids_at_20": {
+          "full_recall": [
+            "yt-dlp__yt-dlp-11880"
+          ],
+          "partial_recall": [],
+          "miss": []
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 1.0,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 1.0,
+        "file_top_3_accuracy": 1.0,
+        "file_top_5_accuracy": 1.0,
+        "file_mrr": 1.0,
+        "base_commit_reachable_evaluation": {
+          "rows_with_reachable_file_ground_truth": 1,
+          "candidate_hit_at_20": 1.0,
+          "candidate_recall_at_20": 1.0,
+          "unreachable_gold_file_count": 0,
+          "unreachable_gold_files_by_ticket": {},
+          "bootstrap_95_ci": {
+            "samples": 2000,
+            "seed": 44,
+            "candidate_hit_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            },
+            "candidate_recall_at_20": {
+              "lower": 1.0,
+              "upper": 1.0
+            }
+          },
+          "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+        }
+      }
+    }
+  },
+  "freeze_manifest": {
+    "path": "D:\\bug-llm-project\\fault_localization_feature_files\\fault_localization_feature_files\\reports\\fault_localization\\stage1_next_iteration\\e8_holdout_v1\\stage1_e8_pre_holdout_freeze.json",
+    "bytes": 6949,
+    "sha256": "d7530d71e762a93ae687067d6f4a3b3e5ecfda07ce527fd0be7a534b96ad8d34"
+  }
+}

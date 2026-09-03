@@ -1,0 +1,41 @@
+{
+  "status": "ready",
+  "created_at_utc": "2026-09-01T09:59:44.389976+00:00",
+  "tickets": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1\\final_holdout_tickets.jsonl",
+  "repository_count": 4,
+  "ready_count": 4,
+  "failure_count": 0,
+  "repo_cache_dir": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1_repos",
+  "repositories": [
+    {
+      "repository": "JohnSnowLabs/spark-nlp",
+      "repository_url": "https://github.com/JohnSnowLabs/spark-nlp",
+      "cache_path": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1_repos\\JohnSnowLabs__spark-nlp",
+      "status": "cached",
+      "required_commits": 3
+    },
+    {
+      "repository": "apache/mxnet",
+      "repository_url": "https://github.com/apache/mxnet",
+      "cache_path": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1_repos\\apache__mxnet",
+      "status": "cached",
+      "required_commits": 5
+    },
+    {
+      "repository": "kubeflow/pipelines",
+      "repository_url": "https://github.com/kubeflow/pipelines",
+      "cache_path": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1_repos\\kubeflow__pipelines",
+      "status": "cached",
+      "required_commits": 14
+    },
+    {
+      "repository": "python/typeshed",
+      "repository_url": "https://github.com/python/typeshed",
+      "cache_path": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1_repos\\python__typeshed",
+      "status": "cached",
+      "required_commits": 5
+    }
+  ],
+  "gold_accessed": false,
+  "evaluation_started": false
+}

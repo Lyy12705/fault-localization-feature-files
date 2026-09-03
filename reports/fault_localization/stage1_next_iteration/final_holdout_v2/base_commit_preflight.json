@@ -1,0 +1,263 @@
+{
+  "status": "ready",
+  "created_at_utc": "2026-08-24T16:05:08.262735+00:00",
+  "tickets": "data/fault_localization/swebench_full/final_holdout_v2/final_holdout_tickets.jsonl",
+  "repo_cache_dir": "data/fault_localization/swebench_full/final_holdout_v2/repos",
+  "ticket_count": 500,
+  "repository_count": 31,
+  "base_commit_count": 496,
+  "reachable_count": 496,
+  "missing_count": 0,
+  "repositories": [
+    {
+      "repository": "DataDog/integrations-core",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "Lightning-AI/lightning",
+      "ticket_count": 10,
+      "base_commit_count": 10,
+      "reachable_count": 10,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "PrefectHQ/prefect",
+      "ticket_count": 11,
+      "base_commit_count": 11,
+      "reachable_count": 11,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "Qiskit/qiskit",
+      "ticket_count": 37,
+      "base_commit_count": 37,
+      "reachable_count": 37,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "apache/airflow",
+      "ticket_count": 12,
+      "base_commit_count": 12,
+      "reachable_count": 12,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "celery/celery",
+      "ticket_count": 7,
+      "base_commit_count": 7,
+      "reachable_count": 7,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "conan-io/conan",
+      "ticket_count": 22,
+      "base_commit_count": 22,
+      "reachable_count": 22,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "conda/conda",
+      "ticket_count": 16,
+      "base_commit_count": 16,
+      "reachable_count": 16,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "dagster-io/dagster",
+      "ticket_count": 4,
+      "base_commit_count": 4,
+      "reachable_count": 4,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "docker/compose",
+      "ticket_count": 16,
+      "base_commit_count": 16,
+      "reachable_count": 16,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "explosion/spaCy",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "gitpython-developers/GitPython",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "google/jax",
+      "ticket_count": 9,
+      "base_commit_count": 9,
+      "reachable_count": 9,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "googleapis/google-cloud-python",
+      "ticket_count": 24,
+      "base_commit_count": 23,
+      "reachable_count": 23,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "huggingface/transformers",
+      "ticket_count": 28,
+      "base_commit_count": 28,
+      "reachable_count": 28,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "ipython/ipython",
+      "ticket_count": 22,
+      "base_commit_count": 22,
+      "reachable_count": 22,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "jupyterlab/jupyterlab",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "mesonbuild/meson",
+      "ticket_count": 25,
+      "base_commit_count": 24,
+      "reachable_count": 24,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "numpy/numpy",
+      "ticket_count": 25,
+      "base_commit_count": 25,
+      "reachable_count": 25,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "open-mmlab/mmdetection",
+      "ticket_count": 3,
+      "base_commit_count": 3,
+      "reachable_count": 3,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pandas-dev/pandas",
+      "ticket_count": 133,
+      "base_commit_count": 131,
+      "reachable_count": 131,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pantsbuild/pants",
+      "ticket_count": 24,
+      "base_commit_count": 24,
+      "reachable_count": 24,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pyca/cryptography",
+      "ticket_count": 9,
+      "base_commit_count": 9,
+      "reachable_count": 9,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "pypa/pip",
+      "ticket_count": 18,
+      "base_commit_count": 18,
+      "reachable_count": 18,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "ray-project/ray",
+      "ticket_count": 9,
+      "base_commit_count": 9,
+      "reachable_count": 9,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "scipy/scipy",
+      "ticket_count": 3,
+      "base_commit_count": 3,
+      "reachable_count": 3,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "tensorflow/models",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "tiangolo/fastapi",
+      "ticket_count": 1,
+      "base_commit_count": 1,
+      "reachable_count": 1,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "twisted/twisted",
+      "ticket_count": 2,
+      "base_commit_count": 2,
+      "reachable_count": 2,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "wagtail/wagtail",
+      "ticket_count": 11,
+      "base_commit_count": 11,
+      "reachable_count": 11,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "ytdl-org/youtube-dl",
+      "ticket_count": 8,
+      "base_commit_count": 8,
+      "reachable_count": 8,
+      "missing_count": 0,
+      "status": "ready"
+    }
+  ],
+  "gold_accessed": false,
+  "evaluation_started": false
+}

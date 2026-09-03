@@ -1,0 +1,10 @@
+{
+  "rank": 1,
+  "file_path": "astropy/coordinates/angle_utilities.py",
+  "function_name": "angle_wrap",
+  "class_name": "",
+  "start_line": 10,
+  "end_line": 26,
+  "retrieval_score": 0.2012,
+  "code_text": "def angle_wrap(angle, unit=None, wrap_angle=360.0 * u.degree):\n    \"\"\"\n    Wrap an angle to the range [0, wrap_angle).\n\n    Parameters\n    ----------\n    angle : `~astropy.units.Quantity`\n        The angle to wrap.\n    unit : `~astropy.units.Unit` or str\n        The unit of the angle.\n    wrap_angle : `~astropy.units.Quantity` or float\n        The angle to wrap to, default is 360 degrees.\n\n    Returns\n    --------\n    wrapped_angle : `~astropy.units.Quantity`\n        The wrapped angle.\n    \"\"\"\n\n    if unit is None:\n        unit = angle.unit\n\n    if wrap_angle is None:\n        wrap_angle = 360.0 * u.degree\n\n    if wrap_angle.unit.physical_type() != 'angle':\n        raise ValueError('wrap_angle must be an angle')\n\n    angle = angle.to(unit).value\n    wrap_angle = wrap_angle.to(unit).value\n\n    wrapped_angle = angle % wrap_angle\n    if wrapped_angle < 0.0:\n        wrapped_angle += wrap_angle\n\n    return wrapped_angle * unit"
+}

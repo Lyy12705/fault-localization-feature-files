@@ -1,0 +1,311 @@
+{
+  "started_at_utc": "2026-08-15T14:24:07.764704+00:00",
+  "completed_at_utc": "2026-08-15T14:36:38.685746+00:00",
+  "method_id": "tfidf-sbert-rerank-085f7ceade9a",
+  "method": {
+    "method_version": "fault-localization-method-v11",
+    "embedding_backend": "tfidf-sbert-rerank",
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000
+  },
+  "tickets_selected": 210,
+  "predictions": 210,
+  "failures": 0,
+  "processed_this_run": 210,
+  "skipped_existing": 0,
+  "index_cache_hits": 0,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/stage1_v11_full_development_tfidf_sbert_unique_files/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/stage1_v11_full_development_tfidf_sbert_unique_files/test_metrics.json",
+  "failures_output": "reports/fault_localization/stage1_v11_full_development_tfidf_sbert_unique_files/test_failures.jsonl",
+  "metrics": {
+    "rows": 210,
+    "gold_rows": 210,
+    "prediction_rows": 210,
+    "matched_prediction_rows": 210,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 210,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 210,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.861904761904762,
+    "candidate_recall_at_20": 0.861904761904762,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 181,
+      "partial_recall_rows": 0,
+      "miss_rows": 29
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.814286,
+        "upper": 0.904762
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.814286,
+        "upper": 0.904762
+      }
+    },
+    "file_top_1_accuracy": 0.5476190476190477,
+    "file_top_3_accuracy": 0.7333333333333333,
+    "file_top_5_accuracy": 0.780952380952381,
+    "file_mrr": 0.6384920634920632,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 210,
+    "top_1_accuracy": 0.5476190476190477,
+    "top_3_accuracy": 0.7333333333333333,
+    "top_5_accuracy": 0.780952380952381,
+    "mrr": 0.6384920634920632,
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 210,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "per_repository": {
+      "django/django": {
+        "rows": 114,
+        "candidate_hit_at_20": 0.8859649122807017,
+        "candidate_recall_at_20": 0.8859649122807017,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 101,
+          "partial_recall_rows": 0,
+          "miss_rows": 13
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.824561,
+            "upper": 0.938596
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.824561,
+            "upper": 0.938596
+          }
+        },
+        "file_top_1_accuracy": 0.5701754385964912,
+        "file_top_3_accuracy": 0.7719298245614035,
+        "file_top_5_accuracy": 0.8157894736842105,
+        "file_mrr": 0.6675438596491227
+      },
+      "matplotlib/matplotlib": {
+        "rows": 23,
+        "candidate_hit_at_20": 0.782608695652174,
+        "candidate_recall_at_20": 0.782608695652174,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 18,
+          "partial_recall_rows": 0,
+          "miss_rows": 5
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.608696,
+            "upper": 0.956522
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.608696,
+            "upper": 0.956522
+          }
+        },
+        "file_top_1_accuracy": 0.5217391304347826,
+        "file_top_3_accuracy": 0.7391304347826086,
+        "file_top_5_accuracy": 0.782608695652174,
+        "file_mrr": 0.6391304347826087
+      },
+      "psf/requests": {
+        "rows": 6,
+        "candidate_hit_at_20": 0.8333333333333334,
+        "candidate_recall_at_20": 0.8333333333333334,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 5,
+          "partial_recall_rows": 0,
+          "miss_rows": 1
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.5,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.5,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.3333333333333333,
+        "file_top_3_accuracy": 0.6666666666666666,
+        "file_top_5_accuracy": 0.6666666666666666,
+        "file_mrr": 0.47222222222222227
+      },
+      "pydata/xarray": {
+        "rows": 5,
+        "candidate_hit_at_20": 0.8,
+        "candidate_recall_at_20": 0.8,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 4,
+          "partial_recall_rows": 0,
+          "miss_rows": 1
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.4,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.4,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.8,
+        "file_top_3_accuracy": 0.8,
+        "file_top_5_accuracy": 0.8,
+        "file_mrr": 0.8
+      },
+      "pylint-dev/pylint": {
+        "rows": 6,
+        "candidate_hit_at_20": 0.6666666666666666,
+        "candidate_recall_at_20": 0.6666666666666666,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 4,
+          "partial_recall_rows": 0,
+          "miss_rows": 2
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.333333,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.333333,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.5,
+        "file_top_3_accuracy": 0.5,
+        "file_top_5_accuracy": 0.5,
+        "file_mrr": 0.5
+      },
+      "pytest-dev/pytest": {
+        "rows": 17,
+        "candidate_hit_at_20": 0.8235294117647058,
+        "candidate_recall_at_20": 0.8235294117647058,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 14,
+          "partial_recall_rows": 0,
+          "miss_rows": 3
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.647059,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.647059,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.4117647058823529,
+        "file_top_3_accuracy": 0.5294117647058824,
+        "file_top_5_accuracy": 0.5882352941176471,
+        "file_mrr": 0.4725490196078431
+      },
+      "scikit-learn/scikit-learn": {
+        "rows": 23,
+        "candidate_hit_at_20": 0.9565217391304348,
+        "candidate_recall_at_20": 0.9565217391304348,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 22,
+          "partial_recall_rows": 0,
+          "miss_rows": 1
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.869565,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.869565,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.6521739130434783,
+        "file_top_3_accuracy": 0.8260869565217391,
+        "file_top_5_accuracy": 0.9130434782608695,
+        "file_mrr": 0.7318840579710146
+      },
+      "sphinx-doc/sphinx": {
+        "rows": 16,
+        "candidate_hit_at_20": 0.8125,
+        "candidate_recall_at_20": 0.8125,
+        "average_candidate_count_at_20": 20.0,
+        "candidate_outcomes_at_20": {
+          "full_recall_rows": 13,
+          "partial_recall_rows": 0,
+          "miss_rows": 3
+        },
+        "candidate_bootstrap_95_ci": {
+          "samples": 2000,
+          "seed": 42,
+          "candidate_hit_at_20": {
+            "lower": 0.625,
+            "upper": 1.0
+          },
+          "candidate_recall_at_20": {
+            "lower": 0.625,
+            "upper": 1.0
+          }
+        },
+        "file_top_1_accuracy": 0.4375,
+        "file_top_3_accuracy": 0.625,
+        "file_top_5_accuracy": 0.6875,
+        "file_mrr": 0.5364583333333333
+      }
+    },
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "purpose": "Stage 3 Symbol Gold development audit source",
+  "seed": 20260902,
+  "source_ticket_count": 1294,
+  "joined_ticket_count": 1294,
+  "selected_ticket_count": 61,
+  "selected_repository_count": 12,
+  "per_repository_minimum": 5,
+  "feature_ticket_minimum": 15,
+  "repository_counts": {
+    "astropy/astropy": 5,
+    "django/django": 6,
+    "matplotlib/matplotlib": 5,
+    "mwaskom/seaborn": 5,
+    "pallets/flask": 5,
+    "psf/requests": 5,
+    "pydata/xarray": 5,
+    "pylint-dev/pylint": 5,
+    "pytest-dev/pytest": 5,
+    "scikit-learn/scikit-learn": 5,
+    "sphinx-doc/sphinx": 5,
+    "sympy/sympy": 5
+  },
+  "feature_counts": {
+    "deletion_evidence": 55,
+    "multi_file": 15,
+    "pure_addition": 29
+  },
+  "selection_policy": "Lowest SHA-256(seed, ticket_id) rows per development repository, then deterministic additions to meet patch-feature coverage.",
+  "sources": {
+    "development_tickets": "data\\fault_localization\\swebench_full\\protocol_v1\\development_tickets.jsonl",
+    "public_swebench_parquet": "data\\fault_localization\\swebench_full\\test.parquet"
+  },
+  "output": "data\\fault_localization\\swebench_full\\stage3_symbol_gold\\development_source_tickets.jsonl",
+  "selection_uses_model_predictions": false,
+  "selection_uses_frozen_holdout": false
+}

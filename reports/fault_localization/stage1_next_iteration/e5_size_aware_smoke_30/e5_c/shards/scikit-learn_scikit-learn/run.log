@@ -1,0 +1,206 @@
+COMMAND
+/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py --tickets reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_c/shards/scikit-learn_scikit-learn/tickets.jsonl --gold reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_c/shards/scikit-learn_scikit-learn/gold.jsonl --repo-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/repos --snapshot-cache-dir reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_c/ephemeral_snapshots --index-cache-dir data/fault_localization/swebench_full/indexes --import-graph-cache-dir data/fault_localization/swebench_full/indexes/import_graphs --call-graph-cache-dir data/fault_localization/swebench_full/indexes/call_graphs --output-dir reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_c/shards/scikit-learn_scikit-learn/run --candidate-file-k 20 --ephemeral-snapshots --checkpoint-every 1 --progress none --embedding-backend tfidf-sbert-rerank --semantic-candidate-k 50 --semantic-candidate-policy repository-size --medium-semantic-candidate-k 100 --large-semantic-candidate-k 100 --no-domain-path-routing --file-aggregation-mode basic --symbol-expansion-mode symbol-definitions-api --fallback-index-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/indexes --resume --repository-size-groups /Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/configs/fault_localization/e5_repository_size_groups.json
+
+STDOUT
+{
+  "started_at_utc": "2026-08-22T17:56:39.659692+00:00",
+  "completed_at_utc": "2026-08-22T17:57:00.431286+00:00",
+  "method_id": "tfidf-sbert-rerank-a13b22316e11",
+  "method": {
+    "method_version": "fault-localization-method-v19",
+    "embedding_backend": "tfidf-sbert-rerank",
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20,
+    "semantic_candidate_policy": "repository-size",
+    "semantic_candidate_k_by_repository_size": {
+      "small": 50,
+      "medium": 100,
+      "large": 100
+    },
+    "repository_size_groups": {
+      "astropy/astropy": "large",
+      "django/django": "large",
+      "matplotlib/matplotlib": "large",
+      "mwaskom/seaborn": "small",
+      "pallets/flask": "small",
+      "psf/requests": "small",
+      "pydata/xarray": "small",
+      "pylint-dev/pylint": "medium",
+      "pytest-dev/pytest": "medium",
+      "scikit-learn/scikit-learn": "medium",
+      "sphinx-doc/sphinx": "medium",
+      "sympy/sympy": "large"
+    },
+    "import_graph_mode": "off",
+    "import_graph_parameters": {
+      "reference_file_k": 5,
+      "outgoing_signal": 0.8,
+      "incoming_signal": 0.65,
+      "rank_decay": 0.08,
+      "maximum_signal": 0.8,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4
+    },
+    "call_graph_mode": "off",
+    "call_graph_parameters": {
+      "reference_file_k": 5,
+      "outgoing_signal": 0.9,
+      "rank_decay": 0.08,
+      "maximum_signal": 0.9,
+      "maximum_bonus": 0.08,
+      "maximum_target_files_per_reference": 8,
+      "maximum_evidence_per_file": 4
+    },
+    "symbol_expansion_mode": "symbol-definitions-api",
+    "symbol_expansion_parameters": {
+      "max_ticket_symbols": 20,
+      "max_files_per_symbol": 4,
+      "exact_match_bonus": 0.06,
+      "leaf_match_bonus": 0.04,
+      "maximum_bonus": 0.1,
+      "maximum_evidence_per_file": 4
+    },
+    "api_implementation_parameters": {
+      "max_links_per_symbol": 4,
+      "reexport_bonus": 0.04,
+      "wrapper_bonus": 0.05,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_wrapper_statements": 4
+    },
+    "file_aggregation_mode": "basic",
+    "file_aggregation_parameters": {
+      "max_evidence_chunks": 5,
+      "evidence_score_ratio": 0.8,
+      "minimum_evidence_score": 0.05,
+      "support_bonus_per_additional_chunk": 0.0125,
+      "support_bonus_cap": 0.05,
+      "symbol_bonus_per_additional_symbol": 0.01,
+      "symbol_bonus_cap": 0.04,
+      "package_bonus_cap": 0.1
+    }
+  },
+  "frozen_protocol": "",
+  "tickets_selected": 4,
+  "predictions": 4,
+  "failures": 0,
+  "processed_this_run": 4,
+  "skipped_existing": 0,
+  "index_cache_hits": 4,
+  "import_graph_cache_hits": 0,
+  "import_graph_builds": 0,
+  "call_graph_cache_hits": 0,
+  "call_graph_builds": 0,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_c/shards/scikit-learn_scikit-learn/run/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_c/shards/scikit-learn_scikit-learn/run/test_metrics.json",
+  "failures_output": "reports/fault_localization/stage1_next_iteration/e5_size_aware_smoke_30/e5_c/shards/scikit-learn_scikit-learn/run/test_failures.jsonl",
+  "metrics": {
+    "rows": 4,
+    "gold_rows": 4,
+    "prediction_rows": 4,
+    "matched_prediction_rows": 4,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 4,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 4,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 1.0,
+    "candidate_recall_at_20": 1.0,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 4,
+      "partial_recall_rows": 0,
+      "miss_rows": 0
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "scikit-learn__scikit-learn-11043",
+        "scikit-learn__scikit-learn-12486",
+        "scikit-learn__scikit-learn-13135",
+        "scikit-learn__scikit-learn-13467"
+      ],
+      "partial_recall": [],
+      "miss": []
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 1.0,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 1.0,
+        "upper": 1.0
+      }
+    },
+    "file_top_1_accuracy": 1.0,
+    "file_top_3_accuracy": 1.0,
+    "file_top_5_accuracy": 1.0,
+    "file_mrr": 1.0,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 4,
+    "top_1_accuracy": 1.0,
+    "top_3_accuracy": 1.0,
+    "top_5_accuracy": 1.0,
+    "mrr": 1.0,
+    "base_commit_reachable_evaluation": {
+      "rows_with_reachable_file_ground_truth": 4,
+      "candidate_hit_at_20": 1.0,
+      "candidate_recall_at_20": 1.0,
+      "unreachable_gold_file_count": 0,
+      "unreachable_gold_files_by_ticket": {},
+      "bootstrap_95_ci": {
+        "samples": 2000,
+        "seed": 44,
+        "candidate_hit_at_20": {
+          "lower": 1.0,
+          "upper": 1.0
+        },
+        "candidate_recall_at_20": {
+          "lower": 1.0,
+          "upper": 1.0
+        }
+      },
+      "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+    },
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 4,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}
+
+STDERR
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 8890.81it/s]

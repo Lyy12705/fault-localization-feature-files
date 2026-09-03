@@ -1,0 +1,105 @@
+{
+  "experiment": "E3-C API namespace guard on the fixed 30-case Development evidence sample",
+  "scope_note": "This is a targeted Development evidence check, not the formal 500-ticket accuracy experiment.",
+  "baseline_mode": "symbol-definitions-api",
+  "candidate_mode": "symbol-definitions-api-namespace",
+  "rows": 30,
+  "repositories": {
+    "astropy/astropy": 21,
+    "django/django": 9
+  },
+  "execution": {
+    "predictions": 30,
+    "failures": 0,
+    "unique_top_20_candidates_per_ticket": true,
+    "method_version": "fault-localization-method-v16"
+  },
+  "evidence_quality": {
+    "correct_mapping": {
+      "before": 8,
+      "after": 8,
+      "gold_evidence_retained": 8,
+      "retention_rate": 1.0
+    },
+    "irrelevant_mapping": {
+      "before": 9,
+      "after": 6,
+      "removed": 3,
+      "reduction_rate": 0.333333
+    },
+    "relationship_correct_not_modified": {
+      "before": 13,
+      "after": 12,
+      "removed": 1
+    },
+    "evidence_rows": {
+      "before": 83,
+      "after": 58,
+      "removed": 25,
+      "reduction_rate": 0.301205
+    },
+    "rejected_namespace_names": 30
+  },
+  "removed_irrelevant_cases": [
+    {
+      "ticket_id": "astropy__astropy-13838",
+      "rejected_name": "p.group"
+    },
+    {
+      "ticket_id": "astropy__astropy-14701",
+      "rejected_name": "io.html"
+    },
+    {
+      "ticket_id": "django__django-12961",
+      "rejected_name": "timezone.now"
+    }
+  ],
+  "removed_relevant_but_not_gold_case": {
+    "ticket_id": "astropy__astropy-12880",
+    "rejected_names": [
+      "BinnedTimeSeries.read",
+      "myBinnedTimeSeries.write",
+      "self.registry.read"
+    ]
+  },
+  "stage1_top_20_metrics": {
+    "baseline": {
+      "hit_at_20": 0.966667,
+      "recall_at_20": 0.905556,
+      "top_1_accuracy": 0.466667,
+      "mrr_at_20": 0.63254,
+      "full_recall_rows": 25,
+      "partial_recall_rows": 4,
+      "miss_rows": 1
+    },
+    "namespace_guard": {
+      "hit_at_20": 0.966667,
+      "recall_at_20": 0.905556,
+      "top_1_accuracy": 0.466667,
+      "mrr_at_20": 0.63254,
+      "full_recall_rows": 25,
+      "partial_recall_rows": 4,
+      "miss_rows": 1
+    },
+    "paired_mean_difference": {
+      "hit_at_20": 0.0,
+      "recall_at_20": 0.0,
+      "top_1_accuracy": 0.0,
+      "mrr_at_20": 0.0
+    },
+    "paired_bootstrap_95_ci": {
+      "hit_at_20": [0.0, 0.0],
+      "recall_at_20": [0.0, 0.0],
+      "top_1_accuracy": [0.0, 0.0],
+      "mrr_at_20": [0.0, 0.0]
+    }
+  },
+  "candidate_changes": {
+    "order_changed_tickets": 1,
+    "top_20_set_changed_tickets": 1,
+    "ticket_id": "django__django-12961",
+    "removed_file": "django/db/models/functions/datetime.py",
+    "added_file": "django/contrib/redirects/models.py"
+  },
+  "decision": "The namespace guard passes the 30-case evidence gate because all 8 correct mappings are retained, irrelevant mappings decrease from 9 to 6, and all paired Stage-1 metrics remain unchanged. Run the formal 500-ticket Development comparison before selecting the method."
+}

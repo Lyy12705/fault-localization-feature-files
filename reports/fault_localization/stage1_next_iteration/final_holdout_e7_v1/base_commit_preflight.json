@@ -1,0 +1,47 @@
+{
+  "status": "ready",
+  "created_at_utc": "2026-09-01T09:59:52.158501+00:00",
+  "tickets": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1\\final_holdout_tickets.jsonl",
+  "repo_cache_dir": "data\\fault_localization\\swebench_full\\final_holdout_e7_v1_repos",
+  "ticket_count": 27,
+  "repository_count": 4,
+  "base_commit_count": 27,
+  "reachable_count": 27,
+  "missing_count": 0,
+  "repositories": [
+    {
+      "repository": "JohnSnowLabs/spark-nlp",
+      "ticket_count": 3,
+      "base_commit_count": 3,
+      "reachable_count": 3,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "apache/mxnet",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "kubeflow/pipelines",
+      "ticket_count": 14,
+      "base_commit_count": 14,
+      "reachable_count": 14,
+      "missing_count": 0,
+      "status": "ready"
+    },
+    {
+      "repository": "python/typeshed",
+      "ticket_count": 5,
+      "base_commit_count": 5,
+      "reachable_count": 5,
+      "missing_count": 0,
+      "status": "ready"
+    }
+  ],
+  "gold_accessed": false,
+  "evaluation_started": false
+}

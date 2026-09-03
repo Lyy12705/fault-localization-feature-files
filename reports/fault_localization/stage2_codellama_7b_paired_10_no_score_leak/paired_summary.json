@@ -1,0 +1,202 @@
+{
+  "tickets": 10,
+  "completed": 10,
+  "model": "codellama:7b-instruct",
+  "json_schema": true,
+  "batch_size": 5,
+  "retrieval_score_hidden_from_llm": true,
+  "runtime_seconds": 426.963,
+  "baseline": {
+    "rows_with_file_ground_truth": 10,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_hit_at_20": 1.0,
+    "candidate_recall_at_20": 0.8666666666666668,
+    "file_top_1_accuracy": 0.6,
+    "file_top_3_accuracy": 0.7,
+    "file_top_5_accuracy": 0.8,
+    "file_mrr": 0.675,
+    "symbol_top_1_accuracy": null,
+    "symbol_top_3_accuracy": null,
+    "symbol_top_5_accuracy": null,
+    "symbol_mrr": null
+  },
+  "llm": {
+    "rows_with_file_ground_truth": 10,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_hit_at_20": 1.0,
+    "candidate_recall_at_20": 0.8666666666666668,
+    "file_top_1_accuracy": 0.5,
+    "file_top_3_accuracy": 0.6,
+    "file_top_5_accuracy": 0.7,
+    "file_mrr": 0.575,
+    "symbol_top_1_accuracy": null,
+    "symbol_top_3_accuracy": null,
+    "symbol_top_5_accuracy": null,
+    "symbol_mrr": null
+  },
+  "delta_llm_minus_baseline": {
+    "candidate_hit_at_20": 0.0,
+    "candidate_recall_at_20": 0.0,
+    "file_top_1_accuracy": -0.1,
+    "file_top_3_accuracy": -0.1,
+    "file_top_5_accuracy": -0.1,
+    "file_mrr": -0.1,
+    "symbol_top_1_accuracy": null,
+    "symbol_top_3_accuracy": null,
+    "symbol_top_5_accuracy": null,
+    "symbol_mrr": null
+  },
+  "file_rank_outcomes": {
+    "improved": {
+      "count": 0,
+      "tickets": []
+    },
+    "unchanged": {
+      "count": 7,
+      "tickets": [
+        {
+          "ticket_id": "astropy__astropy-11693",
+          "baseline_rank": 2,
+          "llm_rank": 2
+        },
+        {
+          "ticket_id": "astropy__astropy-12318",
+          "baseline_rank": 1,
+          "llm_rank": 1
+        },
+        {
+          "ticket_id": "astropy__astropy-12825",
+          "baseline_rank": 1,
+          "llm_rank": 1
+        },
+        {
+          "ticket_id": "astropy__astropy-12880",
+          "baseline_rank": 4,
+          "llm_rank": 4
+        },
+        {
+          "ticket_id": "astropy__astropy-12891",
+          "baseline_rank": 1,
+          "llm_rank": 1
+        },
+        {
+          "ticket_id": "astropy__astropy-12907",
+          "baseline_rank": 1,
+          "llm_rank": 1
+        },
+        {
+          "ticket_id": "astropy__astropy-12962",
+          "baseline_rank": 1,
+          "llm_rank": 1
+        }
+      ]
+    },
+    "worsened": {
+      "count": 1,
+      "tickets": [
+        {
+          "ticket_id": "astropy__astropy-12057",
+          "baseline_rank": 1,
+          "llm_rank": null
+        }
+      ]
+    },
+    "both_miss": {
+      "count": 2,
+      "tickets": [
+        {
+          "ticket_id": "astropy__astropy-12544",
+          "baseline_rank": null,
+          "llm_rank": null
+        },
+        {
+          "ticket_id": "astropy__astropy-12842",
+          "baseline_rank": null,
+          "llm_rank": null
+        }
+      ]
+    },
+    "not_evaluated": {
+      "count": 0,
+      "tickets": []
+    }
+  },
+  "symbol_rank_outcomes": {
+    "improved": {
+      "count": 0,
+      "tickets": []
+    },
+    "unchanged": {
+      "count": 0,
+      "tickets": []
+    },
+    "worsened": {
+      "count": 0,
+      "tickets": []
+    },
+    "both_miss": {
+      "count": 0,
+      "tickets": []
+    },
+    "not_evaluated": {
+      "count": 10,
+      "tickets": [
+        {
+          "ticket_id": "astropy__astropy-11693",
+          "baseline_rank": null,
+          "llm_rank": null
+        },
+        {
+          "ticket_id": "astropy__astropy-12057",
+          "baseline_rank": null,
+          "llm_rank": null
+        },
+        {
+          "ticket_id": "astropy__astropy-12318",
+          "baseline_rank": null,
+          "llm_rank": null
+        },
+        {
+          "ticket_id": "astropy__astropy-12544",
+          "baseline_rank": null,
+          "llm_rank": null
+        },
+        {
+          "ticket_id": "astropy__astropy-12825",
+          "baseline_rank": null,
+          "llm_rank": null
+        },
+        {
+          "ticket_id": "astropy__astropy-12842",
+          "baseline_rank": null,
+          "llm_rank": null
+        },
+        {
+          "ticket_id": "astropy__astropy-12880",
+          "baseline_rank": null,
+          "llm_rank": null
+        },
+        {
+          "ticket_id": "astropy__astropy-12891",
+          "baseline_rank": null,
+          "llm_rank": null
+        },
+        {
+          "ticket_id": "astropy__astropy-12907",
+          "baseline_rank": null,
+          "llm_rank": null
+        },
+        {
+          "ticket_id": "astropy__astropy-12962",
+          "baseline_rank": null,
+          "llm_rank": null
+        }
+      ]
+    }
+  },
+  "file_llm_used": 10,
+  "symbol_llm_used": 10,
+  "predictions_with_warnings": 0,
+  "baseline_predictions": "reports\\fault_localization\\stage2_codellama_7b_paired_10_no_score_leak\\baseline_predictions.jsonl",
+  "llm_predictions": "reports\\fault_localization\\stage2_codellama_7b_paired_10_no_score_leak\\llm_predictions.jsonl"
+}

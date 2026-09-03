@@ -1,0 +1,231 @@
+COMMAND
+/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py --tickets reports/fault_localization/stage1_next_iteration/e3_c_validation_500/namespace/shards/scikit-learn_scikit-learn/tickets.jsonl --gold reports/fault_localization/stage1_next_iteration/e3_c_validation_500/namespace/shards/scikit-learn_scikit-learn/gold.jsonl --repo-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/repos --snapshot-cache-dir reports/fault_localization/stage1_next_iteration/e3_c_validation_500/namespace/ephemeral_snapshots --index-cache-dir data/fault_localization/swebench_full/indexes --import-graph-cache-dir data/fault_localization/swebench_full/indexes/import_graphs --output-dir reports/fault_localization/stage1_next_iteration/e3_c_validation_500/namespace/shards/scikit-learn_scikit-learn/run --candidate-file-k 20 --ephemeral-snapshots --checkpoint-every 1 --progress none --embedding-backend tfidf-sbert-rerank --semantic-candidate-k 50 --no-domain-path-routing --file-aggregation-mode basic --symbol-expansion-mode symbol-definitions-api-namespace --fallback-index-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/indexes --resume
+
+STDOUT
+{
+  "started_at_utc": "2026-08-22T15:06:51.048197+00:00",
+  "completed_at_utc": "2026-08-22T15:10:48.751009+00:00",
+  "method_id": "tfidf-sbert-rerank-8aee0a27ec59",
+  "method": {
+    "method_version": "fault-localization-method-v16",
+    "embedding_backend": "tfidf-sbert-rerank",
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20,
+    "import_graph_mode": "off",
+    "import_graph_parameters": {
+      "reference_file_k": 5,
+      "outgoing_signal": 0.8,
+      "incoming_signal": 0.65,
+      "rank_decay": 0.08,
+      "maximum_signal": 0.8,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4
+    },
+    "symbol_expansion_mode": "symbol-definitions-api-namespace",
+    "symbol_expansion_parameters": {
+      "max_ticket_symbols": 20,
+      "max_files_per_symbol": 4,
+      "exact_match_bonus": 0.06,
+      "leaf_match_bonus": 0.04,
+      "maximum_bonus": 0.1,
+      "maximum_evidence_per_file": 4
+    },
+    "api_implementation_parameters": {
+      "max_links_per_symbol": 4,
+      "reexport_bonus": 0.04,
+      "wrapper_bonus": 0.05,
+      "maximum_bonus": 0.08,
+      "maximum_evidence_per_file": 4,
+      "maximum_wrapper_statements": 4
+    },
+    "file_aggregation_mode": "basic",
+    "file_aggregation_parameters": {
+      "max_evidence_chunks": 5,
+      "evidence_score_ratio": 0.8,
+      "minimum_evidence_score": 0.05,
+      "support_bonus_per_additional_chunk": 0.0125,
+      "support_bonus_cap": 0.05,
+      "symbol_bonus_per_additional_symbol": 0.01,
+      "symbol_bonus_cap": 0.04,
+      "package_bonus_cap": 0.1
+    }
+  },
+  "frozen_protocol": "",
+  "tickets_selected": 52,
+  "predictions": 52,
+  "failures": 0,
+  "processed_this_run": 52,
+  "skipped_existing": 0,
+  "index_cache_hits": 52,
+  "import_graph_cache_hits": 0,
+  "import_graph_builds": 0,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/stage1_next_iteration/e3_c_validation_500/namespace/shards/scikit-learn_scikit-learn/run/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/stage1_next_iteration/e3_c_validation_500/namespace/shards/scikit-learn_scikit-learn/run/test_metrics.json",
+  "failures_output": "reports/fault_localization/stage1_next_iteration/e3_c_validation_500/namespace/shards/scikit-learn_scikit-learn/run/test_failures.jsonl",
+  "metrics": {
+    "rows": 52,
+    "gold_rows": 52,
+    "prediction_rows": 52,
+    "matched_prediction_rows": 52,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 52,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 52,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.9423076923076923,
+    "candidate_recall_at_20": 0.9278846153846154,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 47,
+      "partial_recall_rows": 2,
+      "miss_rows": 3
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "scikit-learn__scikit-learn-11264",
+        "scikit-learn__scikit-learn-12760",
+        "scikit-learn__scikit-learn-10986",
+        "scikit-learn__scikit-learn-12626",
+        "scikit-learn__scikit-learn-25601",
+        "scikit-learn__scikit-learn-14141",
+        "scikit-learn__scikit-learn-13368",
+        "scikit-learn__scikit-learn-12486",
+        "scikit-learn__scikit-learn-26194",
+        "scikit-learn__scikit-learn-14764",
+        "scikit-learn__scikit-learn-13554",
+        "scikit-learn__scikit-learn-10913",
+        "scikit-learn__scikit-learn-25299",
+        "scikit-learn__scikit-learn-11310",
+        "scikit-learn__scikit-learn-14890",
+        "scikit-learn__scikit-learn-13135",
+        "scikit-learn__scikit-learn-11578",
+        "scikit-learn__scikit-learn-26318",
+        "scikit-learn__scikit-learn-15393",
+        "scikit-learn__scikit-learn-15495",
+        "scikit-learn__scikit-learn-11243",
+        "scikit-learn__scikit-learn-13221",
+        "scikit-learn__scikit-learn-13174",
+        "scikit-learn__scikit-learn-11346",
+        "scikit-learn__scikit-learn-13280",
+        "scikit-learn__scikit-learn-12704",
+        "scikit-learn__scikit-learn-14520",
+        "scikit-learn__scikit-learn-13704",
+        "scikit-learn__scikit-learn-23099",
+        "scikit-learn__scikit-learn-15120",
+        "scikit-learn__scikit-learn-12421",
+        "scikit-learn__scikit-learn-12682",
+        "scikit-learn__scikit-learn-25697",
+        "scikit-learn__scikit-learn-11043",
+        "scikit-learn__scikit-learn-13828",
+        "scikit-learn__scikit-learn-12258",
+        "scikit-learn__scikit-learn-10577",
+        "scikit-learn__scikit-learn-11496",
+        "scikit-learn__scikit-learn-25672",
+        "scikit-learn__scikit-learn-14806",
+        "scikit-learn__scikit-learn-25774",
+        "scikit-learn__scikit-learn-14732",
+        "scikit-learn__scikit-learn-13253",
+        "scikit-learn__scikit-learn-15138",
+        "scikit-learn__scikit-learn-25443",
+        "scikit-learn__scikit-learn-13467",
+        "scikit-learn__scikit-learn-15100"
+      ],
+      "partial_recall": [
+        "scikit-learn__scikit-learn-13536",
+        "scikit-learn__scikit-learn-12557"
+      ],
+      "miss": [
+        "scikit-learn__scikit-learn-14067",
+        "scikit-learn__scikit-learn-14125",
+        "scikit-learn__scikit-learn-25102"
+      ]
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.865385,
+        "upper": 1.0
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.850962,
+        "upper": 0.980769
+      }
+    },
+    "file_top_1_accuracy": 0.8461538461538461,
+    "file_top_3_accuracy": 0.9038461538461539,
+    "file_top_5_accuracy": 0.9230769230769231,
+    "file_mrr": 0.876602564102564,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 52,
+    "top_1_accuracy": 0.8461538461538461,
+    "top_3_accuracy": 0.9038461538461539,
+    "top_5_accuracy": 0.9230769230769231,
+    "mrr": 0.876602564102564,
+    "base_commit_reachable_evaluation": {
+      "rows_with_reachable_file_ground_truth": 52,
+      "candidate_hit_at_20": 0.9423076923076923,
+      "candidate_recall_at_20": 0.9326923076923077,
+      "unreachable_gold_file_count": 2,
+      "unreachable_gold_files_by_ticket": {
+        "scikit-learn__scikit-learn-14067": [
+          "sklearn/externals/_scipy_linalg.py"
+        ],
+        "scikit-learn__scikit-learn-12557": [
+          "examples/svm/plot_svm_tie_breaking.py"
+        ]
+      },
+      "bootstrap_95_ci": {
+        "samples": 2000,
+        "seed": 44,
+        "candidate_hit_at_20": {
+          "lower": 0.865385,
+          "upper": 1.0
+        },
+        "candidate_recall_at_20": {
+          "lower": 0.855769,
+          "upper": 0.990385
+        }
+      },
+      "note": "Auxiliary metric only. Gold files absent at base_commit are excluded; the original Recall@20 remains the primary benchmark metric."
+    },
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 52,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}
+
+STDERR
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 9812.24it/s]

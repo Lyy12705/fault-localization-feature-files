@@ -1,0 +1,153 @@
+COMMAND
+/Library/Frameworks/Python.framework/Versions/3.13/bin/python3 /Users/linyaying/Documents/bug_llm_project/fault_localization_feature_files/scripts/run_swebench_lite_fault_localization.py --tickets reports/fault_localization/swebench_full_validation_tfidf_sbert/shards/matplotlib_matplotlib/tickets.jsonl --gold reports/fault_localization/swebench_full_validation_tfidf_sbert/shards/matplotlib_matplotlib/gold.jsonl --repo-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/repos --snapshot-cache-dir reports/fault_localization/swebench_full_validation_tfidf_sbert/ephemeral_snapshots --index-cache-dir data/fault_localization/swebench_full/indexes --output-dir reports/fault_localization/swebench_full_validation_tfidf_sbert/shards/matplotlib_matplotlib/run --candidate-file-k 20 --ephemeral-snapshots --checkpoint-every 1 --progress none --embedding-backend tfidf-sbert-rerank --semantic-candidate-k 50 --no-domain-path-routing --fallback-index-cache-dir ../bug_tracking_llm_system/data/fault_localization/swebench_lite/indexes --resume
+
+STDOUT
+{
+  "started_at_utc": "2026-08-16T18:37:13.161322+00:00",
+  "completed_at_utc": "2026-08-16T18:40:35.228233+00:00",
+  "method_id": "tfidf-sbert-rerank-43260d1c9be2",
+  "method": {
+    "method_version": "fault-localization-method-v11",
+    "embedding_backend": "tfidf-sbert-rerank",
+    "sbert_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "semantic_candidate_k": 50,
+    "candidate_file_k": 20,
+    "generic_routing": false,
+    "domain_path_routing": false,
+    "repository_proximity": false,
+    "advanced_file_aggregation": false,
+    "llm_rerank": false,
+    "llm_candidate_k": 0,
+    "ollama_model": "",
+    "ollama_timeout": 0,
+    "file_aggregation": true,
+    "top_k": 5,
+    "include_tests": false,
+    "chunk_lines": 80,
+    "overlap_lines": 20,
+    "max_file_bytes": 500000,
+    "min_ticket_chars": 20
+  },
+  "frozen_protocol": "",
+  "tickets_selected": 41,
+  "predictions": 41,
+  "failures": 0,
+  "processed_this_run": 41,
+  "skipped_existing": 0,
+  "index_cache_hits": 41,
+  "run_diagnostics": {
+    "llm_rerank_requested": false,
+    "llm_rerank_used_predictions": 0,
+    "llm_rerank_fallback_predictions": 0
+  },
+  "predictions_output": "reports/fault_localization/swebench_full_validation_tfidf_sbert/shards/matplotlib_matplotlib/run/test_predictions.jsonl",
+  "metrics_output": "reports/fault_localization/swebench_full_validation_tfidf_sbert/shards/matplotlib_matplotlib/run/test_metrics.json",
+  "failures_output": "reports/fault_localization/swebench_full_validation_tfidf_sbert/shards/matplotlib_matplotlib/run/test_failures.jsonl",
+  "metrics": {
+    "rows": 41,
+    "gold_rows": 41,
+    "prediction_rows": 41,
+    "matched_prediction_rows": 41,
+    "missing_prediction_rows": 0,
+    "rows_with_file_ground_truth": 41,
+    "rows_with_symbol_ground_truth": 0,
+    "candidate_k": 20,
+    "rows_with_stage1_candidates": 41,
+    "rows_missing_stage1_output": 0,
+    "candidate_hit_at_20": 0.8536585365853658,
+    "candidate_recall_at_20": 0.7262872628726287,
+    "average_candidate_count_at_20": 20.0,
+    "candidate_outcomes_at_20": {
+      "full_recall_rows": 25,
+      "partial_recall_rows": 10,
+      "miss_rows": 6
+    },
+    "candidate_outcome_ticket_ids_at_20": {
+      "full_recall": [
+        "matplotlib__matplotlib-22767",
+        "matplotlib__matplotlib-24224",
+        "matplotlib__matplotlib-26532",
+        "matplotlib__matplotlib-25238",
+        "matplotlib__matplotlib-21481",
+        "matplotlib__matplotlib-23740",
+        "matplotlib__matplotlib-26472",
+        "matplotlib__matplotlib-20788",
+        "matplotlib__matplotlib-20816",
+        "matplotlib__matplotlib-25794",
+        "matplotlib__matplotlib-20374",
+        "matplotlib__matplotlib-20693",
+        "matplotlib__matplotlib-24627",
+        "matplotlib__matplotlib-23049",
+        "matplotlib__matplotlib-25085",
+        "matplotlib__matplotlib-17810",
+        "matplotlib__matplotlib-25631",
+        "matplotlib__matplotlib-21318",
+        "matplotlib__matplotlib-24026",
+        "matplotlib__matplotlib-23203",
+        "matplotlib__matplotlib-13859",
+        "matplotlib__matplotlib-23088",
+        "matplotlib__matplotlib-22871",
+        "matplotlib__matplotlib-25785",
+        "matplotlib__matplotlib-25425"
+      ],
+      "partial_recall": [
+        "matplotlib__matplotlib-19743",
+        "matplotlib__matplotlib-24257",
+        "matplotlib__matplotlib-25515",
+        "matplotlib__matplotlib-24538",
+        "matplotlib__matplotlib-20470",
+        "matplotlib__matplotlib-24691",
+        "matplotlib__matplotlib-24619",
+        "matplotlib__matplotlib-26479",
+        "matplotlib__matplotlib-24013",
+        "matplotlib__matplotlib-23198"
+      ],
+      "miss": [
+        "matplotlib__matplotlib-25346",
+        "matplotlib__matplotlib-24250",
+        "matplotlib__matplotlib-23174",
+        "matplotlib__matplotlib-13980",
+        "matplotlib__matplotlib-21550",
+        "matplotlib__matplotlib-26466"
+      ]
+    },
+    "candidate_bootstrap_95_ci": {
+      "samples": 2000,
+      "seed": 42,
+      "candidate_hit_at_20": {
+        "lower": 0.731707,
+        "upper": 0.95122
+      },
+      "candidate_recall_at_20": {
+        "lower": 0.612466,
+        "upper": 0.836043
+      }
+    },
+    "file_top_1_accuracy": 0.5121951219512195,
+    "file_top_3_accuracy": 0.6585365853658537,
+    "file_top_5_accuracy": 0.7073170731707317,
+    "file_mrr": 0.5934959349593496,
+    "symbol_top_1_accuracy": 0.0,
+    "symbol_top_3_accuracy": 0.0,
+    "symbol_top_5_accuracy": 0.0,
+    "symbol_mrr": 0.0,
+    "rows_with_ground_truth": 41,
+    "top_1_accuracy": 0.5121951219512195,
+    "top_3_accuracy": 0.6585365853658537,
+    "top_5_accuracy": 0.7073170731707317,
+    "mrr": 0.5934959349593496,
+    "missing_file_ground_truth_rows": 0,
+    "missing_symbol_ground_truth_rows": 41,
+    "note": "Rows without fixed_files/modified_files/file ground truth are skipped for file-level metrics. Rows without fixed_symbols/function_name/class_name ground truth are skipped for symbol-level metrics.",
+    "run_diagnostics": {
+      "llm_rerank_requested": false,
+      "llm_rerank_used_predictions": 0,
+      "llm_rerank_fallback_predictions": 0
+    }
+  }
+}
+
+STDERR
+
+Loading weights:   0%|          | 0/103 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 103/103 [00:00<00:00, 9298.61it/s]

@@ -1,0 +1,54 @@
+{
+  "stage": "E2 Import Graph",
+  "decision": "keep_e2_a_baseline",
+  "selected_method": "E2-A",
+  "validation_rows": 500,
+  "holdout_used": false,
+  "acceptance_criteria": {
+    "minimum_recall_at_20_delta": 0.005,
+    "minimum_paired_ci_lower_bound": 0.0,
+    "maximum_hit_at_20_drop": 0.005,
+    "required_predictions": 500,
+    "required_unique_candidate_files": 20
+  },
+  "methods": {
+    "E2-B": {
+      "method": "outgoing_import_graph",
+      "hit_at_20": 0.902,
+      "recall_at_20": 0.8360485852311939,
+      "top_1_accuracy": 0.494,
+      "mrr_at_20": 0.6136187825590302,
+      "recall_delta_vs_e2_a": 0.0062139406487232585,
+      "recall_delta_bootstrap_95_ci": {
+        "lower": -0.015627,
+        "upper": 0.027189
+      },
+      "passes_minimum_recall_delta": true,
+      "passes_ci_lower_bound": false,
+      "passes_hit_drop_limit": true,
+      "passes_execution_requirements": true,
+      "retain": false,
+      "classification": "exploratory_only"
+    },
+    "E2-C": {
+      "method": "bidirectional_import_graph",
+      "hit_at_20": 0.894,
+      "recall_at_20": 0.8316870255348516,
+      "top_1_accuracy": 0.53,
+      "mrr_at_20": 0.638388826404074,
+      "recall_delta_vs_e2_a": 0.0018523809523809528,
+      "recall_delta_bootstrap_95_ci": {
+        "lower": -0.018429,
+        "upper": 0.022644
+      },
+      "passes_minimum_recall_delta": false,
+      "passes_ci_lower_bound": false,
+      "passes_hit_drop_limit": true,
+      "passes_execution_requirements": true,
+      "retain": false,
+      "classification": "not_retained"
+    }
+  },
+  "e2_d_executed": false,
+  "reason": "Neither Import Graph variant satisfies every predeclared Validation acceptance criterion. E2-B is retained only as an exploratory result because its Recall@20 gain is not statistically stable and Top-1/MRR@20 decline."
+}
