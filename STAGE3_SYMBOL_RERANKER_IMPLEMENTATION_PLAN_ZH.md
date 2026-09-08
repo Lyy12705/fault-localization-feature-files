@@ -1,11 +1,12 @@
 # 第三階段 Symbol Reranker 實作與實驗計畫
 
-**文件版本：** v1.0  
-**日期：** 2026-09-02  
-**狀態：** 後續第三階段開發的正式執行基準  
+**文件版本：** v1.1  
+**建立日期：** 2026-09-02  
+**更新日期：** 2026-09-08  
+**狀態：** 採方向二執行；接受候選涵蓋限制並啟動探索性 WP4（待指導教授確認研究範圍調整）  
 **適用專案：** Fault Localization Feature
 
-> **下一個行動：** 先完成 WP1「Symbol 資料契約與 AST 正確性」。在 SymbolRecord、ground truth 與 evaluator 通過驗收前，不開始調整 Code Llama prompt，也不對 Symbol 準確率作結論。
+> **下一個行動：** 凍結 `coverage-aware-v1` 的 68.64% Candidate Recall@30，直接開始 WP4 的 10-ticket Code Llama smoke test；WP4 最多使用 2 個工作日，所有結果標記為探索性，不再以 90% G2 阻塞後續流程。
 
 ---
 
@@ -22,6 +23,46 @@
 5. 現有 Symbol LLM 將 Top-30 拆成每批 5 個後直接跨批比較分數；不同批次的分數不一定可校準。
 
 因此第三階段的正式目標是：先建立可信的 Symbol 資料與評估基礎，再比較 deterministic symbol retrieval 與 Code Llama Symbol Reranker。若 LLM 未通過採用門檻，正式預設維持 symbol retrieval，LLM 保留為實驗選項。
+
+### 0.1 2026-09-08 範圍與時程決策
+
+本版採用方向二：「接受目前候選涵蓋上限，帶著限制往下走」。90%仍保留為理想研究目標，
+但不再是啟動WP4的硬性前置條件。這項調整的理由如下：
+
+| 固定方法 | Conditional Exact Candidate Recall@30 | 相對68.64%基準 | 決定 |
+|---|---:|---:|---|
+| `coverage-aware-v1` | **68.64%** | — | 凍結為WP4候選基準 |
+| `source-neighborhood-v1` | 64.70% | -3.94百分點 | 不採用 |
+| `call-neighborhood-v1` | 66.02% | -2.62百分點 | 不採用 |
+| `call-neighborhood-v2` | 68.20% | -0.44百分點 | 不採用 |
+
+AST pool exact oracle為90.41%，但實際Top-30只有68.64%；三個最近的凍結補救均未超越
+基準，顯示再以局部規則修補不太可能在目前時程內一次增加21.36個百分點。本輪停止
+WP3小幅調整，保留30個pool-reachable ranking misses、17個Stage-2 file misses與2個
+identity mismatches作為已知限制。
+
+WP4可以開始，但必須同時回報Candidate Recall@30、conditional與end-to-end指標；LLM
+只能重排已進shortlist的候選，不能修復未進Top-30的gold symbol。因此WP4結果只作
+探索性證據，不能把未命中候選的責任歸因於LLM。此範圍調整應在下一次進度報告交由
+指導教授確認；若未獲同意，退回方向三，以檔案層級定位作正式範圍，Symbol定位列為
+未來工作。
+
+### 0.2 調整後時程
+
+| 日期／期限 | 工作 | 完成條件 |
+|---|---|---|
+| 2026-09-08 | WP3停損並凍結`coverage-aware-v1` | 保留68.64%與完整負結果 |
+| 2026-09-08～09-09 | WP4 10-ticket smoke | schema、fallback、score leakage與耗時可判讀 |
+| 最晚2026-09-10 | WP4固定50-ticket pilot與採用決策 | 選擇LLM或retrieval，完成限制報告 |
+| 2026-09-11起 | 銜接後續流程與文件 | 不再讓Stage3壓縮原定10月補丁生成里程碑 |
+
+### 0.3 三個方向的決策紀錄
+
+| 方向 | 本版決策 | 理由 |
+|---|---|---|
+| 一：另試語意候選擴充 | 延後為新實驗ID的未來工作 | 與現有規則不同，值得研究，但本輪不再延長WP3 |
+| 二：放寬門檻並啟動WP4 | **採用** | 保留完整限制，優先完成定位→補丁→測試→提交訊息流程 |
+| 三：只做到檔案層級 | 指導教授不同意範圍調整時的備案 | Stage1／2已有結論，可保障最低專題交付 |
 
 **預估工期：** 單人約 10–11 個工作日；若 repository snapshot 已齊全且 50 筆人工抽查一次通過，可縮短至 8–9 個工作日。
 
@@ -297,7 +338,7 @@ Evaluator v1 的 Candidate Hit/Recall@10/30 只使用「至少一個 gold file �
 
 **實作：** 將 symbol localization 與 LLM 開關拆開；保存 Top-30 candidate pool；比較 B0/B1、per-file quota 與 Top-10 shortlist。
 
-**驗收：** eligible development data 的 Exact Symbol Candidate Recall@30 目標至少 90%；未達時停留本 WP，不開始解讀 LLM 排序效果。
+**驗收：** eligible development data 的 Exact Symbol Candidate Recall@30 理想目標仍為90%。依2026-09-08方向二決策，68.64%的`coverage-aware-v1`凍結為目前上限，未達90%不再阻塞探索性WP4；正式報告必須揭露21.36個百分點缺口及其分母。
 
 **目前狀態（2026-09-07）：進行中，coverage-aware-v1 已完成，實際 G2 仍未通過。** `symbol_localization` 與 `symbol_llm_rerank` 核心/API/CLI 開關已拆分；deterministic ranking 已加入 B0 TF-IDF、B1 structured evidence、quota 0／4／6／8、module-reserved 與 coverage-aware-v1 的 frozen development 設定。Stage-3 將 module-level gap 正式表示為 `<module>`，並為只有 generic chunk 的舊 index 自動補一個 module candidate，不必重建 index。coverage-aware-v1 保留強 global prefix、為每個 Stage-2 檔案保留一個 module candidate，並從 prefix 已提供證據的 class family 補入一個 member。61 張 development Tickets 共得到 46 張 Stage-2 conditional-eligible Tickets；B0 Candidate Recall@30 為 60.60%，global B1 為 64.36%，選定的 coverage-aware-v1 為 68.64%，相較 global B1 增加 4.28 個百分點；quota 4／6／8 分別為 61.34%／53.35%／56.24%。AST pool exact oracle 維持 90.41%，但實際 Top-30 仍未達 90%，因此不得開始 WP4 LLM 實驗。coverage-aware-v1 從原本 37 個 pool-reachable ranking misses 找回 7 個，使 conditional Top-30 exact hit 由 81 增至 88、ranking miss 降至 30；另有 Stage-2 file miss 17 與 identity mismatch 2。結果保存在 `reports/fault_localization/stage3_deterministic_g2_dev_v1/`，完整回歸 183/183 通過。下一步仍停留 WP3，針對剩餘 30 個 ranking misses 執行 frozen source-neighborhood expansion ablation，不使用 gold 特徵微調，也不開始 LLM 實驗。
 
@@ -307,17 +348,21 @@ Evaluator v1 的 Candidate Hit/Recall@10/30 只使用「至少一個 gold file �
 
 **WP3 call-neighborhood-v2 更新（2026-09-08）：** v2 已直接使用 `CodeIndex.call_graph` 的 repository-level 呼叫圖，並以 Stage-2 Top-5 candidate identities 過濾兩端；舊 index 缺少呼叫圖時才從完整 index 重建。61 筆 development 全量重跑完成，Recall@30 為 68.20%，比 call-neighborhood-v1 的 66.02% 增加 2.18 個百分點，證實完整索引圖能修復主要 graph reconstruction 缺邊。相較選定的 coverage-aware-v1，v2 找回原 30 個 misses 中的 4 個，但失去 5 個既有命中，exact hits 為 87 對 88，ranking misses 為 31 對 30；主要指標低 0.44 個百分點，因此不採用，baseline 維持 68.64%。188/188 測試通過；設定與證據位於 `configs/fault_localization/stage3_call_neighborhood_v2.json` 與 `reports/fault_localization/stage3_call_neighborhood_dev_v2/EXPERIMENT_ZH.md`。下一步逐筆分析 4 個 recoveries 與 5 個 losses，固定能保留 class-family coverage 的 guarded call expansion 規則；G2 未通過，WP4 尚未開始。
 
+**WP3停損決定（2026-09-08）：** 前述call-neighborhood-v2的「guarded call expansion」下一步取消，不再進行第四次局部補救。`coverage-aware-v1`以68.64%凍結，WP3標記為「工程完成、研究門檻未達」，後續改由WP4量測LLM在可達候選上的排序效果。
+
 ### WP4：Code Llama 配對實驗（2 工作日）
 
 **實作：** opaque candidate IDs、單一 Top-10 global prompt、JSON Schema、score-blind prompt、fallback、timings 與 run manifest；先 10-ticket smoke，再 50-ticket pilot。
 
 **驗收：** LLM valid coverage 至少 95%、fallback 不高於 5%、沒有 score leakage；同一批 tickets 與相同 candidate pool 產生 B1／L1-only／L1-blend 配對結果。
 
+**調整後執行方式（2026-09-08）：** 立即使用凍結的`coverage-aware-v1`開始10-ticket smoke，成功後執行固定50-ticket pilot。WP4最多2個工作日；到期即依G3與探索性配對結果決定「保留retrieval」或「LLM進入後續研究」，不因結果不理想延長prompt微調。所有報告在標題與結論標記`exploratory_due_to_G2_not_met`。
+
 ### WP5：正式比較、凍結與文件（1–2 工作日）
 
-**實作：** 在至少 200 個 symbol-eligible tickets、至少 5 個 repositories 上完成 validation；鎖定設定後才執行 frozen holdout，更新 README、model spec 與最終報告。
+**實作：** 專題最低交付為完成固定50-ticket pilot、做出LLM採用決策、更新README、model spec與限制報告；若不影響後續補丁生成時程，才在至少200個symbol-eligible tickets、至少5個repositories上完成正式validation與frozen holdout。
 
-**驗收：** 所有 schema、tests、commands、manifest 與結果可重現；正式預設設定由下節採用門檻決定。
+**驗收：** 所有schema、tests、commands、manifest與結果可重現；未達G2或G4時不得宣稱正式Symbol準確率提升，但不再阻塞後續補丁生成、測試案例與提交訊息流程。
 
 ---
 
@@ -328,14 +373,20 @@ Evaluator v1 的 Candidate Hit/Recall@10/30 只使用「至少一個 gold file �
 | Gate | 條件 | 未通過時 |
 |---|---|---|
 | G1 Gold | 50 筆抽查 exact ≥95%、provenance 100% | 修 mapper，不跑 LLM 正式實驗 |
-| G2 Candidate | Conditional Exact Candidate Recall@30 ≥90% | 改善 AST／retrieval，不調 LLM prompt |
+| G2 Candidate | 理想目標≥90%；目前凍結68.64%，方向二允許探索性WP4 | 明列候選上限；不得宣稱正式提升，不再阻塞WP4 |
 | G3 Reliability | LLM valid coverage ≥95%、fallback ≤5% | 修 schema／budget／timeout，不比較準確率 |
 | G4 Evidence | ≥200 eligible tickets、≥5 repos；paired 95% CI | 未達者只標為 exploratory |
 | G5 Adoption | LLM 的 Conditional Exact Symbol Hit@5 點估計高於 B1，95% CI 下界不低於 0；end-to-end Hit@5 不下降；p95 Symbol LLM latency ≤60 秒／ticket | 不設為預設，維持 B1 fallback |
 
+G2的調整只改變專題時程與WP4啟動資格，不改變指標定義，也不把68.64%改寫成通過90%。
+若後續有新的deterministic方法或資料，可以用新實驗ID重啟G2；目前development set不再
+用於第四次局部規則調整。
+
 ### 9.2 明確停止條件
 
-若連續兩個凍結 prompt 版本都無法在同一 development set 改善 Conditional Exact Symbol Hit@5，停止繼續 prompt 微調。記錄負結果，正式流程採 B1；後續只有在更強模型、更多 gold 或不同 reranking 方法可用時才重啟。
+WP3已觸發停損：source-neighborhood、call-neighborhood-v1與call-neighborhood-v2三個凍結補救均未超越68.64%基準，因此本輪不再新增deterministic局部規則。
+
+WP4若連續兩個凍結prompt版本都無法在同一development set改善Conditional Exact Symbol Hit@5，或2個工作日用盡，停止繼續prompt微調。記錄負結果，正式流程採B1；後續只有在更強模型、更多gold或不同reranking方法可用時才重啟。
 
 ---
 
@@ -362,8 +413,8 @@ Evaluator v1 的 Candidate Hit/Recall@10/30 只使用「至少一個 gold file �
 1. 1 個 Ticket 驗證 prompt、schema、輸出與 fallback。
 2. 固定 10 個 Ticket 作 smoke test；只判斷流程與 coverage。
 3. 固定 50 個 Ticket 作 pilot；可調 development 參數，不作最終主張。
-4. 至少 200 個 eligible Tickets 作正式 validation；凍結 prompt、K、權重與 threshold。
-5. 最後一次執行 frozen holdout；不得回頭調參。
+4. 固定50個Ticket作探索性pilot並做專題採用決策；未達G2／G4時不宣稱正式提升。
+5. 只有在不壓縮後續補丁生成時程且有至少200個eligible Tickets時，才執行正式validation與一次frozen holdout。
 
 ---
 
@@ -448,13 +499,17 @@ python scripts/run_stage3_paired_comparison.py \
 
 ## 14. 完成定義（Definition of Done）
 
-第三階段只有在以下五項全部完成後才可標記完成：
+第三階段的「完整研究驗收」只有在以下五項全部完成後才可標記完成：
 
 1. `SymbolRecordV1`、parse diagnostics、path/commit safety 與相關測試通過。
 2. Symbol gold 經 50 筆人工抽查達 95%，且 formal evaluator 使用 file-qualified exact match。
 3. deterministic baseline 可獨立執行並保存 Top-30 candidates、Top-5 output 與完整 diagnostics。
 4. Code Llama 配對實驗使用相同候選池、無 score leakage、coverage 達門檻，結果含 CI 與失敗案例。
 5. 依 G5 做出「預設啟用」或「維持 retrieval」的明確決策，並更新 README、模型規格與最終報告。
+
+專題的「流程實作完成」採較窄定義：WP1／WP2通過、WP3 deterministic baseline可執行、
+WP4完成固定smoke與pilot、做出LLM採用決策並如實揭露G2未達。達成此層級後即可往
+補丁生成、測試案例與提交訊息前進，但不得將Stage3標記為已通過完整研究驗收。
 
 ---
 
@@ -472,4 +527,6 @@ WP3 的第一個任務已完成：deterministic symbol localization 與 Symbol L
 
 完整回歸 172/172 通過。
 
-下一個任務：定義 B0/B1 與 per-file quota 實驗設定，讓 development set 可直接執行 Candidate Recall@30 G2 gate；此階段不讀取或調整 LLM prompt。
+2026-09-08最新決策：WP3已完成B0/B1、quota、coverage-aware、source-neighborhood與兩版call-neighborhood比較。選定`coverage-aware-v1`為68.64%基準；G2的90%理想目標未達，三個最近補救均未改善，因此觸發停損，不再執行guarded call expansion。
+
+下一個任務：啟動WP4，先跑固定10-ticket Code Llama smoke test，再跑50-ticket pilot；2個工作日內完成採用決策與限制報告，之後往補丁生成流程前進。
