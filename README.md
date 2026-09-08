@@ -287,6 +287,14 @@ dynamic-dispatch case; none lacks all static-call evidence. The next frozen
 variant should filter the cached graph by candidate identities instead of
 rebuilding a graph from symbol-only chunks.
 
+`call-neighborhood-v2` implements that correction by using the cached
+repository-level graph and filtering both endpoints to the current candidate
+pool. On the same development data it improves call-neighborhood-v1 from
+66.02% to 68.20% Recall@30, but remains below coverage-aware-v1 at 68.64%.
+Against that selected baseline it recovers four ranking misses and loses five
+previous hits, so it is not adopted. The frozen protocol and paired outcomes
+are saved in `reports/fault_localization/stage3_call_neighborhood_dev_v2/`.
+
 For local Ollama models, reranking uses an explicit JSON Schema and batches at
 most five candidates per request. Stage 2 still evaluates all 20 file
 candidates and Stage 3 still evaluates the bounded symbol pool; batching only
