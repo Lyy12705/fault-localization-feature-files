@@ -473,3 +473,59 @@ WP3 的第一個任務已完成：deterministic symbol localization 與 Symbol L
 完整回歸 172/172 通過。
 
 下一個任務：定義 B0/B1 與 per-file quota 實驗設定，讓 development set 可直接執行 Candidate Recall@30 G2 gate；此階段不讀取或調整 LLM prompt。
+
+## 16. 2026-09-08 決策：G2 未過關但帶著限制啟動 WP4 Pilot
+
+**背景：** WP3 已對 deterministic candidate pool 做了多輪消融（source-neighborhood-v1、call-neighborhood-v1、call-neighborhood-v2），三次都低於目前選定的 coverage-aware-v1（68.64%），呈現報酬遞減。distance 90% 的 G2 門檻還有約 21 個百分點的落差，短期內用同類型的鄰域規則微調不太可能一次補齊。同時，專題排程規定步驟 3（錯誤定位＋補丁生成與驗證）僅到 115 年 12 月，後面還有提交訊息生成與系統測試／優化要在 116 年 2 月前完成。
+
+**決策：** 比照 Stage 1 當年處理 Final Holdout Recall@20 只有 67.17% 的做法——不再把 G2 當成硬性阻擋，而是把 68.64% 的候選召回率當作**已知限制**明確寫進報告，先啟動 WP4 Pilot，讓 Symbol LLM 排序的可行性與 end-to-end 表現先有真實數據，再決定要不要回頭繼續衝 G2。這不是撤銷 G2 的正式門檻定義（9.1 節維持不變），而是專題排程下的務實選擇，最終正式採用與否仍需完整跑過 G4／G5 驗證。
+
+**與既有雛形的差異：** 現有 `--symbol-llm-rerank`（`rerank_symbols_with_llm` / `_rerank_symbol_batch`）把 Top-30 拆成每批 5 個、用同批內的本地 rank 當 ID，且跨批分數直接混合排序——這正是第 0 節第 5 點指出、尚未修正的已知問題。WP4 Pilot 改用新增的獨立腳本，不修改既有雛形（避免影響現有 172 項相關回歸測試），採用計畫書 6.3 節設計：
+
+- 直接沿用 WP3 已凍結的 `b1_coverage_aware_v1` Top-30 pool（免重算 retrieval）。
+- 從 Top-30 取 Top-10 shortlist，**單一 Ollama 呼叫**完成排序，不再分批。
+- candidate_id 改為**洗牌過的 opaque ID**（`C1`…`C10`，用固定種子重新排列，不等於原始 rank），prompt 只包含 file_path、symbol_kind、qualified_name、行號與程式碼片段，不包含 retrieval score、Stage-2 file score 或原始 rank。
+- 缺一筆、重複 ID、未知 ID、NaN／超界分數、非 JSON，一律視為整票 LLM failure，並清楚回退到 deterministic baseline 順序（開發過程中的單元測試曾抓到一個真的 bug：若疏忽，fallback 會誤用洗牌後的 prompt 順序而不是原始 baseline 順序，已修正並補了回歸測試）。
+
+**新增產物：**
+- `scripts/run_stage3_wp4_symbol_llm_pilot.py`：WP4 Pilot 主程式（單一 Top-10 呼叫、opaque ID、no-score-leakage、deterministic fallback、run manifest、per-ticket 與彙總輸出）。
+- `tests/test_stage3_wp4_symbol_llm_pilot.py`：16 個單元／整合測試，涵蓋 opaque ID 洗牌與決定性、prompt 不洩漏 retrieval 欄位、缺漏／重複／未知 ID／NaN／超界分數的 fallback、以及 eligibility 判斷（`stage2_localized_files` 為 dict 陣列的實際 schema）。
+- 完整回歸：204/204 通過（188 既有＋16 新增），未修改任何既有檔案的行為。
+- 已用真實 development 資料（不呼叫 Ollama）驗證資料串接：61 筆 development tickets 中 46 筆為 eligible（與既有文件一致），index／chunk 對照與 bug_report 讀取均正確；並在無法連線 Ollama 的環境下驗證了完整 CLI 會正確 fallback 且不中斷。
+
+**尚未完成（需要在有真實 Ollama 存取權的機器上執行）：**
+1. 1 個 Ticket 的真實 smoke test（驗證 prompt、schema、真實模型輸出與 fallback）。
+2. 若 1 票成功，擴大到 46 個 eligible development tickets 的 pilot，得到 baseline vs LLM 的 Exact Hit@1/3/5 與 fallback rate。
+3. 依 G5 的方向（點估計是否優於 baseline、95% CI、p95 latency）整理結果，供教授報告使用；本輪結果仍屬 pilot 等級，不構成正式 G4／G5 判定。
+
+下一個任務：在裝有 `codellama:7b-instruct` 的機器上執行 1-ticket smoke test（見任務清單指令），確認真實模型輸出可被排程與解析，再決定是否擴大到 46 票。
+
+## 17. 2026-09-08 WP4 Pilot 正式結果（46 張 development eligible tickets）
+
+在使用者本機的真實 `codellama:7b-instruct`（Ollama）上完成三階段執行：1 票 smoke → 10 票 smoke → 46 票（全部 Stage-2 conditional-eligible development tickets）正式 pilot。腳本與方法見第 16 節；配對統計由 `scripts/analyze_stage3_wp4_pilot.py` 產生（2,000 次 resample、固定種子 42 的 percentile bootstrap，沿用 `scripts/evaluate_fault_localization.py::_bootstrap_mean_ci` 既有慣例）。
+
+### G3 可靠度
+
+`llm_valid_count=42/46`，`llm_fallback_count=4`，fallback rate **8.70%**，略高於計畫書 G3 門檻（≤5%）。四筆 fallback（`invalid_or_incomplete_output`）為 `pallets__flask-4544`、`pytest-dev__pytest-10893`、`scikit-learn__scikit-learn-11042`、`sympy__sympy-13177`；原始 payload 尚未逐筆歸因是 schema 違反哪一條規則，留待需要時再查。
+
+### 準確率（Exact Hit@K，baseline＝B1 coverage-aware-v1 deterministic Top-5，LLM＝WP4 單次 Top-10 shortlist rerank）
+
+| K | Baseline | LLM | Mean Δ | 95% CI | 判讀 |
+|---|---:|---:|---:|---:|---|
+| 1 | 26.09% | 10.87% | -15.22 pp | [-28.26, -2.17] pp | **CI 不含 0，LLM 顯著更差** |
+| 3 | 47.83% | 41.30% | -6.52 pp | [-21.74, +8.70] pp | 方向為負，CI 含 0，不顯著 |
+| 5 | 60.87% | 58.70% | -2.17 pp | [-15.22, +10.87] pp | 方向為負，CI 含 0，不顯著 |
+
+逐票配對結果（improved／unchanged-hit／worsened／both-miss）：Hit@1 為 2／3／9／32；Hit@3 為 5／14／8／19；Hit@5 為 4／23／5／14。三個 K 值全部呈現「worsened 多於 improved」。
+
+### 判讀與正式建議
+
+結果方向與 Stage 2 File Reranker 完全一致：模型呼叫可靠（G3 接近但未過），但**沒有任何 K 值顯示 LLM 排序優於 deterministic baseline**，Hit@1 甚至是統計上顯著更差（95% CI 完全落在 0 以下）。依 G5 判準（LLM 點估計需高於 B1 且 CI 下界不低於 0），本輪 pilot 明確不通過。
+
+**正式建議：Symbol LLM Reranker 不採用，Stage 3 正式輸出維持 B1 deterministic baseline（coverage-aware-v1）**，與 Stage 2 對 `codellama:7b-instruct` File Reranker 的決定一致。
+
+**重要限制（务必在報告中一併陳述，避免誤讀為模型能力的最終定論）：**
+1. 樣本為 46 筆 development-only tickets、12 個 repositories，未達計畫書 G4 門檻（≥200 tickets、獨立 repo-disjoint holdout），屬 pilot／exploratory 等級，不是正式 G4 驗證。
+2. 這 46 筆的 deterministic 候選池本身 Conditional Exact Candidate Recall@30 只有 68.64%（G2 未過），也就是說即使 LLM 排序能力再好，能被排到前 5 名的正確答案本來就有上限；本輪結果只能回答「在目前候選池品質下，LLM 排序是否有幫助」，不能回答「LLM 排序能力本身的上限」。
+3. 4 筆 fallback 尚未逐筆歸因具體違反 schema 的原因，若要精確報告 G3 是否可透過 prompt 微調過關，需要再看原始回應。
+

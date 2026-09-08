@@ -1,0 +1,58 @@
+{
+  "ticket_count": 46,
+  "llm_valid_count": 42,
+  "llm_fallback_count": 4,
+  "fallback_ticket_ids": [
+    "pallets__flask-4544",
+    "pytest-dev__pytest-10893",
+    "scikit-learn__scikit-learn-11042",
+    "sympy__sympy-13177"
+  ],
+  "per_k": {
+    "1": {
+      "baseline_hit_rate": 0.2608695652173913,
+      "llm_hit_rate": 0.10869565217391304,
+      "mean_delta": -0.15217391304347827,
+      "delta_95ci": {
+        "lower": -0.282609,
+        "upper": -0.021739
+      },
+      "paired_outcomes": {
+        "improved": 2,
+        "unchanged_hit": 3,
+        "worsened": 9,
+        "both_miss": 32
+      }
+    },
+    "3": {
+      "baseline_hit_rate": 0.4782608695652174,
+      "llm_hit_rate": 0.41304347826086957,
+      "mean_delta": -0.06521739130434782,
+      "delta_95ci": {
+        "lower": -0.217391,
+        "upper": 0.086957
+      },
+      "paired_outcomes": {
+        "improved": 5,
+        "unchanged_hit": 14,
+        "worsened": 8,
+        "both_miss": 19
+      }
+    },
+    "5": {
+      "baseline_hit_rate": 0.6086956521739131,
+      "llm_hit_rate": 0.5869565217391305,
+      "mean_delta": -0.021739130434782608,
+      "delta_95ci": {
+        "lower": -0.152174,
+        "upper": 0.108696
+      },
+      "paired_outcomes": {
+        "improved": 4,
+        "unchanged_hit": 23,
+        "worsened": 5,
+        "both_miss": 14
+      }
+    }
+  }
+}
