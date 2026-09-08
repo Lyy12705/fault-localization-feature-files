@@ -243,8 +243,8 @@ the exact identity `<module>` and synthesizes one module candidate for legacy
 indexes that only contain a generic file chunk. The 61-ticket development run
 now selects `coverage-aware-v1` over global B1 and B0 (68.64%, 64.36%, and
 60.60% Conditional Exact Candidate Recall@30, respectively), but still does
-not pass the 90% G2 gate. Symbol LLM experiments therefore remain blocked
-until deterministic ranking improves.
+not pass the 90% G2 gate. The September 8 scope decision permits exploratory
+WP4 with this limitation; it does not waive formal research acceptance.
 
 Run the exact AST-pool ceiling analysis with:
 
@@ -295,7 +295,31 @@ Against that selected baseline it recovers four ranking misses and loses five
 previous hits, so it is not adopted. The frozen protocol and paired outcomes
 are saved in `reports/fault_localization/stage3_call_neighborhood_dev_v2/`.
 
-For local Ollama models, reranking uses an explicit JSON Schema and batches at
+### Stage 3 decision freeze — 2026-09-09
+
+One exploratory WP4 pilot is complete (`exploratory_due_to_G2_not_met`);
+full WP4 research acceptance is incomplete. The selected Stage-3 method remains
+`coverage-aware-v1`; Symbol LLM reranking remains an experimental option and
+is not adopted as the default. This documentation freeze changes no runtime defaults.
+
+The independent WP4 script uses a single shuffled, opaque-ID Top-10 prompt
+over the frozen candidate pool. The saved 1-ticket and 10-ticket smoke runs
+and 46-ticket pilot are in [the WP4 results](reports/fault_localization/stage3_wp4_pilot/).
+Among 46 Stage-2-eligible development tickets, baseline versus LLM Exact
+Hit@1/3/5 is 26.09/47.83/60.87% versus 10.87/41.30/58.70%.
+These are conditional ticket-level metrics, not full-cohort end-to-end rates
+and not the same metric as Candidate Recall@30 (68.64%).
+
+G2 remains unmet (68.64% versus 90%); G3 remains unmet (42/46 valid,
+91.30%; 4/46 fallback, 8.70%). G4 formal validation is incomplete, and this
+pilot does not establish G5 adoption. L1-blend, per-ticket latency/p95,
+full-cohort end-to-end reporting, and complete reproducibility metadata remain
+outstanding. The merge regression run passed 204/204 tests; it did not rerun
+Ollama inference. See the [Stage-3 plan](STAGE3_SYMBOL_RERANKER_IMPLEMENTATION_PLAN_ZH.md)
+and [final summary](reports/fault_localization/FINAL_PROJECT_SUMMARY_ZH.md).
+Next work is patch-generation integration using the frozen localization output.
+
+For the existing CLI prototype, local Ollama reranking uses an explicit JSON Schema and batches at
 most five candidates per request. Stage 2 still evaluates all 20 file
 candidates and Stage 3 still evaluates the bounded symbol pool; batching only
 reduces instruction-following pressure on smaller models. If any batch is

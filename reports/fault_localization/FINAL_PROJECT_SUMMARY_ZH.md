@@ -1,9 +1,34 @@
 # 錯誤定位專題最終總結
 
-- 完成日期：2026-09-02
+- 更新日期：2026-09-09（第三階段決策凍結；非完整研究驗收完成日期）
 - 第一階段實作版本：E8-A
 - 第一階段準確率基準：E6
 - 第二階段正式設定：retrieval baseline；`codellama:7b-instruct` reranker預設關閉
+- 第三階段選定方法：`coverage-aware-v1` deterministic baseline；WP4探索性pilot完成，完整驗收未完成
+
+## 第三階段定案：exploratory_due_to_G2_not_met
+
+本次納入1票與10票smoke、46票pilot的既有結果，維持deterministic baseline，
+不採用Symbol LLM為預設；本文件更新不改動執行設定。以下數字的分母為46筆
+Stage-2 conditional-eligible development tickets，不是全體61筆的end-to-end指標。
+
+| Exact Hit | Baseline | LLM | 差異（百分點） |
+|---|---:|---:|---:|
+| Hit@1 | 26.09% | 10.87% | -15.22 |
+| Hit@3 | 47.83% | 41.30% | -6.52 |
+| Hit@5 | 60.87% | 58.70% | -2.17 |
+
+Hit@5差異的paired bootstrap 95% CI為[-15.22, +10.87]百分點，未提供改善證據。
+valid 42/46（91.30%）、fallback 4/46（8.70%），未通過G3。G2 Candidate Recall@30
+為68.64%，未達90%；這是不同於ticket-level Hit的指標，不能直接混用。
+G4正式validation未完成；本輪不足以通過G5，工程決策為保留baseline。
+
+尚缺L1-blend、逐票耗時與p95、全體end-to-end報告、完整重現metadata，以及4筆fallback
+細分原因。這些均未因凍結而視為完成；46筆也未達原訂50筆pilot目標。
+合併驗證已實際通過204/204項回歸測試，未重新執行Ollama模型實驗。
+依據：[結果摘要](stage3_wp4_pilot/pilot_46tickets_summary.json)、
+[配對分析](stage3_wp4_pilot/pilot_46tickets_analysis.json)、
+[第三階段計畫](../../STAGE3_SYMBOL_RERANKER_IMPLEMENTATION_PLAN_ZH.md)。
 
 ## 一、最終結論
 
@@ -138,7 +163,7 @@ retrieval baseline，7B reranker預設關閉。
 2. E6 Final Holdout的Recall@20只有67.17%，跨Repository泛化仍不足。
 3. 固定Top-20契約沒有處理可索引檔案少於20個的Repository。
 4. 第二階段只測試10張Astropy Ticket，樣本小且Repository單一。
-5. 第二階段資料沒有Symbol gold，尚未完成Symbol層級準確率評估。
+5. 第二階段的10票資料沒有Symbol gold；第三階段另有46票conditional探索性評估，但正式研究驗收未完成。
 
 ## 九、正式採用設定
 
@@ -153,9 +178,12 @@ retrieval baseline，7B reranker預設關閉。
 | 第一階段輸出 | 目標Top-20唯一檔案；不足案例列為契約限制 |
 | 第二階段檔案排序 | Retrieval baseline Top-5 |
 | Code Llama 7B | 實驗選項，預設關閉 |
-| Symbol排序 | Symbol retrieval fallback；準確率尚待有標籤資料驗證 |
+| Symbol排序 | 選定coverage-aware-v1 deterministic baseline；已有探索性評估，完整驗收未完成 |
 
 ## 十、後續工作
+
+目前優先工作：使用凍結的定位輸出銜接補丁生成與驗證，並向指導教授確認研究範圍調整。
+以下候選／模型研究列為後續研究，不自動重啟WP3局部調參。
 
 1. 只在新的Development資料定義小型／模板型Repository的條件式Top-K契約。
 2. 若修改契約或排名方法，建立新實驗ID並使用全新的Repository-disjoint Holdout。
@@ -175,3 +203,7 @@ retrieval baseline，7B reranker預設關閉。
 有可重現提升，但跨Repository泛化與固定Top-20輸出契約仍有限制；第二階段7B模型
 雖能穩定執行，卻沒有改善檔案定位準確率。最終系統採用E8作為第一階段實作、E6
 作為準確率基準，並以retrieval baseline取代Code Llama 7B作為第二階段正式設定。
+
+第三階段已完成一輪WP4探索性pilot，維持coverage-aware-v1為選定方法、Symbol LLM
+不採用為預設。G2／G3未過，G4與完整WP4驗收未完成；此定案保留全部限制，作為
+後續補丁生成的工程基準，不構成Symbol定位已通過完整研究驗收的宣稱。

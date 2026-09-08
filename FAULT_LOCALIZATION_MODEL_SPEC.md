@@ -1,5 +1,34 @@
 # 錯誤定位模型架構與評估規格
 
+## 2026-09-09 第三階段定案（優先於下方歷史設計）
+
+WP4 一輪探索性 pilot 已完成，完整研究驗收未完成；結果標記為
+`exploratory_due_to_G2_not_met`。選定的第三階段方法維持 `coverage-aware-v1`
+deterministic baseline，Symbol LLM 不採用為預設；本次只凍結文件決策，不修改執行設定。
+Stage-1 維持 E8-A 實作／E6 準確率證據，Stage-2 維持 retrieval Top-5。
+
+獨立 WP4 腳本沿用凍結候選池，以單次 Top-10、洗牌 opaque ID、無 retrieval score 的
+prompt 比較 baseline 與 L1-only。46 筆 Stage-2 eligible development tickets 的
+Exact Hit@1/3/5 為 baseline 26.09%／47.83%／60.87%，LLM 10.87%／41.30%／58.70%。
+這些是 conditional ticket-level Hit，不能當作全體 end-to-end 結果，也不能與
+68.64% Candidate Recall@30 混用或直接當成同一種上限。
+
+| 驗收項目 | 定案時狀態 |
+|---|---|
+| G2 Candidate | 68.64% < 90%，未通過；接受限制以繼續探索性工作 |
+| G3 Reliability | valid 42/46（91.30%）、fallback 4/46（8.70%），未通過 |
+| G4 Evidence | 僅46筆development pilot；≥200筆正式validation等證據未完成 |
+| G5 Adoption | 本輪Hit@5未改善，且缺end-to-end與p95延遲證據；不啟用LLM預設 |
+
+完整 WP4 驗收仍缺 L1-blend、逐票耗時／p95、全體 end-to-end 指標、模型 digest／prompt
+版本等重現資訊與 fallback 原因細分。這些缺項保留為後續研究，不能標記已通過。
+合併時已實際重跑204/204項回歸測試；這不等於重新執行模型實驗。
+
+依據：[第三階段計畫](STAGE3_SYMBOL_RERANKER_IMPLEMENTATION_PLAN_ZH.md)、
+[WP4結果摘要](reports/fault_localization/stage3_wp4_pilot/pilot_46tickets_summary.json)、
+[定案總結](reports/fault_localization/FINAL_PROJECT_SUMMARY_ZH.md)。
+下一步以凍結定位輸出銜接補丁生成與驗證；研究範圍調整仍待指導教授確認。
+
 > 實作狀態（2026-08-15）：本文件的 Dual Encoder 是目標架構，不是目前已選定模型。已封存的 Stage-1 v11 使用 TF-IDF + high-precision domain/path routing；完整 Development Recall@20 為 93.33%，一次性跨專案 Holdout 為 84.44%。實作、消融與限制請見 `reports/fault_localization/STAGE1_V11_FINAL_REPORT_ZH.md`。
 
 > 文件狀態：v1 設計基準（Source of Truth）
