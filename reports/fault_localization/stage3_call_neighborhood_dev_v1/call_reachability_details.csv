@@ -1,0 +1,31 @@
+ticket_id,file_path,symbol_kind,qualified_name,baseline_pool_rank,prefix_size,resolved_degree,prefix_neighbor_count,prefix_neighbors,pool_neighbors,call_variant_top30_exact,reachability_class
+astropy__astropy-13465,astropy/utils/diff.py,function,report_diff_values,67,20,1,0,,astropy/utils/diff.py::report_diff_values,False,connected_outside_prefix
+astropy__astropy-14598,astropy/io/fits/card.py,method,Card._split,95,20,0,0,,,False,no_resolved_incident_edge
+django__django-15139,django/core/cache/backends/redis.py,method,RedisSerializer.loads,85,20,0,0,,,False,no_resolved_incident_edge
+matplotlib__matplotlib-22719,lib/matplotlib/category.py,method,UnitData.update,50,20,2,0,,lib/matplotlib/category.py::UnitData.__init__ | lib/matplotlib/category.py::UnitData._str_is_convertible,False,connected_outside_prefix
+matplotlib__matplotlib-23057,lib/matplotlib/pyplot.py,function,_get_backend_mod,34,20,0,0,,,False,no_resolved_incident_edge
+matplotlib__matplotlib-25404,lib/matplotlib/widgets.py,method,SpanSelector.__init__,46,20,0,0,,,False,no_resolved_incident_edge
+matplotlib__matplotlib-25404,lib/matplotlib/widgets.py,method,SpanSelector.new_axes,77,20,0,0,,,False,no_resolved_incident_edge
+matplotlib__matplotlib-25404,lib/matplotlib/widgets.py,method,RectangleSelector.__init__,61,20,0,0,,,False,no_resolved_incident_edge
+matplotlib__matplotlib-25404,lib/matplotlib/widgets.py,method,PolygonSelector.__init__,28,20,0,0,,,False,no_resolved_incident_edge
+mwaskom__seaborn-2389,seaborn/matrix.py,class,_HeatMapper,100,20,0,0,,,False,no_resolved_incident_edge
+mwaskom__seaborn-2389,seaborn/matrix.py,method,_HeatMapper.__init__,104,20,0,0,,,False,no_resolved_incident_edge
+mwaskom__seaborn-2813,seaborn/_statistics.py,method,Histogram._define_bin_edges,107,20,0,0,,,False,no_resolved_incident_edge
+mwaskom__seaborn-2979,seaborn/_core/subplots.py,method,Subplots._determine_axis_sharing,65,20,0,0,,,False,no_resolved_incident_edge
+mwaskom__seaborn-3187,seaborn/_core/scales.py,method,ContinuousBase._setup,28,20,2,1,seaborn/_core/scales.py::PseudoAxis,seaborn/_core/scales.py::PseudoAxis | seaborn/_core/scales.py::forward,True,prefix_one_hop_reachable
+mwaskom__seaborn-3187,seaborn/utils.py,function,locator_to_legend_entries,45,20,0,0,,,False,no_resolved_incident_edge
+pallets__flask-4642,src/flask/cli.py,function,show_server_banner,27,20,0,0,,,False,no_resolved_incident_edge
+psf__requests-1776,requests/models.py,method,PreparedRequest.__init__,101,20,0,0,,,False,no_resolved_incident_edge
+psf__requests-1776,requests/models.py,method,PreparedRequest.copy,231,20,2,0,,requests/models.py::PreparedRequest | requests/models.py::PreparedRequest.copy,False,connected_outside_prefix
+psf__requests-1776,requests/models.py,method,PreparedRequest.prepare_cookies,97,20,3,0,,requests/cookies.py::cookiejar_from_dict | requests/cookies.py::get_cookie_header | requests/models.py::PreparedRequest.prepare,False,connected_outside_prefix
+psf__requests-2393,requests/utils.py,function,requote_uri,229,20,2,1,requests/models.py::PreparedRequest.prepare_url,requests/models.py::PreparedRequest.prepare_url | requests/utils.py::unquote_unreserved,False,prefix_one_hop_reachable
+pydata__xarray-4940,xarray/core/dataset.py,method,Dataset.reduce,118,20,0,0,,,False,no_resolved_incident_edge
+pydata__xarray-4940,xarray/core/dataset.py,method,Dataset.argmin,24,20,0,0,,,True,no_resolved_incident_edge
+pydata__xarray-4940,xarray/core/dataset.py,method,Dataset.argmax,27,20,0,0,,,False,no_resolved_incident_edge
+pydata__xarray-5580,xarray/core/formatting.py,function,coords_repr,240,20,4,1,xarray/core/formatting.py::_mapping_repr,xarray/core/formatting.py::_calculate_col_width | xarray/core/formatting.py::_get_col_items | xarray/core/formatting.py::_mapping_repr | xarray/core/formatting.py::dataset_repr,False,prefix_one_hop_reachable
+pydata__xarray-5580,xarray/core/formatting.py,function,dataset_repr,310,20,6,0,,xarray/core/formatting.py::_calculate_col_width | xarray/core/formatting.py::_get_col_items | xarray/core/formatting.py::coords_repr | xarray/core/formatting.py::dim_summary | xarray/core/formatting.py::pretty_print | xarray/core/formatting.py::unindexed_dims_repr,False,connected_outside_prefix
+scikit-learn__scikit-learn-11042,sklearn/preprocessing/data.py,function,_transform_selected,58,20,0,0,,,False,no_resolved_incident_edge
+sphinx-doc__sphinx-7748,sphinx/ext/autodoc/__init__.py,method,FunctionDocumenter.format_signature,63,20,0,0,,,False,no_resolved_incident_edge
+sphinx-doc__sphinx-8056,sphinx/ext/napoleon/docstring.py,method,GoogleDocstring._consume_fields,109,20,0,0,,,False,no_resolved_incident_edge
+sphinx-doc__sphinx-8611,sphinx/ext/autodoc/__init__.py,method,NonDataDescriptorMixin.should_suppress_value_header,253,20,0,0,,,False,no_resolved_incident_edge
+sphinx-doc__sphinx-8611,sphinx/ext/autodoc/__init__.py,method,NonDataDescriptorMixin.get_doc,139,20,0,0,,,False,no_resolved_incident_edge

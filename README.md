@@ -238,10 +238,54 @@ python3 scripts/run_stage3_deterministic_g2.py
 ```
 
 It compares B0 TF-IDF, B1 structured evidence, and B1 per-file quotas 4/6/8
-against the same saved Stage-2 Top-5. The first 61-ticket development run
-selected B1 without a quota over B0 (58.65% versus 57.81% Conditional Exact Candidate
-Recall@30), but did not pass the 90% G2 gate. Symbol LLM experiments therefore
-remain blocked until deterministic candidate coverage improves.
+against the same saved Stage-2 Top-5. Stage-3 now exposes module-level gaps as
+the exact identity `<module>` and synthesizes one module candidate for legacy
+indexes that only contain a generic file chunk. The 61-ticket development run
+now selects `coverage-aware-v1` over global B1 and B0 (68.64%, 64.36%, and
+60.60% Conditional Exact Candidate Recall@30, respectively), but still does
+not pass the 90% G2 gate. Symbol LLM experiments therefore remain blocked
+until deterministic ranking improves.
+
+Run the exact AST-pool ceiling analysis with:
+
+```bash
+python3 scripts/analyze_stage3_symbol_pool_oracle.py
+```
+
+After adding module candidates, the development pool oracle rises from 81.63%
+to 90.41%. `coverage-aware-v1` preserves the strongest global prefix, reserves
+one module candidate per Stage-2 file, and expands class families evidenced by
+that prefix. It recovers 7 of the original 37 pool-reachable Top-30 misses:
+exact Top-30 hits rise from 81 to 88 and 30 ranking misses remain. The frozen
+source-neighborhood ablation is complete: Recall@30 was 64.70%, recovering one
+miss but losing seven previous hits. Therefore coverage-aware-v1 remains the
+selected baseline at 68.64%. Reproduce the separate experiment with
+`python scripts/run_stage3_deterministic_g2.py --config configs/fault_localization/stage3_source_neighborhood_v1.json`;
+its report and paired outcomes are in
+`reports/fault_localization/stage3_source_neighborhood_dev_v1/`.
+
+The frozen one-hop caller/callee ablation is also complete: Recall@30 was
+66.02%, recovering two misses but losing six previous hits. Coverage-aware-v1
+remains selected at 68.64%. Reproduce it with
+`python scripts/run_stage3_deterministic_g2.py --config configs/fault_localization/stage3_call_neighborhood_v1.json`.
+The protocol, limitations, and paired outcomes are in
+`reports/fault_localization/stage3_call_neighborhood_dev_v1/EXPERIMENT_ZH.md`.
+Reachability analysis of the selected baseline's 30 ranking misses finds only
+3 one-hop links from the global prefix, 5 links exclusively from candidates
+outside that prefix, and 22 symbols with no resolved incident edge in the
+current static graph. Of the two call-variant recoveries, only one is explained
+by a prefix call edge; the other comes from changed backfill. Run
+`python scripts/analyze_stage3_call_reachability.py` for the saved per-symbol
+evidence.
+
+The 22 no-edge cases were then audited against base-commit source and the
+cached repository-level graph. All base definitions are present. Twenty cases
+already have a cached graph edge whose peer is also in the Stage-2 candidate
+pool: 15 are same-file graph reconstruction losses and 5 are cross-file import
+resolution losses. One case is excluded by Stage-2 pool scope and one is a
+dynamic-dispatch case; none lacks all static-call evidence. The next frozen
+variant should filter the cached graph by candidate identities instead of
+rebuilding a graph from symbol-only chunks.
 
 For local Ollama models, reranking uses an explicit JSON Schema and batches at
 most five candidates per request. Stage 2 still evaluates all 20 file

@@ -13,11 +13,8 @@
 |---|---|---|---:|---:|---:|---:|---:|---:|---:|
 | `b0_tfidf` | `b0-tfidf` | `global` | 0 | 46 | 67.39% | 41.80% | 86.96% | 60.60% | 100.00% |
 | `b1_structured` | `b1-structured` | `global` | 0 | 46 | 76.09% | 47.80% | 91.30% | 64.36% | 100.00% |
-| `b1_structured_q4` | `b1-structured` | `global` | 4 | 46 | 69.57% | 43.45% | 86.96% | 61.34% | 100.00% |
-| `b1_structured_q6` | `b1-structured` | `global` | 6 | 46 | 71.74% | 45.17% | 80.43% | 53.35% | 100.00% |
-| `b1_structured_q8` | `b1-structured` | `global` | 8 | 46 | 76.09% | 47.56% | 84.78% | 56.24% | 100.00% |
-| `b1_module_reserved` | `b1-structured` | `module-reserved` | 0 | 46 | 76.09% | 47.80% | 89.13% | 64.94% | 100.00% |
 | `b1_coverage_aware_v1` | `b1-structured` | `coverage-aware-v1` | 0 | 46 | 76.09% | 47.80% | 89.13% | 68.64% | 100.00% |
+| `b1_call_neighborhood_v1` | `b1-structured` | `call-neighborhood-v1` | 0 | 46 | 76.09% | 47.80% | 91.30% | 66.02% | 100.00% |
 
 ## 決策
 

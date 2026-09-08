@@ -1,0 +1,34 @@
+{
+  "schema_version": "stage3-call-reachability-v1",
+  "data_scope": "development-only",
+  "baseline": "b1_coverage_aware_v1",
+  "experiment_variant": "b1_call_neighborhood_v1",
+  "baseline_ranking_misses": 30,
+  "classification_counts": {
+    "connected_outside_prefix": 5,
+    "no_resolved_incident_edge": 22,
+    "prefix_one_hop_reachable": 3
+  },
+  "classification_by_symbol_kind": {
+    "class": {
+      "no_resolved_incident_edge": 1
+    },
+    "function": {
+      "connected_outside_prefix": 2,
+      "no_resolved_incident_edge": 4,
+      "prefix_one_hop_reachable": 2
+    },
+    "method": {
+      "no_resolved_incident_edge": 17,
+      "connected_outside_prefix": 3,
+      "prefix_one_hop_reachable": 1
+    }
+  },
+  "prefix_one_hop_reachable": 3,
+  "pool_graph_connected": 8,
+  "experiment_recovered": 2,
+  "prefix_reachable_recovered": 1,
+  "prefix_reachable_not_selected": 2,
+  "recovered_without_prefix_edge": 1,
+  "interpretation": "No resolved edge is evidence about this static graph only; it does not prove that no runtime call relationship exists."
+}

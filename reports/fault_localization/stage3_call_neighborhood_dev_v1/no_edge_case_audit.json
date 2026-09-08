@@ -1,0 +1,22 @@
+{
+  "schema_version": "stage3-no-edge-audit-v1",
+  "data_scope": "development-only",
+  "audited_cases": 22,
+  "cause_counts": {
+    "dynamic_dispatch": 1,
+    "import_resolution": 5,
+    "source_reconstruction": 15,
+    "stage2_pool_scope": 1
+  },
+  "confidence_counts": {
+    "high": 21,
+    "medium": 1
+  },
+  "base_source_failures": 0,
+  "base_target_missing": 0,
+  "reconstructed_parse_failures": 0,
+  "reconstructed_target_missing": 0,
+  "full_graph_incident_edge_cases": 21,
+  "full_graph_peer_in_candidate_pool_cases": 20,
+  "methodology": "Cross-check candidate-pool reconstruction, cached full-index call graph, and base-commit AST. Medium/low classifications are evidence-guided audit labels rather than proof of runtime dispatch."
+}

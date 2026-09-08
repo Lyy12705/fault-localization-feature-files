@@ -1,0 +1,1024 @@
+{
+  "schema_version": "stage3-symbol-pool-oracle-v1",
+  "created_at_utc": "2026-09-07T11:16:04.279961+00:00",
+  "data_scope": "development-only",
+  "variant_id": "b1_coverage_aware_v1",
+  "metrics": {
+    "formal_symbol_tickets": 60,
+    "conditional_eligible_tickets": 46,
+    "conditional_gold_symbols": 137,
+    "stage2_file_oracle_macro_recall": 0.9312339230817492,
+    "ast_pool_oracle_macro_recall": 0.904060010038271,
+    "top30_macro_recall": 0.6863659890833804,
+    "top30_macro_recall_given_pool_reachable": 0.7680952380952382,
+    "pool_reachable_gold_symbols": 118,
+    "top30_reached_gold_symbols": 88,
+    "top30_micro_recall_given_pool_reachable": 0.7457627118644068,
+    "classification_counts": {
+      "pool_identity_mismatch": 2,
+      "stage2_file_miss": 17,
+      "top30_exact_hit": 88,
+      "top30_ranking_miss": 30
+    }
+  },
+  "loss_decomposition": {
+    "stage2_file_loss": 0.06876607691825076,
+    "ast_or_candidate_policy_loss_after_stage2": 0.02717391304347827,
+    "top30_ranking_loss_after_pool": 0.21769402095489054
+  },
+  "decision": {
+    "oracle_reaches_g2_threshold": true,
+    "top30_reaches_g2_threshold": false,
+    "primary_blocker": "top30_ranking_miss",
+    "remain_in_work_package": "WP3",
+    "llm_experiment_allowed": false
+  },
+  "per_ticket": [
+    {
+      "ticket_id": "astropy__astropy-13073",
+      "repo": "astropy/astropy",
+      "conditional_eligible": true,
+      "gold_symbol_count": 3,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 0.6666666666666666,
+      "ast_pool_oracle_recall": 0.6666666666666666,
+      "top30_recall": 0.6666666666666666,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "stage2_file_miss": 1,
+        "top30_exact_hit": 2
+      }
+    },
+    {
+      "ticket_id": "astropy__astropy-13236",
+      "repo": "astropy/astropy",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 1
+      }
+    },
+    {
+      "ticket_id": "astropy__astropy-13465",
+      "repo": "astropy/astropy",
+      "conditional_eligible": true,
+      "gold_symbol_count": 4,
+      "stage2_file_reached_count": 4,
+      "pool_exact_count": 4,
+      "top30_exact_count": 3,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.75,
+      "top30_recall_given_pool_reachable": 0.75,
+      "classifications": {
+        "top30_exact_hit": 3,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "astropy__astropy-14365",
+      "repo": "astropy/astropy",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 2
+      }
+    },
+    {
+      "ticket_id": "astropy__astropy-14598",
+      "repo": "astropy/astropy",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.5,
+      "top30_recall_given_pool_reachable": 0.5,
+      "classifications": {
+        "top30_exact_hit": 1,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "django__django-12237",
+      "repo": "django/django",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 1
+      }
+    },
+    {
+      "ticket_id": "django__django-14399",
+      "repo": "django/django",
+      "conditional_eligible": false,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 2
+      }
+    },
+    {
+      "ticket_id": "django__django-14785",
+      "repo": "django/django",
+      "conditional_eligible": false,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 2
+      }
+    },
+    {
+      "ticket_id": "django__django-15139",
+      "repo": "django/django",
+      "conditional_eligible": true,
+      "gold_symbol_count": 11,
+      "stage2_file_reached_count": 7,
+      "pool_exact_count": 7,
+      "top30_exact_count": 6,
+      "stage2_file_oracle_recall": 0.6363636363636364,
+      "ast_pool_oracle_recall": 0.6363636363636364,
+      "top30_recall": 0.5454545454545454,
+      "top30_recall_given_pool_reachable": 0.8571428571428571,
+      "classifications": {
+        "stage2_file_miss": 4,
+        "top30_exact_hit": 6,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "django__django-15682",
+      "repo": "django/django",
+      "conditional_eligible": true,
+      "gold_symbol_count": 3,
+      "stage2_file_reached_count": 3,
+      "pool_exact_count": 3,
+      "top30_exact_count": 3,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 3
+      }
+    },
+    {
+      "ticket_id": "django__django-16517",
+      "repo": "django/django",
+      "conditional_eligible": false,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 2
+      }
+    },
+    {
+      "ticket_id": "matplotlib__matplotlib-22719",
+      "repo": "matplotlib/matplotlib",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.5,
+      "top30_recall_given_pool_reachable": 0.5,
+      "classifications": {
+        "top30_exact_hit": 1,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "matplotlib__matplotlib-23057",
+      "repo": "matplotlib/matplotlib",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.5,
+      "top30_recall_given_pool_reachable": 0.5,
+      "classifications": {
+        "top30_exact_hit": 1,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "matplotlib__matplotlib-25281",
+      "repo": "matplotlib/matplotlib",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 2
+      }
+    },
+    {
+      "ticket_id": "matplotlib__matplotlib-25404",
+      "repo": "matplotlib/matplotlib",
+      "conditional_eligible": true,
+      "gold_symbol_count": 5,
+      "stage2_file_reached_count": 5,
+      "pool_exact_count": 5,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.2,
+      "top30_recall_given_pool_reachable": 0.2,
+      "classifications": {
+        "top30_exact_hit": 1,
+        "top30_ranking_miss": 4
+      }
+    },
+    {
+      "ticket_id": "matplotlib__matplotlib-26341",
+      "repo": "matplotlib/matplotlib",
+      "conditional_eligible": true,
+      "gold_symbol_count": 8,
+      "stage2_file_reached_count": 7,
+      "pool_exact_count": 7,
+      "top30_exact_count": 7,
+      "stage2_file_oracle_recall": 0.875,
+      "ast_pool_oracle_recall": 0.875,
+      "top30_recall": 0.875,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "stage2_file_miss": 1,
+        "top30_exact_hit": 7
+      }
+    },
+    {
+      "ticket_id": "mwaskom__seaborn-2389",
+      "repo": "mwaskom/seaborn",
+      "conditional_eligible": true,
+      "gold_symbol_count": 4,
+      "stage2_file_reached_count": 4,
+      "pool_exact_count": 4,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.5,
+      "top30_recall_given_pool_reachable": 0.5,
+      "classifications": {
+        "top30_exact_hit": 2,
+        "top30_ranking_miss": 2
+      }
+    },
+    {
+      "ticket_id": "mwaskom__seaborn-2813",
+      "repo": "mwaskom/seaborn",
+      "conditional_eligible": true,
+      "gold_symbol_count": 3,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 0.6666666666666666,
+      "ast_pool_oracle_recall": 0.6666666666666666,
+      "top30_recall": 0.3333333333333333,
+      "top30_recall_given_pool_reachable": 0.5,
+      "classifications": {
+        "stage2_file_miss": 1,
+        "top30_exact_hit": 1,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "mwaskom__seaborn-2853",
+      "repo": "mwaskom/seaborn",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 1
+      }
+    },
+    {
+      "ticket_id": "mwaskom__seaborn-2979",
+      "repo": "mwaskom/seaborn",
+      "conditional_eligible": true,
+      "gold_symbol_count": 4,
+      "stage2_file_reached_count": 4,
+      "pool_exact_count": 4,
+      "top30_exact_count": 3,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.75,
+      "top30_recall_given_pool_reachable": 0.75,
+      "classifications": {
+        "top30_exact_hit": 3,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "mwaskom__seaborn-3187",
+      "repo": "mwaskom/seaborn",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "top30_ranking_miss": 2
+      }
+    },
+    {
+      "ticket_id": "pallets__flask-4169",
+      "repo": "pallets/flask",
+      "conditional_eligible": true,
+      "gold_symbol_count": 4,
+      "stage2_file_reached_count": 4,
+      "pool_exact_count": 3,
+      "top30_exact_count": 3,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 0.75,
+      "top30_recall": 0.75,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "pool_identity_mismatch": 1,
+        "top30_exact_hit": 3
+      }
+    },
+    {
+      "ticket_id": "pallets__flask-4544",
+      "repo": "pallets/flask",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 1
+      }
+    },
+    {
+      "ticket_id": "pallets__flask-4642",
+      "repo": "pallets/flask",
+      "conditional_eligible": true,
+      "gold_symbol_count": 9,
+      "stage2_file_reached_count": 7,
+      "pool_exact_count": 7,
+      "top30_exact_count": 6,
+      "stage2_file_oracle_recall": 0.7777777777777778,
+      "ast_pool_oracle_recall": 0.7777777777777778,
+      "top30_recall": 0.6666666666666666,
+      "top30_recall_given_pool_reachable": 0.8571428571428571,
+      "classifications": {
+        "stage2_file_miss": 2,
+        "top30_exact_hit": 6,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "pallets__flask-5014",
+      "repo": "pallets/flask",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 1
+      }
+    },
+    {
+      "ticket_id": "pallets__flask-5063",
+      "repo": "pallets/flask",
+      "conditional_eligible": false,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 2
+      }
+    },
+    {
+      "ticket_id": "psf__requests-1768",
+      "repo": "psf/requests",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 2
+      }
+    },
+    {
+      "ticket_id": "psf__requests-1776",
+      "repo": "psf/requests",
+      "conditional_eligible": true,
+      "gold_symbol_count": 7,
+      "stage2_file_reached_count": 5,
+      "pool_exact_count": 5,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 0.7142857142857143,
+      "ast_pool_oracle_recall": 0.7142857142857143,
+      "top30_recall": 0.2857142857142857,
+      "top30_recall_given_pool_reachable": 0.4,
+      "classifications": {
+        "stage2_file_miss": 2,
+        "top30_exact_hit": 2,
+        "top30_ranking_miss": 3
+      }
+    },
+    {
+      "ticket_id": "psf__requests-2317",
+      "repo": "psf/requests",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 2
+      }
+    },
+    {
+      "ticket_id": "psf__requests-2393",
+      "repo": "psf/requests",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "psf__requests-2873",
+      "repo": "psf/requests",
+      "conditional_eligible": false,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 1
+      }
+    },
+    {
+      "ticket_id": "pydata__xarray-3649",
+      "repo": "pydata/xarray",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 2
+      }
+    },
+    {
+      "ticket_id": "pydata__xarray-4184",
+      "repo": "pydata/xarray",
+      "conditional_eligible": true,
+      "gold_symbol_count": 4,
+      "stage2_file_reached_count": 3,
+      "pool_exact_count": 3,
+      "top30_exact_count": 3,
+      "stage2_file_oracle_recall": 0.75,
+      "ast_pool_oracle_recall": 0.75,
+      "top30_recall": 0.75,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "stage2_file_miss": 1,
+        "top30_exact_hit": 3
+      }
+    },
+    {
+      "ticket_id": "pydata__xarray-4684",
+      "repo": "pydata/xarray",
+      "conditional_eligible": false,
+      "gold_symbol_count": 5,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 5
+      }
+    },
+    {
+      "ticket_id": "pydata__xarray-4940",
+      "repo": "pydata/xarray",
+      "conditional_eligible": true,
+      "gold_symbol_count": 3,
+      "stage2_file_reached_count": 3,
+      "pool_exact_count": 3,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "top30_ranking_miss": 3
+      }
+    },
+    {
+      "ticket_id": "pydata__xarray-5580",
+      "repo": "pydata/xarray",
+      "conditional_eligible": true,
+      "gold_symbol_count": 3,
+      "stage2_file_reached_count": 3,
+      "pool_exact_count": 3,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.3333333333333333,
+      "top30_recall_given_pool_reachable": 0.3333333333333333,
+      "classifications": {
+        "top30_exact_hit": 1,
+        "top30_ranking_miss": 2
+      }
+    },
+    {
+      "ticket_id": "pylint-dev__pylint-6357",
+      "repo": "pylint-dev/pylint",
+      "conditional_eligible": true,
+      "gold_symbol_count": 4,
+      "stage2_file_reached_count": 4,
+      "pool_exact_count": 4,
+      "top30_exact_count": 4,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 4
+      }
+    },
+    {
+      "ticket_id": "pylint-dev__pylint-6528",
+      "repo": "pylint-dev/pylint",
+      "conditional_eligible": true,
+      "gold_symbol_count": 4,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 0.5,
+      "ast_pool_oracle_recall": 0.5,
+      "top30_recall": 0.5,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "stage2_file_miss": 2,
+        "top30_exact_hit": 2
+      }
+    },
+    {
+      "ticket_id": "pylint-dev__pylint-6820",
+      "repo": "pylint-dev/pylint",
+      "conditional_eligible": false,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 2
+      }
+    },
+    {
+      "ticket_id": "pylint-dev__pylint-7097",
+      "repo": "pylint-dev/pylint",
+      "conditional_eligible": true,
+      "gold_symbol_count": 4,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 0.5,
+      "ast_pool_oracle_recall": 0.5,
+      "top30_recall": 0.5,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "stage2_file_miss": 2,
+        "top30_exact_hit": 2
+      }
+    },
+    {
+      "ticket_id": "pylint-dev__pylint-7993",
+      "repo": "pylint-dev/pylint",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 1
+      }
+    },
+    {
+      "ticket_id": "pytest-dev__pytest-10893",
+      "repo": "pytest-dev/pytest",
+      "conditional_eligible": true,
+      "gold_symbol_count": 4,
+      "stage2_file_reached_count": 3,
+      "pool_exact_count": 3,
+      "top30_exact_count": 3,
+      "stage2_file_oracle_recall": 0.75,
+      "ast_pool_oracle_recall": 0.75,
+      "top30_recall": 0.75,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "stage2_file_miss": 1,
+        "top30_exact_hit": 3
+      }
+    },
+    {
+      "ticket_id": "pytest-dev__pytest-11160",
+      "repo": "pytest-dev/pytest",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 1
+      }
+    },
+    {
+      "ticket_id": "pytest-dev__pytest-7466",
+      "repo": "pytest-dev/pytest",
+      "conditional_eligible": false,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 1
+      }
+    },
+    {
+      "ticket_id": "pytest-dev__pytest-7749",
+      "repo": "pytest-dev/pytest",
+      "conditional_eligible": false,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 1
+      }
+    },
+    {
+      "ticket_id": "pytest-dev__pytest-8906",
+      "repo": "pytest-dev/pytest",
+      "conditional_eligible": false,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 1
+      }
+    },
+    {
+      "ticket_id": "scikit-learn__scikit-learn-11042",
+      "repo": "scikit-learn/scikit-learn",
+      "conditional_eligible": true,
+      "gold_symbol_count": 3,
+      "stage2_file_reached_count": 3,
+      "pool_exact_count": 3,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.6666666666666666,
+      "top30_recall_given_pool_reachable": 0.6666666666666666,
+      "classifications": {
+        "top30_exact_hit": 2,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "scikit-learn__scikit-learn-13087",
+      "repo": "scikit-learn/scikit-learn",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 1
+      }
+    },
+    {
+      "ticket_id": "scikit-learn__scikit-learn-13620",
+      "repo": "scikit-learn/scikit-learn",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 1
+      }
+    },
+    {
+      "ticket_id": "scikit-learn__scikit-learn-25570",
+      "repo": "scikit-learn/scikit-learn",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 1,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 1
+      }
+    },
+    {
+      "ticket_id": "sphinx-doc__sphinx-7440",
+      "repo": "sphinx-doc/sphinx",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 2,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 2
+      }
+    },
+    {
+      "ticket_id": "sphinx-doc__sphinx-7748",
+      "repo": "sphinx-doc/sphinx",
+      "conditional_eligible": true,
+      "gold_symbol_count": 4,
+      "stage2_file_reached_count": 4,
+      "pool_exact_count": 4,
+      "top30_exact_count": 3,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.75,
+      "top30_recall_given_pool_reachable": 0.75,
+      "classifications": {
+        "top30_exact_hit": 3,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "sphinx-doc__sphinx-8056",
+      "repo": "sphinx-doc/sphinx",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 1,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.5,
+      "top30_recall_given_pool_reachable": 0.5,
+      "classifications": {
+        "top30_exact_hit": 1,
+        "top30_ranking_miss": 1
+      }
+    },
+    {
+      "ticket_id": "sphinx-doc__sphinx-8611",
+      "repo": "sphinx-doc/sphinx",
+      "conditional_eligible": true,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 2,
+      "pool_exact_count": 2,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "top30_ranking_miss": 2
+      }
+    },
+    {
+      "ticket_id": "sphinx-doc__sphinx-9798",
+      "repo": "sphinx-doc/sphinx",
+      "conditional_eligible": false,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 1
+      }
+    },
+    {
+      "ticket_id": "sympy__sympy-13177",
+      "repo": "sympy/sympy",
+      "conditional_eligible": true,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 1,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "pool_identity_mismatch": 1
+      }
+    },
+    {
+      "ticket_id": "sympy__sympy-13279",
+      "repo": "sympy/sympy",
+      "conditional_eligible": false,
+      "gold_symbol_count": 2,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 2
+      }
+    },
+    {
+      "ticket_id": "sympy__sympy-13895",
+      "repo": "sympy/sympy",
+      "conditional_eligible": false,
+      "gold_symbol_count": 1,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 1
+      }
+    },
+    {
+      "ticket_id": "sympy__sympy-13903",
+      "repo": "sympy/sympy",
+      "conditional_eligible": false,
+      "gold_symbol_count": 3,
+      "stage2_file_reached_count": 0,
+      "pool_exact_count": 0,
+      "top30_exact_count": 0,
+      "stage2_file_oracle_recall": 0.0,
+      "ast_pool_oracle_recall": 0.0,
+      "top30_recall": 0.0,
+      "top30_recall_given_pool_reachable": 0.0,
+      "classifications": {
+        "stage2_file_miss": 3
+      }
+    },
+    {
+      "ticket_id": "sympy__sympy-24909",
+      "repo": "sympy/sympy",
+      "conditional_eligible": true,
+      "gold_symbol_count": 3,
+      "stage2_file_reached_count": 3,
+      "pool_exact_count": 3,
+      "top30_exact_count": 3,
+      "stage2_file_oracle_recall": 1.0,
+      "ast_pool_oracle_recall": 1.0,
+      "top30_recall": 1.0,
+      "top30_recall_given_pool_reachable": 1.0,
+      "classifications": {
+        "top30_exact_hit": 3
+      }
+    }
+  ]
+}

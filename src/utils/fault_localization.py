@@ -308,6 +308,7 @@ LLM_RERANK_WEIGHTS = {
 LLM_RERANK_BATCH_SIZE = 5
 
 SYMBOL_RERANK_KINDS = {
+    "module",
     "function",
     "async_function",
     "method",
@@ -316,6 +317,7 @@ SYMBOL_RERANK_KINDS = {
 }
 
 SYMBOL_RETRIEVAL_MODES = ("b0-tfidf", "b1-structured")
+SYMBOL_SELECTION_MODES = ("global", "module-reserved", "coverage-aware-v1", "source-neighborhood-v1", "call-neighborhood-v1", "call-neighborhood-v2")
 SYMBOL_B1_WEIGHTS = {
     "lexical_score": 0.50,
     "identifier_score": 0.20,
@@ -360,6 +362,8 @@ class CodeChunk:
 
     @property
     def symbol_qualified_name(self) -> str:
+        if self.symbol_kind == "module":
+            return "<module>"
         return self.symbol_name
 
     @property
@@ -796,6 +800,7 @@ class FaultLocalizer:
         symbol_top_k: int = 5,
         symbol_retrieval_mode: str = "b0-tfidf",
         symbol_per_file_quota: int = 0,
+        symbol_selection_mode: str = "global",
         file_aggregation: bool = True,
         advanced_file_aggregation: bool = False,
         file_aggregation_mode: str | None = None,
@@ -827,6 +832,16 @@ class FaultLocalizer:
             )
         if symbol_per_file_quota < 0:
             raise ValueError("symbol_per_file_quota cannot be negative.")
+        normalized_symbol_selection_mode = symbol_selection_mode.strip().casefold()
+        if normalized_symbol_selection_mode not in SYMBOL_SELECTION_MODES:
+            raise ValueError(
+                "symbol_selection_mode must be one of: "
+                + ", ".join(SYMBOL_SELECTION_MODES)
+            )
+        if normalized_symbol_selection_mode != "global" and symbol_per_file_quota:
+            raise ValueError(
+                "symbol_per_file_quota must be 0 for coverage-aware selection modes."
+            )
         self.code_index = code_index
         self.repo_path = Path(repo_path).resolve() if repo_path else None
         self.top_k = top_k
@@ -861,6 +876,7 @@ class FaultLocalizer:
         self.symbol_top_k = symbol_top_k
         self.symbol_retrieval_mode = normalized_symbol_retrieval_mode
         self.symbol_per_file_quota = symbol_per_file_quota
+        self.symbol_selection_mode = normalized_symbol_selection_mode
         self.file_aggregation = file_aggregation
         self.file_aggregation_mode = _resolve_file_aggregation_mode(
             file_aggregation_mode,
@@ -885,6 +901,7 @@ class FaultLocalizer:
             )
 
         input_validation = validate_localization_request(ticket_json, min_ticket_chars=self.min_ticket_chars)
+        call_graph = index.call_graph
         bug_report = build_bug_report_text(ticket_json)
         ticket_program_names = (
             extract_ticket_program_names(bug_report)
@@ -911,8 +928,10 @@ class FaultLocalizer:
             if self.import_graph_mode != "off" and import_graph is None:
                 import_graph = build_import_graph(index.chunks)
                 index.import_graph = import_graph
-            call_graph = index.call_graph
-            if self.call_graph_mode != "off" and call_graph is None:
+            if (
+                self.call_graph_mode != "off"
+                or self.symbol_selection_mode == "call-neighborhood-v2"
+            ) and call_graph is None:
                 call_graph = build_call_graph(index.chunks, index.symbol_definitions)
                 index.call_graph = call_graph
             candidates, backend_name = rank_code_chunks(
@@ -979,13 +998,7 @@ class FaultLocalizer:
         if self.symbol_localization and candidates:
             symbol_fallback_reason = "no_symbol_candidates"
             stage2_paths = {candidate.chunk.file_path for candidate in candidates}
-            symbol_pool = [
-                chunk
-                for chunk in index.chunks
-                if chunk.file_path in stage2_paths
-                and chunk.symbol_kind in SYMBOL_RERANK_KINDS
-                and bool(chunk.symbol_qualified_name)
-            ]
+            symbol_pool = build_symbol_candidate_pool(index.chunks, stage2_paths)
             symbol_pool_count = len(symbol_pool)
             if symbol_pool:
                 stage2_file_scores = {
@@ -999,6 +1012,8 @@ class FaultLocalizer:
                     mode=self.symbol_retrieval_mode,
                     top_k=self.symbol_candidate_k,
                     per_file_quota=self.symbol_per_file_quota,
+                    selection_mode=self.symbol_selection_mode,
+                    call_graph=call_graph,
                 )
                 stage3_candidate_pool = list(symbol_candidates)
                 stage3_candidates = symbol_candidates[: self.symbol_top_k]
@@ -1170,6 +1185,9 @@ class FaultLocalizer:
                 "symbol_per_file_quota": (
                     self.symbol_per_file_quota if self.symbol_localization else 0
                 ),
+                "symbol_selection_mode": (
+                    self.symbol_selection_mode if self.symbol_localization else "off"
+                ),
                 "symbol_b1_weights": (
                     SYMBOL_B1_WEIGHTS
                     if self.symbol_localization
@@ -1265,6 +1283,9 @@ class FaultLocalizer:
                 ),
                 "per_file_quota": (
                     self.symbol_per_file_quota if self.symbol_localization else 0
+                ),
+                "selection_mode": (
+                    self.symbol_selection_mode if self.symbol_localization else "off"
                 ),
             },
             "bug_location": bug_location,
@@ -2008,6 +2029,7 @@ def localize_ticket(
     symbol_top_k: int = 5,
     symbol_retrieval_mode: str = "b0-tfidf",
     symbol_per_file_quota: int = 0,
+    symbol_selection_mode: str = "global",
     file_aggregation: bool = True,
     advanced_file_aggregation: bool = False,
     file_aggregation_mode: str | None = None,
@@ -2038,6 +2060,7 @@ def localize_ticket(
         symbol_top_k=symbol_top_k,
         symbol_retrieval_mode=symbol_retrieval_mode,
         symbol_per_file_quota=symbol_per_file_quota,
+        symbol_selection_mode=symbol_selection_mode,
         file_aggregation=file_aggregation,
         advanced_file_aggregation=advanced_file_aggregation,
         file_aggregation_mode=file_aggregation_mode,
@@ -2053,6 +2076,8 @@ def rank_symbol_candidates(
     mode: str = "b0-tfidf",
     top_k: int = 30,
     per_file_quota: int = 0,
+    selection_mode: str = "global",
+    call_graph: CallGraph | None = None,
 ) -> list[LocalizationCandidate]:
     """Rank a deterministic Stage-3 symbol pool under the frozen B0/B1 contract.
 
@@ -2069,6 +2094,15 @@ def rank_symbol_candidates(
         )
     if per_file_quota < 0:
         raise ValueError("per_file_quota cannot be negative.")
+    normalized_selection_mode = selection_mode.strip().casefold()
+    if normalized_selection_mode not in SYMBOL_SELECTION_MODES:
+        raise ValueError(
+            "selection_mode must be one of: " + ", ".join(SYMBOL_SELECTION_MODES)
+        )
+    if normalized_selection_mode != "global" and per_file_quota:
+        raise ValueError(
+            "per_file_quota must be 0 for coverage-aware selection modes."
+        )
 
     pool = [
         chunk
@@ -2078,6 +2112,10 @@ def rank_symbol_candidates(
     ]
     if not pool:
         return []
+    if normalized_selection_mode == "call-neighborhood-v2" and call_graph is None:
+        raise ValueError(
+            "call_graph is required for call-neighborhood-v2 selection."
+        )
 
     bug_report = build_bug_report_text(ticket_json)
     lexical_scores, _ = _embedding_scores(
@@ -2170,11 +2208,74 @@ def rank_symbol_candidates(
         )
 
     unique = _unique_symbol_candidates(sorted(ranked, key=_ranking_key))
-    return _apply_symbol_per_file_quota(
+    if normalized_selection_mode == "global":
+        return _apply_symbol_per_file_quota(
+            unique,
+            top_k=top_k,
+            per_file_quota=per_file_quota,
+        )
+    return _select_coverage_aware_symbols(
         unique,
         top_k=top_k,
-        per_file_quota=per_file_quota,
+        stage2_file_scores=stage2_scores,
+        mode=normalized_selection_mode,
+        call_graph=call_graph,
     )
+
+
+def build_symbol_candidate_pool(
+    chunks: Iterable[CodeChunk],
+    file_paths: Iterable[str],
+) -> list[CodeChunk]:
+    """Build the Stage-3 pool with one exact-reachable module identity per file.
+
+    Existing module-gap chunks are retained so deterministic retrieval can pick
+    the most relevant module-level evidence. Legacy indexes may represent a
+    constants-only file as a generic ``chunk``; those files receive one
+    synthesized ``<module>`` candidate without rebuilding the index.
+    """
+
+    wanted = {_normalize_path(path) for path in file_paths if str(path).strip()}
+    chunks_by_file: dict[str, list[CodeChunk]] = {}
+    pool: list[CodeChunk] = []
+    module_files: set[str] = set()
+    for chunk in chunks:
+        normalized_path = _normalize_path(chunk.file_path)
+        if normalized_path not in wanted:
+            continue
+        chunks_by_file.setdefault(normalized_path, []).append(chunk)
+        if (
+            chunk.symbol_kind in SYMBOL_RERANK_KINDS
+            and bool(chunk.symbol_qualified_name)
+        ):
+            pool.append(chunk)
+            if chunk.symbol_kind == "module":
+                module_files.add(normalized_path)
+
+    for file_path in sorted(wanted - module_files):
+        file_chunks = sorted(
+            chunks_by_file.get(file_path, []),
+            key=lambda chunk: (chunk.start_line, chunk.end_line, chunk.chunk_id),
+        )
+        if not file_chunks:
+            continue
+        evidence_chunks = file_chunks[:3]
+        code_text = "\n".join(chunk.code_text for chunk in evidence_chunks)[:12_000]
+        first = file_chunks[0]
+        pool.append(
+            CodeChunk(
+                chunk_id=f"{first.file_path}:1-{max(chunk.end_line for chunk in evidence_chunks)}:<module>",
+                file_path=first.file_path,
+                language=first.language,
+                symbol_kind="module",
+                function_name="",
+                class_name="",
+                start_line=1,
+                end_line=max(chunk.end_line for chunk in evidence_chunks),
+                code_text=code_text,
+            )
+        )
+    return pool
 
 
 def _symbol_identity_text(chunk: CodeChunk) -> str:
@@ -2225,6 +2326,181 @@ def _apply_symbol_per_file_quota(
             return selected
     selected.extend(deferred[: max(0, top_k - len(selected))])
     return selected
+
+
+def _select_coverage_aware_symbols(
+    candidates: list[LocalizationCandidate],
+    *,
+    top_k: int,
+    stage2_file_scores: dict[str, float],
+    mode: str,
+    call_graph: CallGraph | None = None,
+) -> list[LocalizationCandidate]:
+    """Reserve bounded file/module/family coverage, then backfill by score.
+
+    v1 never inspects gold. It preserves a strong global prefix, reserves one
+    module identity per Stage-2 file, and optionally expands one member from
+    each of up to five class families already evidenced by that prefix.
+    source-neighborhood-v1 replaces those family slots with nearest disjoint
+    same-file definitions within 100 source lines of prefix anchors.
+    call-neighborhood-v1 instead uses one-hop callers/callees resolved by the
+    existing static graph within the candidate pool, ordered by original score.
+    call-neighborhood-v2 filters the cached repository-level graph to the same
+    candidate identities, preserving edges that require full-index context.
+    """
+
+    if len(candidates) <= top_k:
+        return list(candidates)
+    file_order = sorted(
+        {_normalize_path(candidate.chunk.file_path) for candidate in candidates},
+        key=lambda path: (-stage2_file_scores.get(path, 0.0), path),
+    )
+    module_by_file: dict[str, LocalizationCandidate] = {}
+    for candidate in candidates:
+        path = _normalize_path(candidate.chunk.file_path)
+        if candidate.chunk.symbol_kind == "module" and path not in module_by_file:
+            module_by_file[path] = candidate
+    reserved_modules = [
+        module_by_file[path] for path in file_order if path in module_by_file
+    ][:top_k]
+    family_budget = (
+        min(5, max(0, top_k - len(reserved_modules) - 1))
+        if mode in {"coverage-aware-v1", "source-neighborhood-v1", "call-neighborhood-v1", "call-neighborhood-v2"}
+        else 0
+    )
+    prefix_k = max(1, top_k - len(reserved_modules) - family_budget)
+    selected: list[LocalizationCandidate] = []
+    seen: set[tuple[str, str, str]] = set()
+
+    def add(candidate: LocalizationCandidate) -> None:
+        key = (
+            _normalize_path(candidate.chunk.file_path),
+            candidate.chunk.symbol_kind,
+            candidate.chunk.symbol_qualified_name,
+        )
+        if key not in seen and len(selected) < top_k:
+            selected.append(candidate)
+            seen.add(key)
+
+    for candidate in candidates[:prefix_k]:
+        add(candidate)
+    for candidate in reserved_modules:
+        add(candidate)
+
+    if family_budget and mode in {"call-neighborhood-v1", "call-neighborhood-v2"}:
+        graph = (
+            build_call_graph(candidate.chunk for candidate in candidates)
+            if mode == "call-neighborhood-v1"
+            else call_graph
+        )
+        if graph is None:
+            raise ValueError("call-neighborhood-v2 requires a repository call graph.")
+        adjacency: dict[tuple[str, str], set[tuple[str, str]]] = {}
+        for edges in graph.outgoing.values():
+            for edge in edges:
+                caller = (_normalize_path(edge["caller_file"]), edge["caller_symbol"])
+                callee = (_normalize_path(edge["target_file"]), edge["target_symbol"])
+                adjacency.setdefault(caller, set()).add(callee)
+                adjacency.setdefault(callee, set()).add(caller)
+        expanded = 0
+        for anchor in candidates[:prefix_k]:
+            if anchor.chunk.symbol_kind == "module":
+                continue
+            neighbors = adjacency.get((
+                _normalize_path(anchor.chunk.file_path),
+                anchor.chunk.symbol_qualified_name,
+            ), set())
+            for candidate in candidates:
+                key = (_normalize_path(candidate.chunk.file_path),
+                       candidate.chunk.symbol_kind, candidate.chunk.symbol_qualified_name)
+                if key in seen or candidate.chunk.symbol_kind == "module":
+                    continue
+                if (key[0], key[2]) in neighbors:
+                    add(candidate)
+                    expanded += 1
+                    break
+            if expanded == family_budget:
+                break
+
+    if family_budget and mode == "source-neighborhood-v1":
+        # Freeze five expansion slots and a 100-line window before evaluation.
+        # Only source positions and the existing ranking determine neighbors.
+        expanded = 0
+        for anchor in candidates[:prefix_k]:
+            if anchor.chunk.symbol_kind == "module":
+                continue
+            neighbors = []
+            for candidate in candidates:
+                key = (
+                    _normalize_path(candidate.chunk.file_path),
+                    candidate.chunk.symbol_kind,
+                    candidate.chunk.symbol_qualified_name,
+                )
+                if key in seen or candidate.chunk.symbol_kind == "module":
+                    continue
+                if key[0] != _normalize_path(anchor.chunk.file_path):
+                    continue
+                # Overlapping definitions (e.g. a containing class) are not
+                # adjacent source definitions.
+                distance = max(
+                    candidate.chunk.start_line - anchor.chunk.end_line,
+                    anchor.chunk.start_line - candidate.chunk.end_line,
+                )
+                if 0 < distance <= 100:
+                    neighbors.append((distance, _ranking_key(candidate), candidate))
+            if neighbors:
+                neighbors.sort(key=lambda row: (row[0], row[1]))
+                add(neighbors[0][2])
+                expanded += 1
+                if expanded == family_budget:
+                    break
+
+    if family_budget and mode == "coverage-aware-v1":
+        family_anchors: dict[tuple[str, str], LocalizationCandidate] = {}
+        for candidate in candidates[:prefix_k]:
+            family = _symbol_family_key(candidate.chunk)
+            if family and family not in family_anchors:
+                family_anchors[family] = candidate
+        for family, anchor in list(family_anchors.items())[:family_budget]:
+            members = [
+                candidate
+                for candidate in candidates
+                if _symbol_family_key(candidate.chunk) == family
+                and (
+                    _normalize_path(candidate.chunk.file_path),
+                    candidate.chunk.symbol_kind,
+                    candidate.chunk.symbol_qualified_name,
+                )
+                not in seen
+            ]
+            if not members:
+                continue
+            members.sort(
+                key=lambda candidate: (
+                    candidate.chunk.symbol_qualified_name.rsplit(".", 1)[-1]
+                    != "__init__",
+                    abs(candidate.chunk.start_line - anchor.chunk.start_line),
+                    _ranking_key(candidate),
+                )
+            )
+            add(members[0])
+
+    for candidate in candidates:
+        add(candidate)
+        if len(selected) == top_k:
+            break
+    return selected
+
+
+def _symbol_family_key(chunk: CodeChunk) -> tuple[str, str] | None:
+    qualified_name = chunk.symbol_qualified_name
+    if chunk.symbol_kind == "class":
+        family = qualified_name
+    elif chunk.symbol_kind in {"method", "async_method"} and "." in qualified_name:
+        family = qualified_name.rsplit(".", 1)[0]
+    else:
+        return None
+    return (_normalize_path(chunk.file_path), family)
 
 
 def _git_head_commit(root: Path) -> str:

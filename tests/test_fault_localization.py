@@ -19,6 +19,7 @@ for import_path in (str(SRC_ROOT), str(PROJECT_ROOT)):
 from modules.bug_localizer import BugLocalizer
 import utils.fault_localization as fault_localization
 from utils.fault_localization import (
+    build_symbol_candidate_pool,
     build_bug_report_text,
     build_code_index,
     localize_ticket,
@@ -1716,6 +1717,50 @@ class FaultLocalizationTests(unittest.TestCase):
         )
         self.assertEqual(ranked[0].signals["identifier_score"], 1.0)
 
+    def test_symbol_candidate_pool_exposes_one_module_identity_per_file(self) -> None:
+        generic_chunk = fault_localization.CodeChunk(
+            chunk_id="src/settings.py:1-2:chunk",
+            file_path="src/settings.py",
+            language="python",
+            symbol_kind="chunk",
+            function_name="",
+            class_name="",
+            start_line=1,
+            end_line=2,
+            code_text="FEATURE_FLAG = True",
+        )
+
+        pool = build_symbol_candidate_pool(
+            [generic_chunk],
+            {"src/settings.py"},
+        )
+
+        self.assertEqual(len(pool), 1)
+        self.assertEqual(pool[0].symbol_kind, "module")
+        self.assertEqual(pool[0].symbol_qualified_name, "<module>")
+        self.assertIn("FEATURE_FLAG", pool[0].code_text)
+
+    def test_existing_module_chunks_have_exact_module_qualified_name(self) -> None:
+        module_chunk = fault_localization.CodeChunk(
+            chunk_id="src/settings.py:1-2:module",
+            file_path="src/settings.py",
+            language="python",
+            symbol_kind="module",
+            function_name="",
+            class_name="",
+            start_line=1,
+            end_line=2,
+            code_text="FEATURE_FLAG = True",
+        )
+
+        pool = build_symbol_candidate_pool(
+            [module_chunk],
+            {"src/settings.py"},
+        )
+
+        self.assertEqual(len(pool), 1)
+        self.assertEqual(pool[0].symbol_qualified_name, "<module>")
+
     def test_symbol_per_file_quota_diversifies_before_backfill(self) -> None:
         chunks = [
             fault_localization.CodeChunk(
@@ -1758,6 +1803,183 @@ class FaultLocalizationTests(unittest.TestCase):
             {ranked[0].chunk.file_path, ranked[1].chunk.file_path},
             {"src/a.py", "src/b.py"},
         )
+
+    def test_module_reserved_selector_keeps_each_stage2_file_module(self) -> None:
+        candidates = [
+            fault_localization.LocalizationCandidate(
+                chunk=fault_localization.CodeChunk(
+                    chunk_id=f"{path}:{rank}-{rank}:{name}",
+                    file_path=path,
+                    language="python",
+                    symbol_kind=kind,
+                    function_name="" if kind == "module" else name,
+                    class_name="",
+                    start_line=rank,
+                    end_line=rank,
+                    code_text=name,
+                ),
+                score=1.0 - rank / 100,
+                embedding_score=1.0 - rank / 100,
+                reason="test",
+            )
+            for rank, (path, kind, name) in enumerate(
+                [
+                    ("src/a.py", "function", "a1"),
+                    ("src/a.py", "function", "a2"),
+                    ("src/a.py", "function", "a3"),
+                    ("src/a.py", "module", ""),
+                    ("src/b.py", "module", ""),
+                ],
+                start=1,
+            )
+        ]
+
+        selected = fault_localization._select_coverage_aware_symbols(
+            candidates,
+            top_k=4,
+            stage2_file_scores={"src/a.py": 1.0, "src/b.py": 0.5},
+            mode="module-reserved",
+        )
+
+        self.assertEqual(len(selected), 4)
+        self.assertEqual(
+            {
+                candidate.chunk.file_path
+                for candidate in selected
+                if candidate.chunk.symbol_kind == "module"
+            },
+            {"src/a.py", "src/b.py"},
+        )
+
+    def test_coverage_selector_expands_init_from_a_strong_class_family(self) -> None:
+        rows = [
+            ("class", "Service", 1),
+            ("function", "unrelated", 2),
+            ("module", "", 3),
+            ("method", "Service.run", 4),
+            ("method", "Service.__init__", 5),
+        ]
+        candidates = [
+            fault_localization.LocalizationCandidate(
+                chunk=fault_localization.CodeChunk(
+                    chunk_id=f"src/service.py:{rank}-{rank}:{name or kind}",
+                    file_path="src/service.py",
+                    language="python",
+                    symbol_kind=kind,
+                    function_name="" if kind in {"class", "module"} else name,
+                    class_name=name if kind == "class" else "",
+                    start_line=rank,
+                    end_line=rank,
+                    code_text=name,
+                ),
+                score=1.0 - rank / 100,
+                embedding_score=1.0 - rank / 100,
+                reason="test",
+            )
+            for kind, name, rank in rows
+        ]
+
+        selected = fault_localization._select_coverage_aware_symbols(
+            candidates,
+            top_k=3,
+            stage2_file_scores={"src/service.py": 1.0},
+            mode="coverage-aware-v1",
+        )
+
+        self.assertEqual(len(selected), 3)
+        self.assertIn(
+            "Service.__init__",
+            [candidate.chunk.symbol_qualified_name for candidate in selected],
+        )
+
+    def test_call_neighbors_expand_both_directions_and_ignore_text_mentions(self) -> None:
+        for anchor_name in ("caller", "callee"):
+            with self.subTest(anchor=anchor_name):
+                rows = [
+                    ("caller", 1, "def caller():\n    return callee()"),
+                    ("callee", 4, "def callee():\n    return 1"),
+                    ("decoy", 7, "def decoy():\n    return 'caller callee'"),
+                ]
+                rows.sort(key=lambda row: 0 if row[0] == anchor_name else 1 if row[0] == "decoy" else 2)
+                candidates = [
+                    fault_localization.LocalizationCandidate(
+                        chunk=fault_localization.CodeChunk(
+                            chunk_id=name, file_path="a.py", language="python",
+                            symbol_kind="function", function_name=name, class_name="",
+                            start_line=line, end_line=line + 1, code_text=code,
+                        ),
+                        score=1.0 - rank / 10, embedding_score=1.0 - rank / 10,
+                        reason="test",
+                    )
+                    for rank, (name, line, code) in enumerate(rows)
+                ]
+                selected = fault_localization._select_coverage_aware_symbols(
+                    candidates, top_k=2, stage2_file_scores={"a.py": 1.0},
+                    mode="call-neighborhood-v1",
+                )
+                self.assertEqual({item.chunk.function_name for item in selected},
+                                 {"caller", "callee"})
+
+    def test_call_neighbors_v2_use_cached_repository_graph(self) -> None:
+        names = ["caller", "decoy", "callee"]
+        candidates = [
+            fault_localization.LocalizationCandidate(
+                chunk=fault_localization.CodeChunk(
+                    chunk_id=name, file_path="a.py", language="python",
+                    symbol_kind="function", function_name=name, class_name="",
+                    start_line=rank * 3 + 1, end_line=rank * 3 + 2,
+                    code_text=f"def {name}():\n    return 1",
+                ),
+                score=1.0 - rank / 10, embedding_score=1.0 - rank / 10,
+                reason="test",
+            )
+            for rank, name in enumerate(names)
+        ]
+        graph = fault_localization.CallGraph(
+            outgoing={
+                "a.py": [{
+                    "caller_file": "a.py", "caller_symbol": "caller",
+                    "target_file": "a.py", "target_symbol": "callee",
+                    "call_name": "callee", "line": 2,
+                    "resolution_type": "local_function",
+                }]
+            }
+        )
+
+        selected = fault_localization._select_coverage_aware_symbols(
+            candidates, top_k=2, stage2_file_scores={"a.py": 1.0},
+            mode="call-neighborhood-v2", call_graph=graph,
+        )
+
+        self.assertEqual([item.chunk.function_name for item in selected],
+                         ["caller", "callee"])
+
+    def test_source_neighbors_respect_file_window_and_nonoverlap(self) -> None:
+        rows = [
+            ("a.py", "anchor", 100, 110),
+            ("b.py", "wrong_file", 111, 112),
+            ("a.py", "containing", 1, 200),
+            ("a.py", "too_far", 211, 212),
+            ("a.py", "neighbor", 111, 112),
+        ]
+        candidates = [
+            fault_localization.LocalizationCandidate(
+                chunk=fault_localization.CodeChunk(
+                    chunk_id=name, file_path=path, language="python",
+                    symbol_kind="function", function_name=name, class_name="",
+                    start_line=start, end_line=end, code_text=name,
+                ),
+                score=1.0 - rank / 100, embedding_score=1.0 - rank / 100,
+                reason="test",
+            )
+            for rank, (path, name, start, end) in enumerate(rows)
+        ]
+        selected = fault_localization._select_coverage_aware_symbols(
+            candidates, top_k=2, stage2_file_scores={"a.py": 1.0},
+            mode="source-neighborhood-v1",
+        )
+        self.assertEqual([item.chunk.function_name for item in selected],
+                         ["anchor", "neighbor"])
 
     def test_cli_symbol_flags_are_independent_and_legacy_alias_enables_both(self) -> None:
         parser = build_fault_localization_parser()

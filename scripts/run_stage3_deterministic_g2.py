@@ -21,8 +21,11 @@ if str(ROOT) not in sys.path:
 
 from scripts.evaluate_fault_localization import evaluate_records
 from utils.fault_localization import (
-    SYMBOL_RERANK_KINDS,
     LocalizationCandidate,
+    SYMBOL_RETRIEVAL_MODES,
+    SYMBOL_SELECTION_MODES,
+    build_call_graph,
+    build_symbol_candidate_pool,
     load_code_index,
     rank_symbol_candidates,
 )
@@ -104,13 +107,13 @@ def main() -> None:
             raise SystemExit(f"Missing code index for {ticket_id}: {index_path}")
         index = load_code_index(index_path)
         wanted_paths = {row["file_path"] for row in stage2_files}
-        symbol_pool = [
-            chunk
-            for chunk in index.chunks
-            if chunk.file_path in wanted_paths
-            and chunk.symbol_kind in SYMBOL_RERANK_KINDS
-            and bool(chunk.symbol_qualified_name)
-        ]
+        symbol_pool = build_symbol_candidate_pool(index.chunks, wanted_paths)
+        needs_cached_call_graph = any(
+            str(variant.get("selection_mode") or "global") == "call-neighborhood-v2"
+            for variant in pending
+        )
+        if needs_cached_call_graph and index.call_graph is None:
+            index.call_graph = build_call_graph(index.chunks, index.symbol_definitions)
         stage2_scores = {
             row["file_path"]: float(row.get("score") or row.get("retrieval_score") or 0.0)
             for row in stage2_files
@@ -123,6 +126,8 @@ def main() -> None:
                 mode=variant["mode"],
                 top_k=int(config["candidate_k"]),
                 per_file_quota=int(variant["per_file_quota"]),
+                selection_mode=str(variant.get("selection_mode") or "global"),
+                call_graph=index.call_graph,
             )
             row = _prediction_row(
                 ticket=ticket,
@@ -179,6 +184,20 @@ def _validate_config(config: dict[str, Any]) -> None:
         raise SystemExit("Config must include the b0_tfidf control.")
     if int(config.get("candidate_k") or 0) != 30:
         raise SystemExit("G2 v1 requires candidate_k=30.")
+    for variant in variants:
+        mode = str(variant.get("mode") or "")
+        selection_mode = str(variant.get("selection_mode") or "global")
+        quota = int(variant.get("per_file_quota") or 0)
+        if mode not in SYMBOL_RETRIEVAL_MODES:
+            raise SystemExit(f"Unsupported retrieval mode in {variant['variant_id']}: {mode}")
+        if selection_mode not in SYMBOL_SELECTION_MODES:
+            raise SystemExit(
+                f"Unsupported selection mode in {variant['variant_id']}: {selection_mode}"
+            )
+        if selection_mode != "global" and quota:
+            raise SystemExit(
+                f"Coverage selector {variant['variant_id']} must use per_file_quota=0."
+            )
 
 
 def _prediction_row(
@@ -202,6 +221,7 @@ def _prediction_row(
             "variant_id": variant["variant_id"],
             "symbol_retrieval_mode": variant["mode"],
             "symbol_per_file_quota": int(variant["per_file_quota"]),
+            "symbol_selection_mode": str(variant.get("selection_mode") or "global"),
             "symbol_candidate_k": candidate_k,
             "symbol_top_k": retrieval_top_k,
             "symbol_llm_rerank_requested": False,
@@ -224,6 +244,7 @@ def _prediction_row(
             "source": "symbol_retrieval" if candidate_rows else "not_run",
             "retrieval_mode": variant["mode"],
             "per_file_quota": int(variant["per_file_quota"]),
+            "selection_mode": str(variant.get("selection_mode") or "global"),
             "stage2_file_count": len(_stage2_files(stage2)),
             "ast_symbol_pool_count": symbol_pool_count,
             "candidate_symbol_count": len(candidate_rows),
@@ -288,6 +309,9 @@ def _build_summary(
         compact[variant_id] = {
             "mode": variants_by_id[variant_id]["mode"],
             "per_file_quota": variants_by_id[variant_id]["per_file_quota"],
+            "selection_mode": str(
+                variants_by_id[variant_id].get("selection_mode") or "global"
+            ),
             "eligible_rows": candidate["eligible_rows"],
             "hit_at_10": candidate["hit_at_10"],
             "recall_at_10": candidate["recall_at_10"],
@@ -357,12 +381,12 @@ def _markdown_report(summary: dict[str, Any]) -> str:
         "",
         "## 比較結果",
         "",
-        "| Variant | Mode | Quota | Eligible | Hit@10 | Recall@10 | Hit@30 | Recall@30 | Coverage |",
-        "|---|---|---:|---:|---:|---:|---:|---:|---:|",
+        "| Variant | Retrieval | Selection | Quota | Eligible | Hit@10 | Recall@10 | Hit@30 | Recall@30 | Coverage |",
+        "|---|---|---|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for variant_id, row in summary["variants"].items():
         lines.append(
-            f"| `{variant_id}` | `{row['mode']}` | {row['per_file_quota']} | "
+            f"| `{variant_id}` | `{row['mode']}` | `{row['selection_mode']}` | {row['per_file_quota']} | "
             f"{row['eligible_rows']} | {row['hit_at_10']:.2%} | "
             f"{row['recall_at_10']:.2%} | {row['hit_at_30']:.2%} | "
             f"{row['recall_at_30']:.2%} | {row['candidate_output_coverage']:.2%} |"

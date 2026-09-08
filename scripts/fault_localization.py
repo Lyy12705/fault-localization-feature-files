@@ -22,6 +22,7 @@ from utils.fault_localization import (
     IMPORT_GRAPH_MODES,
     SYMBOL_EXPANSION_MODES,
     SYMBOL_RETRIEVAL_MODES,
+    SYMBOL_SELECTION_MODES,
     CodeIndex,
     build_code_index,
     load_code_index,
@@ -151,6 +152,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=0,
         help="Initial per-file cap for the symbol Top-K; 0 disables quota before backfill.",
     )
+    parser.add_argument(
+        "--symbol-selection-mode",
+        choices=SYMBOL_SELECTION_MODES,
+        default="global",
+        help="Top-30 selector: global score, module reservation, or coverage-aware v1.",
+    )
     parser.add_argument("--ollama-model", default="codellama:7b-instruct")
     parser.add_argument("--ollama-url", default="http://localhost:11434/api/generate")
     parser.add_argument("--ollama-timeout", type=int, default=180)
@@ -199,6 +206,10 @@ def main() -> None:
         raise SystemExit("--symbol-top-k must be positive.")
     if args.symbol_per_file_quota < 0:
         raise SystemExit("--symbol-per-file-quota cannot be negative.")
+    if args.symbol_selection_mode != "global" and args.symbol_per_file_quota:
+        raise SystemExit(
+            "--symbol-per-file-quota must be 0 with coverage-aware selection."
+        )
     if args.semantic_candidate_k <= 0:
         raise SystemExit("--semantic-candidate-k must be positive.")
     if args.candidate_file_k <= 0:
@@ -259,6 +270,7 @@ def main() -> None:
             symbol_top_k=args.symbol_top_k,
             symbol_retrieval_mode=args.symbol_retrieval_mode,
             symbol_per_file_quota=args.symbol_per_file_quota,
+            symbol_selection_mode=args.symbol_selection_mode,
             file_aggregation=not args.no_file_aggregation,
             advanced_file_aggregation=args.advanced_file_aggregation,
             min_ticket_chars=args.min_ticket_chars,

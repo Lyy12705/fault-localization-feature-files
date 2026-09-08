@@ -29,7 +29,11 @@ class Stage3DeterministicG2Tests(unittest.TestCase):
         self.assertEqual(config["candidate_k"], 30)
         self.assertEqual(
             [row["per_file_quota"] for row in config["variants"]],
-            [0, 0, 4, 6, 8],
+            [0, 0, 4, 6, 8, 0, 0],
+        )
+        self.assertEqual(
+            [row["selection_mode"] for row in config["variants"][-2:]],
+            ["module-reserved", "coverage-aware-v1"],
         )
 
     def test_selection_requires_b1_to_strictly_improve_recall_at_30(self) -> None:
