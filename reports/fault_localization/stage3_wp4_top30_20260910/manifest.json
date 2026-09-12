@@ -1,0 +1,46 @@
+{
+  "shortlist_k": 30,
+  "top_k": 5,
+  "shuffle_seed": 20260908,
+  "options": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "num_predict": 3072,
+    "num_ctx": 16384
+  },
+  "timeout_seconds": 600,
+  "max_code_chars": 1200,
+  "max_bug_report_chars": 4000,
+  "models": {
+    "models": [
+      {
+        "name": "codellama:7b-instruct",
+        "model": "codellama:7b-instruct",
+        "modified_at": "2026-09-02T01:03:07.5912544+08:00",
+        "size": 3825910662,
+        "digest": "8fdf8f752f6e80de33e82f381aba784c025982752cd1ae9377add66449d2225f",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": null,
+          "parameter_size": "7B",
+          "quantization_level": "Q4_0",
+          "context_length": 16384,
+          "embedding_length": 4096
+        },
+        "capabilities": [
+          "completion"
+        ]
+      }
+    ]
+  },
+  "ollama_version": {
+    "version": "0.33.3"
+  },
+  "input_sha256": {
+    "reports/fault_localization/stage3_deterministic_g2_dev_v1/b1_coverage_aware_v1_predictions.jsonl": "ce983f2caf3025e04a135a8012c476f2f3cb29f371a211f38f7ece74f902823b",
+    "data/fault_localization/swebench_full/stage3_symbol_gold/development_source_tickets.jsonl": "9339f99b198669b61f65aede5edddcd14980067c7f31912c3acdff98d21e487c",
+    "data/fault_localization/swebench_full/stage3_symbol_gold/symbol_gold_v1.jsonl": "e51680358c6ea652848beab3d4e3d36ff46bf944db1c84727725995ce0c41951"
+  }
+}

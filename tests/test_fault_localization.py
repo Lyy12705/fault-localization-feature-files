@@ -2095,6 +2095,70 @@ class FaultLocalizationTests(unittest.TestCase):
 
         self.assertEqual(metrics["rows_with_symbol_ground_truth"], 0)
 
+    def test_bug_localizer_returns_selected_stage3_top5(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = _make_repo(Path(tmp))
+            source = repo / "src" / "auth" / "validator.py"
+            source.write_text(
+                "def validate_token(token):\n    return token.strip()\n\n"
+                + "\n".join(
+                    f"def helper_{i}(token):\n    return token\n" for i in range(40)
+                ),
+                encoding="utf-8",
+            )
+            ticket = {
+                "ticket_id": "STAGE3-HANDOFF",
+                "description": "validate_token crashes when token is None in src/auth/validator.py",
+                "stack_trace": 'File "src/auth/validator.py", line 2, in validate_token',
+            }
+            # Stage-2 file count must not change the fixed Stage-3 Top-5 size.
+            result = BugLocalizer(top_k=1).localize(ticket, str(repo))
+            symbols = result["stage3_ranked_symbols"]
+            self.assertEqual(result["repo"], "repo")
+            self.assertEqual(result["base_commit"], "working-tree")
+            self.assertEqual(
+                set(result["source_file_sha256"]),
+                {s["file_path"] for s in symbols},
+            )
+            self.assertEqual(len(symbols), 5)
+            self.assertEqual(len(result["stage3_candidate_symbols"]), 30)
+            self.assertEqual(symbols, result["stage3_retrieval_symbols"])
+            self.assertEqual(result["stage3_diagnostics"]["retrieval_mode"], "b1-structured")
+            self.assertEqual(result["stage3_diagnostics"]["selection_mode"], "coverage-aware-v1")
+            self.assertFalse(result["stage3_diagnostics"]["llm_attempted"])
+            self.assertIn("validate_token", [s["symbol_qualified_name"] for s in symbols])
+            self.assertEqual(len(result["localized_files"]), 1)
+            for rank, symbol in enumerate(symbols, 1):
+                self.assertEqual(symbol["rank"], rank)
+                self.assertTrue(symbol["file_path"])
+                self.assertTrue(symbol["code_text"])
+                self.assertGreaterEqual(symbol["start_line"], 1)
+                self.assertGreaterEqual(symbol["end_line"], symbol["start_line"])
+            json.dumps(result)  # Handoff remains JSON serializable.
+
+    def test_bug_localizer_stage3_can_be_disabled_for_legacy_callers(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = _make_repo(Path(tmp))
+            result = BugLocalizer(symbol_localization=False).localize(
+                {"description": "validate_token crashes when token is None"}, str(repo)
+            )
+        self.assertTrue(result["localized_candidates"])
+        self.assertEqual(result["stage3_ranked_symbols"], [])
+        self.assertFalse(result["stage3_diagnostics"]["localization_requested"])
+
+    def test_bug_localizer_stage3_does_not_fabricate_five_symbols(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = _make_repo(Path(tmp))
+            result = BugLocalizer(top_k=1).localize(
+                {"description": "validate_token crashes when token is None"}, str(repo)
+            )
+        self.assertGreater(len(result["stage3_ranked_symbols"]), 0)
+        self.assertLess(len(result["stage3_ranked_symbols"]), 5)
+        self.assertEqual(
+            len(result["stage3_ranked_symbols"]),
+            len({s["chunk_id"] for s in result["stage3_ranked_symbols"]}),
+        )
+
     def test_bug_localizer_reuses_unchanged_repository_index(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             repo = _make_repo(Path(tmp))

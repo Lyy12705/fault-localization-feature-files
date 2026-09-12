@@ -104,6 +104,48 @@ Use `--force-reindex` to ignore a current cache.
 
 ## Output contract
 
+The reusable `modules.bug_localizer.BugLocalizer` now enables deterministic
+Stage-3 localization by default: `b1-structured` evidence ranking with
+`coverage-aware-v1`, at most 30 symbol candidates, and at most five final
+symbols. Symbol LLM reranking is disabled in this wrapper. Its `top_k` option
+still controls the Stage-2 file count, independently of the symbol Top-5.
+Fewer than five available symbols produce a shorter list, never padded rows.
+
+```python
+from modules.bug_localizer import BugLocalizer
+
+result = BugLocalizer().localize(ticket_json, repo_path)
+symbols_for_patch = result["stage3_ranked_symbols"]
+policy = result["patch_generation_policy"]
+```
+
+Each symbol carries its file path, qualified name, kind, start/end lines,
+code text, rank, score and retrieval evidence. This change enables the selected
+Stage-3 configuration only; it does not switch Stage-1 to the frozen experiment
+configuration or reproduce its benchmark scores. The CLI and lower-level
+`localize_ticket` defaults are unchanged. Legacy callers can explicitly pass
+`BugLocalizer(symbol_localization=False)` for file-only output.
+
+Patch consumers must explicitly read `stage3_ranked_symbols`; `bug_location`,
+`localized_candidates`, and `localized_files` retain their existing file-level
+meaning. An empty symbol list is not a successful symbol localization. Keep the
+confidence policy and manual-review state when handing off results. The wrapper
+also exports the indexed `repo`, `base_commit`, and `source_file_sha256` for
+selected symbol files, so the consumer can detect changed source.
+
+The sibling full-system PatchGenerator now prioritizes these Stage-3 symbols
+and reads their complete source files, including module candidates. It verifies
+the indexed hashes and, when supplied, the base commit against the checkout.
+Invalid or stale context blocks the model call. Source is deduplicated by file;
+the current limits are 500 KB per file and 100,000 source characters in total.
+Exceeding a limit requests manual context selection instead of silently cutting
+off code. Benchmark tickets identified by `source_dataset` or `instance_id`
+cannot supply a developer patch as generated output, and the model ticket uses
+a field whitelist. Unmarked user-provided patch inputs retain legacy behavior.
+Model configuration and real-model end-to-end patch/test validation remain
+integration work; the sibling pipeline still needs the updated localization
+implementation wired into its own runtime.
+
 The existing compatibility fields remain available:
 
 - `localized_candidates`: ranked primary code chunks.

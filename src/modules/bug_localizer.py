@@ -9,9 +9,11 @@ from utils.fault_localization import CODE_SUFFIXES, CodeIndex, build_code_index,
 class BugLocalizer:
     """Locate likely faulty files/functions from ticket text and repository code.
 
-    The default implementation is a runnable retrieval baseline: it builds code
-    chunks from the repository, ranks them against the bug report with vector
-    similarity, and optionally leaves room for an LLM reranker.
+    The default returns the selected deterministic Stage-3 baseline: B1
+    structured evidence with coverage-aware-v1 selection, up to 30 symbol
+    candidates and five ranked symbols. File retrieval settings remain
+    configurable independently. Patch consumers should read
+    ``stage3_ranked_symbols``; legacy file-level fields retain their meaning.
     """
 
     def __init__(
@@ -36,6 +38,7 @@ class BugLocalizer:
         file_aggregation: bool = True,
         advanced_file_aggregation: bool = False,
         min_ticket_chars: int = 20,
+        symbol_localization: bool = True,
     ) -> None:
         self.code_index_path = Path(code_index_path) if code_index_path else None
         self.top_k = top_k
@@ -56,6 +59,7 @@ class BugLocalizer:
         self.file_aggregation = file_aggregation
         self.advanced_file_aggregation = advanced_file_aggregation
         self.min_ticket_chars = min_ticket_chars
+        self.symbol_localization = symbol_localization
         self._cached_index_key: tuple[str, ...] | None = None
         self._cached_index: CodeIndex | None = None
 
@@ -117,11 +121,27 @@ class BugLocalizer:
             llm_client=self.llm_client,
             llm_rerank=self.llm_rerank,
             llm_candidate_k=self.llm_candidate_k,
+            symbol_localization=self.symbol_localization,
+            symbol_llm_rerank=False,
+            symbol_candidate_k=30,
+            symbol_top_k=5,
+            symbol_retrieval_mode="b1-structured",
+            symbol_per_file_quota=0,
+            symbol_selection_mode="coverage-aware-v1",
             file_aggregation=self.file_aggregation,
             advanced_file_aggregation=self.advanced_file_aggregation,
             min_ticket_chars=self.min_ticket_chars,
         )
         input_validation = result.get("input_validation")
+        # Preserve the indexed snapshot identity for the patch-context consumer.
+        result["repo"] = code_index.settings.get("repository_name", "")
+        result["base_commit"] = code_index.settings.get("base_commit", "")
+        fingerprints = code_index.settings.get("file_fingerprints", {})
+        result["source_file_sha256"] = {
+            row["file_path"]: fingerprints[row["file_path"]]
+            for row in result.get("stage3_ranked_symbols", [])
+            if row.get("file_path") in fingerprints
+        }
         invalid_input = isinstance(input_validation, dict) and not bool(input_validation.get("is_valid", True))
         if not result.get("localized_candidates") and not invalid_input:
             raise ValueError("No bug localization candidates found in the repository code index.")
