@@ -1286,7 +1286,7 @@ def _atomic_write_text(path: Path, text: str) -> None:
 
 
 def _run_git(args: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
-    completed = subprocess.run(["git", *args], cwd=str(cwd), capture_output=True, text=True, check=False)
+    completed = _run_git_process(args, cwd=cwd)
     if completed.returncode != 0:
         raise RuntimeError(
             f"git {' '.join(args)} failed in {cwd}: {completed.stderr.strip() or completed.stdout.strip()}"
@@ -1294,8 +1294,22 @@ def _run_git(args: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
     return completed
 
 
+def _run_git_process(args: list[str], *, cwd: Path) -> subprocess.CompletedProcess[str]:
+    # git's own output is UTF-8 regardless of the OS locale. Without an
+    # explicit encoding, `text=True` decodes with
+    # locale.getpreferredencoding() -- on a Traditional Chinese Windows
+    # install that is cp950, which cannot decode every byte git prints and
+    # crashes with UnicodeDecodeError instead of returning a
+    # CompletedProcess (observed for real on this project's Windows dev
+    # machine via scripts/prefetch_swebench_repositories.py's own copy of
+    # this helper).
+    return subprocess.run(
+        ["git", *args], cwd=str(cwd), capture_output=True, text=True, encoding="utf-8", errors="replace", check=False
+    )
+
+
 def _git_output(args: list[str], *, cwd: Path, check: bool = True) -> str:
-    completed = subprocess.run(["git", *args], cwd=str(cwd), capture_output=True, text=True, check=False)
+    completed = _run_git_process(args, cwd=cwd)
     if check and completed.returncode != 0:
         raise RuntimeError(
             f"git {' '.join(args)} failed in {cwd}: {completed.stderr.strip() or completed.stdout.strip()}"

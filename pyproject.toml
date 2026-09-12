@@ -32,3 +32,12 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+# Without this, a bare `pytest`/`python -m pytest` walks the WHOLE repo root
+# (including any non-test scratch/output folders someone has dropped inside
+# the connected project folder, e.g. a "Claude outputs" drop folder) and can
+# collect a same-named stray copy of a real tests/*.py file -- pytest then
+# refuses with "import file mismatch" because it can't tell the two apart.
+# Scoping collection to tests/ avoids that class of collision entirely.
+testpaths = ["tests"]

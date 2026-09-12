@@ -1081,7 +1081,14 @@ class FaultLocalizer:
         ]
         best = localized[0] if localized else None
         bug_location = _legacy_bug_location(best)
-        confidence = _localization_confidence(localized, input_validation, llm_rerank_used=llm_rerank_used)
+        confidence = _localization_confidence(
+            localized,
+            input_validation,
+            llm_rerank_used=llm_rerank_used,
+            symbol_localization_requested=self.symbol_localization,
+            symbol_candidate_pool_present=bool(stage3_candidate_pool),
+            ranked_symbols=ranked_symbols,
+        )
         bug_location.update(
             {
                 "confidence_level": confidence["confidence_level"],
@@ -1297,6 +1304,8 @@ class FaultLocalizer:
             "should_manual_review": confidence["should_manual_review"],
             "recommend_patch_generation": confidence["recommend_patch_generation"],
             "patch_generation_policy": confidence["patch_generation_policy"],
+            "symbol_gate_status": confidence["symbol_gate_status"],
+            "symbol_gate_reason": confidence["symbol_gate_reason"],
             "repository_path": index.repository_path,
             "evaluation_ready_fields": {
                 "candidate_stage": "stage1_candidate_files[*].file_path",
@@ -3049,13 +3058,80 @@ def _ticket_content_text(ticket_json: dict[str, Any]) -> str:
     return "\n".join(part.strip() for part in parts if part.strip())
 
 
+def _symbol_gate_status(
+    *,
+    symbol_localization_requested: bool,
+    symbol_candidate_pool_present: bool,
+    ranked_symbols: list[dict[str, Any]] | None,
+) -> str:
+    """Classify Stage-3 symbol-level evidence for the patch-generation gate.
+
+    Stage-4 (patch generation) targets a specific function/method, not just a
+    file, so a high file-level confidence score is not sufficient on its own:
+    a Ticket can have a clearly-identified file but no symbol-level candidate
+    at all (e.g. the bug is in module-level code the AST symbol pool does not
+    cover, or Stage-3 retrieval failed to surface anything). Returns one of:
+
+    - "not_applicable": Stage-3 symbol localization was not requested for this
+      run, so the symbol gate does not apply and the file-level gate alone
+      decides ``patch_generation_policy``.
+    - "ready_for_patch": Stage-3 was requested and produced at least one
+      ranked symbol candidate.
+    - "manual_review_symbol_uncertain": Stage-3 was requested and an eligible
+      symbol pool existed (functions/methods were found in the Stage-2
+      files), but ranking produced no usable symbol candidate (e.g. LLM
+      rerank failed/timed out with no retrieval fallback available).
+    - "block_no_symbol_candidate": Stage-3 was requested but no symbol
+      candidate exists at all (no AST-derived function/method/class chunk was
+      found inside the Stage-2 files, or there were no Stage-2 files).
+    """
+
+    if not symbol_localization_requested:
+        return "not_applicable"
+    if ranked_symbols:
+        return "ready_for_patch"
+    if symbol_candidate_pool_present:
+        return "manual_review_symbol_uncertain"
+    return "block_no_symbol_candidate"
+
+
+def _symbol_gate_reason(status: str, *, ranked_symbol_count: int) -> str:
+    """Human-readable explanation paired with ``symbol_gate_status``."""
+
+    if status == "not_applicable":
+        return "Stage-3 symbol localization was not requested for this run."
+    if status == "ready_for_patch":
+        return f"stage3_ranked_symbols is non-empty ({ranked_symbol_count} candidate(s))."
+    if status == "manual_review_symbol_uncertain":
+        return (
+            "an eligible Stage-3 symbol pool existed for the localized files, "
+            "but ranking produced no usable stage3_ranked_symbols candidate."
+        )
+    return (
+        "no AST-derived function/method/class chunk was found inside the "
+        "Stage-2 localized files, so no symbol-level patch target exists."
+    )
+
+
 def _localization_confidence(
     localized: list[dict[str, Any]],
     input_validation: dict[str, Any],
     *,
     llm_rerank_used: bool,
+    symbol_localization_requested: bool = False,
+    symbol_candidate_pool_present: bool = False,
+    ranked_symbols: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
+    symbol_gate_status = _symbol_gate_status(
+        symbol_localization_requested=symbol_localization_requested,
+        symbol_candidate_pool_present=symbol_candidate_pool_present,
+        ranked_symbols=ranked_symbols,
+    )
+
     if not localized:
+        no_candidate_gate_status = (
+            "not_applicable" if symbol_gate_status == "ready_for_patch" else symbol_gate_status
+        )
         return {
             "confidence_level": "low",
             "confidence_score": 0.0,
@@ -3064,6 +3140,8 @@ def _localization_confidence(
             "should_manual_review": True,
             "recommend_patch_generation": False,
             "patch_generation_policy": "block_patch_generation",
+            "symbol_gate_status": no_candidate_gate_status,
+            "symbol_gate_reason": _symbol_gate_reason(no_candidate_gate_status, ranked_symbol_count=0),
         }
 
     best = localized[0]
@@ -3095,8 +3173,31 @@ def _localization_confidence(
         reasons.append("top candidate is test-like")
     if llm_rerank_used:
         reasons.append("optional LLM rerank was applied")
+    if symbol_gate_status == "manual_review_symbol_uncertain":
+        reasons.append("Stage-3 symbol ranking produced no usable candidate")
+    elif symbol_gate_status == "block_no_symbol_candidate":
+        reasons.append("Stage-3 found no symbol-level candidate in the localized files")
 
-    allow_patch = level == "high"
+    file_level_policy = (
+        "allow_patch_suggestion"
+        if level == "high"
+        else "manual_review_before_patch"
+        if level == "medium"
+        else "block_patch_generation"
+    )
+
+    # patch_generation_policy is the intersection of the file-level gate and
+    # the Stage-3 symbol-level gate: a Ticket must clear BOTH before a patch
+    # suggestion is recommended, otherwise "confident file, absent symbol"
+    # Tickets would incorrectly reach patch generation with no valid target.
+    if symbol_gate_status == "block_no_symbol_candidate" or file_level_policy == "block_patch_generation":
+        policy = "block_patch_generation"
+    elif symbol_gate_status == "manual_review_symbol_uncertain" or file_level_policy == "manual_review_before_patch":
+        policy = "manual_review_before_patch"
+    else:
+        policy = "allow_patch_suggestion"
+
+    allow_patch = policy == "allow_patch_suggestion"
     return {
         "confidence_level": level,
         "confidence_score": round(best_score, 4),
@@ -3104,7 +3205,11 @@ def _localization_confidence(
         "uncertainty_reason": "; ".join(reasons),
         "should_manual_review": not allow_patch,
         "recommend_patch_generation": allow_patch,
-        "patch_generation_policy": "allow_patch_suggestion" if allow_patch else "manual_review_before_patch" if level == "medium" else "block_patch_generation",
+        "patch_generation_policy": policy,
+        "symbol_gate_status": symbol_gate_status,
+        "symbol_gate_reason": _symbol_gate_reason(
+            symbol_gate_status, ranked_symbol_count=len(ranked_symbols or [])
+        ),
     }
 
 

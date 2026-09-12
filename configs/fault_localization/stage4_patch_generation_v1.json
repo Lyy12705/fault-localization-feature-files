@@ -1,0 +1,33 @@
+{
+  "version": "stage4-patch-generation-v1",
+  "plan_reference": "STAGE4_PATCH_GENERATION_IMPLEMENTATION_PLAN_ZH.md section 5.2 (模型與參數)",
+  "prompt_version": "patchgen-fim-v1",
+  "fim": {
+    "prefix_token_budget": 2048,
+    "suffix_token_budget": 2048,
+    "num_predict_headroom": 2.0,
+    "min_num_predict": 256,
+    "max_num_predict": 4096,
+    "use_native_suffix": true,
+    "note": "The generation budget is sized per symbol (estimated tokens of the symbol being replaced x num_predict_headroom, clamped to [min,max]) rather than fixed. A fixed 256 was used in the first 1-ticket smoke run (2026-09-12) and truncated every sample mid-statement on an 80-line/~825-token target, scoring 0/3 -- see utils.patch_generation.resolve_num_predict."
+  },
+  "sampling": {
+    "temperatures": [0.2, 0.4, 0.6],
+    "note": "One FIM sample is generated per listed temperature (sampling_index == its position in this list), so n == len(temperatures). Extend this list to raise n; do not change it mid-run once a stage's results are being compared."
+  },
+  "symbol_selection": {
+    "symbol_topk": 1,
+    "note": "Only the top-ranked stage3_ranked_symbols[*] candidate per ticket is attempted by default -- this mirrors what a real system would act on. Pass --symbol-topk on the CLI to attempt more of the ranked list per ticket (multiplies FIM call volume linearly)."
+  },
+  "eligibility": {
+    "policy": "conditional_eligible",
+    "definition": "A ticket is conditional-eligible iff stage3_ranked_symbols is non-empty (i.e. symbol_gate_status != block_no_symbol_candidate for that ticket). This is the same 'conditional' definition Stage-3 WP4's recall metric uses, so Stage-4's Patch Apply Rate stays comparable to it without introducing a new sampling difference."
+  },
+  "repo_resolution": {
+    "clone_missing": false,
+    "fetch_missing_commits": false,
+    "note": "Defaults are conservative (no network calls) since this project's egress policy blocks ad hoc git operations from most environments. Pass --clone-missing/--fetch-missing-commits explicitly on a machine where that is allowed, or prefetch repositories first via scripts/prefetch_swebench_repositories.py."
+  },
+  "frozen_since": "2026-09-12",
+  "frozen_by": "Stage-4 WP2 (see plan section 9)"
+}

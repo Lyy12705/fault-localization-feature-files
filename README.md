@@ -114,12 +114,23 @@ Additional safety and file-level fields include:
 
 - `localized_files`: one entry per suspicious file.
 - `input_validation`: sparse or invalid ticket diagnostics.
-- `confidence_level`: `high`, `medium`, or `low`.
+- `confidence_level`: `high`, `medium`, or `low` (file-level, Stage-1/2 only).
 - `should_manual_review` and `recommend_patch_generation`.
-- `patch_generation_policy`: patch suggestion, manual review, or block.
+- `symbol_gate_status`: Stage-3 symbol-level gate — `not_applicable` (symbol
+  localization was not requested for this run), `ready_for_patch` (at least
+  one Stage-3 ranked symbol candidate exists), `manual_review_symbol_uncertain`
+  (an eligible symbol pool existed but ranking produced no usable candidate),
+  or `block_no_symbol_candidate` (no symbol-level candidate exists at all).
+- `patch_generation_policy`: patch suggestion, manual review, or block — the
+  intersection of `confidence_level` and `symbol_gate_status`, so a Ticket
+  with a confident file but no identified symbol is never recommended for
+  patch generation.
 
-Only high-confidence results are recommended for patch suggestion. Medium and
-low confidence results remain localization hints for human review.
+Only results where both the file-level confidence is high AND the Stage-3
+symbol gate is `ready_for_patch` (or not applicable, when symbol
+localization was not requested) are recommended for patch suggestion. Any
+other combination remains a localization hint for human review, or is
+blocked outright when no symbol-level target exists.
 
 ## Stage-1 candidate retrieval contract
 

@@ -152,6 +152,24 @@ def collect_repository_pull_numbers(rows: list[dict[str, Any]]) -> dict[str, lis
     }
 
 
+def ensure_origin_remote(destination: Path, url: str, *, cache_dir: Path) -> tuple[bool, str]:
+    """Make ``destination``'s ``origin`` remote exist and point at ``url``.
+
+    Idempotent by design: safe to call on a fresh ``git init``, on a repository
+    whose remote is already correct, and on one left half-configured by an
+    interrupted earlier run. Returns ``(ok, error_text)``.
+    """
+
+    existing = run_git(["-C", str(destination), "remote", "get-url", "origin"], cwd=cache_dir)
+    if existing.returncode != 0:
+        added = run_git(["-C", str(destination), "remote", "add", "origin", url], cwd=cache_dir)
+        return (added.returncode == 0), added.stdout.strip()
+    if existing.stdout.strip() != url:
+        updated = run_git(["-C", str(destination), "remote", "set-url", "origin", url], cwd=cache_dir)
+        return (updated.returncode == 0), updated.stdout.strip()
+    return True, ""
+
+
 def prefetch_repository(
     repository: str,
     url: str,
@@ -171,23 +189,40 @@ def prefetch_repository(
             "status": "cached",
             "required_commits": len(required_commits),
         }
-    if destination.exists() and not git_dir.is_dir():
+    if destination.exists() and not git_dir.is_dir() and any(destination.iterdir()):
+        # Non-empty and not a git repository: this is someone else's data, do
+        # not init over it. An EMPTY leftover directory (e.g. created by an
+        # interrupted earlier run, between mkdir and git init) is recoverable
+        # and falls through to the init below instead of failing forever.
         return {
             "repository": repository,
             "repository_url": url,
             "cache_path": portable_path(destination),
             "status": "failed",
-            "error": "Destination exists but is not a Git repository.",
+            "error": "Destination exists, is not a Git repository, and is not empty.",
         }
     if not git_dir.is_dir():
-        destination.mkdir(parents=True)
+        destination.mkdir(parents=True, exist_ok=True)
         init = run_git(["init", str(destination)], cwd=cache_dir)
         if init.returncode != 0:
-            return failed_result(repository, url, destination, "Git init failed.")
-        remote = run_git(["-C", str(destination), "remote", "add", "origin", url], cwd=cache_dir)
-        if remote.returncode != 0:
-            return failed_result(repository, url, destination, "Git remote setup failed.")
-        run_git(["-C", str(destination), "config", "core.longpaths", "true"], cwd=cache_dir)
+            return failed_result(repository, url, destination, f"Git init failed: {init.stdout.strip()!r}")
+
+    # Ensure the origin remote is present and correct on EVERY run, not only on
+    # the run that created the repository. Repository setup is three separate
+    # git commands (init, remote add, config), so any interruption between them
+    # -- a crash, Ctrl-C, a machine going to sleep -- leaves a directory that
+    # HAS .git but has no origin. Keying "already set up?" off the existence of
+    # .git alone (as this function used to) then permanently skips remote setup
+    # for that repository, and every later run fails instantly with
+    # "fatal: 'origin' does not appear to be a git repository" no matter how
+    # many times it is retried. Observed for real on 2026-09-12: an earlier
+    # UnicodeDecodeError crash left all 12 cached repositories in exactly this
+    # half-initialized state. Making setup idempotent is what makes --resume
+    # actually able to resume.
+    ensured, remote_error = ensure_origin_remote(destination, url, cache_dir=cache_dir)
+    if not ensured:
+        return failed_result(repository, url, destination, f"Git remote setup failed: {remote_error!r}")
+    run_git(["-C", str(destination), "config", "core.longpaths", "true"], cwd=cache_dir)
 
     missing = [commit for commit in required_commits if not commit_exists(destination, commit)]
     for commit in missing:
@@ -203,9 +238,10 @@ def prefetch_repository(
                 ["-C", str(destination), "fetch", "--no-tags", "origin"],
                 cwd=cache_dir,
             )
+            pr_fetch_output = ""
             if not commit_exists(destination, commit):
                 for pull_number in pull_numbers:
-                    run_git(
+                    pr_process = run_git(
                         [
                             "-C",
                             str(destination),
@@ -218,14 +254,24 @@ def prefetch_repository(
                         ],
                         cwd=cache_dir,
                     )
+                    if pr_process.returncode != 0:
+                        pr_fetch_output = pr_process.stdout.strip()
                     if commit_exists(destination, commit):
                         break
             if not commit_exists(destination, commit):
+                # Keep every attempted git command's own output (git prints its
+                # real reason -- auth, rate limit, unadvertised object, network
+                # -- to stdout/stderr) instead of a fixed generic string, so a
+                # failure can be diagnosed from the manifest alone rather than
+                # needing another run with extra logging added after the fact.
                 return failed_result(
                     repository,
                     url,
                     destination,
-                    f"Git fetch failed for required commit {commit}.",
+                    f"Git fetch failed for required commit {commit}. "
+                    f"direct_fetch_output={process.stdout.strip()!r} "
+                    f"fallback_fetch_output={fallback.stdout.strip()!r}"
+                    + (f" pr_fetch_output={pr_fetch_output!r}" if pr_fetch_output else ""),
                 )
     ready = sum(commit_exists(destination, commit) for commit in required_commits)
     refs_ready = ensure_commit_refs(destination, required_commits) if ready == len(required_commits) else False
@@ -261,6 +307,16 @@ def run_git(arguments: list[str], *, cwd: Path) -> subprocess.CompletedProcess[s
         ["git", *arguments],
         cwd=cwd,
         text=True,
+        # git's own output is UTF-8 regardless of the OS locale. Without an
+        # explicit encoding, `text=True` decodes with
+        # locale.getpreferredencoding() -- on a Traditional Chinese Windows
+        # install that is cp950, which cannot decode every byte git prints
+        # (clone progress, remote messages, ...) and crashes with
+        # UnicodeDecodeError instead of returning a CompletedProcess.
+        # errors="replace" keeps this resilient even for the rare byte
+        # sequence that is not valid UTF-8 either.
+        encoding="utf-8",
+        errors="replace",
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         check=False,

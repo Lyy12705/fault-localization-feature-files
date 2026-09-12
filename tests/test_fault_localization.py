@@ -125,6 +125,188 @@ class FaultLocalizationTests(unittest.TestCase):
             with self.assertRaisesRegex(TimeoutError, "hard deadline"):
                 OllamaClient(timeout=1).generate("rerank this")
 
+    # -- Stage-4 WP1: FIM infrastructure ----------------------------------
+
+    def _fake_curl_result(self, response_text: str) -> subprocess.CompletedProcess:
+        return subprocess.CompletedProcess(
+            args=["curl"],
+            returncode=0,
+            stdout=json.dumps({"response": response_text}).encode("utf-8"),
+            stderr=b"",
+        )
+
+    def test_generate_fim_uses_ollamas_native_suffix_field_and_code_model(self) -> None:
+        """The default FIM path must use Ollama's own infilling API (prompt =
+        prefix, suffix = suffix) against the code-completion model tag, NOT a
+        hand-written sentinel prompt against the chat-tuned "-instruct" tag.
+
+        Hand-spelling "<PRE>/<SUF>/<MID>" into a prompt depends on the
+        tokenizer mapping those strings back to real special tokens; against a
+        real "codellama:7b-instruct" server that failed in three different
+        ways across three runs. Letting the server build the FIM prompt from
+        the model's own template removes that whole failure class."""
+
+        captured: dict = {}
+
+        def fake_run(command, *, input, capture_output, check, timeout):
+            captured["payload"] = json.loads(input.decode("utf-8"))
+            return self._fake_curl_result("    return value + 1")
+
+        with patch("utils.llm_client.subprocess.run", side_effect=fake_run):
+            result = OllamaClient().generate_fim("def f(x):\n", "\n    return result\n")
+
+        self.assertEqual(result, "    return value + 1")
+        payload = captured["payload"]
+        self.assertNotIn("format", payload)
+        self.assertEqual(payload["prompt"], "def f(x):\n")
+        self.assertEqual(payload["suffix"], "\n    return result\n")
+        self.assertEqual(payload["model"], "codellama:7b-code")
+        # The server templates the FIM prompt itself here, so raw must NOT be
+        # set -- raw:true would bypass the very template doing that work.
+        self.assertNotIn("raw", payload)
+
+    def test_generate_fim_fallback_path_builds_canonical_psm_prompt_with_raw(self) -> None:
+        """The manual fallback must use the canonical spacing
+        " <PRE> {prefix} <SUF>{suffix} <MID>". Code Llama's vocabulary stores
+        these sentinels with a leading space marker, so omitting the spaces
+        can stop them matching the special tokens at all."""
+
+        captured: dict = {}
+
+        def fake_run(command, *, input, capture_output, check, timeout):
+            captured["payload"] = json.loads(input.decode("utf-8"))
+            return self._fake_curl_result("    return value + 1")
+
+        with patch("utils.llm_client.subprocess.run", side_effect=fake_run):
+            OllamaClient().generate_fim(
+                "def f(x):\n", "\n    return result\n", use_native_suffix=False
+            )
+
+        payload = captured["payload"]
+        self.assertEqual(
+            payload["prompt"],
+            " <PRE> def f(x):\n <SUF>\n    return result\n <MID>",
+        )
+        self.assertIs(payload["raw"], True)
+        self.assertNotIn("suffix", payload)
+        self.assertEqual(payload["model"], "codellama:7b-code")
+
+    def test_json_rerank_path_keeps_the_instruct_model(self) -> None:
+        """Changing the FIM model must not disturb the Stage-2/3 JSON rerank
+        path, which is already verified in production against -instruct."""
+
+        captured: dict = {}
+
+        def fake_run(command, *, input, capture_output, check, timeout):
+            captured["payload"] = json.loads(input.decode("utf-8"))
+            return self._fake_curl_result('{"ok": true}')
+
+        with patch("utils.llm_client.subprocess.run", side_effect=fake_run):
+            OllamaClient().generate("rerank this")
+
+        self.assertEqual(captured["payload"]["model"], "codellama:7b-instruct")
+        self.assertNotIn("suffix", captured["payload"])
+
+    def test_generate_uses_templated_generation_not_raw(self) -> None:
+        """generate()/generate_json_with_schema() are natural-language
+        instruction prompts meant to go through the model's own instruct
+        template (this is the existing, already-verified-in-production
+        Stage-2/3 LLM rerank path) -- only generate_fim() needs raw=True."""
+
+        captured: dict = {}
+
+        def fake_run(command, *, input, capture_output, check, timeout):
+            captured["payload"] = json.loads(input.decode("utf-8"))
+            return self._fake_curl_result('{"ok": true}')
+
+        with patch("utils.llm_client.subprocess.run", side_effect=fake_run):
+            OllamaClient().generate("rerank this")
+
+        self.assertNotIn("raw", captured["payload"])
+        self.assertNotIn("stop", captured["payload"]["options"])
+
+    def test_generate_fim_truncates_at_eot_and_preserves_leading_whitespace(self) -> None:
+        with patch(
+            "utils.llm_client.subprocess.run",
+            side_effect=lambda *a, **k: self._fake_curl_result("    x = 1\n<EOT>\ntrailing garbage"),
+        ):
+            result = OllamaClient().generate_fim("def f():\n", "\n")
+
+        self.assertEqual(result, "    x = 1\n")
+
+    def test_generate_fim_requests_server_side_stop_sequences(self) -> None:
+        """Ollama should be told to stop generation itself at the FIM
+        sentinels (options.stop), not just have the client truncate after
+        the fact -- this was added after a real server kept generating past
+        <EOT> into a second, hallucinated prompt cycle (see manual_check_
+        generate_fim.py's 2026-09-12 run)."""
+
+        captured: dict = {}
+
+        def fake_run(command, *, input, capture_output, check, timeout):
+            captured["payload"] = json.loads(input.decode("utf-8"))
+            return self._fake_curl_result("pass")
+
+        with patch("utils.llm_client.subprocess.run", side_effect=fake_run):
+            OllamaClient().generate_fim("a", "b")
+
+        stop = captured["payload"]["options"]["stop"]
+        self.assertEqual(set(stop), {"<EOT>", "<PRE>", "<SUF>", "<MID>", "<EOF>", "<INF>"})
+
+    def test_generate_fim_client_side_truncates_at_observed_eof_loop_marker(self) -> None:
+        """Regression test for the real failure observed against a live
+        Ollama server: the model emitted '<EOF>' (not '<EOT>') and then
+        looped into a second, hallucinated <PRE>/<SUF>/<MID> cycle. The
+        client-side safety net must cut at '<EOF>' even though it is not one
+        of Code Llama's documented FIM sentinels."""
+
+        looped_response = (
+            "\n\ndef clamp(value, low, high):\n"
+            "    if value < low:\n"
+            "        return low\n"
+            "    return value\n"
+            "<EOF>\n"
+            "\n# Ticket summary: restating the same bug\n"
+            "<SUF>\n"
+            "def main():\n"
+            "    pass\n"
+            "<MID>\n"
+            "def clamp(value, low, high):\n"
+            "    return value\n"
+        )
+        with patch(
+            "utils.llm_client.subprocess.run",
+            side_effect=lambda *a, **k: self._fake_curl_result(looped_response),
+        ):
+            result = OllamaClient().generate_fim("def clamp(value, low, high):\n", "\n")
+
+        self.assertEqual(
+            result,
+            "\n\ndef clamp(value, low, high):\n"
+            "    if value < low:\n"
+            "        return low\n"
+            "    return value\n",
+        )
+
+    def test_generate_fim_uses_requested_sampling_parameters(self) -> None:
+        captured: dict = {}
+
+        def fake_run(command, *, input, capture_output, check, timeout):
+            captured["payload"] = json.loads(input.decode("utf-8"))
+            return self._fake_curl_result("pass")
+
+        with patch("utils.llm_client.subprocess.run", side_effect=fake_run):
+            OllamaClient().generate_fim("a", "b", temperature=0.6, top_p=0.9, num_predict=64)
+
+        options = captured["payload"]["options"]
+        self.assertEqual(options["temperature"], 0.6)
+        self.assertEqual(options["top_p"], 0.9)
+        self.assertEqual(options["num_predict"], 64)
+
+    def test_generate_fim_rejects_non_string_prefix_or_suffix(self) -> None:
+        with self.assertRaises(TypeError):
+            OllamaClient().generate_fim(None, "suffix")  # type: ignore[arg-type]
+
     def test_hybrid_backend_bounds_sbert_candidate_pool(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             repo = _make_repo(Path(tmp))
@@ -1544,6 +1726,155 @@ class FaultLocalizationTests(unittest.TestCase):
         self.assertEqual(result["confidence_level"], "low")
         self.assertTrue(result["should_manual_review"])
         self.assertFalse(result["recommend_patch_generation"])
+
+    # -- Stage-4 WP1: symbol-aware confidence gate -----------------------
+
+    def test_symbol_gate_status_not_applicable_when_symbol_stage_not_requested(self) -> None:
+        status = fault_localization._symbol_gate_status(
+            symbol_localization_requested=False,
+            symbol_candidate_pool_present=False,
+            ranked_symbols=[],
+        )
+        self.assertEqual(status, "not_applicable")
+
+    def test_symbol_gate_status_ready_when_ranked_symbols_present(self) -> None:
+        status = fault_localization._symbol_gate_status(
+            symbol_localization_requested=True,
+            symbol_candidate_pool_present=True,
+            ranked_symbols=[{"symbol_qualified_name": "module.func"}],
+        )
+        self.assertEqual(status, "ready_for_patch")
+
+    def test_symbol_gate_status_manual_review_when_pool_present_but_ranking_empty(self) -> None:
+        status = fault_localization._symbol_gate_status(
+            symbol_localization_requested=True,
+            symbol_candidate_pool_present=True,
+            ranked_symbols=[],
+        )
+        self.assertEqual(status, "manual_review_symbol_uncertain")
+
+    def test_symbol_gate_status_blocks_when_no_candidate_pool_at_all(self) -> None:
+        status = fault_localization._symbol_gate_status(
+            symbol_localization_requested=True,
+            symbol_candidate_pool_present=False,
+            ranked_symbols=[],
+        )
+        self.assertEqual(status, "block_no_symbol_candidate")
+
+    def _confident_localized_row(self) -> dict:
+        return {
+            "file_path": "src/auth/validator.py",
+            "score": 0.9,
+            "scoring_signals": {"stack_trace_score": 0.8},
+        }
+
+    def _clean_input_validation(self) -> dict:
+        return {
+            "errors": [],
+            "warnings": [],
+            "signals_present": {"path_hint": True},
+        }
+
+    def test_confidence_gate_blocks_confident_file_with_no_symbol_candidate(self) -> None:
+        """A Ticket can have a clearly-identified file but no Stage-3 symbol at
+        all (e.g. the AST symbol pool did not cover the affected code). Before
+        WP1 this reached ``allow_patch_suggestion`` on file-level evidence
+        alone; the fix must block it instead."""
+
+        confidence = fault_localization._localization_confidence(
+            [self._confident_localized_row()],
+            self._clean_input_validation(),
+            llm_rerank_used=False,
+            symbol_localization_requested=True,
+            symbol_candidate_pool_present=False,
+            ranked_symbols=[],
+        )
+        self.assertEqual(confidence["confidence_level"], "high")
+        self.assertEqual(confidence["symbol_gate_status"], "block_no_symbol_candidate")
+        self.assertEqual(confidence["patch_generation_policy"], "block_patch_generation")
+        self.assertFalse(confidence["recommend_patch_generation"])
+        self.assertTrue(confidence["should_manual_review"])
+        self.assertIn("no symbol-level patch target", confidence["symbol_gate_reason"])
+
+    def test_confidence_gate_downgrades_to_manual_review_when_symbol_ranking_uncertain(self) -> None:
+        confidence = fault_localization._localization_confidence(
+            [self._confident_localized_row()],
+            self._clean_input_validation(),
+            llm_rerank_used=False,
+            symbol_localization_requested=True,
+            symbol_candidate_pool_present=True,
+            ranked_symbols=[],
+        )
+        self.assertEqual(confidence["confidence_level"], "high")
+        self.assertEqual(confidence["symbol_gate_status"], "manual_review_symbol_uncertain")
+        self.assertEqual(confidence["patch_generation_policy"], "manual_review_before_patch")
+        self.assertFalse(confidence["recommend_patch_generation"])
+
+    def test_confidence_gate_allows_patch_when_both_file_and_symbol_gates_pass(self) -> None:
+        confidence = fault_localization._localization_confidence(
+            [self._confident_localized_row()],
+            self._clean_input_validation(),
+            llm_rerank_used=False,
+            symbol_localization_requested=True,
+            symbol_candidate_pool_present=True,
+            ranked_symbols=[{"symbol_qualified_name": "validator.validate_token"}],
+        )
+        self.assertEqual(confidence["symbol_gate_status"], "ready_for_patch")
+        self.assertEqual(confidence["patch_generation_policy"], "allow_patch_suggestion")
+        self.assertTrue(confidence["recommend_patch_generation"])
+
+    def test_confidence_gate_is_backward_compatible_when_symbol_stage_not_requested(self) -> None:
+        """Existing file-only pipelines (symbol_localization=False) must keep
+        their prior behavior: the symbol gate does not apply and cannot block
+        a run that never asked for Stage-3."""
+
+        confidence = fault_localization._localization_confidence(
+            [self._confident_localized_row()],
+            self._clean_input_validation(),
+            llm_rerank_used=False,
+        )
+        self.assertEqual(confidence["symbol_gate_status"], "not_applicable")
+        self.assertEqual(confidence["patch_generation_policy"], "allow_patch_suggestion")
+        self.assertTrue(confidence["recommend_patch_generation"])
+
+    def test_confidence_gate_medium_file_confidence_still_caps_policy_even_if_symbol_ready(self) -> None:
+        medium_row = {
+            "file_path": "src/auth/validator.py",
+            "score": 0.3,
+            "scoring_signals": {"stack_trace_score": 0.1},
+        }
+        confidence = fault_localization._localization_confidence(
+            [medium_row],
+            self._clean_input_validation(),
+            llm_rerank_used=False,
+            symbol_localization_requested=True,
+            symbol_candidate_pool_present=True,
+            ranked_symbols=[{"symbol_qualified_name": "validator.validate_token"}],
+        )
+        self.assertEqual(confidence["confidence_level"], "medium")
+        self.assertEqual(confidence["symbol_gate_status"], "ready_for_patch")
+        self.assertEqual(confidence["patch_generation_policy"], "manual_review_before_patch")
+
+    def test_full_pipeline_exposes_symbol_gate_status_when_symbol_candidates_found(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = _make_repo(Path(tmp))
+            result = localize_ticket(
+                {
+                    "ticket_id": "SYMBOL-GATE-READY",
+                    "title": "Login token validation fails",
+                    "description": "The token validator rejects a valid login token.",
+                    "logs": "TypeError: token is None at src/auth/validator.py:2",
+                },
+                repo_path=repo,
+                top_k=2,
+                symbol_localization=True,
+                symbol_candidate_k=10,
+                symbol_top_k=3,
+            )
+
+        self.assertTrue(result["stage3_ranked_symbols"])
+        self.assertEqual(result["symbol_gate_status"], "ready_for_patch")
+        self.assertEqual(result["confidence"]["symbol_gate_status"], "ready_for_patch")
 
     def test_localize_ticket_validates_backend_and_handles_llm_fallback(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
